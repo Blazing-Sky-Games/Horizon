@@ -23,11 +23,12 @@ public class MockupGridBehavior : GridBehaviour<RectPoint>
     public override void InitGrid()
     {
         playgrid = Grid.CastValues<Mockupcell, RectPoint>();
+        character.init();
     }
 
     void Update()
     {
-        if(character.isMoving == false)
+        if (character.isMoving == false)
             SetHover(MousePosition);
         else
             playgrid[hover].highlighted = false;
@@ -43,7 +44,7 @@ public class MockupGridBehavior : GridBehaviour<RectPoint>
 
     private void SetHover(RectPoint currenthover)
     {
-        if(playgrid.IsOutside(currenthover))
+        if (playgrid.IsOutside(currenthover))
         {
             playgrid[hover].highlighted = false;
             wasoutside = true;

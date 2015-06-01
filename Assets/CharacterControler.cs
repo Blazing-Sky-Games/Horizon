@@ -9,13 +9,13 @@ public class CharacterControler : MonoBehaviour
     private RectPoint destination;
     public bool isMoving = false;
 
-    private RectMap map = new RectMap(new Vector2(1, 1));
+    //private IMap3D<RectPoint> map = select3d.instance.Map;
 
     public float speed;
 
-    void Awake()
+    public void init()
     {
-        pos = map.RawWorldToGrid((Vector2)transform.position + new Vector2(4,4));
+        pos = select3d.instance.Map[transform.position];
         destination = pos;
     }
 
@@ -50,7 +50,7 @@ public class CharacterControler : MonoBehaviour
         };
 
         var path = Algorithms.AStar<Mockupcell,RectPoint>(
-            MockupGridBehavior.Instance.Grid.CastValues<Mockupcell, RectPoint>(), 
+            select3d.instance.Grid.CastValues<Mockupcell, RectPoint>(), 
             pos, 
             destination,
             h,
@@ -62,8 +62,10 @@ public class CharacterControler : MonoBehaviour
         foreach(RectPoint point in path)
         {
             nextPos = point;
-            Vector2 worldpos = map.GridToWorld(pos);
-            Vector2 worldNext = map.GridToWorld(nextPos);
+            Vector3 worldpos = select3d.instance.Map[pos];
+            Vector3 worldNext = select3d.instance.Map[nextPos];
+            worldpos.y = transform.position.y;
+            worldNext.y = worldpos.y;
 
             float elapsed = 0;
             float to_elapse = (worldNext - worldpos).magnitude / speed;
@@ -71,14 +73,16 @@ public class CharacterControler : MonoBehaviour
             {
                 elapsed += Time.deltaTime;
 
-                transform.position = Vector2.Lerp(worldpos, worldNext, elapsed / to_elapse) - new Vector2(4.5f,4.5f);
+                transform.position = Vector3.Lerp(worldpos, worldNext, elapsed / to_elapse);
 
                 yield return 0;
             }
             transform.position = worldNext;
             pos = nextPos;
         }
-        transform.position = map.GridToWorld(destination) - new Vector2(4.5f, 4.5f);
+        float oldy = transform.position.y;
+        transform.position = select3d.instance.Map[destination];
+        transform.position = new Vector3(transform.position.x, oldy, transform.position.z);
         pos = destination;
 
         isMoving = false;
