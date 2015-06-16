@@ -2,6 +2,10 @@
 using System.Collections;
 using Gamelogic.Grids;
 
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
 public class MockupGridBehavior : GridBehaviour<RectPoint>
 {
     private static MockupGridBehavior instance;
@@ -68,4 +72,15 @@ public class MockupGridBehavior : GridBehaviour<RectPoint>
     }
     private RectPoint hover;
     private bool wasoutside = false;
+
+#if UNITY_EDITOR
+	void OnDrawGizmos()
+	{
+		Handles.DotCap(0,Vector3.zero,Quaternion.identity,1);
+		//foreach(var point in PointList)
+		//{
+			//Handles.DotCap(0,playgrid[point].Center,Quaternion.identity,1);
+		//}
+	}
+#endif
 }
