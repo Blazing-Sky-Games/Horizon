@@ -335,7 +335,7 @@ namespace Gamelogic.Grids
 				int spliceCount = point.SpliceCount;
 				int index = point.SpliceIndex;
 
-				cell.SetAngle(-360f/spliceCount*index);
+				//cell.SetAngle(-360f/spliceCount*index);
 
 				grid[point] = cell;
 			}

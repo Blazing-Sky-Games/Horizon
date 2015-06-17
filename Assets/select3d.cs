@@ -208,9 +208,6 @@ public class select3d : GridBehaviour<RectPoint>
 
 							RectPoint last = new RectPoint(a,b) + new RectPoint(4, 4);
 
-							Debug.Log(last);
-							Debug.Log(current);
-
 							List<GameObject> pointsInRange = new List<GameObject>();
 
 							IterateRectPointRange(last,current, (cell) =>

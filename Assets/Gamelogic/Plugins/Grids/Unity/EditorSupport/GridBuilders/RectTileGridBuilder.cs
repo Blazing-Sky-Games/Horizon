@@ -65,6 +65,10 @@ namespace Gamelogic.Grids
 
 				return (RectGrid<TileCell>)base.Grid;
 			}
+			protected set
+			{
+				base.Grid = value;
+			}
 		}
 
 		public new IMap3D<RectPoint> Map

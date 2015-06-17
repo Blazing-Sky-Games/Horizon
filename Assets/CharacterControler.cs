@@ -9,8 +9,6 @@ public class CharacterControler : MonoBehaviour
     private RectPoint destination;
     public bool isMoving = false;
 
-    //private IMap3D<RectPoint> map = select3d.instance.Map;
-
     public float speed;
 
     public void init()
