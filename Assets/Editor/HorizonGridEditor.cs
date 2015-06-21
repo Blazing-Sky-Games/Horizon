@@ -1,4 +1,4 @@
-﻿using UnityEditor;
+using UnityEditor;
 using UnityEditorInternal;
 using UnityEngine;
 
@@ -8,8 +8,8 @@ using Gamelogic.Grids.Editor.Internal;
 
 using System.Collections;
 
-[CustomEditor(typeof(HorizonGridBuilder))]
-public class HorizonGridEditor : SimpleGridEditor<HorizonGridBuilder, RectPoint> 
+[CustomEditor(typeof(HorizonGridView))]
+public class HorizonGridEditor : SimpleGridEditor<HorizonGridView, RectPoint> 
 {
 	new void OnEnable()
 	{
@@ -24,7 +24,7 @@ public class HorizonGridEditor : SimpleGridEditor<HorizonGridBuilder, RectPoint>
 		else
 		{
 			GameObject HorizonCellPrefab = (GameObject)AssetDatabase.LoadAssetAtPath(AssetDatabase.GUIDToAssetPath(assetGuids[0]),typeof(GameObject));
-			Target.CellPrefab = HorizonCellPrefab.GetComponent<HorizonCell>();
+			Target.CellPrefab = HorizonCellPrefab.GetComponent<HorizonCellView>();
 		}
 	}
 
