@@ -47,15 +47,13 @@ public class select3d : GridBehaviour<RectPoint>
 
     private IGrid<Mockupcell, RectPoint> playgrid;
 
-    private Vector2 dimensions;
     private Vector2 cellFactor;
     private Plane gridPlane;
 
     public override void InitGrid()
     {
         playgrid = Grid.CastValues<Mockupcell, RectPoint>();
-
-        dimensions = GridBuilder.Dimensions.toVec2();
+		
         cellFactor = GridBuilder.CellSpacingFactor;
 
         Vector3 gridNormal = GridBuilder.Plane == MapPlane.XY ? Vector3.forward: Vector3.up;
@@ -73,7 +71,7 @@ public class select3d : GridBehaviour<RectPoint>
         Ray mouseRay = Camera.main.ScreenPointToRay(CorrectedMousePosision);
 
         float enter;
-        bool parralel = gridPlane.Raycast(mouseRay, out enter);
+        gridPlane.Raycast(mouseRay, out enter);
 
         Vector3 planeIntersect = mouseRay.origin + mouseRay.direction * enter;
 
