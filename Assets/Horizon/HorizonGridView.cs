@@ -14,6 +14,8 @@ public class HorizonGridView : RectTileGridBuilder
 
 	private Material lineMaterial;
 
+	private HorizonGridModel model;
+
 	protected override void InitGrid ()
 	{
 		//called whenever the grid gets reset
@@ -27,6 +29,8 @@ public class HorizonGridView : RectTileGridBuilder
 		cellSpacingFactor = new Vector2(1,1);
 
 		base.Grid = RectGrid<TileCell>.Rectangle(Dimensions.X, Dimensions.Y);
+
+		model = gameObject.GetComponent<HorizonGridModel>();
 
 		Camera.main.GetComponent<SimpleCameraControls>().PostRenderEvent += OnPostRender;
 	}
@@ -65,38 +69,60 @@ public class HorizonGridView : RectTileGridBuilder
 
 		GL.Color(Color.cyan * new Color(1,1,1,0.5f));
 
-		try{
-		for(int i = 0; i <= Dimensions.Y; i += 1)
+		for(int j = 0; j <= Dimensions.Y; j += 1)
 		{
-			for(int j = 0; j < Dimensions.X; j += 1)
+			for(int i = 0; i < Dimensions.X; i += 1)
 			{
 				bool draw = true;
-				if(i == 0)
+				if(j == 0)
 				{
-					//draw = cellViewGrid[new RectPoint(i,j)].model.state == CellState.Passable;
+					draw = model.CellViewGrid[new RectPoint(i,j)].model.state == CellState.Passable;
 				}
-				else if(i == 10)
+				else if(j == 10)
 				{
-					//draw = cellViewGrid[new RectPoint(i,j - 1)].model.state == CellState.Passable;
+					draw = model.CellViewGrid[new RectPoint(i,j - 1)].model.state == CellState.Passable;
 				}
 				else
 				{
-					//CellState forwardState = cellViewGrid[new RectPoint(i,j)].model.state;
-					//CellState backState = cellViewGrid[new RectPoint(i, j - 1)].model.state;
-					//draw = backState == CellState.Passable || forwardState == CellState.Passable;
+					CellState forwardState = model.CellViewGrid[new RectPoint(i,j)].model.state;
+					CellState backState = model.CellViewGrid[new RectPoint(i, j-1)].model.state;
+					draw = (backState == CellState.Passable || forwardState == CellState.Passable);
 				}
 
 				if(draw)
 				{
-					GL.Vertex3( transform.position.x + j * CellSpacingFactor.x, transform.position.y + 0.01f, transform.position.z + i * CellSpacingFactor.y );
-					GL.Vertex3( transform.position.x + (j+1) * CellSpacingFactor.x, transform.position.y + 0.01f, transform.position.z + i * CellSpacingFactor.y );
+					GL.Vertex3( transform.position.x + i * CellSpacingFactor.x, transform.position.y + 0.01f, transform.position.z + j * CellSpacingFactor.y );
+					GL.Vertex3( transform.position.x + (i+1) * CellSpacingFactor.x, transform.position.y + 0.01f, transform.position.z + j * CellSpacingFactor.y );
 				}
 			}
 		}
-		}
-		catch(Exception e)
+
+		for(int i = 0; i <= Dimensions.X; i += 1)
 		{
-			print (e);
+			for(int j = 0; j < Dimensions.Y; j += 1)
+			{
+				bool draw = true;
+				if(i == 0)
+				{
+					draw = model.CellViewGrid[new RectPoint(i,j)].model.state == CellState.Passable;
+				}
+				else if(i == 10)
+				{
+					draw = model.CellViewGrid[new RectPoint(i-1,j)].model.state == CellState.Passable;
+				}
+				else
+				{
+					CellState forwardState = model.CellViewGrid[new RectPoint(i,j)].model.state;
+					CellState backState = model.CellViewGrid[new RectPoint(i-1, j)].model.state;
+					draw = (backState == CellState.Passable || forwardState == CellState.Passable);
+				}
+				
+				if(draw)
+				{
+					GL.Vertex3( transform.position.x + i * CellSpacingFactor.x, transform.position.y + 0.01f, transform.position.z + j * CellSpacingFactor.y );
+					GL.Vertex3( transform.position.x + i * CellSpacingFactor.x, transform.position.y + 0.01f, transform.position.z + (j+1) * CellSpacingFactor.y );
+				}
+			}
 		}
 
 		//for(float i = 0; i <= Dimensions.X * CellSpacingFactor.x; i += CellSpacingFactor.x)
