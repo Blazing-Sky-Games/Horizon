@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
+
 using System.Collections;
+using System.Collections.Generic;
 
 public enum CellState
 {
@@ -9,5 +11,7 @@ public enum CellState
 
 public class HorizonCellModel : MonoBehaviour 
 {
+	[SerializeField]
 	public CellState state;
+	//public List<HorizonUnitModel> Units;
 }

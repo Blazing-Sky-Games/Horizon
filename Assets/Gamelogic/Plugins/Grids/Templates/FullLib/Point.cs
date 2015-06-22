@@ -7,6 +7,8 @@
 
 // Auto-generated File
 
+using UnityEngine;
+
 namespace Gamelogic.Grids
 {
 	public partial struct RectPoint
@@ -20,7 +22,9 @@ namespace Gamelogic.Grids
 
 		#region Fields
 		//private readonly VectorPoint vector;
+		[SerializeField]
 		private readonly int x;
+		[SerializeField]
 		private readonly int y;
 		#endregion
 
@@ -28,6 +32,7 @@ namespace Gamelogic.Grids
 		/** 
 			The x-coordinate of this point.
 		*/
+		[SerializeField]
 		public int X
 		{
 			get
@@ -39,6 +44,7 @@ namespace Gamelogic.Grids
 		/**
 			The y-coordinate of this point.
 		*/
+		[SerializeField]
 		public int Y
 		{
 			get

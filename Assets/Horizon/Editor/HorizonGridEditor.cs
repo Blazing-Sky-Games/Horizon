@@ -14,6 +14,7 @@ public class HorizonGridEditor : SimpleGridEditor<HorizonGridView, RectPoint>
 	new void OnEnable()
 	{
 		dimensionsProp = FindProperty("dimensions");
+		lineMatProp = FindProperty("lineMaterial");
 		
 		var assetGuids = AssetDatabase.FindAssets("HorizonCell t:prefab");
 		if(assetGuids.Length < 1)
@@ -30,11 +31,13 @@ public class HorizonGridEditor : SimpleGridEditor<HorizonGridView, RectPoint>
 
 	// serilized properties
 	private GLSerializedProperty dimensionsProp;
+	private GLSerializedProperty lineMatProp;
 	
 	public override void OnInspectorGUI()
 	{
 		serializedObject.Update();
 
+		AddField(lineMatProp);
 		AddField(dimensionsProp);
 		
 		if (GUI.changed)

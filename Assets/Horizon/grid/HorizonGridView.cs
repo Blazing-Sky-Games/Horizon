@@ -12,9 +12,10 @@ public class HorizonGridView : RectTileGridBuilder
 	private RectPoint PointUnderMouse;
 	private Ray mouseRay;
 
-	private Material lineMaterial;
+	[SerializeField]
+	public Material lineMaterial;
 
-	private HorizonGridModel model;
+	public HorizonGridModel model;
 
 	protected override void InitGrid ()
 	{
@@ -49,20 +50,6 @@ public class HorizonGridView : RectTileGridBuilder
 
 	void DrawGridLines ()
 	{
-		if(lineMaterial == null)
-		{
-			lineMaterial = new Material( 
-			"Shader \"Lines/Colored Blended\" {" +
-			"SubShader { Pass { " +
-			"    Blend SrcAlpha OneMinusSrcAlpha " +
-			"    ZWrite Off Cull Off Fog { Mode Off } " +
-			"    BindChannels {" +
-			"      Bind \"vertex\", vertex Bind \"color\", color }" +
-			"} } }" );
-			lineMaterial.hideFlags = HideFlags.HideAndDontSave;
-			lineMaterial.shader.hideFlags = HideFlags.HideAndDontSave;
-		}
-
 		lineMaterial.SetPass( 0 );
 
 		GL.Begin( GL.LINES );

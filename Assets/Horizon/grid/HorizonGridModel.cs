@@ -10,11 +10,24 @@ public class HorizonGridModel : GridBehaviour<RectPoint>
 
 	//
 
-	public IGrid<HorizonCellView, RectPoint> CellViewGrid;
+	private IGrid<HorizonCellView, RectPoint> cellViewGrid;
+
+	public IGrid<HorizonCellView, RectPoint> CellViewGrid
+	{
+		get
+		{
+			if(cellViewGrid == null)
+			{
+				cellViewGrid = Grid.CastValues<HorizonCellView, RectPoint>();
+			}
+
+			return cellViewGrid;
+		}
+	}
 
 	public override void InitGrid ()
 	{
-		CellViewGrid = Grid.CastValues<HorizonCellView, RectPoint>();
+		cellViewGrid = Grid.CastValues<HorizonCellView, RectPoint>();
 	}
 
 	//grid specific messages
