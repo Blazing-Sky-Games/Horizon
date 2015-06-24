@@ -1,5 +1,9 @@
 ﻿using UnityEngine;
+
 using System.Collections;
+using System.Collections.Generic;
+
+using Gamelogic.Grids;
 
 public enum CellState
 {
@@ -9,5 +13,9 @@ public enum CellState
 
 public class HorizonCellModel : MonoBehaviour 
 {
+	[SerializeField]
 	public CellState state;
+	//public List<HorizonUnitModel> Units;
+
+	public RectPoint PositionPoint;
 }

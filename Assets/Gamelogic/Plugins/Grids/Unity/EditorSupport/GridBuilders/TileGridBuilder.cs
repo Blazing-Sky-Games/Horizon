@@ -332,8 +332,8 @@ namespace Gamelogic.Grids
 
 				cell.name = point.ToString();
 
-				int spliceCount = point.SpliceCount;
-				int index = point.SpliceIndex;
+				//int spliceCount = point.SpliceCount;
+				//int index = point.SpliceIndex;
 
 				//cell.SetAngle(-360f/spliceCount*index);
 
