@@ -20,8 +20,12 @@ public class HorizonGridView : RectTileGridBuilder
 
 	public HorizonGridModel model;
 
+	public bool handleInput;
+
 	public void pushHighlightSet(IEnumerable<RectPoint> points, Color color)
 	{
+		if(points == null) return;
+
 		foreach(RectPoint point in points)
 		{
 			model.CellViewGrid[point].pushHighlightColor(color);
@@ -58,6 +62,8 @@ public class HorizonGridView : RectTileGridBuilder
 
 		model = gameObject.GetComponent<HorizonGridModel>();
 
+		handleInput = true;
+
 		Camera.main.GetComponent<SimpleCameraControls>().PostRenderEvent += OnPostRender;
 	}
 
@@ -65,7 +71,10 @@ public class HorizonGridView : RectTileGridBuilder
 	{
 		UpdatePointUnderMouse();
 
-		ProcessInput();
+		if(handleInput)
+		{
+			ProcessInput();
+		}
 	}
 
 	void OnPostRender()

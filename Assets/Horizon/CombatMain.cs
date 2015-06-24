@@ -34,10 +34,12 @@ public class CombatMain : MonoBehaviour
 			GridView.pushHighlightSet(Unit.PointsInMovmentRange,Color.red * new Color(1,1,1,0.5f));
 
 			if(Unit != null && GridModel.HighlightedCell != null && Unit.PointsInMovmentRange.Contains(GridModel.HighlightedCell.model.PositionPoint))
+			{
 				GridView.pushHighlightSet(
-					GridModel.ShortestPathBetweenPoints(Unit.PositionPoint,GridModel.HighlightedCell.model.PositionPoint), 
+					Unit.ShortestPathToPoint(GridModel.HighlightedCell.model.PositionPoint), 
 					Color.green * new Color(1,1,1,0.5f)
 				);
+			}
 		}
 			
 	}
@@ -60,9 +62,35 @@ public class CombatMain : MonoBehaviour
 		}
 	}
 
+	void MoveSelectedUnitTo(RectPoint point)
+	{
+		HorizonUnitModel unit = GridModel.SelectedUnit;
+
+		//unselect the unit
+		GridModel.SelectedUnit = null;
+		//disable user input
+		GridView.handleInput = false;
+
+		Action OnMoveEnd;
+		OnMoveEnd = () => 
+		{
+			unit.OnTraversePathEnd -= OnMoveEnd;
+			//enable user input
+			GridView.handleInput = true;
+		};
+
+		unit.OnTraversePathEnd += OnMoveEnd;
+
+		StartCoroutine(unit.TraverseShortestPathToPoint(point));
+	}
+
 	void HandleOnCellSelected (HorizonCellView Cell)
 	{
 		//move unit
+		if(Cell != null && GridModel.SelectedUnit != null && GridModel.SelectedUnit.PointsInMovmentRange.Contains(Cell.model.PositionPoint))
+		{
+			MoveSelectedUnitTo(Cell.model.PositionPoint);
+		}
 	}
 
 	
@@ -76,9 +104,9 @@ public class CombatMain : MonoBehaviour
 			if(GridModel.SelectedUnit != null && GridModel.SelectedUnit.PointsInMovmentRange.Contains(NewCell.model.PositionPoint))
 			{
 				GridView.pushHighlightSet(
-					GridModel.ShortestPathBetweenPoints(GridModel.SelectedUnit.PositionPoint,NewCell.model.PositionPoint), 
+					GridModel.SelectedUnit.ShortestPathToPoint(NewCell.model.PositionPoint), 
 					Color.green * new Color(1,1,1,0.5f)
-					);
+				);
 			}
 		}
 	}

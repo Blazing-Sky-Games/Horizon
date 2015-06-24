@@ -137,24 +137,14 @@ public class HorizonGridModel : GridBehaviour<RectPoint>
 
 //public methods
 
-	//get a movment range
-	public Dictionary<RectPoint, float> GetPointsInMovementRange(RectPoint start, float moveRange)
-	{
-		return GetPointsInRangeCost(
-			start,
-			moveRange, 
-			(x) => x.model.state == CellState.Passable,
-			(x,y) => {return 1;}
-		);
-	}
-
 	//get a range of cells given cell movecost and accsesability functions
 	//todo: provide custom neighbor checking
-	public Dictionary<RectPoint, float> GetPointsInRangeCost(
+	public IEnumerable<RectPoint> GetPointsInRangeCost(
 		RectPoint start,
 		float moveRange,
 		Func<HorizonCellView, bool> isAcessible,
-		Func<RectPoint, RectPoint, float> getCellMoveCost)
+		Func<RectPoint, RectPoint, float> getCellMoveCost,
+		Func<RectPoint, float, bool> isPointIncluded)
 	{
 		IGrid<HorizonCellView, RectPoint> grid = cellViewGrid;
 
@@ -166,6 +156,8 @@ public class HorizonGridModel : GridBehaviour<RectPoint>
 		
 		//keep track of the shortest path to each point
 		Dictionary<RectPoint, float> costToMoveTo = new Dictionary<RectPoint, float>();
+
+		List<RectPoint> PointsInRange = new List<RectPoint>();
 		
 		// init
 		frontier.Add(start);
@@ -198,6 +190,11 @@ public class HorizonGridModel : GridBehaviour<RectPoint>
 						costToMoveTo[neighbor] = totalcostToNeighbor;
 					}
 				}
+
+				PointsInRange.AddRange(newFrontier.Where( (x) =>
+				{
+					return isPointIncluded(x,costToMoveTo[x]);
+				}));
 				
 				// we have now visited this point
 				visited.Add(point);
@@ -207,18 +204,18 @@ public class HorizonGridModel : GridBehaviour<RectPoint>
 			frontier = newFrontier;
 		}
 		
-		return costToMoveTo;
+		return PointsInRange;
 	}
 
-	public IEnumerable<RectPoint> ShortestPathBetweenPoints(RectPoint start, RectPoint end)
+	public IEnumerable<RectPoint> ShortestPathBetweenPoints(RectPoint start, RectPoint end, Func<HorizonCellView,bool> isAccesable)
 	{
 		return Algorithms.AStar(
 			cellViewGrid,
 			start,
 			end,
 		   	(p, q) =>p.DistanceFrom(q),
-			x => x.model.state == CellState.Passable,
+			isAccesable,
 			(x,y) => 1
-		);
+		).Skip(1);
 	}
 }
