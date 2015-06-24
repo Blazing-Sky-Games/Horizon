@@ -4,6 +4,7 @@ using UnityEditor;
 using Gamelogic.Grids;
 
 using System.Collections;
+using System.Collections.Generic;
 
 public class HorizonCellView : SpriteCell 
 {
@@ -20,6 +21,25 @@ public class HorizonCellView : SpriteCell
 	private HorizonCellModel m_model;
 
 	public Color HighlightColor = new Color(0,0,0,0);
+
+	private Stack<Color> colorStack = new Stack<Color>();
+
+	public void pushHighlightColor(Color color)
+	{
+		colorStack.Push(color);
+		HighlightColor = color;
+	}
+
+	public void popHighlightColor()
+	{
+		if(colorStack.Count > 0)
+			colorStack.Pop();
+
+		if(colorStack.Count > 0)
+			HighlightColor = colorStack.Peek();
+		else
+			HighlightColor = new Color(0,0,0,0);
+	}
 
 	void Start()
 	{

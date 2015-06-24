@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEditor;
 
 using System.Collections;
+using System.Collections.Generic;
 using System;
 
 using Gamelogic.Grids;
@@ -12,10 +13,34 @@ public class HorizonGridView : RectTileGridBuilder
 	private RectPoint PointUnderMouse;
 	private Ray mouseRay;
 
+	private Stack<IEnumerable<RectPoint>> highlighSets = new Stack<IEnumerable<RectPoint>>();
+
 	[SerializeField]
 	public Material lineMaterial;
 
 	public HorizonGridModel model;
+
+	public void pushHighlightSet(IEnumerable<RectPoint> points, Color color)
+	{
+		foreach(RectPoint point in points)
+		{
+			model.CellViewGrid[point].pushHighlightColor(color);
+		}
+
+		highlighSets.Push(points);
+	}
+
+	public void popHighlightSet()
+	{
+		if(highlighSets.Count == 0) return;
+
+		foreach(RectPoint point in highlighSets.Peek())
+		{
+			model.CellViewGrid[point].popHighlightColor();
+		}
+
+		highlighSets.Pop();
+	}
 
 	protected override void InitGrid ()
 	{
@@ -139,6 +164,25 @@ public class HorizonGridView : RectTileGridBuilder
 		int b = (int)Mathf.Floor(planeIntersect.z / CellSpacingFactor.y);
 		
 		PointUnderMouse = new RectPoint(a, b);
+
+		RaycastHit hit;
+		if(Physics.Raycast(mouseRay,out hit,100))
+		{
+			model.HighlightedUnit = hit.collider.GetComponentInParent<HorizonUnitModel>();
+		}
+		else
+		{
+			model.HighlightedUnit = null;
+		}
+
+		if (Grid.Contains(PointUnderMouse) && model.HighlightedUnit == null)
+		{
+			model.HighlightedCell = model.CellViewGrid[PointUnderMouse];
+		}
+		else
+		{
+			model.HighlightedCell = null;
+		}
 	}
 	
 	private void ProcessInput()
@@ -146,19 +190,16 @@ public class HorizonGridView : RectTileGridBuilder
 		if (Input.GetMouseButtonDown(0) && UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject() == false)
 		{
 			RaycastHit hit;
-			if(Physics.Raycast(mouseRay,out hit,100,LayerMask.NameToLayer("units")))
+			if(Physics.Raycast(mouseRay,out hit,100))
 			{
-				//select unit
+				HorizonUnitModel unitModel = hit.collider.GetComponentInParent<HorizonUnitModel>();
+				if(unitModel != null) model.SelectedUnit = unitModel;
 			}
 			else if (Grid.Contains(PointUnderMouse))
 			{
-				//SendMessageToGridAndCell(PointUnderMouse, "OnClick");
-				//print(PointUnderMouse);
-				//select cell
+				model.SelectedCell = model.CellViewGrid[PointUnderMouse];
 			}
 		}
-
-		//other input processing
 	}
 
 	private void SendMessageToGridAndCell(RectPoint point, string message)
