@@ -15,7 +15,8 @@ public class HorizonCellModel : MonoBehaviour
 {
 	[SerializeField]
 	public CellState state;
-	//public List<HorizonUnitModel> Units;
+
+	public HorizonUnitModel OccupyingUnit;
 
 	public RectPoint PositionPoint;
 }
