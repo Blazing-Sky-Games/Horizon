@@ -48,6 +48,8 @@ public class HorizonUnitModel : MonoBehaviour
 
 	private HorizonCellModel m_occupyingCell;
 
+	public static event Action<HorizonUnitModel> OnUnitHPEqualsZero;
+
 	public RectPoint PositionPoint
 	{
 		get
@@ -67,6 +69,9 @@ public class HorizonUnitModel : MonoBehaviour
 			m_occupyingCell.OccupyingUnit = this;
 
 			positionPoint = value;
+
+			X = positionPoint.X;
+			Y = positionPoint.Y;
 		}
 	}
 
@@ -173,6 +178,8 @@ public class HorizonUnitModel : MonoBehaviour
 	void Awake()
 	{
 		PositionPoint = new RectPoint(X,Y);
+		Hp = maxHp;
+		lastHp = maxHp;
 	}
 
 	[SerializeField]
@@ -219,6 +226,20 @@ public class HorizonUnitModel : MonoBehaviour
 
 	[SerializeField]
 	public int Hp;
+
+	private int lastHp;
+	void Update()
+	{
+		Hp = (int)Mathf.Clamp(Hp,0,maxHp);
+
+		if(lastHp != Hp && Hp == 0)
+		{
+			if(OnUnitHPEqualsZero != null)
+				OnUnitHPEqualsZero(this);
+		}
+
+		lastHp = Hp;
+	}
 
 	[SerializeField]
 	public int maxHp;

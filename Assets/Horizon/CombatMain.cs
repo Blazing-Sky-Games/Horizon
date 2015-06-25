@@ -14,12 +14,36 @@ public class CombatMain : MonoBehaviour
 
 	void Start()
 	{
-		GridModel.OnCellSelected += HandleOnCellSelected;;
+		GridModel.OnCellSelected += HandleOnCellSelected;
 		GridModel.OnHighlightedCellChanged += HandleOnHighlightedCellChanged;
 
 		GridModel.OnUnitSelected += HandleOnUnitSelected;
 		GridModel.OnHighlightedUnitChanged += HandleOnHighlightedUnitChanged;
 		GridModel.OnActiveUnitChanged += HandleOnActiveUnitChanged;
+
+		GridModel.OnLoss += HandleOnLoss;
+		GridModel.OnWin += HandleOnWin;
+
+		HorizonUnitModel.OnUnitHPEqualsZero -= HandleOnUnitHPEqualsZero;
+		HorizonUnitModel.OnUnitHPEqualsZero += HandleOnUnitHPEqualsZero;
+	}
+
+	void HandleOnUnitHPEqualsZero (HorizonUnitModel unit)
+	{
+		if(unit == GridModel.SelectedUnit)
+			GridModel.SelectedUnit = null;
+	}
+
+	void HandleOnWin (HorizonGridModel model)
+	{
+		if(model == GridModel)
+			Application.LoadLevel(1);
+	}
+
+	void HandleOnLoss (HorizonGridModel model)
+	{
+		if(model == GridModel)
+			Application.LoadLevel(2);
 	}
 
 	void HandleOnUnitSelected (HorizonUnitModel Unit)
@@ -109,5 +133,20 @@ public class CombatMain : MonoBehaviour
 				);
 			}
 		}
+	}
+
+	void OnDestroy()
+	{
+		GridModel.OnCellSelected -= HandleOnCellSelected;
+		GridModel.OnHighlightedCellChanged -= HandleOnHighlightedCellChanged;
+		
+		GridModel.OnUnitSelected -= HandleOnUnitSelected;
+		GridModel.OnHighlightedUnitChanged -= HandleOnHighlightedUnitChanged;
+		GridModel.OnActiveUnitChanged -= HandleOnActiveUnitChanged;
+		
+		GridModel.OnLoss -= HandleOnLoss;
+		GridModel.OnWin -= HandleOnWin;
+		
+		HorizonUnitModel.OnUnitHPEqualsZero -= HandleOnUnitHPEqualsZero;
 	}
 }
