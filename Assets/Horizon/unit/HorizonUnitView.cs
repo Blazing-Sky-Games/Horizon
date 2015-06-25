@@ -1,9 +1,15 @@
 ﻿using UnityEngine;
+
 using System.Collections;
 
 public class HorizonUnitView : MonoBehaviour 
 {
 	private float outlineSize = 0.05f;
+
+	private HPLabel HPDisplay;
+
+	private HorizonUnitModel model;
+	private Renderer unitRenderer;
 
 	public float OutlineSize
 	{
@@ -28,5 +34,35 @@ public class HorizonUnitView : MonoBehaviour
 		{
 			OutlineSize = 0.001f * value;
 		}
+	}
+
+	void Start()
+	{
+		unitRenderer = gameObject.GetComponentInChildren<Renderer>();
+		model = gameObject.GetComponent<HorizonUnitModel>();
+
+		HPDisplay = CombatUI.NewHPLabel();
+		HPDisplay.gameObject.SetActive(true);
+	}
+
+	void Update()
+	{
+		HPDisplay.rectTransform.position = getHPLablePosition();
+		HPDisplay.MaxHP = model.maxHp;
+		HPDisplay.CurrentHP = model.Hp;
+	}
+
+	void OnDestroy()
+	{
+		Destroy(HPDisplay.gameObject);
+	}
+
+	Vector3 getHPLablePosition()
+	{
+		float unitHeight = unitRenderer.bounds.max.y;
+
+		Vector3 worldPoint = new Vector3(transform.position.x,unitHeight,transform.position.z);
+
+		return Camera.main.WorldToScreenPoint(worldPoint);
 	}
 }

@@ -13,6 +13,12 @@ public class HorizonGridModel : GridBehaviour<RectPoint>
 
 //public feilds
 
+	public HorizonUnitModel[] FriendlyUnits;
+	public HorizonUnitModel[] EnemyUnits;
+
+	public event Action<HorizonGridModel> OnWin;
+	public event Action<HorizonGridModel> OnLoss;
+
 //public properties, private backing feilds, and changed events
 
 	//cell view grid, gives accsess to cell views by rect point
@@ -129,9 +135,47 @@ public class HorizonGridModel : GridBehaviour<RectPoint>
 
 	public override void InitGrid ()
 	{
+		HorizonUnitModel.OnUnitHPEqualsZero -= HandleOnUnitHPEqualsZero;
+
 		foreach(var item in CellViewGrid)
 		{
 			CellViewGrid[item].model.PositionPoint = item;
+		}
+
+		HorizonUnitModel.OnUnitHPEqualsZero += HandleOnUnitHPEqualsZero;
+	}
+
+	void HandleOnUnitHPEqualsZero (HorizonUnitModel unit)
+	{
+		if(unit.unitType == UnitType.Character)
+		{
+			FriendlyUnits = FriendlyUnits.Where(x => x != unit).ToArray();
+		}
+		else
+		{
+			EnemyUnits = EnemyUnits.Where(x => x != unit).ToArray();
+		}
+
+		Destroy(unit.gameObject);
+
+		CheckWinLoss();
+	}
+
+	void CheckWinLoss ()
+	{
+		if(FriendlyUnits.Count() == 0)
+		{
+			if(OnLoss != null) 
+			{
+				OnLoss(this);
+			}
+		}
+		else if(EnemyUnits.Count() == 0)
+		{
+			if(OnWin != null) 
+			{
+				OnWin(this);
+			}
 		}
 	}
 
@@ -217,5 +261,10 @@ public class HorizonGridModel : GridBehaviour<RectPoint>
 			isAccesable,
 			(x,y) => 1
 		).Skip(1);
+	}
+
+	void OnDestroy()
+	{
+		HorizonUnitModel.OnUnitHPEqualsZero -= HandleOnUnitHPEqualsZero;
 	}
 }
