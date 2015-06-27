@@ -46,9 +46,16 @@ public class HorizonUnitModel : MonoBehaviour
 {
 	private RectPoint positionPoint;
 
-	private HorizonCellModel m_occupyingCell;
+	public HorizonCellModel OccupyingCell;
 
 	public static event Action<HorizonUnitModel> OnUnitHPEqualsZero;
+
+	public int AttackPower = 2;
+
+	public void Attack(HorizonUnitModel unit)
+	{
+		unit.Hp -= AttackPower;
+	}
 
 	public RectPoint PositionPoint
 	{
@@ -60,13 +67,13 @@ public class HorizonUnitModel : MonoBehaviour
 		{
 			pointsInMovmentRange = null;
 
-			if(m_occupyingCell != null)
+			if(OccupyingCell != null)
 			{
-				m_occupyingCell.OccupyingUnit = null;
+				OccupyingCell.OccupyingUnit = null;
 			}
 
-			m_occupyingCell = GridView.model.CellViewGrid[value].model;
-			m_occupyingCell.OccupyingUnit = this;
+			OccupyingCell = GridView.model.CellViewGrid[value].model;
+			OccupyingCell.OccupyingUnit = this;
 
 			positionPoint = value;
 

@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.EventSystems;
 using UnityEditor;
 
 using System.Collections;
@@ -175,7 +177,11 @@ public class HorizonGridView : RectTileGridBuilder
 		PointUnderMouse = new RectPoint(a, b);
 
 		RaycastHit hit;
-		if(Physics.Raycast(mouseRay,out hit,100))
+		if(UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject() == true)
+		{
+			model.HighlightedUnit = null;
+		}
+		else if(Physics.Raycast(mouseRay,out hit,100))
 		{
 			model.HighlightedUnit = hit.collider.GetComponentInParent<HorizonUnitModel>();
 		}
@@ -184,7 +190,11 @@ public class HorizonGridView : RectTileGridBuilder
 			model.HighlightedUnit = null;
 		}
 
-		if (Grid.Contains(PointUnderMouse) && model.HighlightedUnit == null)
+		if(UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject() == true)
+		{
+			model.HighlightedCell = null;
+		}
+		else if (Grid.Contains(PointUnderMouse) && model.HighlightedUnit == null)
 		{
 			model.HighlightedCell = model.CellViewGrid[PointUnderMouse];
 		}
@@ -196,7 +206,7 @@ public class HorizonGridView : RectTileGridBuilder
 	
 	private void ProcessInput()
 	{
-		if (Input.GetMouseButtonDown(0) && UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject() == false)
+		if (Input.GetMouseButtonDown(0) && EventSystem.current.IsPointerOverGameObject() == false)
 		{
 			RaycastHit hit;
 			if(Physics.Raycast(mouseRay,out hit,100))
