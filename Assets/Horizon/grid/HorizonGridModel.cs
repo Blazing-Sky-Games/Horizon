@@ -13,6 +13,9 @@ public class HorizonGridModel : GridBehaviour<RectPoint>
 
 //public feilds
 
+	public List<HorizonUnitView> TurnOrder = new List<HorizonUnitView>();
+	private int activeIndex = 0;
+
 	public HorizonUnitModel[] FriendlyUnits;
 	public HorizonUnitModel[] EnemyUnits;
 
@@ -114,6 +117,11 @@ public class HorizonGridModel : GridBehaviour<RectPoint>
 		}
 	}
 
+	void HandleOnTurnFinished ()
+	{
+		IncrementTurnOrder();
+	}
+
 	public HorizonUnitModel ActiveUnit
 	{
 		get
@@ -124,6 +132,10 @@ public class HorizonGridModel : GridBehaviour<RectPoint>
 		{
 			if(activeUnit != value && OnActiveUnitChanged != null)
 				OnActiveUnitChanged(value);
+
+			if(activeUnit != null) activeUnit.OnTurnFinished -= HandleOnTurnFinished;
+
+			if(value != null) value.OnTurnFinished += HandleOnTurnFinished;
 
 			activeUnit = value;
 		}
@@ -139,6 +151,12 @@ public class HorizonGridModel : GridBehaviour<RectPoint>
 	{
 		HorizonUnitModel.OnUnitHPEqualsZero -= HandleOnUnitHPEqualsZero;
 
+		ActiveUnit = TurnOrder[activeIndex].model;
+		CombatUI.Instance.turnOrderDiaplsy.turnOrder = TurnOrder;
+		CombatUI.Instance.turnOrderDiaplsy.UpdateTurnOrder();
+
+		SelectedUnit = ActiveUnit;
+
 		foreach(var item in CellViewGrid)
 		{
 			CellViewGrid[item].model.PositionPoint = item;
@@ -147,8 +165,24 @@ public class HorizonGridModel : GridBehaviour<RectPoint>
 		HorizonUnitModel.OnUnitHPEqualsZero += HandleOnUnitHPEqualsZero;
 	}
 
+	void IncrementTurnOrder ()
+	{
+		activeIndex++;
+		if(activeIndex >= TurnOrder.Count) activeIndex = 0;
+
+		if(TurnOrder.Count != 0)
+		{
+			ActiveUnit = TurnOrder[activeIndex].model;
+		}
+	}
+
 	void HandleOnUnitHPEqualsZero (HorizonUnitModel unit)
 	{
+		if(unit == activeUnit) IncrementTurnOrder();
+
+		TurnOrder.Remove(unit.view);
+		CombatUI.Instance.turnOrderDiaplsy.UpdateTurnOrder();
+
 		if(unit.unitType == UnitType.Character)
 		{
 			FriendlyUnits = FriendlyUnits.Where(x => x != unit).ToArray();

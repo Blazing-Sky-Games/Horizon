@@ -113,16 +113,14 @@ public class HorizonUnitModelEditor : GLEditor<HorizonUnitModel>
 }
 
 [CustomEditor(typeof(HorizonUnitView))]
+[CanEditMultipleObjects]
 public class HorizonUnitViewEditor : GLEditor<HorizonUnitView> 
 {
 	public override void OnInspectorGUI()
 	{
 		serializedObject.Update();
 
-		//EditorGUILayout.BeginHorizontal();
-		//GUILayout.Label("outline Size");
-		//Target.OutlineSize = GUILayout.HorizontalSlider(Target.OutlineSize,0,0.1f);
-		//EditorGUILayout.EndHorizontal();
+		DrawDefaultInspector();
 
 		if(GUILayout.Button("fix Model Outline"))
 		{

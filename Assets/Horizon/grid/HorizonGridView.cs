@@ -9,7 +9,6 @@ using System;
 
 using Gamelogic.Grids;
 
-[ExecuteInEditMode]
 public class HorizonGridView : RectTileGridBuilder
 {
 	private RectPoint PointUnderMouse;
