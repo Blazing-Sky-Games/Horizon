@@ -138,6 +138,7 @@ public class HorizonGridModel : GridBehaviour<RectPoint>
 			if(value != null) value.OnTurnFinished += HandleOnTurnFinished;
 
 			activeUnit = value;
+			SelectedUnit = activeUnit;
 		}
 	}
 
@@ -289,14 +290,17 @@ public class HorizonGridModel : GridBehaviour<RectPoint>
 
 	public IEnumerable<RectPoint> ShortestPathBetweenPoints(RectPoint start, RectPoint end, Func<HorizonCellView,bool> isAccesable)
 	{
-		return Algorithms.AStar(
+		IEnumerable<RectPoint> path = Algorithms.AStar(
 			cellViewGrid,
 			start,
 			end,
 		   	(p, q) =>p.DistanceFrom(q),
 			isAccesable,
 			(x,y) => 1
-		).Skip(1);
+		);
+
+		if(path == null) return null;
+		else return path.Skip(1);
 	}
 
 	void OnDestroy()

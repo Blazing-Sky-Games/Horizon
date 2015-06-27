@@ -62,8 +62,11 @@ public class AttackButton : MonoBehaviour
 			yield return null;
 		}
 
+		/// THIS CODE IS SUPER BUGGY RIGHT NOW
+		// fix it so that OnTargetEnd can be called after the attack
 		if(OnTargetEnd != null) OnTargetEnd();
 
+		// change this to yielding an attack corutine, so it can wait for the animation to finish
 		if(targetedUnit != null) m_gridModel.SelectedUnit.Attack(targetedUnit);
 	}
 
@@ -79,8 +82,8 @@ public class AttackButton : MonoBehaviour
 
 	void Update()
 	{
-		gameObject.transform.GetChild(0).gameObject.SetActive(m_gridModel.SelectedUnit != null && m_gridModel.SelectedUnit == m_gridModel.ActiveUnit && m_gridModel.SelectedUnit.hasAttacked == false);
-		gameObject.transform.GetChild(1).gameObject.SetActive(m_gridModel.SelectedUnit != null && m_gridModel.SelectedUnit == m_gridModel.ActiveUnit);
+		gameObject.transform.GetChild(0).gameObject.SetActive(m_gridModel.SelectedUnit != null && m_gridModel.SelectedUnit.unitType == UnitType.Character && m_gridModel.SelectedUnit == m_gridModel.ActiveUnit && m_gridModel.SelectedUnit.hasAttacked == false);
+		gameObject.transform.GetChild(1).gameObject.SetActive(m_gridModel.SelectedUnit != null && m_gridModel.SelectedUnit.unitType == UnitType.Character && m_gridModel.SelectedUnit == m_gridModel.ActiveUnit);
 
 		buttonLabel.text = m_selecting ? "Cancle Attack" : "Attack";
 	}

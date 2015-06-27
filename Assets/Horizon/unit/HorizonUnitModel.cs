@@ -71,6 +71,8 @@ public class HorizonUnitModel : MonoBehaviour
 	{
 		if(hasAttacked) return;
 
+		// hmm ... code here to wait for an animation to finish
+
 		unit.Hp -= AttackPower;
 
 		hasAttacked = true;
@@ -182,9 +184,11 @@ public class HorizonUnitModel : MonoBehaviour
 		}
 	}
 
+	// event on trverspathstart ... use for animation
 	public event Action OnTraversePathEnd;
 	public IEnumerator TraversePath(IEnumerable<RectPoint> path)
 	{
+		//trverspathstart();
 		if(path != null)
 		{
 			foreach(RectPoint point in path)
