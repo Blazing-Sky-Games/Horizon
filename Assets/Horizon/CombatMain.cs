@@ -110,7 +110,10 @@ public class CombatMain : MonoBehaviour
 
 	void HandleOnActiveUnitChanged (HorizonUnitModel NewUnit)
 	{
-		// nothing yet
+		GridModel.HighlightedCell = null;
+		GridModel.HighlightedUnit = null;
+		GridModel.SelectedCell = null;
+		GridModel.SelectedUnit = NewUnit;
 	}
 
 	void HandleOnHighlightedUnitChanged (HorizonUnitModel NewUnit)
@@ -141,6 +144,7 @@ public class CombatMain : MonoBehaviour
 			unit.OnTraversePathEnd -= OnMoveEnd;
 			//enable user input
 			GridView.handleInput = true;
+			GridModel.SelectedUnit = GridModel.ActiveUnit;
 		};
 
 		unit.OnTraversePathEnd += OnMoveEnd;
@@ -158,7 +162,7 @@ public class CombatMain : MonoBehaviour
 				GridModel.SelectedUnit = Cell.model.OccupyingUnit;
 			}
 		}
-		else if(Cell != null && GridModel.SelectedUnit != null && GridModel.SelectedUnit.PointsInMovmentRange.Contains(Cell.model.PositionPoint))
+		else if(Cell != null && GridModel.SelectedUnit != null && GridModel.SelectedUnit == GridModel.ActiveUnit && GridModel.SelectedUnit.PointsInMovmentRange.Contains(Cell.model.PositionPoint))
 		{
 			//move unit
 			MoveSelectedUnitTo(Cell.model.PositionPoint);
@@ -181,12 +185,12 @@ public class CombatMain : MonoBehaviour
 			return;
 		}
 
-		if(GridModel.SelectedUnit != null && GridModel.HighlightedCell != null && GridModel.SelectedUnit.PointsInMovmentRange.Contains(GridModel.HighlightedCell.model.PositionPoint))
+		if(GridModel.SelectedUnit != null && GridModel.SelectedUnit == GridModel.ActiveUnit && GridModel.HighlightedCell != null && GridModel.SelectedUnit.PointsInMovmentRange.Contains(GridModel.HighlightedCell.model.PositionPoint))
 			GridView.popHighlightSet();
 
 		if(NewCell != null)
 		{
-			if(GridModel.SelectedUnit != null && GridModel.SelectedUnit.PointsInMovmentRange.Contains(NewCell.model.PositionPoint))
+			if(GridModel.SelectedUnit != null && GridModel.SelectedUnit == GridModel.ActiveUnit && GridModel.SelectedUnit.PointsInMovmentRange.Contains(NewCell.model.PositionPoint))
 			{
 				GridView.pushHighlightSet(
 					GridModel.SelectedUnit.ShortestPathToPoint(NewCell.model.PositionPoint), 

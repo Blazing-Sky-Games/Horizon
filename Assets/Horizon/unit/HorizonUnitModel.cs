@@ -50,11 +50,31 @@ public class HorizonUnitModel : MonoBehaviour
 
 	public static event Action<HorizonUnitModel> OnUnitHPEqualsZero;
 
+	public event Action OnTurnFinished;
+
+	public HorizonUnitView view;
+
 	public int AttackPower = 2;
+
+	public bool hasMoved = false;
+	public bool hasAttacked = false;
+
+	public void PassTurn ()
+	{
+		hasMoved = false;
+		hasAttacked = false;
+		pointsInMovmentRange = null;
+		if(OnTurnFinished != null) OnTurnFinished();
+	}
 
 	public void Attack(HorizonUnitModel unit)
 	{
+		if(hasAttacked) return;
+
 		unit.Hp -= AttackPower;
+
+		hasAttacked = true;
+		if(hasMoved && hasAttacked) PassTurn();
 	}
 
 	public RectPoint PositionPoint
@@ -96,6 +116,8 @@ public class HorizonUnitModel : MonoBehaviour
 
 	public IEnumerable<RectPoint> GetPointsInMovementRange()
 	{
+		if (hasMoved == true) return new List<RectPoint>();
+
 		return GridView.model.GetPointsInRangeCost(
 			PositionPoint,
 			speed,
@@ -174,7 +196,13 @@ public class HorizonUnitModel : MonoBehaviour
 			}
 		}
 
-		if(OnTraversePathEnd != null) OnTraversePathEnd();
+		if(OnTraversePathEnd != null) 
+		{
+			hasMoved = true;
+			pointsInMovmentRange = null;
+			OnTraversePathEnd();
+			if(hasMoved && hasAttacked) PassTurn();
+		}
 	}
 
 	public IEnumerator TraverseShortestPathToPoint(RectPoint point)

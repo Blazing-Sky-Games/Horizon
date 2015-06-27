@@ -8,8 +8,10 @@ public class HorizonUnitView : MonoBehaviour
 
 	private HPLabel HPDisplay;
 
-	private HorizonUnitModel model;
+	public HorizonUnitModel model;
 	private Renderer unitRenderer;
+
+	public Sprite Portrait;
 
 	public float OutlineSize
 	{
@@ -40,6 +42,7 @@ public class HorizonUnitView : MonoBehaviour
 	{
 		unitRenderer = gameObject.GetComponentInChildren<Renderer>();
 		model = gameObject.GetComponent<HorizonUnitModel>();
+		model.view = this;
 
 		HPDisplay = CombatUI.NewHPLabel();
 		HPDisplay.gameObject.SetActive(true);
@@ -58,7 +61,8 @@ public class HorizonUnitView : MonoBehaviour
 
 	void OnDestroy()
 	{
-		Destroy(HPDisplay.gameObject);
+		if(HPDisplay != null && HPDisplay.gameObject != null)
+			Destroy(HPDisplay.gameObject);
 	}
 
 	Vector3 getHPLablePosition()

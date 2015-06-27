@@ -62,9 +62,9 @@ public class AttackButton : MonoBehaviour
 			yield return null;
 		}
 
-		if(targetedUnit != null) m_gridModel.SelectedUnit.Attack(targetedUnit);
-
 		if(OnTargetEnd != null) OnTargetEnd();
+
+		if(targetedUnit != null) m_gridModel.SelectedUnit.Attack(targetedUnit);
 	}
 
 	public void SelectTargetForSelectedUnit()
@@ -79,9 +79,15 @@ public class AttackButton : MonoBehaviour
 
 	void Update()
 	{
-		gameObject.transform.GetChild(0).gameObject.SetActive(m_gridModel.SelectedUnit != null);
+		gameObject.transform.GetChild(0).gameObject.SetActive(m_gridModel.SelectedUnit != null && m_gridModel.SelectedUnit == m_gridModel.ActiveUnit && m_gridModel.SelectedUnit.hasAttacked == false);
+		gameObject.transform.GetChild(1).gameObject.SetActive(m_gridModel.SelectedUnit != null && m_gridModel.SelectedUnit == m_gridModel.ActiveUnit);
 
 		buttonLabel.text = m_selecting ? "Cancle Attack" : "Attack";
+	}
+
+	public void pass()
+	{
+		m_gridModel.ActiveUnit.PassTurn();
 	}
 
 }
