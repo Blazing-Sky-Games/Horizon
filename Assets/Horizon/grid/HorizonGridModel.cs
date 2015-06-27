@@ -79,7 +79,7 @@ public class HorizonGridModel : GridBehaviour<RectPoint>
 	private HorizonUnitModel highlightedUnit;
 	private HorizonUnitModel activeUnit;
 
-	public event Action<HorizonUnitModel> OnUnitSelected;
+	public event Func<HorizonUnitModel,bool> OnUnitSelected;
 	public event Action<HorizonUnitModel> OnHighlightedUnitChanged;
 	public event Action<HorizonUnitModel> OnActiveUnitChanged;
 
@@ -92,9 +92,11 @@ public class HorizonGridModel : GridBehaviour<RectPoint>
 		}
 		set
 		{
-			if(OnUnitSelected != null) OnUnitSelected(value);
+			bool shouldchangeSelection = false;
+			if(OnUnitSelected != null) shouldchangeSelection = OnUnitSelected(value);
 
-			selectedUnit = value;
+			if(shouldchangeSelection)
+				selectedUnit = value;
 		}
 	}
 	public HorizonUnitModel HighlightedUnit

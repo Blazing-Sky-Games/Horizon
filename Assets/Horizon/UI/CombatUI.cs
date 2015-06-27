@@ -8,12 +8,27 @@ using System.Collections.Generic;
 public class CombatUI : MonoBehaviour 
 {
 	public GameObject HPLabelPrefab;
+	public HorizonGridModel GridModel;
+	public AttackButton attackButton;
 
 	private static CombatUI m_instance;
 
 	void Awake()
 	{
 		m_instance = this;
+	}
+
+	void Start()
+	{
+		attackButton.SetGridModel(GridModel);
+	}
+
+	public static CombatUI Instance
+	{
+		get
+		{
+			return m_instance;
+		}
 	}
 
 	public static HPLabel NewHPLabel()

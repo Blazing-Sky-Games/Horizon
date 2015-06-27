@@ -47,9 +47,13 @@ public class HorizonUnitView : MonoBehaviour
 
 	void Update()
 	{
-		HPDisplay.rectTransform.position = getHPLablePosition();
 		HPDisplay.MaxHP = model.maxHp;
 		HPDisplay.CurrentHP = model.Hp;
+	}
+
+	void LateUpdate()
+	{
+		HPDisplay.rectTransform.position = getHPLablePosition();
 	}
 
 	void OnDestroy()
