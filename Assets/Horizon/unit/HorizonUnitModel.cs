@@ -71,7 +71,26 @@ public class HorizonUnitModel : MonoBehaviour
 	{
 		if(hasAttacked) return;
 
+		RectPoint direction = unit.PositionPoint - positionPoint;
+		if(direction == RectPoint.North)
+		{
+			SetUnitDirection(UnitDirection.forward);
+		}
+		else if(direction == RectPoint.South)
+		{
+			SetUnitDirection(UnitDirection.backward);	
+		}
+		else if(direction == RectPoint.East)
+		{
+			SetUnitDirection(UnitDirection.right);
+		}
+		else if(direction == RectPoint.West)
+		{
+			SetUnitDirection(UnitDirection.left);
+		}
+
 		// hmm ... code here to wait for an animation to finish
+		// turn attack into a corutine
 
 		unit.Hp -= AttackPower;
 

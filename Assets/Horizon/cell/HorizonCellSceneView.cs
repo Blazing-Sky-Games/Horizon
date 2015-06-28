@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿#if UNITY_EDITOR
+
+using UnityEngine;
 using UnityEngine.Internal;
 using UnityEditor;
 
@@ -83,3 +85,4 @@ public class HorizonCellSceneView : MonoBehaviour
 		GLGizmos.Label(transform.position, name);
 	}
 }
+#endif

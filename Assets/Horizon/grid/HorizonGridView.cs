@@ -1,12 +1,9 @@
-using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.EventSystems;
-using UnityEditor;
-
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using System;
-
+using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.Events;
 using Gamelogic.Grids;
 
 public class HorizonGridView : RectTileGridBuilder
@@ -49,9 +46,6 @@ public class HorizonGridView : RectTileGridBuilder
 
 	protected override void InitGrid ()
 	{
-		//called whenever the grid gets reset
-		//NEED TO MAKE SURE CELL PROPS STAY
-
 		Camera.main.GetComponent<SimpleCameraControls>().PostRenderEvent -= OnPostRender;
 		
 		updateType = UpdateType.EditorAuto;
@@ -146,12 +140,6 @@ public class HorizonGridView : RectTileGridBuilder
 				}
 			}
 		}
-
-		//for(float i = 0; i <= Dimensions.X * CellSpacingFactor.x; i += CellSpacingFactor.x)
-		//{
-			//GL.Vertex3( transform.position.x + i, transform.position.y + 0.01f, transform.position.z );
-			//GL.Vertex3( transform.position.x + i, transform.position.y + 0.01f, transform.position.z + Dimensions.Y * CellSpacingFactor.y);
-		//}
 
 		GL.End();
 	}

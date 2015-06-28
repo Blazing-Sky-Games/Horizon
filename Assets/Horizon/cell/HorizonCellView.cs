@@ -1,10 +1,7 @@
-﻿using UnityEngine;
-using UnityEditor;
-
-using Gamelogic.Grids;
-
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
+using Gamelogic.Grids;
 
 public class HorizonCellView : SpriteCell 
 {

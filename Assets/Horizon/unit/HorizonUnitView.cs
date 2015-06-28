@@ -22,7 +22,11 @@ public class HorizonUnitView : MonoBehaviour
 		set
 		{
 			outlineSize = Mathf.Clamp(value,0,0.1f);
-			gameObject.GetComponentInChildren<MeshRenderer>().material.SetFloat("_Outline",outlineSize);
+			MeshRenderer rend = gameObject.GetComponentInChildren<MeshRenderer>();
+			foreach(Material mat in rend.materials)
+			{
+				mat.SetFloat("_Outline",outlineSize);
+			}
 		}
 	}
 
