@@ -145,26 +145,32 @@ public class CombatMain : MonoBehaviour
 		{
 			foreach(RectPoint characterNeighbor in GridModel.CellViewGrid.GetNeighbors(character.PositionPoint))
 			{
-				IEnumerable<RectPoint> path = enemy.ShortestPathToPoint(characterNeighbor);
-				if(path != null)ditancesToUnits.Add (path);
+				if( GridModel.CellViewGrid[characterNeighbor].model.OccupyingUnit == null)
+				{
+					IEnumerable<RectPoint> path = enemy.ShortestPathToPoint(characterNeighbor);
+					if(path != null)ditancesToUnits.Add (path);
+				}
 			}
 		}
 
-		// hmm ... include information about the unit you are travling towords, and include it in a heuristic measurment
-		// this by itself migh tbe good enough to make the ai enjoyable
-		IEnumerable<RectPoint> shortestPath = ditancesToUnits.OrderBy(x=>x.Count()).First();
-
-		if(shortestPath.Count() <= enemy.speed) 
+		if(ditancesToUnits.Count() != 0)
 		{
-			if(shortestPath.Count() != 0)
+			// hmm ... include information about the unit you are travling towords, and include it in a heuristic measurment
+			// this by itself migh tbe good enough to make the ai enjoyable
+			IEnumerable<RectPoint> shortestPath = ditancesToUnits.OrderBy(x=>x.Count()).First();
+			
+			if(shortestPath.Count() <= enemy.speed) 
 			{
-				yield return StartCoroutine(enemy.TraversePath(shortestPath));
+				if(shortestPath.Count() != 0)
+				{
+					yield return StartCoroutine(enemy.TraversePath(shortestPath));
+				}
 			}
-		}
-		else
-		{
-			IEnumerable<RectPoint> path = shortestPath.Take(enemy.speed);
-			yield return StartCoroutine(enemy.TraversePath(path));
+			else
+			{
+				IEnumerable<RectPoint> path = shortestPath.Take(enemy.speed);
+				yield return StartCoroutine(enemy.TraversePath(path));
+			}
 		}
 
 		//attack if we couldnt attack befor

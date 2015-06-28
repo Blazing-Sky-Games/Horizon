@@ -153,6 +153,8 @@ public class HorizonUnitModel : MonoBehaviour
 
 	private IEnumerator TryMoveToCell(RectPoint point, Referance<bool> result)
 	{
+		bool cellWasEmpty = GridView.model.CellViewGrid[point].model.OccupyingUnit == null;
+
 		if(GridView.Grid.GetAllNeighbors(PositionPoint).Contains(point))
 		{
 			RectPoint direction = point - PositionPoint;
@@ -175,7 +177,17 @@ public class HorizonUnitModel : MonoBehaviour
 
 			yield return StartCoroutine(transform.MoveTransformToPointInTime(GridView.Grid[point].Center,0.5f));
 
-			PositionPoint = point;
+			if(cellWasEmpty)
+			{
+				// use the property so we reset cell ocupation
+				PositionPoint = point;
+			}
+			else
+			{
+				// we are passing through a freindly unit, dont edit cell ocupation, so dont use the property
+				positionPoint = point;
+			}
+
 			result.value = true;
 		}
 		else
