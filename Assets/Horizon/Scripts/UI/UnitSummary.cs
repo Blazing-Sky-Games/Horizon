@@ -3,6 +3,7 @@ using UnityEngine.UI;
 
 using System.Collections;
 
+//the little boxes in the turn order
 public class UnitSummary : MonoBehaviour 
 {
 	private Image m_background;
@@ -20,7 +21,7 @@ public class UnitSummary : MonoBehaviour
 	public void SetUnit(HorizonUnitGameView unit)
 	{
 		m_unit = unit;
-		m_portraite.sprite = m_unit.Portrait;
+		m_portraite.sprite = m_unit.Portrait; // update the portraite
 	}
 
 	public void SetGridModel(HorizonGridModel model)
@@ -31,6 +32,7 @@ public class UnitSummary : MonoBehaviour
 
 	void Awake() 
 	{
+		//init
 		m_background = gameObject.GetComponent<Image>();
 		rectTransform = gameObject.GetComponent<RectTransform>();
 		m_portraite = transform.GetChild(0).GetComponent<Image>();
@@ -38,8 +40,10 @@ public class UnitSummary : MonoBehaviour
 		m_background.color = Netural;
 	}
 
+	// this should replaced with listening for some events
 	void Update()
 	{
+		// pop up the summary if the unit is selected
 		if(m_gridModel.SelectedUnit == m_unit.model)
 		{
 			rectTransform.localPosition = new Vector3(rectTransform.localPosition.x,rectTransform.rect.height / 2,0);
@@ -49,6 +53,7 @@ public class UnitSummary : MonoBehaviour
 			rectTransform.localPosition = new Vector3(rectTransform.localPosition.x,0,0);
 		}
 
+		// highlight the summary if it is active/highlighted
 		if(m_gridModel.HighlightedUnit == m_unit.model)
 		{
 			m_background.color = Highlighted;

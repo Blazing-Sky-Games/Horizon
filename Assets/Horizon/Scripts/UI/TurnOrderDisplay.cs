@@ -9,30 +9,22 @@ public class TurnOrderDisplay : MonoBehaviour
 
 	private List<UnitSummary> summarys = new List<UnitSummary>();
 
-	//private int m_activeUnitIndex;
-
-	//public int ActiveUnitIndex
-	//{
-		//get
-		//{
-			//return m_activeUnitIndex;
-		//}
-	//}
-
 	void Start()
 	{
 		UpdateTurnOrder();
 	}
 
+	// remove and reposision unit summaries in the turn order
 	public void UpdateTurnOrder()
 	{
+		//get rid of all the old ones
 		foreach(UnitSummary summary in summarys)
 		{
 			Destroy(summary.gameObject);
 		}
-
 		summarys.Clear();
 
+		//make new summaries
 		foreach(HorizonUnitGameView unit in turnOrder)
 		{
 			UnitSummary summary = CombatUI.NewUnitSummary();
@@ -41,6 +33,7 @@ public class TurnOrderDisplay : MonoBehaviour
 			summarys.Add(summary);
 		}
 
+		// do some layout stuff
 		float totalWidth = 0;
 		foreach(UnitSummary summary in summarys)
 		{
@@ -54,14 +47,4 @@ public class TurnOrderDisplay : MonoBehaviour
 			AccumulatedWidth += summary.rectTransform.rect.width;
 		}
 	}
-
-	//public void IncrementActiveUnit()
-	//{
-		//m_activeUnitIndex++;
-		//while(m_activeUnitIndex >= turnOrder.Count)
-			//m_activeUnitIndex -= turnOrder.Count;
-
-		//update Arrow .. hmm ... add arrow later
-		//hmm we need some way to know which unit is the active one ...
-	//}
 }

@@ -1,13 +1,14 @@
+using System.Collections;
+using Gamelogic.Editor;
+using Gamelogic.Grids;
 using UnityEditor;
 using UnityEditorInternal;
 using UnityEngine;
-
-using Gamelogic.Editor;
-using Gamelogic.Grids;
 using Gamelogic.Grids.Editor.Internal;
 
-using System.Collections;
-
+// this is the custom inspector for grid stuff
+// this just gives a way to edit the size of a grid
+// do we even really need this ...
 [CustomEditor(typeof(HorizonGridGameView))]
 public class HorizonGridEditor : SimpleGridEditor<HorizonGridGameView, RectPoint> 
 {
@@ -16,7 +17,10 @@ public class HorizonGridEditor : SimpleGridEditor<HorizonGridGameView, RectPoint
 		dimensionsProp = FindProperty("dimensions");
 		lineMatProp = FindProperty("lineMaterial");
 		
-		var assetGuids = AssetDatabase.FindAssets("HorizonCell t:prefab");
+		// set the cell prefab
+		// the cell prefab is the cell that gets created in the editor
+		var assetGuids = AssetDatabase.FindAssets("HorizonCell t:prefab"); // the horizon cell prefab
+		// hmm ... maybe i should be doing this editor black magic, and just have the user assign the prefabe in the editor them self
 		if(assetGuids.Length < 1)
 		{
 			Debug.LogError("HorizonCell Prefab Missing!");
@@ -42,10 +46,10 @@ public class HorizonGridEditor : SimpleGridEditor<HorizonGridGameView, RectPoint
 		
 		if (GUI.changed)
 		{
-			CheckDimensions(dimensionsProp);
+			CheckDimensions(dimensionsProp); // make sure the grid dimentions are in bounds
 			serializedObject.ApplyModifiedProperties();
 			
-			Target.__UpdatePresentation(true);
+			Target.__UpdatePresentation(true); // update the visual properties of the grid
 		}
 	}
 

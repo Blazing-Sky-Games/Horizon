@@ -9,6 +9,7 @@ using Gamelogic.Editor;
 using Gamelogic.Grids;
 using Gamelogic.Grids.Editor.Internal;
 
+// editor for the unit model
 [CustomEditor(typeof(HorizonUnitModel))]
 public class HorizonUnitModelEditor : GLEditor<HorizonUnitModel> 
 {
@@ -16,8 +17,10 @@ public class HorizonUnitModelEditor : GLEditor<HorizonUnitModel>
 	{
 		Target.GridView = GameObject.Find("HorizonGrid").GetComponent<HorizonGridGameView>();
 
+		// set position
 		Target.PositionPoint = new RectPoint(Target.X,Target.Y);
 
+		// make sure the unit is on a valid cell
 		if(CheckPosition(Target.PositionPoint) == false)
 		{
 			Func<bool> findValidCellFunc = () => 
@@ -43,6 +46,7 @@ public class HorizonUnitModelEditor : GLEditor<HorizonUnitModel>
 			if(findValidCellFunc() == false) Debug.LogError("nowhere to put a unit!");
 		}
 
+		//set direction
 		switch(Target.Direction)
 		{
 		case UnitDirection.forward:
@@ -73,6 +77,7 @@ public class HorizonUnitModelEditor : GLEditor<HorizonUnitModel>
 
 		if (GUI.changed)
 		{
+			//set unit direction
 			switch(Target.Direction)
 			{
 			case UnitDirection.forward:
@@ -89,6 +94,7 @@ public class HorizonUnitModelEditor : GLEditor<HorizonUnitModel>
 				break;
 			}
 
+			// set position
 			if ( CheckPosition(new RectPoint(Target.X,Target.Y)) )
 			{
 				Target.transform.position = Target.GridView.model.CellViewGrid[new RectPoint(Target.X,Target.Y)].transform.position;
@@ -112,6 +118,8 @@ public class HorizonUnitModelEditor : GLEditor<HorizonUnitModel>
 	}
 }
 
+//editor for the unit view
+//all this is for is fixing unit models so the highlight shader works
 [CustomEditor(typeof(HorizonUnitGameView))]
 [CanEditMultipleObjects]
 public class HorizonUnitViewEditor : GLEditor<HorizonUnitGameView> 
@@ -130,6 +138,10 @@ public class HorizonUnitViewEditor : GLEditor<HorizonUnitGameView>
 		serializedObject.ApplyModifiedProperties();
 	}
 
+	//HACK this is how i make the outline shader work for models with hard normals
+	// it does a bunch of munging on the model to compute smoooth normals, and secretly passes them down to the shader
+	// using the tagent vertex property
+	// if you want to know more about this talk to me, matthew draper
 	void fixMeshForOutline (MeshFilter filter) 
 	{
 		Mesh mesh = filter.sharedMesh;

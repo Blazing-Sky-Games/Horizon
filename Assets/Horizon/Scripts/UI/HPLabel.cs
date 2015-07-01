@@ -3,6 +3,7 @@ using UnityEngine.UI;
 
 using System.Collections;
 
+// simple ui that displays text for HP
 public class HPLabel : MonoBehaviour 
 {
 	private RectTransform m_rectTransform;
