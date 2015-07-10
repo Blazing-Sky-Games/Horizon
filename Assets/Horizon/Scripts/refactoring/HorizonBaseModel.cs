@@ -17,6 +17,8 @@ namespace Horizon.Models
 
 		public HorizonBaseModel()
 		{
+			// dont do it this way ... it is lazy
+			// if we change the way this works we could use views as a way to turn functionality on and off
 			Type viewType = typeof(Horizon.Views.HorizonBaseView<HorizonBaseModel>).GetGenericTypeDefinition().MakeGenericType(new Type[]{this.GetType()});
 			foreach(Assembly assembly in AppDomain.CurrentDomain.GetAssemblies())
 			{
@@ -29,6 +31,8 @@ namespace Horizon.Models
 				}
 			}
 		}
+
+		//TODO add editor only method to serilize to and from a custom asset ... hmm ... maybe this should be an extention class
 		
 		public void RaisePropertyChanged<T>(Expression<Func<T>> property)
 		{
@@ -91,6 +95,7 @@ namespace Horizon.Models
 			foreach(IDisposable disposable in views) disposable.Dispose();
 		}
 
+		//make this alist of views so we call update/start/etc
 		private List<IDisposable> views = new List<IDisposable>();
 	}
 }

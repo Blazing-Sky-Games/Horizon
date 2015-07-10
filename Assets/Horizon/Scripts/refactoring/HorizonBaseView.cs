@@ -7,6 +7,8 @@ namespace Horizon.Views
 	public class HorizonBaseView<ModelType> : IDisposable  
 		where ModelType:HorizonBaseModel
 	{
+		//TODO add the concept of disabling a view
+
 		public virtual void Dispose(){}
 
 		public HorizonBaseView(ModelType model)
