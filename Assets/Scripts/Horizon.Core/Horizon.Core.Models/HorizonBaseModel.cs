@@ -54,7 +54,7 @@ namespace Horizon.Core.Models
 
 		protected virtual void Start()
 		{
-			Camera.main.GetComponent<SimpleCameraControls>().PostRenderEvent += PostRenderEvent;
+			//Camera.main.GetComponent<SimpleCameraControls>().PostRenderEvent += PostRenderEvent;
 		}
 		
 		private void RaisePropertyChanged(string whichProperty = "")

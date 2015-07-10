@@ -8,6 +8,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 using System;
+using System.Text.RegularExpressions;
+
+
 namespace Horizon.Core.ExtensionMethods
 {
 	public static class StringExtensionMethods
