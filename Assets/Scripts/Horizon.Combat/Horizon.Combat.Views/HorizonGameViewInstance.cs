@@ -1,27 +1,25 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System;
-using Horizon.Core.Models;
+using Horizon.Core.Objects;
 using Horizon.Core.Views.GameViews;
 using Horizon.Combat.Models;
-using Horizon.Core.Gl;
+using Horizon.Core.GL;
 using Horizon.Core.WeakSubscription;
+using Horizon.Core.ExtensionMethods;
 
 namespace Horizon.Combat.Views.GameViews
 {
 	public class HorizonGameViewInstance : HorizonBaseGameView<HorizonModelInstance>  
 	{
-		public HorizonGameViewInstance(HorizonModelInstance instance) :base(instance)
+		public HorizonGameViewInstance(HorizonModelInstance instance) : base(instance)
 		{
-			m_testChangedSubscription = Model.WeakSubscribe(() => Model.test, (sender,args) => HandleTestChange());
-			m_drawSettings = new HorizonGLSettings(color: Color.green.SetAlpha(0.5f));
-		}
+			Model.WeakSubscribe(() => Model.test, (sender,args) => HandleTestChange());
 
-		protected override void OnPostRender ()
-		{
-			base.OnPostRender ();
-
-			HorizonGL.DrawLine(Model.transform.position , Model.transform.position + Vector3.forward,m_drawSettings);
+			m_line = new GLLine();
+			m_line.StartPoint = new Vector3(0,0,0); 
+			m_line.EndPoint = new Vector3(0,0,1);
+			m_line.Settings = new GLSettings(color:Color.green.SetAlpha(0.5f));
 		}
 
 		private void HandleTestChange()
@@ -32,11 +30,10 @@ namespace Horizon.Combat.Views.GameViews
 		public override void Dispose ()
 		{
 			base.Dispose ();
-			DisposeSubscription(ref m_testChangedSubscription);
+			m_line.Dispose();
 		}
 
-		private HorizonGLSettings m_drawSettings;
-		private NotifyPropertyChangedEventSubscription m_testChangedSubscription;
+		private GLLine m_line;
 	}
 }
 

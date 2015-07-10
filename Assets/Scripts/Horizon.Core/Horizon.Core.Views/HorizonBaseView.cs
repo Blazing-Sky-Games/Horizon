@@ -1,12 +1,12 @@
 ﻿using System;
 using UnityEngine;
-using Horizon.Core.Models;
+using Horizon.Core.Objects;
 using Horizon.Core.WeakSubscription;
 
 namespace Horizon.Core.Views
 {
 	public class HorizonBaseView<ModelType> : IDisposable  
-		where ModelType:HorizonBaseModel
+		where ModelType:HorizonGameObjectBase
 	{
 		//TODO add the concept of disabling a view
 
@@ -19,12 +19,6 @@ namespace Horizon.Core.Views
 
 		// accses to the model for this view
 		protected readonly ModelType Model;
-
-		protected void DisposeSubscription(ref NotifyPropertyChangedEventSubscription member)
-		{
-			if(member!=null) member.Dispose();
-			member = null;
-		}
 	}
 }
 

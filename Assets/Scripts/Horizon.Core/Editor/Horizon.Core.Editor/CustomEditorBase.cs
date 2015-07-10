@@ -3,7 +3,7 @@ using System.Linq;
 using System.Collections;
 using System.Reflection;
 using System.Text.RegularExpressions;
-using Horizon.Core.Models;
+using Horizon.Core.Objects;
 using UnityEditor;
 using UnityEngine;
 using Horizon.Core.ExtensionMethods;
@@ -11,7 +11,7 @@ using Horizon.Core.ExtensionMethods;
 namespace Horizon.Core.Editor
 {
 	//TODO: support multiobject editing. use showmixedvalue
-	[CustomEditor(typeof( HorizonBaseModel ), true, isFallback = true)]
+	[CustomEditor(typeof( HorizonGameObjectBase ), true, isFallback = true)]
 	public class CustomEditorBase : UnityEditor.Editor
 	{
 		private PropertyInfo[] properties;

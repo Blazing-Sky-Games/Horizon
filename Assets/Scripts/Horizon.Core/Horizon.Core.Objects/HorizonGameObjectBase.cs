@@ -6,9 +6,9 @@ using System.Linq.Expressions;
 using System.ComponentModel;
 using Horizon.Core.WeakSubscription;
 
-namespace Horizon.Core.Models
+namespace Horizon.Core.Objects
 {
-	public class HorizonBaseModel : MonoBehaviour, INotifyPropertyChanged
+	public class HorizonGameObjectBase : MonoBehaviour, INotifyPropertyChanged
 	{
 		public event PropertyChangedEventHandler PropertyChanged;
 
@@ -16,11 +16,11 @@ namespace Horizon.Core.Models
 		public Action DrawGizmosSelectedEvent;
 		public Action PostRenderEvent;
 
-		public HorizonBaseModel()
+		public HorizonGameObjectBase()
 		{
 			// dont do it this way ... it is lazy
 			// if we change the way this works we could use views as a way to turn functionality on and off
-			Type viewType = typeof(Horizon.Core.Views.HorizonBaseView<HorizonBaseModel>).GetGenericTypeDefinition().MakeGenericType(new Type[]{this.GetType()});
+			Type viewType = typeof(Horizon.Core.Views.HorizonBaseView<HorizonGameObjectBase>).GetGenericTypeDefinition().MakeGenericType(new Type[]{this.GetType()});
 			foreach(Assembly assembly in AppDomain.CurrentDomain.GetAssemblies())
 			{
 				foreach(Type type in assembly.GetTypes())

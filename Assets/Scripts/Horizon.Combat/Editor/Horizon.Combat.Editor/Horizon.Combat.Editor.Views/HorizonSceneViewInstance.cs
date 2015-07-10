@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
 using Horizon.Combat.Models;
-using Horizon.Core.Models;
+using Horizon.Core.Objects;
 using Horizon.Core.Views.SceneViews;
 using Horizon.Core.Gizmos;
-using Horizon.Core.Gl;
+using Horizon.Core.GL;
+using Horizon.Core.ExtensionMethods;
 
 namespace Horizon.Combat.Views.SceneViews
 {

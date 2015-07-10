@@ -1,9 +1,9 @@
-﻿using Horizon.Core.Models;
+﻿using Horizon.Core.Objects;
 
 namespace Horizon.Core.Views.SceneViews
 {
 	public class HorizonBaseSceneView<ModelType> :  HorizonBaseView<ModelType> 
-		where ModelType:HorizonBaseModel
+		where ModelType:HorizonGameObjectBase
 	{
 		public HorizonBaseSceneView(ModelType model):base(model)
 		{

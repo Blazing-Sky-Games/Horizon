@@ -1,12 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
-using Horizon.Core.Models;
+using Horizon.Core.Objects;
 
 namespace Horizon.Combat.Models
 {
 	public enum testenum{ONE,TWO,THREE}
 
-	public class HorizonModelInstance : HorizonBaseModel 
+	public class HorizonModelInstance : HorizonGameObjectBase 
 	{
 		public int PublicInt;
 
