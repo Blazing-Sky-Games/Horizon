@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using Horizon.Combat.GameObjects;
 using Horizon.Core;
 using Horizon.Core.Editor;
@@ -8,7 +8,7 @@ using Horizon.Core.GL;
 
 namespace Horizon.Combat.Editor
 {
-	public class TestSceneView : SceneViewBase<TestObject>
+	public class TestSceneView : SceneView<TestObject>
 	{
 		public TestSceneView(TestObject model) : base(model)
 		{

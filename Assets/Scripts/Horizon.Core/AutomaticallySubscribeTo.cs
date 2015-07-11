@@ -5,11 +5,10 @@ using Horizon.Core.WeakSubscription;
 
 namespace Horizon.Core
 {
-	public class AutomaticallySubscribeTo<HorizonObjectType> : IDisposable  
+	//todo: create concept of manualsubscribers, and add functions hooked up to start, update, etc
+	public class AutomaticallySubscribeTo<HorizonObjectType>  
 		where HorizonObjectType:HorizonGameObjectBase
 	{
-		public virtual void Dispose(){}
-
 		public AutomaticallySubscribeTo(HorizonObjectType HorizonObject)
 		{
 			this.HorizonObject = HorizonObject;

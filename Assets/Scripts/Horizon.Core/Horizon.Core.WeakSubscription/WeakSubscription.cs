@@ -36,6 +36,7 @@ namespace Horizon.Core.WeakSubscription
 			
 			_eventHandlerMethodInfo = targetEventHandler.Method;
 
+			//hmmm this whole mock target thing might just be a patch for a bug ...
 			if(targetEventHandler.Target != null)
 			{
 				_targetReference = new WeakReference(targetEventHandler.Target);
@@ -118,7 +119,7 @@ namespace Horizon.Core.WeakSubscription
 	{
 		private static readonly EventInfo PropertyChangedEventInfo = typeof(INotifyPropertyChanged).GetEvent("PropertyChanged");
 		
-		// This code ensures the PropertyChanged event is not stripped by linker
+		// This code ensures the PropertyChanged event is not stripped by linker. wait, what?
 		public static void LinkerPleaseInclude(INotifyPropertyChanged iNotifyPropertyChanged)
 		{
 			iNotifyPropertyChanged.PropertyChanged += (sender, e) => { };

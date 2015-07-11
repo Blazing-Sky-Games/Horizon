@@ -1,7 +1,8 @@
 using System;
+using UnityEngine;
 using Horizon.Core;
 using Horizon.Core.WeakSubscription;
-using UnityEngine;
+
 namespace Horizon.Core.GL
 {
 	public abstract class GLObject : IDisposable

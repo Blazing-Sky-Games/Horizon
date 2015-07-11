@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using Horizon.Core;
+using Horizon.Core.WeakSubscription;
 
 namespace Horizon.Core.Editor.Gizmos
 {
@@ -15,11 +16,11 @@ namespace Horizon.Core.Editor.Gizmos
 
 			if(onlyOnSelected)
 			{
-				gameObject.DrawGizmosSelectedEvent += Draw;
+				gameObject.WeakSubscribeToEvent(gameObject.DrawGizmosSelectedEventName, (sender,args) => Draw());
 			}
 			else
 			{
-				gameObject.DrawGizmosEvent += Draw;
+				gameObject.WeakSubscribeToEvent(gameObject.DrawGizmosEventName, (sender,args) => Draw());
 			}
 		}
 

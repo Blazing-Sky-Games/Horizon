@@ -5,8 +5,8 @@ using System.Linq.Expressions;
 using System.Reflection;
 using UnityEngine;
 using Horizon.Core;
-using Horizon.Core.WeakSubscription;
 using Horizon.Core.ExtensionMethods;
+using Horizon.Core.WeakSubscription;
 
 namespace Horizon.Core
 {
@@ -14,65 +14,67 @@ namespace Horizon.Core
 	{
 		public event PropertyChangedEventHandler PropertyChanged;
 
-		// make these events and create a way to week subscribe to events
-		public Action DrawGizmosEvent;
-		public Action DrawGizmosSelectedEvent;
-		//public Action PostRenderEvent;
+		public event EventHandler<EventArgs> DrawGizmosEvent;
+		public readonly EventName DrawGizmosEventName;
+
+		public event EventHandler<EventArgs> DrawGizmosSelectedEvent;
+		public readonly EventName DrawGizmosSelectedEventName;
 
 		public HorizonGameObjectBase()
 		{
-			Type viewType = typeof(AutomaticallySubscribeTo<HorizonGameObjectBase>).GetGenericTypeDefinition().MakeGenericType(new Type[]{this.GetType()});
-			//only get scene views in editor
-			//Type sceneViewType = typeof(Horiz AutomaticallySubscribeTo<HorizonGameObjectBase>).GetGenericTypeDefinition().MakeGenericType(new Type[]{this.GetType()});
+			DrawGizmosEventName = this.GetEventNameFromExpresion(() => DrawGizmosEvent);
+			DrawGizmosSelectedEventName = this.GetEventNameFromExpresion(() => DrawGizmosSelectedEvent);
+
+			//using reflection, find all automatic subscribers and set them up
+			Type subscriberType = typeof(AutomaticallySubscribeTo<HorizonGameObjectBase>).GetGenericTypeDefinition().MakeGenericType(new Type[]{this.GetType()});
+			//TODO dont hook up scene views if we are not in the editor
 			foreach(Assembly assembly in AppDomain.CurrentDomain.GetAssemblies())
 			{
 				foreach(Type type in assembly.GetTypes())
 				{
-					if (type.IsSubclassOf(viewType)) 
+					if (type.IsSubclassOf(subscriberType)) 
 					{
-						views.Add((IDisposable)Activator.CreateInstance(type,new System.Object[]{this}));
+						m_subscribers.Add(Activator.CreateInstance(type,new System.Object[]{this}));
 					}
 				}
 			}
 		}
 
-		//TODO add editor only method to serilize to and from a custom asset ... hmm ... maybe this should be an extention class
-		
-		public void RaisePropertyChanged<T>(Expression<Func<T>> property)
+		protected virtual void Awake()
 		{
-			var name = this.GetPropertyNameFromExpression(property);
-			RaisePropertyChanged(name);
-		}
-
-		public void RaiseAllPropertiesChanged()
-		{
-			var changedArgs = new PropertyChangedEventArgs(string.Empty);
-			RaisePropertyChanged(changedArgs);
+			//fire awake event
 		}
 
 		protected virtual void Start()
 		{
-			
+			//fire start event
 		}
 
-		// property stuff
+		protected virtual void Update()
+		{
+			//fire update event
+		}
+
+		protected virtual void LateUpdate()
+		{
+			//fire Lateupdate event
+		}
+
+		private void OnDrawGizmos()
+		{
+			if (DrawGizmosEvent != null) DrawGizmosEvent(this, EventArgs.Empty);
+		}
+		
+		private void OnDrawGizmosSelected()
+		{
+			if (DrawGizmosSelectedEvent != null) DrawGizmosSelectedEvent(this, EventArgs.Empty);
+		}
+
 		protected bool SetPropertyFeild<T>(ref T storage, T value, Expression<Func<T>> property)
 		{
 			return SetProperty(ref storage,value,this.GetPropertyNameFromExpression(property));
 		}
-		
-		private void RaisePropertyChanged(string whichProperty = "")
-		{
-			var changedArgs = new PropertyChangedEventArgs(whichProperty);
-			RaisePropertyChanged(changedArgs);
-		}
-		
-		private void RaisePropertyChanged(PropertyChangedEventArgs changedArgs)
-		{
-			if (PropertyChanged != null)
-				PropertyChanged(this, changedArgs);
-		}
-		
+
 		private bool SetProperty<T>(ref T storage, T value, string propertyName = null)
 		{
 			if (Equals(storage, value))
@@ -85,23 +87,32 @@ namespace Horizon.Core
 			return true;
 		}
 
-		private void OnDrawGizmos()
+		private void RaisePropertyChanged(string whichProperty = "")
 		{
-			if (DrawGizmosEvent != null) DrawGizmosEvent();
+			var changedArgs = new PropertyChangedEventArgs(whichProperty);
+			RaisePropertyChanged(changedArgs);
 		}
 
-		private void OnDrawGizmosSelected()
+		private void RaisePropertyChanged(PropertyChangedEventArgs changedArgs)
 		{
-			if (DrawGizmosSelectedEvent != null) DrawGizmosSelectedEvent();
+			if (PropertyChanged != null)
+				PropertyChanged(this, changedArgs);
+		}
+		
+		private void RaisePropertyChanged<T>(Expression<Func<T>> property)
+		{
+			var name = this.GetPropertyNameFromExpression(property);
+			RaisePropertyChanged(name);
 		}
 
-		private void OnDestroy()
+		private void RaiseAllPropertiesChanged()
 		{
-			foreach(IDisposable disposable in views) disposable.Dispose();
+			var changedArgs = new PropertyChangedEventArgs(string.Empty);
+			RaisePropertyChanged(changedArgs);
 		}
 
-		//make this alist of views so we call update/start/etc
-		private List<IDisposable> views = new List<IDisposable>();
+		// just to maintain a referance to the views
+		private List<object> m_subscribers = new List<object>();
 	}
 }
 

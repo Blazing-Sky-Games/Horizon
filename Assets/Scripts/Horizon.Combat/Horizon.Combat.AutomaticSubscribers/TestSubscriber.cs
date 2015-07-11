@@ -26,12 +26,6 @@ namespace Horizon.Combat.AutomaticSubscribers
 			Debug.Log (HorizonObject.testInt);
 		}
 
-		public override void Dispose ()
-		{
-			base.Dispose ();
-			m_line.Dispose();
-		}
-
 		private GLLine m_line;
 	}
 }
