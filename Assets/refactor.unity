@@ -181,16 +181,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 327895451}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b811088dbece3dc4b92f3fd8558ff22e, type: 3}
+  m_Script: {fileID: 11500000, guid: 3ed996f688cb47d4193b45adc2c51cf0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bounds:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 0
-    height: 0
-  speed: 0
 --- !u!1 &949398593
 GameObject:
   m_ObjectHideFlags: 0
@@ -349,10 +342,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 2052159540}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bacea61de8a8a2942950983b87735089, type: 3}
+  m_Script: {fileID: 11500000, guid: bb61ed8ad475ccb4f9144b32b8bf9f21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PublicInt: 0
   m_testSerialized: 0
   m_enumSerialized: 0
 --- !u!4 &2052159542
@@ -362,7 +354,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2052159540}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
