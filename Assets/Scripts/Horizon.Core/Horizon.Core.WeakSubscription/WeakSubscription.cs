@@ -11,6 +11,7 @@ namespace Horizon.Core.WeakSubscription
 			where TEventArgs : EventArgs
 	{
 		private readonly WeakReference _targetReference;
+		private readonly Object _mockTarget;
 		private readonly WeakReference _sourceReference;
 		private readonly MethodInfo _eventHandlerMethodInfo;
 		private readonly EventInfo _sourceEventInfo;
@@ -31,10 +32,20 @@ namespace Horizon.Core.WeakSubscription
 				throw new ArgumentNullException();
 			
 			if (sourceEventInfo == null)
-				throw new ArgumentNullException("sourceEventInfo","missing source event info in MvxWeakEventSubscription");
+				throw new ArgumentNullException("sourceEventInfo","missing source event info in WeakEventSubscription");
 			
 			_eventHandlerMethodInfo = targetEventHandler.Method;
-			_targetReference = new WeakReference(targetEventHandler.Target);
+
+			if(targetEventHandler.Target != null)
+			{
+				_targetReference = new WeakReference(targetEventHandler.Target);
+			}
+			else
+			{
+				_mockTarget = new object();
+				_targetReference = new WeakReference(_mockTarget);
+			}
+			
 			_sourceReference = new WeakReference(source);
 			_sourceEventInfo = sourceEventInfo;
 			
@@ -121,7 +132,7 @@ namespace Horizon.Core.WeakSubscription
 		
 		protected override Delegate CreateEventHandler()
 		{
-			return new PropertyChangedEventHandler(OnSourceEvent);
+			return new EventHandler<PropertyChangedEventArgs>(OnSourceEvent);
 		}
 	}
 	
@@ -158,15 +169,45 @@ namespace Horizon.Core.WeakSubscription
 			);
 		}
 	}
+
+	public class GeneralEventSubscription
+		: WeakEventSubscription<object, EventArgs>
+	{
+		public GeneralEventSubscription(object source,
+		                                   EventInfo eventInfo,
+		                                   EventHandler<EventArgs> eventHandler)
+			: base(source, eventInfo, eventHandler)
+		{
+		}
+		
+		protected override Delegate CreateEventHandler()
+		{
+			return new EventHandler<EventArgs>(OnSourceEvent);
+		}
+	}
+
+	public class EventName
+	{
+		public readonly string Name;
+		public EventName(object source, Expression<Func<EventHandler<EventArgs>>> eventExpression)
+		{
+			Name = source.GetEventNameStringFromExpresion(eventExpression);
+		}
+	}
 	
 	public static class WeakSubscriptionExtensionMethods
 	{
-		public static NamedNotifyPropertyChangedEventSubscription<T> WeakSubscribe<T>(this INotifyPropertyChanged source,
+		public static NamedNotifyPropertyChangedEventSubscription<T> WeakSubscribeToProperty<T>(this INotifyPropertyChanged source,
 		                                                                              Expression<Func<T>> property,
 		                                                                              EventHandler<PropertyChangedEventArgs>
 		                                                                              eventHandler)
 		{
 			return new NamedNotifyPropertyChangedEventSubscription<T>(source, property, eventHandler);
+		}
+
+		public static GeneralEventSubscription WeakSubscribeToEvent(this object source, EventName eventName, EventHandler<EventArgs> eventHandler)
+		{
+			return new GeneralEventSubscription(source, source.GetType().GetEvent(eventName.Name), eventHandler);
 		}
 	}
 }

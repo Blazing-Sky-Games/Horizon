@@ -10,6 +10,7 @@ namespace Horizon.Core.GL
 
 		public override void Draw()
 		{
+			base.Draw();
 			UnityEngine.GL.Begin( UnityEngine.GL.LINES );
 			
 			UnityEngine.GL.Vertex(StartPoint);

@@ -13,7 +13,7 @@ namespace Horizon.Combat.AutomaticSubscribers
 	{
 		public TestSubscriber(TestObject instance) : base(instance)
 		{
-			HorizonObject.WeakSubscribe(() => HorizonObject.testInt, (sender,args) => HandleTestChange());
+			HorizonObject.WeakSubscribeToProperty(() => HorizonObject.testInt, (sender,args) => HandleTestChange());
 
 			m_line = new GLLine();
 			m_line.StartPoint = new Vector3(0,0,0); 

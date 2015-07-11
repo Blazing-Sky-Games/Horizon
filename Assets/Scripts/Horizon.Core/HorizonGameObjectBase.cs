@@ -17,7 +17,7 @@ namespace Horizon.Core
 		// make these events and create a way to week subscribe to events
 		public Action DrawGizmosEvent;
 		public Action DrawGizmosSelectedEvent;
-		public Action PostRenderEvent;
+		//public Action PostRenderEvent;
 
 		public HorizonGameObjectBase()
 		{

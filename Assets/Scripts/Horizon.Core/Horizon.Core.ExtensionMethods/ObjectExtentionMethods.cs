@@ -1,6 +1,7 @@
 using System;
 using System.Linq.Expressions;
 using System.Reflection;
+using Horizon.Core.WeakSubscription;
 
 namespace Horizon.Core.ExtensionMethods
 {
@@ -18,7 +19,7 @@ namespace Horizon.Core.ExtensionMethods
 				throw new ArgumentNullException("expression");
 			}
 			
-			var memberExpression = FindMemberExpression(expression);
+			var memberExpression = expression.FindMemberExpression();
 			
 			if (memberExpression == null)
 			{
@@ -51,8 +52,33 @@ namespace Horizon.Core.ExtensionMethods
 			
 			return member.Name;
 		}
+
+		public static string GetEventNameStringFromExpresion( this object target, Expression<Func<EventHandler<EventArgs>>> expression)
+		{
+			if (expression == null)
+			{
+				throw new ArgumentNullException("expression");
+			}
+			
+			var memberExpression = expression.FindMemberExpression();
+			
+			if (memberExpression == null)
+			{
+				throw new ArgumentException(WrongExpressionMessage, "expression");
+			}
+			
+			EventInfo ei = target.GetType().GetEvent(memberExpression.Member.Name);
+			if(ei == null) throw new ArgumentException(WrongExpressionMessage, "expression");
+
+			return memberExpression.Member.Name;
+		}
+
+		public static EventName GetEventNameFromExpresion(this object target, Expression<Func<EventHandler<EventArgs>>> expression)
+		{
+			return new EventName(target,expression);
+		}
 		
-		private static MemberExpression FindMemberExpression<T>(Expression<Func<T>> expression)
+		public static MemberExpression FindMemberExpression<T>(this Expression<Func<T>> expression)
 		{
 			if (expression.Body is UnaryExpression)
 			{
