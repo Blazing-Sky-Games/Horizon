@@ -16,11 +16,11 @@ namespace Horizon.Core.Editor.Gizmos
 
 			if(onlyOnSelected)
 			{
-				gameObject.WeakSubscribeToEvent(gameObject.DrawGizmosSelectedEventName, (sender,args) => Draw());
+				gameObject.WeakSubscribeToEvent(gameObject.OnDrawGizmosSelectedEventName, (sender,args) => Draw());
 			}
 			else
 			{
-				gameObject.WeakSubscribeToEvent(gameObject.DrawGizmosEventName, (sender,args) => Draw());
+				gameObject.WeakSubscribeToEvent(gameObject.OnDrawGizmosEventName, (sender,args) => Draw());
 			}
 		}
 

@@ -12,6 +12,11 @@ namespace Horizon.Core
 		public event EventHandler<EventArgs> PostRenderEvent;
 		public readonly EventName PostRenderEventName;
 
+		public HorizonCamera()
+		{
+			PostRenderEventName = this.GetEventNameFromExpresion(() => PostRenderEvent);
+		}
+
 		public static HorizonCamera Main
 		{
 			get
@@ -20,10 +25,10 @@ namespace Horizon.Core
 			}
 		}
 
-		public HorizonCamera()
+		protected override void Init ()
 		{
+			base.Init ();
 			m_mainCamera = this;
-			PostRenderEventName = this.GetEventNameFromExpresion(() => PostRenderEvent);
 		}
 
 		private void OnPostRender()

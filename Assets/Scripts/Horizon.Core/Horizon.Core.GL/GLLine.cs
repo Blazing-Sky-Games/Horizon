@@ -5,6 +5,8 @@ namespace Horizon.Core.GL
 {
 	public class GLLine : GLObject
 	{
+		public GLLine(HorizonGameObjectBase owner):base(owner){}
+
 		public Vector3 StartPoint;
 		public Vector3 EndPoint;
 

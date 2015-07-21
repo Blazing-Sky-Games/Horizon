@@ -45,18 +45,23 @@ namespace Horizon.Core.GL
 
 		public bool Enabled;
 
-		public GLObject()
+		public GLObject(HorizonGameObjectBase owner)
 		{
-			m_postRenderSubscription = HorizonCamera.Main.WeakSubscribeToEvent(
-				HorizonCamera.Main.PostRenderEventName, 
-				(sender,args) => 
-				{
-					if(Enabled)
+			m_owner = owner;
+
+			m_owner.WeakSubscribeToEvent(m_owner.StartEventName,(s,e)=>
+			{
+				m_postRenderSubscription = HorizonCamera.Main.WeakSubscribeToEvent(
+					HorizonCamera.Main.PostRenderEventName, 
+					(sender,args) => 
 					{
-						Draw();
+						if(Enabled)
+						{
+							Draw();
+						}
 					}
-				}
-			);
+				);
+			});
 
 			Enabled = true;
 		}
@@ -69,6 +74,7 @@ namespace Horizon.Core.GL
 		private IDisposable m_postRenderSubscription;
 		private GLSettings m_settings;
 		private Material m_drawingMaterial;
+		private readonly HorizonGameObjectBase m_owner;
 	}
 }
 

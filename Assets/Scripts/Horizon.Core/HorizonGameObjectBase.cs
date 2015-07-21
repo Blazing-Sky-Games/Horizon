@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using UnityEngine;
@@ -14,60 +15,82 @@ namespace Horizon.Core
 	{
 		public event PropertyChangedEventHandler PropertyChanged;
 
-		public event EventHandler<EventArgs> DrawGizmosEvent;
-		public readonly EventName DrawGizmosEventName;
+		public event EventHandler<EventArgs> StartEvent;
+		public readonly EventName StartEventName;
 
-		public event EventHandler<EventArgs> DrawGizmosSelectedEvent;
-		public readonly EventName DrawGizmosSelectedEventName;
+		public event EventHandler<EventArgs> UpdateEvent;
+		public readonly EventName UpdateEventName;
+
+		public event EventHandler<EventArgs> LateUpdateEvent;
+		public readonly EventName LateUpdateEventName;
+
+		public event EventHandler<EventArgs> OnDrawGizmosEvent;
+		public readonly EventName OnDrawGizmosEventName;
+
+		public event EventHandler<EventArgs> OnDrawGizmosSelectedEvent;
+		public readonly EventName OnDrawGizmosSelectedEventName;
 
 		public HorizonGameObjectBase()
 		{
-			DrawGizmosEventName = this.GetEventNameFromExpresion(() => DrawGizmosEvent);
-			DrawGizmosSelectedEventName = this.GetEventNameFromExpresion(() => DrawGizmosSelectedEvent);
+			Initilizer.CallOnInit(Init);
+			StartEventName = this.GetEventNameFromExpresion(() => StartEvent);
+			UpdateEventName = this.GetEventNameFromExpresion(() => UpdateEvent);
+			LateUpdateEventName = this.GetEventNameFromExpresion(() => LateUpdateEvent);
+			OnDrawGizmosEventName = this.GetEventNameFromExpresion(() => OnDrawGizmosEvent);
+			OnDrawGizmosSelectedEventName = this.GetEventNameFromExpresion(() => OnDrawGizmosSelectedEvent);
+		}
 
-			//using reflection, find all automatic subscribers and set them up
+		protected virtual void Init()
+		{
+#if UNITY_EDITOR
+			if(UnityEditor.EditorApplication.isPlayingOrWillChangePlaymode) return;
+
+			// get rid of null subscribers ... this is probably just a patch for a bug
+			Subscribers = Subscribers.Where(x => x != null).ToList();
+
+			//using reflection, find all automatic subscribers and set them up. hmm ... how does this intereact with serilization
 			Type subscriberType = typeof(AutomaticallySubscribeTo<HorizonGameObjectBase>).GetGenericTypeDefinition().MakeGenericType(new Type[]{this.GetType()});
-			//TODO dont hook up scene views if we are not in the editor
 			foreach(Assembly assembly in AppDomain.CurrentDomain.GetAssemblies())
 			{
 				foreach(Type type in assembly.GetTypes())
 				{
 					if (type.IsSubclassOf(subscriberType)) 
 					{
-						m_subscribers.Add(Activator.CreateInstance(type,new System.Object[]{this}));
+						if(Subscribers.Any(x => x.GetType() == type) == false)
+						{
+							AutomaticallySubscribeToBase subscriber = (AutomaticallySubscribeToBase)ScriptableObject.CreateInstance(type);
+							subscriber.__SetModel(this);
+							Subscribers.Add(subscriber);
+						}
 					}
 				}
 			}
-		}
-
-		protected virtual void Awake()
-		{
-			//fire awake event
+#endif
 		}
 
 		protected virtual void Start()
 		{
-			//fire start event
+			StartEvent.FireIfNotNull(this, EventArgs.Empty);
 		}
 
 		protected virtual void Update()
 		{
-			//fire update event
+			UpdateEvent.FireIfNotNull(this, EventArgs.Empty);
 		}
 
 		protected virtual void LateUpdate()
 		{
-			//fire Lateupdate event
+			LateUpdateEvent.FireIfNotNull(this, EventArgs.Empty);
 		}
 
 		private void OnDrawGizmos()
 		{
-			if (DrawGizmosEvent != null) DrawGizmosEvent(this, EventArgs.Empty);
+			OnDrawGizmosEvent.FireIfNotNull(this, EventArgs.Empty);
 		}
 		
 		private void OnDrawGizmosSelected()
 		{
-			if (DrawGizmosSelectedEvent != null) DrawGizmosSelectedEvent(this, EventArgs.Empty);
+			OnDrawGizmosSelectedEvent.FireIfNotNull(this, EventArgs.Empty);
 		}
 
 		protected bool SetPropertyFeild<T>(ref T storage, T value, Expression<Func<T>> property)
@@ -112,7 +135,8 @@ namespace Horizon.Core
 		}
 
 		// just to maintain a referance to the views
-		private List<object> m_subscribers = new List<object>();
+		[SerializeField]
+		private List<AutomaticallySubscribeToBase> Subscribers = new List<AutomaticallySubscribeToBase>();
 	}
 }
 

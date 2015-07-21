@@ -11,14 +11,31 @@ namespace Horizon.Combat.AutomaticSubscribers
 {
 	public class TestSubscriber : AutomaticallySubscribeTo<TestObject> 
 	{
-		public TestSubscriber(TestObject instance) : base(instance)
+		[SerializeField]
+		private Color lineColor;
+
+		public Color LineColor
 		{
+			get
+			{
+				return lineColor;
+			}
+			set
+			{
+				m_line.Settings = new GLSettings(color:value);
+				lineColor = value;
+			}
+		}
+
+		protected override void Init ()
+		{
+			base.Init ();
 			HorizonObject.WeakSubscribeToProperty(() => HorizonObject.testInt, (sender,args) => HandleTestChange());
 
-			m_line = new GLLine();
+			m_line = new GLLine(HorizonObject);
 			m_line.StartPoint = new Vector3(0,0,0); 
 			m_line.EndPoint = new Vector3(0,0,1);
-			m_line.Settings = new GLSettings(color:Color.green.SetAlpha(0.5f));
+			m_line.Settings = new GLSettings(color:lineColor);
 		}
 
 		private void HandleTestChange()

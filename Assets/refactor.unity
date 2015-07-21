@@ -87,6 +87,45 @@ NavMeshSettings:
     cellSize: .166666672
     manualCellSize: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &13381086
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 13381088}
+  - 114: {fileID: 13381087}
+  m_Layer: 0
+  m_Name: Initilizer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &13381087
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 13381086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3159d896acdf90e42959786fdcbbaed2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &13381088
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 13381086}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: .500462711, y: .858248472, z: -.133277774}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
 --- !u!1 &327895451
 GameObject:
   m_ObjectHideFlags: 0
@@ -184,6 +223,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fc364d79aea79541bb321305e907b91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Subscribers: []
+--- !u!114 &779059220
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9291b5e797e802d42afc600da03d4607, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HorizonObject: {fileID: 2052159541}
+  gizmoColor: {r: .687000334, g: .510921299, b: .992647052, a: .497000009}
+--- !u!114 &911017552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0445dd1709e1ea443a09ed46138d82cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HorizonObject: {fileID: 2052159541}
+  lineColor: {r: 0, g: 1, b: .213793039, a: .634000003}
 --- !u!1 &949398593
 GameObject:
   m_ObjectHideFlags: 0
@@ -345,8 +411,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb61ed8ad475ccb4f9144b32b8bf9f21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_testSerialized: 0
-  m_enumSerialized: 0
+  Subscribers:
+  - {fileID: 779059220}
+  - {fileID: 911017552}
+  m_testSerialized: 7
+  m_enumSerialized: 2
 --- !u!4 &2052159542
 Transform:
   m_ObjectHideFlags: 0
