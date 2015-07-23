@@ -1,0 +1,16 @@
+Assets is the top level unit directory
+The top level project directory is what is visible on github
+
+Assets is what is visible in unity
+
+file structure
+
+1. 3rd party
+	thrid part code/assets we are using in the project. right now this is just the grids plug-in from the asset store i used to simplify the grid code
+
+2. placeholder Assets
+	unlike the stuff in 3rd party, these are assets that will be gradually replaced as we make more of our own assets. ideally, we would get to the point where we didnt even have this any more
+	
+3. Horizon
+	everything we have made our selves that we are using for project horizon
+	
