@@ -152,7 +152,7 @@ namespace Horizon.Core.Editor
 			if(!this.target)
 			{
 				HorizonGameObjectBase obj = (HorizonGameObjectBase)this.target;
-				obj.OnDestroy();
+				this.DisposeAndDestroy(obj);
 			}
 		}
 

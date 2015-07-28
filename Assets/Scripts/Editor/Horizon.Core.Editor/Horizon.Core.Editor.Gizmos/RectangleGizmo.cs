@@ -37,6 +37,14 @@ namespace Horizon.Core.Editor.Gizmos
 			UnityEngine.Gizmos.DrawMesh(rectangleMesh.TransformMesh(t));
 		}
 
+		public override void Dispose ()
+		{
+			base.Dispose ();
+
+			if(m_rectangleMesh != null)
+				UnityEngine.Object.DestroyImmediate(m_rectangleMesh);
+		}
+
 		private Mesh rectangleMesh
 		{
 			get

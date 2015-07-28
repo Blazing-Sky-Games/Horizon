@@ -148,11 +148,12 @@ namespace Horizon.Core
 			RaisePropertyChanged(changedArgs);
 		}
 
-		public void OnDestroy()
+		public override void Dispose ()
 		{
+			base.Dispose ();
 			foreach(AutomaticallySubscribeToBase subscriber in Subscribers)
 			{
-				DestroyImmediate(subscriber);
+				this.DisposeAndDestroy(subscriber);
 			}
 		}
 

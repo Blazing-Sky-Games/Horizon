@@ -11,7 +11,7 @@ using System;
 using UnityEngine;
 namespace Horizon.Core
 {	
-	public class ScriptableInit : ScriptableObject , ISerializationCallbackReceiver
+	public class ScriptableInit : ScriptableObject , ISerializationCallbackReceiver, IDisposable
 	{
 		bool initilized = false;
 
@@ -35,9 +35,20 @@ namespace Horizon.Core
 		#endregion
 		
 		protected virtual void Init(){ initilized = true; }
+
+		#region IDisposable implementation
+
+		public virtual void Dispose (){}
+
+		#endregion
+
+		private void OnDestroy()
+		{
+			Dispose();
+		}
 	}
 
-	public class InitBehavior : MonoBehaviour, ISerializationCallbackReceiver
+	public class InitBehavior : MonoBehaviour, ISerializationCallbackReceiver, IDisposable
 	{
 		bool constructed = false;
 
@@ -67,6 +78,17 @@ namespace Horizon.Core
 			}
 		}
 		#endregion
+
+		#region IDisposable implementation
+
+		public virtual void Dispose (){}
+
+		#endregion
+
+		private void OnDestroy()
+		{
+			Dispose();
+		}
 
 	}
 }

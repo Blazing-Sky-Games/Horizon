@@ -31,6 +31,11 @@ namespace Horizon.Combat.Editor
 			gameObject.WeakSubscribeToProperty(() => gameObject.CellSize, (s,a) => m_rectangleGizmo.Size = gameObject.CellSize);
 		}
 
+		public override void Dispose ()
+		{
+			m_rectangleGizmo.Dispose();
+		}
+
 		private RectangleGizmo m_rectangleGizmo;
 	}
 }

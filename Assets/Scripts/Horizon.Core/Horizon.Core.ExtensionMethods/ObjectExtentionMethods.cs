@@ -91,6 +91,15 @@ namespace Horizon.Core.ExtensionMethods
 			
 			return expression.Body as MemberExpression;
 		}
+
+		public static void DisposeAndDestroy<T>(this object self, T toDestroy) where T: UnityEngine.Object , IDisposable
+		{
+			if(toDestroy != null)
+			{
+				toDestroy.Dispose();
+				UnityEngine.Object.DestroyImmediate(toDestroy);
+			}
+		}
 	}
 }
 

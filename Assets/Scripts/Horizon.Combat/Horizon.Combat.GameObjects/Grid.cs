@@ -14,6 +14,7 @@ using Horizon.Core.WeakSubscription;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Collections.ObjectModel;
+using Horizon.Core.ExtensionMethods;
 
 
 namespace Horizon.Combat.GameObjects
@@ -130,7 +131,11 @@ namespace Horizon.Combat.GameObjects
 					foreach(Cell cell in cells)
 					{
 						if(cell != null)
-							DestroyImmediate(cell.gameObject);
+						{
+							GameObject todestroy = cell.gameObject;
+							this.DisposeAndDestroy(cell);
+							DestroyImmediate(todestroy);
+						}
 					}
 
 					cells.Clear();
@@ -168,13 +173,17 @@ namespace Horizon.Combat.GameObjects
 						foreach(Cell cell in cells)
 						{
 							if(cell!= null)
-								DestroyImmediate(cell.gameObject);
+							{
+								GameObject todestroy = cell.gameObject;
+								this.DisposeAndDestroy(cell);
+								DestroyImmediate(todestroy);
+							}
 						}
 						
 						cells.Clear();
 					}
 					
-					m_cells.RemoveRange(Dimensions.x - 1, m_cells.Count - Dimensions.x);
+					m_cells.RemoveRange(Dimensions.x, m_cells.Count - Dimensions.x);
 				}
 
 				if(Dimensions.y == 0)
@@ -184,7 +193,11 @@ namespace Horizon.Combat.GameObjects
 						foreach(Cell cell in cells)
 						{
 							if(cell != null)
-								DestroyImmediate(cell.gameObject);
+							{
+								GameObject todestroy = cell.gameObject;
+								this.DisposeAndDestroy(cell);
+								DestroyImmediate(todestroy);
+							}
 						}
 						
 						cells.Clear();
@@ -213,10 +226,14 @@ namespace Horizon.Combat.GameObjects
 						for(int j = Dimensions.y; j < cells.Count; j++)
 						{
 							if(cells[j] != null)
-								DestroyImmediate(cells[j].gameObject);
+							{
+								GameObject todestroy = cells[j].gameObject;
+								this.DisposeAndDestroy(cells[j]);
+								DestroyImmediate(todestroy);
+							}
 						}
 
-						cells.RemoveRange(Dimensions.y - 1, cells.Count - Dimensions.y);
+						cells.RemoveRange(Dimensions.y, cells.Count - Dimensions.y);
 					}
 				}
 			}

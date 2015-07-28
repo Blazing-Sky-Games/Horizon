@@ -5,7 +5,7 @@ using Horizon.Core.WeakSubscription;
 
 namespace Horizon.Core.Editor.Gizmos
 {
-	public abstract class Gizmo
+	public abstract class Gizmo : IDisposable
 	{
 		public bool Enabled = true;
 		public Color color;
@@ -28,6 +28,8 @@ namespace Horizon.Core.Editor.Gizmos
 		{
 			UnityEngine.Gizmos.color = color;
 		}
+
+		public virtual void Dispose (){}
 
 		protected HorizonGameObjectBase gameObject;
 	}
