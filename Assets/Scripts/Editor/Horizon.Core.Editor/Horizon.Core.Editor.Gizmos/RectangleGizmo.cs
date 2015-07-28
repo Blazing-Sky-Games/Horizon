@@ -29,12 +29,7 @@ namespace Horizon.Core.Editor.Gizmos
 		protected override void Draw ()
 		{
 			base.Draw();
-			Transform t = Temp.transform;
-			t.position = gameObject.transform.position;
-			t.rotation = gameObject.transform.rotation;
-			t.localScale = gameObject.transform.localScale * Size;
-
-			UnityEngine.Gizmos.DrawMesh(rectangleMesh.TransformMesh(t));
+			UnityEngine.Gizmos.DrawMesh(rectangleMesh,gameObject.transform.position,gameObject.transform.rotation,gameObject.transform.localScale * Size);
 		}
 
 		public override void Dispose ()
@@ -52,7 +47,7 @@ namespace Horizon.Core.Editor.Gizmos
 				if(m_rectangleMesh == null)
 				{
 					m_rectangleMesh = new Mesh();
-					m_rectangleMesh.hideFlags = HideFlags.DontSave;
+					m_rectangleMesh.hideFlags = HideFlags.HideAndDontSave;
 					m_rectangleMesh.vertices = new Vector3[]{ 
 						new Vector3(0.5f,0.0f,0.5f), 
 						new Vector3(-0.5f,0.0f,0.5f), 
@@ -78,7 +73,7 @@ namespace Horizon.Core.Editor.Gizmos
 			}
 		}
 
-		private Mesh m_rectangleMesh;
+		private static Mesh m_rectangleMesh;
 		private static GameObject m_temp;
 	}
 }

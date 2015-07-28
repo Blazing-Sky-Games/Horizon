@@ -15,6 +15,7 @@ namespace Horizon.Core.ExtensionMethods
 			}
 			
 			Mesh m = UnityEngine.Object.Instantiate(self);
+			//m.hideFlags = HideFlags.HideAndDontSave;
 			m.vertices = newVerts.ToArray();
 			return m;
 		}

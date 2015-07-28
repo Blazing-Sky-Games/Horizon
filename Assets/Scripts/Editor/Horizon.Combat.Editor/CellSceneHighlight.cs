@@ -18,10 +18,8 @@ using Horizon.Core.WeakSubscription;
 
 namespace Horizon.Combat.Editor
 {
-	public class CellSceneView : SceneView<Cell>
+	public class CellSceneHighlight : SceneView<Cell>
 	{
-		public int testPrefabConnection = 1;
-
 		protected override void Init ()
 		{
 			base.Init ();
@@ -33,7 +31,8 @@ namespace Horizon.Combat.Editor
 
 		public override void Dispose ()
 		{
-			m_rectangleGizmo.Dispose();
+			if(m_rectangleGizmo != null)
+				m_rectangleGizmo.Dispose();
 		}
 
 		private RectangleGizmo m_rectangleGizmo;

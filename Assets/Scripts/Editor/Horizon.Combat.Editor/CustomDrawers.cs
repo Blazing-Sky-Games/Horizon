@@ -23,25 +23,30 @@ namespace Horizon.Combat.Editor
 			public override object Draw (string label, object val)
 			{
 				GridPoint value = (GridPoint)val;
+				int x;
+				int y;
 
-				EditorGUI.indentLevel++;
-				GUILayout.BeginVertical();
+				EditorGUILayout.LabelField(label);
+				//using(new HorizonEditor.Indent())
+				//{
+					GUIStyle SplitterStyle = new GUIStyle
+					{
+						normal = {background = EditorGUIUtility.whiteTexture},
+						stretchWidth = false,
+						margin = new RectOffset(25, 0, 0, 0)
+					};
 
-				GUILayout.Label(label);
+					//Color splitterColor = EditorGUIUtility.isProSkin ? new Color(0.157f, 0.157f, 0.157f) : new Color(0.5f, 0.5f, 0.5f);
+					Color old = GUI.color;
 
-				GUILayout.BeginHorizontal();
+					GUI.color = new Color(0.85f, 0.85f, 0.85f);
+					EditorGUILayout.BeginVertical(SplitterStyle);
+					x = EditorGUILayout.IntField("X",value.x,GUILayout.ExpandWidth(false));
+					y = EditorGUILayout.IntField("Y",value.y,GUILayout.ExpandWidth(false));
+					EditorGUILayout.EndVertical();
+					GUI.color = old;
+				//}
 
-				GUILayout.Label("X");
-				int x = EditorGUILayout.IntField(value.x);
-				
-				GUILayout.Label("Y");
-				int y = EditorGUILayout.IntField(value.y);
-
-				GUILayout.EndHorizontal();
-
-				GUILayout.EndVertical();
-				EditorGUI.indentLevel--;
-				
 				return new GridPoint(x,y);
 			}
 		}

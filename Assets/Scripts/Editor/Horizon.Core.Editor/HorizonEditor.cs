@@ -32,7 +32,7 @@ namespace Horizon.Core.Editor
 			}
 		}
 
-		private class Indent : IDisposable
+		public class Indent : IDisposable
 		{
 			public Indent()
 			{
@@ -71,19 +71,19 @@ namespace Horizon.Core.Editor
 
 		private void DisplayObjectThroughReflection(UnityEngine.Object obj)
 		{
-			if(foldOutSets.ContainsKey(obj) == false) foldOutSets[obj] = new foldOutSet();
+			//if(foldOutSets.ContainsKey(obj) == false) foldOutSets[obj] = new foldOutSet();
 
 			//fields
-			if(obj.GetType().GetFields().Where(x=>x.FieldType != typeof(EventName)).Count() != 0 && (foldOutSets[obj].fields = EditorGUILayout.Foldout(foldOutSets[obj].fields,"Fields")))
-			{
-				using(new Indent())
-				{
+			//if(obj.GetType().GetFields().Where(x=>x.FieldType != typeof(EventName)).Count() != 0 && (foldOutSets[obj].fields = EditorGUILayout.Foldout(foldOutSets[obj].fields,"Fields")))
+			//{
+				//using(new Indent())
+				//{
 					foreach(FieldInfo field in obj.GetType().GetFields())
 					{
 						HorizonEditorUtility.DisplayMemberValue(field,obj);
 					}
-				}
-			}
+				//}
+			//}
 			
 			//properties
 			var props =
@@ -96,10 +96,10 @@ namespace Horizon.Core.Editor
 					&& x.DeclaringType != typeof(Behaviour) 
 					&& x.DeclaringType != typeof(MonoBehaviour)
 				);
-			if (props.Count() != 0 && (foldOutSets[obj].props = EditorGUILayout.Foldout(foldOutSets[obj].props,"Properties")))
-			{
-				using(new Indent())
-				{
+			//if (props.Count() != 0 && (foldOutSets[obj].props = EditorGUILayout.Foldout(foldOutSets[obj].props,"Properties")))
+			//{
+				//using(new Indent())
+				//{
 					foreach(PropertyInfo property in props)
 					{
 						if(property.CanRead && property.CanWrite)
@@ -107,8 +107,8 @@ namespace Horizon.Core.Editor
 							HorizonEditorUtility.DisplayMemberValue(property,obj);
 						}
 					}
-				}
-			}
+				//}
+			//}
 			
 			//funtions
 			//todo
@@ -120,14 +120,20 @@ namespace Horizon.Core.Editor
 		// show all properties
 		public override void OnInspectorGUI()
 		{
-			using(new Indent())
-			{
+			//using(new Indent())
+			//{
+				
+				GUIStyle style = new GUIStyle();
+				style.fontStyle = FontStyle.BoldAndItalic;
+				GUILayout.Label("Game Object",style);
 				DisplayObjectThroughReflection(target);
 				
-				if(showSubscribers = EditorGUILayout.Foldout(showSubscribers,"Subscribers"))
-				{
+				//if(showSubscribers = EditorGUILayout.Foldout(showSubscribers,"Subscribers"))
+				//{
 					List<AutomaticallySubscribeToBase> subscribers = (List<AutomaticallySubscribeToBase>)(typeof(HorizonGameObjectBase).GetField("Subscribers", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(target));
-
+					Splitter();
+					style.fontStyle = FontStyle.BoldAndItalic;
+					GUILayout.Label("Subscribers",style);
 					foreach(var subscriber in subscribers)
 					{
 						if(subscriber == null)
@@ -136,15 +142,18 @@ namespace Horizon.Core.Editor
 							continue;
 						}
 
-						Splitter();
-						GUILayout.Label(subscriber.GetType().Name.SplitCamelCase());
-						using(new Indent())
-						{
+						style.fontStyle = FontStyle.Italic;
+						//Splitter();
+						
+						GUILayout.Label(subscriber.GetType().Name.SplitCamelCase(),style);
+						//using(new Indent())
+						//{
 							DisplayObjectThroughReflection(subscriber);
-						}
+						//}
+						//GUILayout.Space(16);
 					}
-				}
-			}
+				//}
+			//}
 		}
 
 		public void OnDestroy()
@@ -156,8 +165,8 @@ namespace Horizon.Core.Editor
 			}
 		}
 
-		private bool showSubscribers = false;
-		private Dictionary<UnityEngine.Object, foldOutSet> foldOutSets = new Dictionary<UnityEngine.Object, foldOutSet>();
+		//private bool showSubscribers = false;
+		//private Dictionary<UnityEngine.Object, foldOutSet> foldOutSets = new Dictionary<UnityEngine.Object, foldOutSet>();
 	}
 }
 
