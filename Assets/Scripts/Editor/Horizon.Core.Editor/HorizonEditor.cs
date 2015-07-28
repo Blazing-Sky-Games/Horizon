@@ -127,9 +127,15 @@ namespace Horizon.Core.Editor
 				if(showSubscribers = EditorGUILayout.Foldout(showSubscribers,"Subscribers"))
 				{
 					List<AutomaticallySubscribeToBase> subscribers = (List<AutomaticallySubscribeToBase>)(typeof(HorizonGameObjectBase).GetField("Subscribers", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(target));
-					
+
 					foreach(var subscriber in subscribers)
 					{
+						if(subscriber == null)
+						{
+							EditorGUILayout.LabelField("subscriber","null");
+							continue;
+						}
+
 						Splitter();
 						GUILayout.Label(subscriber.GetType().Name.SplitCamelCase());
 						using(new Indent())
@@ -138,6 +144,15 @@ namespace Horizon.Core.Editor
 						}
 					}
 				}
+			}
+		}
+
+		public void OnDestroy()
+		{
+			if(!this.target)
+			{
+				HorizonGameObjectBase obj = (HorizonGameObjectBase)this.target;
+				obj.OnDestroy();
 			}
 		}
 

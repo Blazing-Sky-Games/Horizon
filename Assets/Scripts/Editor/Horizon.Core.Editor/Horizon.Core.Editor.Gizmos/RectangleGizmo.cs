@@ -7,12 +7,34 @@ namespace Horizon.Core.Editor.Gizmos
 {
 	public class RectangleGizmo : Gizmo
 	{
+		static GameObject Temp
+		{
+			get
+			{
+				if(m_temp == null)
+				{
+					m_temp = new GameObject();
+					m_temp.hideFlags = HideFlags.HideAndDontSave;
+				}
+
+				return m_temp;
+			}
+
+		}
+
 		public RectangleGizmo(HorizonGameObjectBase gameObject) : base(gameObject){}
+
+		public float Size = 1;
 
 		protected override void Draw ()
 		{
 			base.Draw();
-			UnityEngine.Gizmos.DrawMesh(rectangleMesh.TransformMesh(gameObject.transform));
+			Transform t = Temp.transform;
+			t.position = gameObject.transform.position;
+			t.rotation = gameObject.transform.rotation;
+			t.localScale = gameObject.transform.localScale * Size;
+
+			UnityEngine.Gizmos.DrawMesh(rectangleMesh.TransformMesh(t));
 		}
 
 		private Mesh rectangleMesh
@@ -49,6 +71,7 @@ namespace Horizon.Core.Editor.Gizmos
 		}
 
 		private Mesh m_rectangleMesh;
+		private static GameObject m_temp;
 	}
 }
 

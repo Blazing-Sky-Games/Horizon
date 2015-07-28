@@ -15,12 +15,28 @@ using UnityEditor;
 using UnityEngine;
 using Horizon.Core.ExtensionMethods;
 using Horizon.Core.WeakSubscription;
+using System.Collections.Generic;
 
 
 namespace Horizon.Core.Editor
 {
 	public class HorizonEditorUtility
 	{
+		static HorizonEditorUtility()
+		{
+			foreach(Assembly assembly in AppDomain.CurrentDomain.GetAssemblies())
+			{
+				foreach(Type type in assembly.GetTypes())
+				{
+					CustomDrawerAtribute atrib = (CustomDrawerAtribute)type.GetCustomAttributes(typeof(CustomDrawerAtribute),false).FirstOrDefault();
+					if(atrib != null)
+					{
+						customDrawFunctions[atrib.type] = (CustomDrawer)Activator.CreateInstance(type);
+					}
+				}
+			}
+		}
+
 		private class MemberValueWrapper
 		{
 			public readonly Type ValueType;
@@ -131,6 +147,10 @@ namespace Horizon.Core.Editor
 			{
 				//todo
 			}
+			else if(customDrawFunctions.ContainsKey(memberValue.ValueType))
+			{
+				memberValue.set(customDrawFunctions[memberValue.ValueType].Draw(memberValue.Name.SplitCamelCase(),memberValue.get()));
+			}
 			else
 			{
 				EditorGUILayout.LabelField(memberValue.Name.SplitCamelCase(),"cannot display");
@@ -147,6 +167,8 @@ namespace Horizon.Core.Editor
 		{
 			DisplayMemberValue(new MemberValueWrapper(info, target));
 		}
+
+		private static Dictionary<Type, CustomDrawer> customDrawFunctions = new Dictionary<Type, CustomDrawer>();
 	}
 }
 

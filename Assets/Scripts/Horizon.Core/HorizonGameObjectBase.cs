@@ -11,7 +11,7 @@ using Horizon.Core.WeakSubscription;
 
 namespace Horizon.Core
 {
-	public class HorizonGameObjectBase : MonoBehaviour, INotifyPropertyChanged
+	public class HorizonGameObjectBase : InitBehavior, INotifyPropertyChanged
 	{
 		public event PropertyChangedEventHandler PropertyChanged;
 
@@ -32,7 +32,6 @@ namespace Horizon.Core
 
 		public HorizonGameObjectBase()
 		{
-			Initilizer.CallOnInit(Init);
 			StartEventName = this.GetEventNameFromExpresion(() => StartEvent);
 			UpdateEventName = this.GetEventNameFromExpresion(() => UpdateEvent);
 			LateUpdateEventName = this.GetEventNameFromExpresion(() => LateUpdateEvent);
@@ -40,8 +39,9 @@ namespace Horizon.Core
 			OnDrawGizmosSelectedEventName = this.GetEventNameFromExpresion(() => OnDrawGizmosSelectedEvent);
 		}
 
-		protected virtual void Init()
+		protected override void Init()
 		{
+			base.Init();
 #if UNITY_EDITOR
 			if(UnityEditor.EditorApplication.isPlayingOrWillChangePlaymode) return;
 
@@ -59,8 +59,22 @@ namespace Horizon.Core
 						if(Subscribers.Any(x => x.GetType() == type) == false)
 						{
 							AutomaticallySubscribeToBase subscriber = (AutomaticallySubscribeToBase)ScriptableObject.CreateInstance(type);
-							subscriber.__SetModel(this);
+							subscriber.__setGameObject(this);
 							Subscribers.Add(subscriber);
+						}
+						else
+						{
+							for(int i = 0; i < Subscribers.Count; i++)
+							{
+								if(Subscribers[i].GetType() == type && object.ReferenceEquals(Subscribers[i].__getGameObject(), this) == false)
+								{
+									AutomaticallySubscribeToBase oldSub = Subscribers[i];
+									object old = oldSub.__getGameObject();
+									oldSub.__setGameObject(this);
+									Subscribers[i] = Instantiate(Subscribers[i]);
+									oldSub.__setGameObject(old);
+								}
+							}
 						}
 					}
 				}
@@ -132,6 +146,14 @@ namespace Horizon.Core
 		{
 			var changedArgs = new PropertyChangedEventArgs(string.Empty);
 			RaisePropertyChanged(changedArgs);
+		}
+
+		public void OnDestroy()
+		{
+			foreach(AutomaticallySubscribeToBase subscriber in Subscribers)
+			{
+				DestroyImmediate(subscriber);
+			}
 		}
 
 		// just to maintain a referance to the views

@@ -10,8 +10,8 @@ namespace Horizon.Core.Editor
 		protected override void Init ()
 		{
 			base.Init ();
-			HorizonObject.WeakSubscribeToEvent(HorizonObject.OnDrawGizmosEventName, (sender,args) => SceneViewUpdate());
-			HorizonObject.WeakSubscribeToEvent(HorizonObject.OnDrawGizmosSelectedEventName, (sender,args) => WhileSelected());
+			gameObject.WeakSubscribeToEvent(gameObject.OnDrawGizmosEventName, (sender,args) => SceneViewUpdate());
+			gameObject.WeakSubscribeToEvent(gameObject.OnDrawGizmosSelectedEventName, (sender,args) => WhileSelected());
 		}
 
 		protected virtual void SceneViewUpdate(){}

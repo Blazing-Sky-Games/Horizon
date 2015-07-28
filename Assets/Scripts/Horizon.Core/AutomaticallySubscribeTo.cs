@@ -5,37 +5,39 @@ using Horizon.Core.WeakSubscription;
 
 namespace Horizon.Core
 {
-	public class AutomaticallySubscribeToBase : ScriptableObject
+	public class AutomaticallySubscribeToBase : ScriptableInit
 	{
-		public virtual void __SetModel(object model){}
+		public virtual void __setGameObject(object model){}
+		public virtual object __getGameObject(){return null;}
 	}
 	
 	public class AutomaticallySubscribeTo<HorizonObjectType> : AutomaticallySubscribeToBase
 		where HorizonObjectType:HorizonGameObjectBase
 	{
-		public AutomaticallySubscribeTo()
+		protected override void Init()
 		{
-			Initilizer.CallOnInit(Init);
-		}
-
-		protected virtual void Init()
-		{
-			HorizonObject.WeakSubscribeToEvent(HorizonObject.StartEventName,(s,e) => Start());
-			HorizonObject.WeakSubscribeToEvent(HorizonObject.UpdateEventName,(s,e) => Update());
-			HorizonObject.WeakSubscribeToEvent(HorizonObject.LateUpdateEventName,(s,e) => LateUpdate());
+			base.Init();
+			gameObject.WeakSubscribeToEvent(gameObject.StartEventName,(s,e) => Start());
+			gameObject.WeakSubscribeToEvent(gameObject.UpdateEventName,(s,e) => Update());
+			gameObject.WeakSubscribeToEvent(gameObject.LateUpdateEventName,(s,e) => LateUpdate());
 		}
 
 		protected virtual void Start(){}
 		protected virtual void Update(){}
 		protected virtual void LateUpdate(){}
 
-		public override void __SetModel(object model)
+		public override void __setGameObject(object model)
 		{
-			HorizonObject = (HorizonObjectType)model;
+			gameObject = (HorizonObjectType)model;
+		}
+
+		public override object __getGameObject ()
+		{
+			return gameObject;
 		}
 
 		[SerializeField]
-		protected HorizonObjectType HorizonObject;
+		protected HorizonObjectType gameObject;
 	}
 }
 
