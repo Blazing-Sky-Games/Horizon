@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 using System;
-using Horizon.Combat.GameObjects;
+using Horizon.Combat.Models;
 using Horizon.Core.Editor;
 using Horizon.Core.Editor.Gizmos;
 using UnityEngine;
@@ -23,10 +23,10 @@ namespace Horizon.Combat.Editor
 		protected override void Init ()
 		{
 			base.Init ();
-			m_rectangleGizmo = new RectangleGizmo(gameObject);
+			m_rectangleGizmo = new RectangleGizmo(model);
 			m_rectangleGizmo.color = Color.cyan.SetAlpha(0.4f);
-			m_rectangleGizmo.Size = gameObject.CellSize;
-			gameObject.WeakSubscribeToProperty(() => gameObject.CellSize, (s,a) => m_rectangleGizmo.Size = gameObject.CellSize);
+			m_rectangleGizmo.Size = model.CellSize;
+			model.WeakSubscribeToProperty(() => model.CellSize, (s,a) => m_rectangleGizmo.Size = model.CellSize);
 		}
 
 		public override void Dispose ()

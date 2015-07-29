@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 using System;
-using Horizon.Combat.GameObjects;
+using Horizon.Combat.Models;
 using Horizon.Core.Editor;
 
 

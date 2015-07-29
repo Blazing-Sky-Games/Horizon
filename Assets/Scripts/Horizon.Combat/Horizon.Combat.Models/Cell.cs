@@ -10,11 +10,12 @@
 using System;
 using Horizon.Core;
 using UnityEngine;
+using Horizon.Core.WeakSubscription;
 
 
-namespace Horizon.Combat.GameObjects
+namespace Horizon.Combat.Models
 {
-	public class Cell : HorizonGameObjectBase
+	public class Cell : ModelBase
 	{
 		public float CellSize
 		{
@@ -30,6 +31,12 @@ namespace Horizon.Combat.GameObjects
 
 		[SerializeField]
 		private float m_cellSizeSerilized = 1;
+
+		[SerializeField]
+		private Grid m_gridSerilized;
+
+		[SerializeField]
+		private GridPoint m_gridPoint;
 	}
 }
 

@@ -4,14 +4,14 @@ using Horizon.Core.WeakSubscription;
 
 namespace Horizon.Core.Editor
 {
-	public class SceneView<HorizonObjectType> :  AutomaticallySubscribeTo<HorizonObjectType> 
-		where HorizonObjectType:HorizonGameObjectBase
+	public class SceneView<HorizonObjectType> :  ViewBase<HorizonObjectType> 
+		where HorizonObjectType:ModelBase
 	{
 		protected override void Init ()
 		{
 			base.Init ();
-			gameObject.WeakSubscribeToEvent(gameObject.OnDrawGizmosEventName, (sender,args) => SceneViewUpdate());
-			gameObject.WeakSubscribeToEvent(gameObject.OnDrawGizmosSelectedEventName, (sender,args) => WhileSelected());
+			model.WeakSubscribeToEvent(model.OnDrawGizmosEventName, (sender,args) => SceneViewUpdate());
+			model.WeakSubscribeToEvent(model.OnDrawGizmosSelectedEventName, (sender,args) => WhileSelected());
 		}
 
 		protected virtual void SceneViewUpdate(){}

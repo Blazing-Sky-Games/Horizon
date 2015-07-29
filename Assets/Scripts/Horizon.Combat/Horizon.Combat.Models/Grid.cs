@@ -17,9 +17,9 @@ using System.Collections.ObjectModel;
 using Horizon.Core.ExtensionMethods;
 
 
-namespace Horizon.Combat.GameObjects
+namespace Horizon.Combat.Models
 {
-	public class Grid : HorizonGameObjectBase
+	public class Grid : ModelBase
 	{
 		public int CellCount
 		{

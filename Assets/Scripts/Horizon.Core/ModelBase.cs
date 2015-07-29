@@ -11,7 +11,7 @@ using Horizon.Core.WeakSubscription;
 
 namespace Horizon.Core
 {
-	public class HorizonGameObjectBase : InitBehavior, INotifyPropertyChanged
+	public class ModelBase : MonoBehaviour, INotifyPropertyChanged, ISerializationCallbackReceiver, IDisposable
 	{
 		public event PropertyChangedEventHandler PropertyChanged;
 
@@ -30,49 +30,46 @@ namespace Horizon.Core
 		public event EventHandler<EventArgs> OnDrawGizmosSelectedEvent;
 		public readonly EventName OnDrawGizmosSelectedEventName;
 
-		public HorizonGameObjectBase()
+		public ModelBase()
 		{
 			StartEventName = this.GetEventNameFromExpresion(() => StartEvent);
 			UpdateEventName = this.GetEventNameFromExpresion(() => UpdateEvent);
 			LateUpdateEventName = this.GetEventNameFromExpresion(() => LateUpdateEvent);
 			OnDrawGizmosEventName = this.GetEventNameFromExpresion(() => OnDrawGizmosEvent);
 			OnDrawGizmosSelectedEventName = this.GetEventNameFromExpresion(() => OnDrawGizmosSelectedEvent);
+			CallInitSafe();
 		}
 
-		protected override void Init()
+		protected virtual void Init()
 		{
-			base.Init();
 #if UNITY_EDITOR
-			if(UnityEditor.EditorApplication.isPlayingOrWillChangePlaymode) return;
-
 			// get rid of null subscribers ... this is probably just a patch for a bug
-			Subscribers = Subscribers.Where(x => x != null).ToList();
+			m_views = m_views.Where(x => x != null).ToList();
 
 			//using reflection, find all automatic subscribers and set them up. hmm ... how does this intereact with serilization
-			Type subscriberType = typeof(AutomaticallySubscribeTo<HorizonGameObjectBase>).GetGenericTypeDefinition().MakeGenericType(new Type[]{this.GetType()});
+			Type viewType = typeof(ViewBase<ModelBase>).GetGenericTypeDefinition().MakeGenericType(new Type[]{this.GetType()});
 			foreach(Assembly assembly in AppDomain.CurrentDomain.GetAssemblies())
 			{
 				foreach(Type type in assembly.GetTypes())
 				{
-					if (type.IsSubclassOf(subscriberType)) 
+					if (type.IsSubclassOf(viewType)) 
 					{
-						if(Subscribers.Any(x => x.GetType() == type) == false)
+						if(m_views.Any(x => x.GetType() == type) == false)
 						{
-							AutomaticallySubscribeToBase subscriber = (AutomaticallySubscribeToBase)ScriptableObject.CreateInstance(type);
-							subscriber.__setGameObject(this);
-							Subscribers.Add(subscriber);
+							ViewBaseNonGeneric view = (ViewBaseNonGeneric)ScriptableObject.CreateInstance(type);
+							view.SetModel(this);
+							m_views.Add(view);
 						}
 						else
 						{
-							for(int i = 0; i < Subscribers.Count; i++)
+							for(int i = 0; i < m_views.Count; i++)
 							{
-								if(Subscribers[i].GetType() == type && object.ReferenceEquals(Subscribers[i].__getGameObject(), this) == false)
+								if(m_views[i].GetType() == type)
 								{
-									AutomaticallySubscribeToBase oldSub = Subscribers[i];
-									object old = oldSub.__getGameObject();
-									oldSub.__setGameObject(this);
-									Subscribers[i] = Instantiate(Subscribers[i]);
-									oldSub.__setGameObject(old);
+									if(object.ReferenceEquals(m_views[i].GetModel(), this) == false)
+										m_views[i] = Instantiate(m_views[i]);
+
+									m_views[i].SetModel(this);
 								}
 							}
 						}
@@ -81,6 +78,37 @@ namespace Horizon.Core
 			}
 #endif
 		}
+
+		#region ISerializationCallbackReceiver implementation
+		public void OnBeforeSerialize ()
+		{
+			CallInitSafe();
+		}
+		public void OnAfterDeserialize ()
+		{
+			m_initilized = false;
+			CallInitSafe();
+		}
+		#endregion
+		
+		private void OnDestroy()
+		{
+			Dispose();
+		}
+		
+		private void CallInitSafe()
+		{
+			Dispatcher.CallOnMainThread (() =>  
+			{
+				if (!m_initilized)
+				{
+					Init ();
+					m_initilized = true;
+				}
+			});
+		}
+		
+		private bool m_initilized = false;
 
 		protected virtual void Start()
 		{
@@ -148,10 +176,9 @@ namespace Horizon.Core
 			RaisePropertyChanged(changedArgs);
 		}
 
-		public override void Dispose ()
+		public virtual void Dispose ()
 		{
-			base.Dispose ();
-			foreach(AutomaticallySubscribeToBase subscriber in Subscribers)
+			foreach(ViewBaseNonGeneric subscriber in m_views)
 			{
 				this.DisposeAndDestroy(subscriber);
 			}
@@ -159,7 +186,7 @@ namespace Horizon.Core
 
 		// just to maintain a referance to the views
 		[SerializeField]
-		private List<AutomaticallySubscribeToBase> Subscribers = new List<AutomaticallySubscribeToBase>();
+		private List<ViewBaseNonGeneric> m_views = new List<ViewBaseNonGeneric>();
 	}
 }
 

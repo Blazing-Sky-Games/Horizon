@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Horizon.Core
 {
-	public class HorizonCamera : HorizonGameObjectBase
+	public class HorizonCamera : ModelBase
 	{
 		public event EventHandler<EventArgs> PostRenderEvent;
 		public readonly EventName PostRenderEventName;

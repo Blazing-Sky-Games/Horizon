@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Linq;
 using System.Reflection;
@@ -13,7 +13,7 @@ using Horizon.Core.WeakSubscription;
 namespace Horizon.Core.Editor
 {
 	//TODO: support multiobject editing. use showmixedvalue
-	[CustomEditor(typeof( HorizonGameObjectBase ), true, isFallback = true)]
+	[CustomEditor(typeof( ModelBase ), true, isFallback = true)]
 	public class HorizonEditor : UnityEditor.Editor
 	{
 		//todo make it so you can close the foldouts
@@ -120,47 +120,44 @@ namespace Horizon.Core.Editor
 		// show all properties
 		public override void OnInspectorGUI()
 		{
-			//using(new Indent())
-			//{
-				
-				GUIStyle style = new GUIStyle();
-				style.fontStyle = FontStyle.BoldAndItalic;
-				GUILayout.Label("Game Object",style);
-				DisplayObjectThroughReflection(target);
-				
-				//if(showSubscribers = EditorGUILayout.Foldout(showSubscribers,"Subscribers"))
-				//{
-					List<AutomaticallySubscribeToBase> subscribers = (List<AutomaticallySubscribeToBase>)(typeof(HorizonGameObjectBase).GetField("Subscribers", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(target));
-					Splitter();
-					style.fontStyle = FontStyle.BoldAndItalic;
-					GUILayout.Label("Subscribers",style);
-					foreach(var subscriber in subscribers)
-					{
-						if(subscriber == null)
-						{
-							EditorGUILayout.LabelField("subscriber","null");
-							continue;
-						}
+			EditorGUI.BeginChangeCheck();
 
-						style.fontStyle = FontStyle.Italic;
-						//Splitter();
-						
-						GUILayout.Label(subscriber.GetType().Name.SplitCamelCase(),style);
-						//using(new Indent())
-						//{
-							DisplayObjectThroughReflection(subscriber);
-						//}
-						//GUILayout.Space(16);
-					}
-				//}
-			//}
+			GUIStyle boldAndItalicStyle = new GUIStyle();
+			boldAndItalicStyle.fontStyle = FontStyle.BoldAndItalic;
+
+			GUILayout.Label("Model",boldAndItalicStyle);
+
+			DisplayObjectThroughReflection(target);
+
+			Splitter();
+		
+			GUILayout.Label("Views",boldAndItalicStyle);
+
+			List<ViewBaseNonGeneric> views = (List<ViewBaseNonGeneric>)(typeof(ModelBase).GetField("m_views", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(target));
+			foreach(var view in views)
+			{
+				if(view == null)
+				{
+					EditorGUILayout.LabelField("view","null");
+					continue;
+				}
+			
+				EditorGUILayout.InspectorTitlebar(true,view);
+				
+				DisplayObjectThroughReflection(view);
+			}
+
+			if(EditorGUI.EndChangeCheck())
+			{
+				EditorApplication.MarkSceneDirty();
+			}
 		}
 
 		public void OnDestroy()
 		{
 			if(!this.target)
 			{
-				HorizonGameObjectBase obj = (HorizonGameObjectBase)this.target;
+				ModelBase obj = (ModelBase)this.target;
 				this.DisposeAndDestroy(obj);
 			}
 		}

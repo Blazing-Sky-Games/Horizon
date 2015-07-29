@@ -45,7 +45,7 @@ namespace Horizon.Core.GL
 
 		public bool Enabled;
 
-		public GLObject(HorizonGameObjectBase owner)
+		public GLObject(ModelBase owner)
 		{
 			m_owner = owner;
 
@@ -74,7 +74,7 @@ namespace Horizon.Core.GL
 		private IDisposable m_postRenderSubscription;
 		private GLSettings m_settings;
 		private Material m_drawingMaterial;
-		private readonly HorizonGameObjectBase m_owner;
+		private readonly ModelBase m_owner;
 	}
 }
 

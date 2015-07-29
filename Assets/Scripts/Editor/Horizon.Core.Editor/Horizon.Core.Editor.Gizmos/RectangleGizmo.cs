@@ -22,7 +22,7 @@ namespace Horizon.Core.Editor.Gizmos
 
 		}
 
-		public RectangleGizmo(HorizonGameObjectBase gameObject) : base(gameObject){}
+		public RectangleGizmo(ModelBase gameObject) : base(gameObject){}
 
 		public float Size = 1;
 

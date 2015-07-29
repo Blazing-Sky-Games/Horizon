@@ -8,13 +8,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 using System;
-using Horizon.Combat.GameObjects;
+using Horizon.Combat.Models;
 using Horizon.Core;
 
 
-namespace Horizon.Combat.AutomaticSubscribers
+namespace Horizon.Combat.Views
 {
-	public class GridView : AutomaticallySubscribeTo<Grid>
+	public class GridView : ViewBase<Grid>
 	{
 
 	}

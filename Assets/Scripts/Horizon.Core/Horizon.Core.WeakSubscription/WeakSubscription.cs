@@ -208,7 +208,10 @@ namespace Horizon.Core.WeakSubscription
 
 		public static GeneralEventSubscription WeakSubscribeToEvent(this object source, EventName eventName, EventHandler<EventArgs> eventHandler)
 		{
-			if(eventName == null) throw new ArgumentNullException("eventName","you are trying to subscribe to an event that has not been initilized yet");
+			if(eventName == null)
+			{
+				throw new ArgumentNullException("eventName","you are trying to subscribe to an event that has not been initilized yet");
+			}
 
 			return new GeneralEventSubscription(source, source.GetType().GetEvent(eventName.Name), eventHandler);
 		}

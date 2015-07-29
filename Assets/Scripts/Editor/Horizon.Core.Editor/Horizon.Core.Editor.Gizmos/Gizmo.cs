@@ -10,7 +10,7 @@ namespace Horizon.Core.Editor.Gizmos
 		public bool Enabled = true;
 		public Color color;
 
-		public Gizmo(HorizonGameObjectBase gameObject, bool onlyOnSelected = false)
+		public Gizmo(ModelBase gameObject, bool onlyOnSelected = false)
 		{
 			this.gameObject = gameObject;
 
@@ -31,7 +31,7 @@ namespace Horizon.Core.Editor.Gizmos
 
 		public virtual void Dispose (){}
 
-		protected HorizonGameObjectBase gameObject;
+		protected ModelBase gameObject;
 	}
 }
 
