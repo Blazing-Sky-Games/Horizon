@@ -37,7 +37,8 @@ namespace Horizon.Core
 			LateUpdateEventName = this.GetEventNameFromExpresion(() => LateUpdateEvent);
 			OnDrawGizmosEventName = this.GetEventNameFromExpresion(() => OnDrawGizmosEvent);
 			OnDrawGizmosSelectedEventName = this.GetEventNameFromExpresion(() => OnDrawGizmosSelectedEvent);
-			CallInitSafe();
+
+			//CallInitSafe();
 		}
 
 		protected virtual void Init()
@@ -59,6 +60,17 @@ namespace Horizon.Core
 							ViewBaseNonGeneric view = (ViewBaseNonGeneric)ScriptableObject.CreateInstance(type);
 							view.SetModel(this);
 							m_views.Add(view);
+
+							if(gameObject == null) continue;
+
+							if(gameObject.activeInHierarchy)
+							{
+								view.hideFlags = HideFlags.None;
+							}
+							else
+							{
+								view.hideFlags = HideFlags.HideAndDontSave;
+							}
 						}
 						else
 						{
@@ -70,6 +82,17 @@ namespace Horizon.Core
 										m_views[i] = Instantiate(m_views[i]);
 
 									m_views[i].SetModel(this);
+
+									if(gameObject == null) continue;
+
+									if(gameObject.activeInHierarchy)
+									{
+										m_views[i].hideFlags = HideFlags.None;
+									}
+									else
+									{
+										m_views[i].hideFlags = HideFlags.HideAndDontSave;
+									}
 								}
 							}
 						}
@@ -82,11 +105,12 @@ namespace Horizon.Core
 		#region ISerializationCallbackReceiver implementation
 		public void OnBeforeSerialize ()
 		{
-			CallInitSafe();
 		}
 		public void OnAfterDeserialize ()
 		{
-			m_initilized = false;
+			if(this.GetType() == typeof(Horizon.Combat.Models.Cell))
+				Debug.Log(GetInstanceID() + " deserilized");
+
 			CallInitSafe();
 		}
 		#endregion
@@ -108,6 +132,7 @@ namespace Horizon.Core
 			});
 		}
 		
+		[NonSerialized]
 		private bool m_initilized = false;
 
 		protected virtual void Start()

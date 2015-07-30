@@ -14,7 +14,7 @@ namespace Horizon.Core.Editor
 {
 	//TODO: support multiobject editing. use showmixedvalue
 	[CustomEditor(typeof( ModelBase ), true, isFallback = true)]
-	public class HorizonEditor : UnityEditor.Editor
+	public class ModelInspector : UnityEditor.Editor
 	{
 		//todo make it so you can close the foldouts
 		//private bool showFeilds = true;
@@ -80,7 +80,7 @@ namespace Horizon.Core.Editor
 				//{
 					foreach(FieldInfo field in obj.GetType().GetFields())
 					{
-						HorizonEditorUtility.DisplayMemberValue(field,obj);
+						ModelInspectorUtility.DisplayMemberValue(field,obj);
 					}
 				//}
 			//}
@@ -104,7 +104,7 @@ namespace Horizon.Core.Editor
 					{
 						if(property.CanRead && property.CanWrite)
 						{
-							HorizonEditorUtility.DisplayMemberValue(property,obj);
+							ModelInspectorUtility.DisplayMemberValue(property,obj);
 						}
 					}
 				//}

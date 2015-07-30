@@ -20,9 +20,12 @@ namespace Horizon.Combat.Editor
 {
 	public class CellSceneHighlight : SceneView<Cell>
 	{
+		public int testPrefabConnection = 1;
+
 		protected override void Init ()
 		{
 			base.Init ();
+			Debug.Log(GetInstanceID() + " init: model is " + model.GetInstanceID());
 			m_rectangleGizmo = new RectangleGizmo(model);
 			m_rectangleGizmo.color = Color.cyan.SetAlpha(0.4f);
 			m_rectangleGizmo.Size = model.CellSize;

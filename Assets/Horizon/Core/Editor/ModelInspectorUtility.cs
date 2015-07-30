@@ -20,9 +20,9 @@ using System.Collections.Generic;
 
 namespace Horizon.Core.Editor
 {
-	public class HorizonEditorUtility
+	public class ModelInspectorUtility
 	{
-		static HorizonEditorUtility()
+		static ModelInspectorUtility()
 		{
 			foreach(Assembly assembly in AppDomain.CurrentDomain.GetAssemblies())
 			{
@@ -68,8 +68,6 @@ namespace Horizon.Core.Editor
 
 		private static void DisplayMemberValue(MemberValueWrapper memberValue)
 		{
-			//TODO add ability to extend what classes can be shown, from outside this file
-			
 			// display value editor ui based on property type
 			if(memberValue.ValueType == typeof(Bounds))
 			{

@@ -29,6 +29,8 @@ namespace Horizon.Combat.Models
 			}
 		}
 
+		//private float derp;
+
 		[SerializeField]
 		private float m_cellSizeSerilized = 1;
 

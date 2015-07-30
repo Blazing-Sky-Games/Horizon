@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Reflection;
 using Horizon.Core.ExtensionMethods;
 using System.Linq.Expressions;
+using System.Runtime.CompilerServices;
 
 namespace Horizon.Core.WeakSubscription
 {
