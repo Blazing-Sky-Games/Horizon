@@ -14,12 +14,12 @@ namespace Horizon.Core.GL
 		public readonly CompareFunction ZTest;
 		
 		public GLSettings(
-			Color color = default(Color),
-			BlendMode SrcBlend = BlendMode.SrcAlpha,
-			BlendMode DstBlend = BlendMode.OneMinusSrcAlpha,
-			CullMode  CullMode = CullMode.Off,
-			bool ZWrite = true,
-			CompareFunction ZTest = CompareFunction.LessEqual)
+			Color color,
+			BlendMode SrcBlend,
+			BlendMode DstBlend,
+			CullMode  CullMode,
+			bool ZWrite,
+			CompareFunction ZTest)
 		{
 			this.color = color;
 			this.SrcBlend = SrcBlend;

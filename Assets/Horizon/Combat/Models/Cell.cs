@@ -17,6 +17,8 @@ namespace Horizon.Combat.Models
 {
 	public class Cell : ModelBase
 	{
+		public bool Passable;
+
 		public float CellSize
 		{
 			get
@@ -39,6 +41,8 @@ namespace Horizon.Combat.Models
 
 		[SerializeField]
 		private GridPoint m_gridPoint;
+
+
 	}
 }
 
