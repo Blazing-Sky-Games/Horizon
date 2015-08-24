@@ -17,7 +17,17 @@ namespace Horizon.Combat.Models
 {
 	public class Cell : ModelBase
 	{
-		public bool Passable;
+		public bool Passable
+		{
+			get
+			{
+				return m_passableSerilized;
+			}
+			set
+			{
+				SetPropertyFeild(ref m_passableSerilized,value,() => Passable);
+			}
+		}
 
 		public float CellSize
 		{
@@ -31,8 +41,6 @@ namespace Horizon.Combat.Models
 			}
 		}
 
-		//private float derp;
-
 		[SerializeField]
 		private float m_cellSizeSerilized = 1;
 
@@ -42,7 +50,8 @@ namespace Horizon.Combat.Models
 		[SerializeField]
 		private GridPoint m_gridPoint;
 
-
+		[SerializeField]
+		private bool m_passableSerilized;
 	}
 }
 
