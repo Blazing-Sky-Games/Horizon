@@ -43,6 +43,7 @@ namespace Horizon.Core.Editor
 			public readonly Action<object> set;
 			public readonly Func<object> get;
 			public readonly string Name;
+			public readonly bool mixed;
 			
 			public MemberValueWrapper(PropertyInfo info, object target)
 			{
@@ -50,6 +51,28 @@ namespace Horizon.Core.Editor
 				set = (obj) => info.GetSetMethod().Invoke(target,new object[]{obj});
 				get = () => info.GetValue(target,null);
 				Name = info.Name;
+				mixed = false;
+			}
+
+			public MemberValueWrapper(PropertyInfo info, object[] targets)
+			{
+				ValueType = info.PropertyType;
+				set = 
+				(obj) => 
+				{
+					foreach(object target in targets)
+					{ 
+						info.GetSetMethod().Invoke(target,new object[]{obj});
+					}
+				};
+				get = () => info.GetValue(targets[0],null);
+				Name = info.Name;
+				mixed = targets.Any(
+					(obj) => 
+					{
+						return info.GetValue(targets[0],null).Equals(info.GetValue(obj,null)) == false;
+					}
+				);
 			}
 			
 			public MemberValueWrapper(FieldInfo info, object target)
@@ -58,12 +81,40 @@ namespace Horizon.Core.Editor
 				set = (obj) => info.SetValue(target,obj);
 				get = () => info.GetValue(target);
 				Name = info.Name;
+				mixed = false;
+			}
+
+			public MemberValueWrapper(FieldInfo info, object[] targets)
+			{
+				ValueType = info.FieldType;
+				set = 
+				(obj) => 
+				{
+					foreach(object target in targets)
+					{ 
+						info.SetValue(target,obj);
+					}
+				};
+				get = () => info.GetValue(targets[0]);
+				Name = info.Name;
+				mixed = targets.Any(obj => info.GetValue(targets[0]) != info.GetValue(obj));
 			}
 		}
 
 		private static void Display<T>(MemberValueWrapper value, Func<string,T,GUILayoutOption[],T> DisplayFunction)
 		{
-			value.set(DisplayFunction(value.Name.SplitCamelCase(),(T)value.get(),new GUILayoutOption[]{}));
+			EditorGUI.showMixedValue = value.mixed;
+
+			EditorGUI.BeginChangeCheck();
+
+			T val = DisplayFunction(value.Name.SplitCamelCase(),(T)value.get(),new GUILayoutOption[]{});
+
+			if(EditorGUI.EndChangeCheck())
+			{
+				value.set(val);
+			}
+
+			EditorGUI.showMixedValue = false;
 		}
 
 		private static void DisplayMemberValue(MemberValueWrapper memberValue)
@@ -156,14 +207,24 @@ namespace Horizon.Core.Editor
 			//todo, list, type, delegate
 		}
 
-		public static void DisplayMemberValue(FieldInfo info, object target)
+		//public static void DisplayMemberValue(FieldInfo info, object target)
+		//{
+			//DisplayMemberValue(new MemberValueWrapper(info, target));
+		//}
+
+		//public static void DisplayMemberValue(PropertyInfo info, object target)
+		//{
+			//DisplayMemberValue(new MemberValueWrapper(info, target));
+		//}
+
+		public static void DisplayMemberValue(FieldInfo info, object[] targets)
 		{
-			DisplayMemberValue(new MemberValueWrapper(info, target));
+			DisplayMemberValue(new MemberValueWrapper(info, targets));
 		}
 
-		public static void DisplayMemberValue(PropertyInfo info, object target)
+		public static void DisplayMemberValue(PropertyInfo info, object[] targets)
 		{
-			DisplayMemberValue(new MemberValueWrapper(info, target));
+			DisplayMemberValue(new MemberValueWrapper(info, targets));
 		}
 
 		private static Dictionary<Type, CustomDrawer> customDrawFunctions = new Dictionary<Type, CustomDrawer>();

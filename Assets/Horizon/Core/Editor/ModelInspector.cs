@@ -14,6 +14,7 @@ namespace Horizon.Core.Editor
 {
 	//TODO: support multiobject editing. use showmixedvalue
 	[CustomEditor(typeof( ModelBase ), true, isFallback = true)]
+	[CanEditMultipleObjects]
 	public class ModelInspector : UnityEditor.Editor
 	{
 		//todo make it so you can close the foldouts
@@ -69,25 +70,15 @@ namespace Horizon.Core.Editor
 			}
 		}
 
-		private void DisplayObjectThroughReflection(UnityEngine.Object obj)
+		private void DisplayObjectsThroughReflection(UnityEngine.Object[] objs)
 		{
-			//if(foldOutSets.ContainsKey(obj) == false) foldOutSets[obj] = new foldOutSet();
+			foreach(FieldInfo field in objs[0].GetType().GetFields())
+			{
+				ModelInspectorUtility.DisplayMemberValue(field,objs);
+			}
 
-			//fields
-			//if(obj.GetType().GetFields().Where(x=>x.FieldType != typeof(EventName)).Count() != 0 && (foldOutSets[obj].fields = EditorGUILayout.Foldout(foldOutSets[obj].fields,"Fields")))
-			//{
-				//using(new Indent())
-				//{
-					foreach(FieldInfo field in obj.GetType().GetFields())
-					{
-						ModelInspectorUtility.DisplayMemberValue(field,obj);
-					}
-				//}
-			//}
-			
-			//properties
 			var props =
-				obj
+				objs[0]
 				.GetType()
 				.GetProperties()
 				.Where(
@@ -96,25 +87,14 @@ namespace Horizon.Core.Editor
 					&& x.DeclaringType != typeof(Behaviour) 
 					&& x.DeclaringType != typeof(MonoBehaviour)
 				);
-			//if (props.Count() != 0 && (foldOutSets[obj].props = EditorGUILayout.Foldout(foldOutSets[obj].props,"Properties")))
-			//{
-				//using(new Indent())
-				//{
-					foreach(PropertyInfo property in props)
+
+				foreach(PropertyInfo property in props)
+				{
+					if(property.CanRead && property.CanWrite)
 					{
-						if(property.CanRead && property.CanWrite)
-						{
-							ModelInspectorUtility.DisplayMemberValue(property,obj);
-						}
+						ModelInspectorUtility.DisplayMemberValue(property,objs);
 					}
-				//}
-			//}
-			
-			//funtions
-			//todo
-			
-			//events
-			//todo
+				}
 		}
 
 		// show all properties
@@ -127,24 +107,31 @@ namespace Horizon.Core.Editor
 
 			GUILayout.Label("Model",boldAndItalicStyle);
 
-			DisplayObjectThroughReflection(target);
+			DisplayObjectsThroughReflection(targets);
 
 			Splitter();
 		
 			GUILayout.Label("Views",boldAndItalicStyle);
 
-			List<ViewBaseNonGeneric> views = (List<ViewBaseNonGeneric>)(typeof(ModelBase).GetField("m_views", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(target));
-			foreach(var view in views)
+			// stores the views of all selected models, based on type
+			Dictionary<Type, List<ViewBaseNonGeneric>> viewLookup = new Dictionary<Type, List<ViewBaseNonGeneric>>();
+			foreach(object obj in targets)
 			{
-				if(view == null)
+				List<ViewBaseNonGeneric> views = (List<ViewBaseNonGeneric>)(typeof(ModelBase).GetField("m_views", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(obj));
+				foreach(ViewBaseNonGeneric view in views)
 				{
-					EditorGUILayout.LabelField("view","null");
-					continue;
+					if(viewLookup.ContainsKey(view.GetType()) == false) viewLookup[view.GetType()] = new List<ViewBaseNonGeneric>(); 
+
+					viewLookup[view.GetType()].Add(view);
 				}
-			
-				EditorGUILayout.InspectorTitlebar(true,view);
+			}
+
+			//foreach type of view on this type of model
+			foreach(KeyValuePair<Type, List<ViewBaseNonGeneric>> entry in viewLookup)
+			{
+				EditorGUILayout.InspectorTitlebar(true,entry.Value[0]);
 				
-				DisplayObjectThroughReflection(view);
+				DisplayObjectsThroughReflection(entry.Value.ToArray());
 			}
 
 			if(EditorGUI.EndChangeCheck())
