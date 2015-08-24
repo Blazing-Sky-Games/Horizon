@@ -8,6 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 using System;
+using System.Linq;
 using Horizon.Combat.Models;
 using Horizon.Core;
 using UnityEngine;
@@ -19,6 +20,8 @@ namespace Horizon.Combat.Views
 {
 	public class GridView : ViewBase<Grid>
 	{
+		public Color GridLineColor = Color.black;
+
 		protected override void Init ()
 		{
 			base.Init ();
@@ -34,77 +37,17 @@ namespace Horizon.Combat.Views
 		{
 			GLUtility.DefaultMaterial.SetPass (0);
 			GL.Begin( GL.LINES );
-			GL.Color(Color.black * new Color(1,1,1,0.8f));
+			GL.Color(GridLineColor * new Color(1,1,1,0.8f));
 			Grid grid = model;
 
-			for(int j = 0; j <= grid.Dimensions.y; j += 1)
+			foreach (GridLine line in grid.GridLines)
 			{
-				for(int i = 0; i < grid.Dimensions.x; i += 1)
+				if(line.AdjacentCells.Any(cell => cell.Passable))
 				{
-					bool draw = true;
-					if(j == 0)
-					{
-						//we are on the edge, only check one cell
-						draw = grid[i][j].Passable;
-					}
-					else if(j == grid.Dimensions.y)
-					{
-						//we are on the edge, only check one cell
-						//draw = model.CellViewGrid[new RectPoint(i,j - 1)].model.state == CellState.Passable;
-						draw = grid[i][j-1].Passable;
-					}
-					else
-					{
-						// draw this line if either of the bordering cells are passable
-						bool CellAbovePassable = grid[i][j].Passable;
-						bool CellBelowPassable = grid[i][j-1].Passable;
-						draw = CellAbovePassable || CellBelowPassable;
-					}
-					
-					// draw the line segment
-					if(draw)
-					{
-						GL.Vertex3( grid.transform.position.x + i * grid.CellSize, grid.transform.position.y + 0.01f, grid.transform.position.z + j * grid.CellSize );
-						GL.Vertex3( grid.transform.position.x + (i+1) * grid.CellSize, grid.transform.position.y + 0.01f, grid.transform.position.z + j * grid.CellSize );
-					}
+					GL.Vertex3(line.start.x,line.start.y,line.start.z);
+					GL.Vertex3(line.end.x,line.end.y,line.end.z);
 				}
-			
 			}
-
-			for(int i = 0; i <= grid.Dimensions.x; i += 1)
-			{
-				for(int j = 0; j < grid.Dimensions.y; j += 1)
-				{
-					bool draw = true;
-					if(i == 0)
-					{
-						//we are on the edge, only check one cell
-						draw = grid[i][j].Passable;
-					}
-					else if(i == grid.Dimensions.x)
-					{
-						//we are on the edge, only check one cell
-						//draw = model.CellViewGrid[new RectPoint(i,j - 1)].model.state == CellState.Passable;
-						draw = grid[i-1][j].Passable;
-					}
-					else
-					{
-						// draw this line if either of the bordering cells are passable
-						bool CellAbovePassable = grid[i][j].Passable;
-						bool CellBelowPassable = grid[i-1][j].Passable;
-						draw = CellAbovePassable || CellBelowPassable;
-					}
-					
-					// draw the line segment
-					if(draw)
-					{
-						GL.Vertex3( grid.transform.position.x + i * grid.CellSize, grid.transform.position.y + 0.01f, grid.transform.position.z + j * grid.CellSize );
-						GL.Vertex3( grid.transform.position.x + i * grid.CellSize, grid.transform.position.y + 0.01f, grid.transform.position.z + (j+1) * grid.CellSize );
-					}
-				}
-				
-			}
-
 
 			GL.End();
 		}

@@ -20,8 +20,6 @@ namespace Horizon.Combat.Editor
 {
 	public class CellSceneHighlight : SceneView<Cell>
 	{
-		public int testPrefabConnection = 1;
-
 		protected override void Init ()
 		{
 			base.Init ();

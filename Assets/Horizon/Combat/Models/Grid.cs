@@ -19,6 +19,37 @@ using Horizon.Core.ExtensionMethods;
 
 namespace Horizon.Combat.Models
 {
+	public struct GridLine
+	{
+		public GridLine(Vector3 start,Vector3 end, Cell left, Cell right)
+		{
+			this.start = start;
+			this.end = end;
+			this.leftCell = left;
+			this.rightCell = right;
+		}
+		
+		public readonly Vector3 start;
+		public readonly Vector3 end;
+		
+		public readonly Cell leftCell;
+		public readonly Cell rightCell;
+
+		public IEnumerable<Cell> AdjacentCells
+		{
+			get
+			{
+				if(leftCell != null)
+					yield return leftCell;
+
+				if(rightCell != null)
+					yield return rightCell;
+
+				yield break;
+			}
+		}
+	}
+
 	public class Grid : ModelBase
 	{
 		public int CellCount
@@ -42,6 +73,59 @@ namespace Horizon.Combat.Models
 			get
 			{
 				return m_cells[point.x][point.y];
+			}
+		}
+
+
+
+		public IEnumerable<GridLine> GridLines
+		{
+			get
+			{
+				for(int j = 0; j <= Dimensions.y; j += 1)
+				{
+					for(int i = 0; i < Dimensions.x; i += 1)
+					{
+						Vector3 start = new Vector3( transform.position.x + i * CellSize, transform.position.y + 0.01f, transform.position.z + j * CellSize );
+						Vector3 end = new Vector3( transform.position.x + (i+1) * CellSize, transform.position.y + 0.01f, transform.position.z + j * CellSize );
+
+						if(j == 0)
+						{
+							yield return new GridLine(start,end,this[i][j],null);
+						}
+						else if(j == Dimensions.y)
+						{
+							yield return new GridLine(start,end,null,this[i][j-1]);
+						}
+						else
+						{
+							yield return new GridLine(start,end,this[i][j],this[i][j-1]);
+						}
+					}
+					
+				}
+				
+				for(int i = 0; i <= Dimensions.x; i += 1)
+				{
+					for(int j = 0; j < Dimensions.y; j += 1)
+					{
+						Vector3 start = new Vector3( transform.position.x + i * CellSize, transform.position.y + 0.01f, transform.position.z + j * CellSize );
+						Vector3 end = new Vector3( transform.position.x + i * CellSize, transform.position.y + 0.01f, transform.position.z + (j+1) * CellSize );
+
+						if(i == 0)
+						{
+							yield return new GridLine(start,end,this[i][j],null);
+						}
+						else if(i == Dimensions.x)
+						{
+							yield return new GridLine(start,end,null,this[i-1][j]);
+						}
+						else
+						{
+							yield return new GridLine(start,end,this[i][j],this[i-1][j]);
+						}
+					}
+				}
 			}
 		}
 
