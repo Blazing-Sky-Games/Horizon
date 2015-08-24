@@ -108,9 +108,6 @@ namespace Horizon.Core
 		}
 		public void OnAfterDeserialize ()
 		{
-			if(this.GetType() == typeof(Horizon.Combat.Models.Cell))
-				Debug.Log(GetInstanceID() + " deserilized");
-
 			CallInitSafe();
 		}
 		#endregion

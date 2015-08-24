@@ -10,11 +10,6 @@ namespace Horizon.Core
 		public virtual void SetModel(ModelBase model){}
 		public virtual ModelBase GetModel(){return null;}
 
-		public ViewBaseNonGeneric()
-		{
-			Debug.Log(GetInstanceID() + " constructor");
-		}
-
 		#region IDisposable implementation
 
 		public virtual void Dispose (){}

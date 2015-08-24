@@ -25,7 +25,6 @@ namespace Horizon.Combat.Editor
 		protected override void Init ()
 		{
 			base.Init ();
-			Debug.Log(GetInstanceID() + " init: model is " + model.GetInstanceID());
 			m_rectangleGizmo = new RectangleGizmo(model);
 			m_rectangleGizmo.color = Color.cyan.SetAlpha(0.4f);
 			m_rectangleGizmo.Size = model.CellSize;
