@@ -1,0 +1,1233 @@
+fileFormatVersion: 2
+guid: dc44b33d7625fa441a696ac002da58a2
+timeCreated: 1440458177
+licenseType: Free
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: ikHandle1
+    100002: ikHandle2
+    100004: ikHandle3
+    100006: ikHandle4
+    100008: ikHandle5
+    100010: ikHandle6
+    100012: ikHandle7
+    100014: ikHandle8
+    100016: joint1
+    100018: joint10
+    100020: joint11
+    100022: joint12
+    100024: joint13
+    100026: joint14
+    100028: joint15
+    100030: joint16
+    100032: joint17
+    100034: joint18
+    100036: joint19
+    100038: joint2
+    100040: joint20
+    100042: joint21
+    100044: joint22
+    100046: joint23
+    100048: joint24
+    100050: joint25
+    100052: joint26
+    100054: joint27
+    100056: joint28
+    100058: joint29
+    100060: joint3
+    100062: joint30
+    100064: joint31
+    100066: joint32
+    100068: joint33
+    100070: joint34
+    100072: joint35
+    100074: joint36
+    100076: joint37
+    100078: joint38
+    100080: joint39
+    100082: joint4
+    100084: joint5
+    100086: joint6
+    100088: joint7
+    100090: joint8
+    100092: joint9
+    100094: nurbsCircle1
+    100096: nurbsCircle10
+    100098: nurbsCircle11
+    100100: nurbsCircle12
+    100102: nurbsCircle13
+    100104: nurbsCircle14
+    100106: nurbsCircle15
+    100108: nurbsCircle17
+    100110: nurbsCircle19
+    100112: nurbsCircle2
+    100114: nurbsCircle21
+    100116: nurbsCircle22
+    100118: nurbsCircle24
+    100120: nurbsCircle25
+    100122: nurbsCircle29
+    100124: nurbsCircle3
+    100126: nurbsCircle31
+    100128: nurbsCircle32
+    100130: nurbsCircle4
+    100132: nurbsCircle5
+    100134: nurbsCircle6
+    100136: nurbsCircle7
+    100138: nurbsCircle8
+    100140: nurbsCircle9
+    100142: pCube1
+    100144: pCube10
+    100146: pCube11
+    100148: pCube12
+    100150: pCube13
+    100152: pCube14
+    100154: pCube15
+    100156: pCube16
+    100158: pCube17
+    100160: pCube18
+    100162: pCube19
+    100164: pCube2
+    100166: pCube24
+    100168: pCube25
+    100170: pCube26
+    100172: pCube27
+    100174: pCube28
+    100176: pCube29
+    100178: pCube3
+    100180: pCube30
+    100182: pCube31
+    100184: pCube32
+    100186: pCube33
+    100188: pCube34
+    100190: pCube35
+    100192: pCube4
+    100194: pCube5
+    100196: pCube6
+    100198: pCube7
+    100200: pCube8
+    100202: pCube9
+    100204: polySurface1
+    100206: //RootNode
+    100208: transform1
+    100210: transform10
+    100212: transform11
+    100214: transform12
+    100216: transform13
+    100218: transform14
+    100220: transform15
+    100222: transform16
+    100224: transform17
+    100226: transform18
+    100228: transform19
+    100230: transform2
+    100232: transform20
+    100234: transform21
+    100236: transform22
+    100238: transform23
+    100240: transform24
+    100242: transform25
+    100244: transform26
+    100246: transform27
+    100248: transform28
+    100250: transform29
+    100252: transform3
+    100254: transform30
+    100256: transform31
+    100258: transform4
+    100260: transform5
+    100262: transform6
+    100264: transform7
+    100266: transform8
+    100268: transform9
+    400000: ikHandle1
+    400002: ikHandle2
+    400004: ikHandle3
+    400006: ikHandle4
+    400008: ikHandle5
+    400010: ikHandle6
+    400012: ikHandle7
+    400014: ikHandle8
+    400016: joint1
+    400018: joint10
+    400020: joint11
+    400022: joint12
+    400024: joint13
+    400026: joint14
+    400028: joint15
+    400030: joint16
+    400032: joint17
+    400034: joint18
+    400036: joint19
+    400038: joint2
+    400040: joint20
+    400042: joint21
+    400044: joint22
+    400046: joint23
+    400048: joint24
+    400050: joint25
+    400052: joint26
+    400054: joint27
+    400056: joint28
+    400058: joint29
+    400060: joint3
+    400062: joint30
+    400064: joint31
+    400066: joint32
+    400068: joint33
+    400070: joint34
+    400072: joint35
+    400074: joint36
+    400076: joint37
+    400078: joint38
+    400080: joint39
+    400082: joint4
+    400084: joint5
+    400086: joint6
+    400088: joint7
+    400090: joint8
+    400092: joint9
+    400094: nurbsCircle1
+    400096: nurbsCircle10
+    400098: nurbsCircle11
+    400100: nurbsCircle12
+    400102: nurbsCircle13
+    400104: nurbsCircle14
+    400106: nurbsCircle15
+    400108: nurbsCircle17
+    400110: nurbsCircle19
+    400112: nurbsCircle2
+    400114: nurbsCircle21
+    400116: nurbsCircle22
+    400118: nurbsCircle24
+    400120: nurbsCircle25
+    400122: nurbsCircle29
+    400124: nurbsCircle3
+    400126: nurbsCircle31
+    400128: nurbsCircle32
+    400130: nurbsCircle4
+    400132: nurbsCircle5
+    400134: nurbsCircle6
+    400136: nurbsCircle7
+    400138: nurbsCircle8
+    400140: nurbsCircle9
+    400142: pCube1
+    400144: pCube10
+    400146: pCube11
+    400148: pCube12
+    400150: pCube13
+    400152: pCube14
+    400154: pCube15
+    400156: pCube16
+    400158: pCube17
+    400160: pCube18
+    400162: pCube19
+    400164: pCube2
+    400166: pCube24
+    400168: pCube25
+    400170: pCube26
+    400172: pCube27
+    400174: pCube28
+    400176: pCube29
+    400178: pCube3
+    400180: pCube30
+    400182: pCube31
+    400184: pCube32
+    400186: pCube33
+    400188: pCube34
+    400190: pCube35
+    400192: pCube4
+    400194: pCube5
+    400196: pCube6
+    400198: pCube7
+    400200: pCube8
+    400202: pCube9
+    400204: polySurface1
+    400206: //RootNode
+    400208: transform1
+    400210: transform10
+    400212: transform11
+    400214: transform12
+    400216: transform13
+    400218: transform14
+    400220: transform15
+    400222: transform16
+    400224: transform17
+    400226: transform18
+    400228: transform19
+    400230: transform2
+    400232: transform20
+    400234: transform21
+    400236: transform22
+    400238: transform23
+    400240: transform24
+    400242: transform25
+    400244: transform26
+    400246: transform27
+    400248: transform28
+    400250: transform29
+    400252: transform3
+    400254: transform30
+    400256: transform31
+    400258: transform4
+    400260: transform5
+    400262: transform6
+    400264: transform7
+    400266: transform8
+    400268: transform9
+    4300000: polySurface1
+    7400000: Idle
+    7400002: Attack
+    7400004: Walk
+    9500000: //RootNode
+    13700000: polySurface1
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Idle
+      takeName: Take 001
+      firstFrame: 1
+      lastFrame: 23
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: joint4
+        weight: 1
+      - path: joint4/joint5
+        weight: 1
+      - path: joint4/joint5/joint6
+        weight: 1
+      - path: joint4/joint5/joint6/joint7
+        weight: 1
+      - path: joint4/joint5/joint6/joint7/joint8
+        weight: 1
+      - path: joint4/joint5/joint6/joint7/joint8/joint9
+        weight: 1
+      - path: joint4/joint5/joint6/joint7/joint8/joint9/joint1
+        weight: 1
+      - path: joint4/joint5/joint6/joint7/joint8/joint9/joint1/joint2
+        weight: 1
+      - path: joint4/joint5/joint6/joint7/joint8/joint9/joint1/joint2/joint39
+        weight: 1
+      - path: joint4/joint5/joint6/joint7/joint8/joint9/joint1/joint3
+        weight: 1
+      - path: joint4/joint5/joint6/joint7/joint8/joint24
+        weight: 1
+      - path: joint4/joint5/joint6/joint7/joint8/joint24/joint25
+        weight: 1
+      - path: joint4/joint5/joint6/joint7/joint8/joint24/joint25/joint26
+        weight: 1
+      - path: joint4/joint5/joint6/joint7/joint8/joint24/joint25/joint26/joint27
+        weight: 1
+      - path: joint4/joint5/joint6/joint7/joint8/joint24/joint25/joint26/joint27/joint28
+        weight: 1
+      - path: joint4/joint5/joint6/joint7/joint8/joint29
+        weight: 1
+      - path: joint4/joint5/joint6/joint7/joint8/joint29/joint30
+        weight: 1
+      - path: joint4/joint5/joint6/joint7/joint8/joint29/joint30/joint31
+        weight: 1
+      - path: joint4/joint5/joint6/joint7/joint8/joint29/joint30/joint31/joint32
+        weight: 1
+      - path: joint4/joint5/joint6/joint7/joint8/joint29/joint30/joint31/joint32/joint33
+        weight: 1
+      - path: joint4/joint10
+        weight: 1
+      - path: joint4/joint10/joint11
+        weight: 1
+      - path: joint4/joint10/joint11/joint12
+        weight: 1
+      - path: joint4/joint10/joint11/joint12/joint13
+        weight: 1
+      - path: joint4/joint10/joint11/joint12/joint13/joint14
+        weight: 1
+      - path: joint4/joint10/joint11/joint12/joint13/joint14/joint15
+        weight: 1
+      - path: joint4/joint10/joint11/joint12/joint13/joint14/joint15/joint16
+        weight: 1
+      - path: joint4/joint10/joint11/joint12/joint13/joint14/joint15/joint16/joint17
+        weight: 1
+      - path: joint4/joint10/joint11/joint12/joint13/joint14/joint15/joint16/joint17/joint18
+        weight: 1
+      - path: joint4/joint19
+        weight: 1
+      - path: joint4/joint19/joint20
+        weight: 1
+      - path: joint4/joint19/joint20/joint21
+        weight: 1
+      - path: joint4/joint19/joint20/joint21/joint22
+        weight: 1
+      - path: joint4/joint19/joint20/joint21/joint22/joint23
+        weight: 1
+      - path: joint4/joint34
+        weight: 1
+      - path: joint4/joint34/joint35
+        weight: 1
+      - path: joint4/joint34/joint35/joint36
+        weight: 1
+      - path: joint4/joint34/joint35/joint36/joint37
+        weight: 1
+      - path: joint4/joint34/joint35/joint36/joint37/joint38
+        weight: 1
+      - path: nurbsCircle1
+        weight: 1
+      - path: nurbsCircle1/nurbsCircle19
+        weight: 1
+      - path: nurbsCircle1/nurbsCircle19/ikHandle4
+        weight: 1
+      - path: nurbsCircle1/nurbsCircle19/ikHandle5
+        weight: 1
+      - path: nurbsCircle1/nurbsCircle19/nurbsCircle17
+        weight: 1
+      - path: nurbsCircle1/nurbsCircle21
+        weight: 1
+      - path: nurbsCircle1/nurbsCircle21/ikHandle3
+        weight: 1
+      - path: nurbsCircle1/nurbsCircle21/ikHandle6
+        weight: 1
+      - path: nurbsCircle1/nurbsCircle21/nurbsCircle22
+        weight: 1
+      - path: nurbsCircle1/nurbsCircle24
+        weight: 1
+      - path: nurbsCircle1/nurbsCircle24/ikHandle2
+        weight: 1
+      - path: nurbsCircle1/nurbsCircle24/ikHandle8
+        weight: 1
+      - path: nurbsCircle1/nurbsCircle25
+        weight: 1
+      - path: nurbsCircle1/nurbsCircle29
+        weight: 1
+      - path: nurbsCircle1/nurbsCircle29/ikHandle1
+        weight: 1
+      - path: nurbsCircle1/nurbsCircle29/ikHandle7
+        weight: 1
+      - path: nurbsCircle1/nurbsCircle31
+        weight: 1
+      - path: nurbsCircle1/nurbsCircle32
+        weight: 1
+      - path: nurbsCircle1/nurbsCircle32/nurbsCircle9
+        weight: 1
+      - path: nurbsCircle1/nurbsCircle32/nurbsCircle9/nurbsCircle8
+        weight: 1
+      - path: nurbsCircle1/nurbsCircle32/nurbsCircle9/nurbsCircle8/nurbsCircle7
+        weight: 1
+      - path: nurbsCircle1/nurbsCircle32/nurbsCircle9/nurbsCircle8/nurbsCircle7/nurbsCircle6
+        weight: 1
+      - path: nurbsCircle1/nurbsCircle32/nurbsCircle9/nurbsCircle8/nurbsCircle7/nurbsCircle6/nurbsCircle5
+        weight: 1
+      - path: nurbsCircle1/nurbsCircle32/nurbsCircle9/nurbsCircle8/nurbsCircle7/nurbsCircle6/nurbsCircle5/nurbsCircle4
+        weight: 1
+      - path: nurbsCircle1/nurbsCircle32/nurbsCircle9/nurbsCircle8/nurbsCircle7/nurbsCircle6/nurbsCircle5/nurbsCircle4/nurbsCircle3
+        weight: 1
+      - path: nurbsCircle1/nurbsCircle32/nurbsCircle9/nurbsCircle8/nurbsCircle7/nurbsCircle6/nurbsCircle5/nurbsCircle4/nurbsCircle3/nurbsCircle2
+        weight: 1
+      - path: nurbsCircle1/nurbsCircle32/nurbsCircle10
+        weight: 1
+      - path: nurbsCircle1/nurbsCircle32/nurbsCircle10/nurbsCircle11
+        weight: 1
+      - path: nurbsCircle1/nurbsCircle32/nurbsCircle10/nurbsCircle11/nurbsCircle12
+        weight: 1
+      - path: nurbsCircle1/nurbsCircle32/nurbsCircle10/nurbsCircle11/nurbsCircle12/nurbsCircle13
+        weight: 1
+      - path: nurbsCircle1/nurbsCircle32/nurbsCircle10/nurbsCircle11/nurbsCircle12/nurbsCircle13/nurbsCircle14
+        weight: 1
+      - path: nurbsCircle1/nurbsCircle32/nurbsCircle10/nurbsCircle11/nurbsCircle12/nurbsCircle13/nurbsCircle14/nurbsCircle15
+        weight: 1
+      - path: pCube1
+        weight: 1
+      - path: pCube1/transform30
+        weight: 1
+      - path: pCube2
+        weight: 1
+      - path: pCube2/transform31
+        weight: 1
+      - path: pCube3
+        weight: 1
+      - path: pCube3/transform29
+        weight: 1
+      - path: pCube4
+        weight: 1
+      - path: pCube4/transform28
+        weight: 1
+      - path: pCube5
+        weight: 1
+      - path: pCube5/transform27
+        weight: 1
+      - path: pCube6
+        weight: 1
+      - path: pCube6/transform26
+        weight: 1
+      - path: pCube7
+        weight: 1
+      - path: pCube7/transform25
+        weight: 1
+      - path: pCube8
+        weight: 1
+      - path: pCube8/transform24
+        weight: 1
+      - path: pCube9
+        weight: 1
+      - path: pCube9/transform23
+        weight: 1
+      - path: pCube10
+        weight: 1
+      - path: pCube10/transform22
+        weight: 1
+      - path: pCube11
+        weight: 1
+      - path: pCube11/transform21
+        weight: 1
+      - path: pCube12
+        weight: 1
+      - path: pCube12/transform20
+        weight: 1
+      - path: pCube13
+        weight: 1
+      - path: pCube13/transform19
+        weight: 1
+      - path: pCube14
+        weight: 1
+      - path: pCube14/transform18
+        weight: 1
+      - path: pCube15
+        weight: 1
+      - path: pCube15/transform17
+        weight: 1
+      - path: pCube16
+        weight: 1
+      - path: pCube16/transform16
+        weight: 1
+      - path: pCube17
+        weight: 1
+      - path: pCube17/transform15
+        weight: 1
+      - path: pCube18
+        weight: 1
+      - path: pCube18/transform14
+        weight: 1
+      - path: pCube19
+        weight: 1
+      - path: pCube19/transform13
+        weight: 1
+      - path: pCube24
+        weight: 1
+      - path: pCube24/transform12
+        weight: 1
+      - path: pCube25
+        weight: 1
+      - path: pCube25/transform11
+        weight: 1
+      - path: pCube26
+        weight: 1
+      - path: pCube26/transform10
+        weight: 1
+      - path: pCube27
+        weight: 1
+      - path: pCube27/transform9
+        weight: 1
+      - path: pCube28
+        weight: 1
+      - path: pCube28/transform8
+        weight: 1
+      - path: pCube29
+        weight: 1
+      - path: pCube29/transform7
+        weight: 1
+      - path: pCube30
+        weight: 1
+      - path: pCube30/transform6
+        weight: 1
+      - path: pCube31
+        weight: 1
+      - path: pCube31/transform5
+        weight: 1
+      - path: pCube32
+        weight: 1
+      - path: pCube32/transform4
+        weight: 1
+      - path: pCube33
+        weight: 1
+      - path: pCube33/transform3
+        weight: 1
+      - path: pCube34
+        weight: 1
+      - path: pCube34/transform2
+        weight: 1
+      - path: pCube35
+        weight: 1
+      - path: pCube35/transform1
+        weight: 1
+      - path: polySurface1
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Attack
+      takeName: Take 001
+      firstFrame: 24
+      lastFrame: 50
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: joint4
+        weight: 1
+      - path: joint4/joint5
+        weight: 1
+      - path: joint4/joint5/joint6
+        weight: 1
+      - path: joint4/joint5/joint6/joint7
+        weight: 1
+      - path: joint4/joint5/joint6/joint7/joint8
+        weight: 1
+      - path: joint4/joint5/joint6/joint7/joint8/joint9
+        weight: 1
+      - path: joint4/joint5/joint6/joint7/joint8/joint9/joint1
+        weight: 1
+      - path: joint4/joint5/joint6/joint7/joint8/joint9/joint1/joint2
+        weight: 1
+      - path: joint4/joint5/joint6/joint7/joint8/joint9/joint1/joint2/joint39
+        weight: 1
+      - path: joint4/joint5/joint6/joint7/joint8/joint9/joint1/joint3
+        weight: 1
+      - path: joint4/joint5/joint6/joint7/joint8/joint24
+        weight: 1
+      - path: joint4/joint5/joint6/joint7/joint8/joint24/joint25
+        weight: 1
+      - path: joint4/joint5/joint6/joint7/joint8/joint24/joint25/joint26
+        weight: 1
+      - path: joint4/joint5/joint6/joint7/joint8/joint24/joint25/joint26/joint27
+        weight: 1
+      - path: joint4/joint5/joint6/joint7/joint8/joint24/joint25/joint26/joint27/joint28
+        weight: 1
+      - path: joint4/joint5/joint6/joint7/joint8/joint29
+        weight: 1
+      - path: joint4/joint5/joint6/joint7/joint8/joint29/joint30
+        weight: 1
+      - path: joint4/joint5/joint6/joint7/joint8/joint29/joint30/joint31
+        weight: 1
+      - path: joint4/joint5/joint6/joint7/joint8/joint29/joint30/joint31/joint32
+        weight: 1
+      - path: joint4/joint5/joint6/joint7/joint8/joint29/joint30/joint31/joint32/joint33
+        weight: 1
+      - path: joint4/joint10
+        weight: 1
+      - path: joint4/joint10/joint11
+        weight: 1
+      - path: joint4/joint10/joint11/joint12
+        weight: 1
+      - path: joint4/joint10/joint11/joint12/joint13
+        weight: 1
+      - path: joint4/joint10/joint11/joint12/joint13/joint14
+        weight: 1
+      - path: joint4/joint10/joint11/joint12/joint13/joint14/joint15
+        weight: 1
+      - path: joint4/joint10/joint11/joint12/joint13/joint14/joint15/joint16
+        weight: 1
+      - path: joint4/joint10/joint11/joint12/joint13/joint14/joint15/joint16/joint17
+        weight: 1
+      - path: joint4/joint10/joint11/joint12/joint13/joint14/joint15/joint16/joint17/joint18
+        weight: 1
+      - path: joint4/joint19
+        weight: 1
+      - path: joint4/joint19/joint20
+        weight: 1
+      - path: joint4/joint19/joint20/joint21
+        weight: 1
+      - path: joint4/joint19/joint20/joint21/joint22
+        weight: 1
+      - path: joint4/joint19/joint20/joint21/joint22/joint23
+        weight: 1
+      - path: joint4/joint34
+        weight: 1
+      - path: joint4/joint34/joint35
+        weight: 1
+      - path: joint4/joint34/joint35/joint36
+        weight: 1
+      - path: joint4/joint34/joint35/joint36/joint37
+        weight: 1
+      - path: joint4/joint34/joint35/joint36/joint37/joint38
+        weight: 1
+      - path: nurbsCircle1
+        weight: 1
+      - path: nurbsCircle1/nurbsCircle19
+        weight: 1
+      - path: nurbsCircle1/nurbsCircle19/ikHandle4
+        weight: 1
+      - path: nurbsCircle1/nurbsCircle19/ikHandle5
+        weight: 1
+      - path: nurbsCircle1/nurbsCircle19/nurbsCircle17
+        weight: 1
+      - path: nurbsCircle1/nurbsCircle21
+        weight: 1
+      - path: nurbsCircle1/nurbsCircle21/ikHandle3
+        weight: 1
+      - path: nurbsCircle1/nurbsCircle21/ikHandle6
+        weight: 1
+      - path: nurbsCircle1/nurbsCircle21/nurbsCircle22
+        weight: 1
+      - path: nurbsCircle1/nurbsCircle24
+        weight: 1
+      - path: nurbsCircle1/nurbsCircle24/ikHandle2
+        weight: 1
+      - path: nurbsCircle1/nurbsCircle24/ikHandle8
+        weight: 1
+      - path: nurbsCircle1/nurbsCircle25
+        weight: 1
+      - path: nurbsCircle1/nurbsCircle29
+        weight: 1
+      - path: nurbsCircle1/nurbsCircle29/ikHandle1
+        weight: 1
+      - path: nurbsCircle1/nurbsCircle29/ikHandle7
+        weight: 1
+      - path: nurbsCircle1/nurbsCircle31
+        weight: 1
+      - path: nurbsCircle1/nurbsCircle32
+        weight: 1
+      - path: nurbsCircle1/nurbsCircle32/nurbsCircle9
+        weight: 1
+      - path: nurbsCircle1/nurbsCircle32/nurbsCircle9/nurbsCircle8
+        weight: 1
+      - path: nurbsCircle1/nurbsCircle32/nurbsCircle9/nurbsCircle8/nurbsCircle7
+        weight: 1
+      - path: nurbsCircle1/nurbsCircle32/nurbsCircle9/nurbsCircle8/nurbsCircle7/nurbsCircle6
+        weight: 1
+      - path: nurbsCircle1/nurbsCircle32/nurbsCircle9/nurbsCircle8/nurbsCircle7/nurbsCircle6/nurbsCircle5
+        weight: 1
+      - path: nurbsCircle1/nurbsCircle32/nurbsCircle9/nurbsCircle8/nurbsCircle7/nurbsCircle6/nurbsCircle5/nurbsCircle4
+        weight: 1
+      - path: nurbsCircle1/nurbsCircle32/nurbsCircle9/nurbsCircle8/nurbsCircle7/nurbsCircle6/nurbsCircle5/nurbsCircle4/nurbsCircle3
+        weight: 1
+      - path: nurbsCircle1/nurbsCircle32/nurbsCircle9/nurbsCircle8/nurbsCircle7/nurbsCircle6/nurbsCircle5/nurbsCircle4/nurbsCircle3/nurbsCircle2
+        weight: 1
+      - path: nurbsCircle1/nurbsCircle32/nurbsCircle10
+        weight: 1
+      - path: nurbsCircle1/nurbsCircle32/nurbsCircle10/nurbsCircle11
+        weight: 1
+      - path: nurbsCircle1/nurbsCircle32/nurbsCircle10/nurbsCircle11/nurbsCircle12
+        weight: 1
+      - path: nurbsCircle1/nurbsCircle32/nurbsCircle10/nurbsCircle11/nurbsCircle12/nurbsCircle13
+        weight: 1
+      - path: nurbsCircle1/nurbsCircle32/nurbsCircle10/nurbsCircle11/nurbsCircle12/nurbsCircle13/nurbsCircle14
+        weight: 1
+      - path: nurbsCircle1/nurbsCircle32/nurbsCircle10/nurbsCircle11/nurbsCircle12/nurbsCircle13/nurbsCircle14/nurbsCircle15
+        weight: 1
+      - path: pCube1
+        weight: 1
+      - path: pCube1/transform30
+        weight: 1
+      - path: pCube2
+        weight: 1
+      - path: pCube2/transform31
+        weight: 1
+      - path: pCube3
+        weight: 1
+      - path: pCube3/transform29
+        weight: 1
+      - path: pCube4
+        weight: 1
+      - path: pCube4/transform28
+        weight: 1
+      - path: pCube5
+        weight: 1
+      - path: pCube5/transform27
+        weight: 1
+      - path: pCube6
+        weight: 1
+      - path: pCube6/transform26
+        weight: 1
+      - path: pCube7
+        weight: 1
+      - path: pCube7/transform25
+        weight: 1
+      - path: pCube8
+        weight: 1
+      - path: pCube8/transform24
+        weight: 1
+      - path: pCube9
+        weight: 1
+      - path: pCube9/transform23
+        weight: 1
+      - path: pCube10
+        weight: 1
+      - path: pCube10/transform22
+        weight: 1
+      - path: pCube11
+        weight: 1
+      - path: pCube11/transform21
+        weight: 1
+      - path: pCube12
+        weight: 1
+      - path: pCube12/transform20
+        weight: 1
+      - path: pCube13
+        weight: 1
+      - path: pCube13/transform19
+        weight: 1
+      - path: pCube14
+        weight: 1
+      - path: pCube14/transform18
+        weight: 1
+      - path: pCube15
+        weight: 1
+      - path: pCube15/transform17
+        weight: 1
+      - path: pCube16
+        weight: 1
+      - path: pCube16/transform16
+        weight: 1
+      - path: pCube17
+        weight: 1
+      - path: pCube17/transform15
+        weight: 1
+      - path: pCube18
+        weight: 1
+      - path: pCube18/transform14
+        weight: 1
+      - path: pCube19
+        weight: 1
+      - path: pCube19/transform13
+        weight: 1
+      - path: pCube24
+        weight: 1
+      - path: pCube24/transform12
+        weight: 1
+      - path: pCube25
+        weight: 1
+      - path: pCube25/transform11
+        weight: 1
+      - path: pCube26
+        weight: 1
+      - path: pCube26/transform10
+        weight: 1
+      - path: pCube27
+        weight: 1
+      - path: pCube27/transform9
+        weight: 1
+      - path: pCube28
+        weight: 1
+      - path: pCube28/transform8
+        weight: 1
+      - path: pCube29
+        weight: 1
+      - path: pCube29/transform7
+        weight: 1
+      - path: pCube30
+        weight: 1
+      - path: pCube30/transform6
+        weight: 1
+      - path: pCube31
+        weight: 1
+      - path: pCube31/transform5
+        weight: 1
+      - path: pCube32
+        weight: 1
+      - path: pCube32/transform4
+        weight: 1
+      - path: pCube33
+        weight: 1
+      - path: pCube33/transform3
+        weight: 1
+      - path: pCube34
+        weight: 1
+      - path: pCube34/transform2
+        weight: 1
+      - path: pCube35
+        weight: 1
+      - path: pCube35/transform1
+        weight: 1
+      - path: polySurface1
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Walk
+      takeName: Take 001
+      firstFrame: 52
+      lastFrame: 84
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: joint4
+        weight: 1
+      - path: joint4/joint5
+        weight: 1
+      - path: joint4/joint5/joint6
+        weight: 1
+      - path: joint4/joint5/joint6/joint7
+        weight: 1
+      - path: joint4/joint5/joint6/joint7/joint8
+        weight: 1
+      - path: joint4/joint5/joint6/joint7/joint8/joint9
+        weight: 1
+      - path: joint4/joint5/joint6/joint7/joint8/joint9/joint1
+        weight: 1
+      - path: joint4/joint5/joint6/joint7/joint8/joint9/joint1/joint2
+        weight: 1
+      - path: joint4/joint5/joint6/joint7/joint8/joint9/joint1/joint2/joint39
+        weight: 1
+      - path: joint4/joint5/joint6/joint7/joint8/joint9/joint1/joint3
+        weight: 1
+      - path: joint4/joint5/joint6/joint7/joint8/joint24
+        weight: 1
+      - path: joint4/joint5/joint6/joint7/joint8/joint24/joint25
+        weight: 1
+      - path: joint4/joint5/joint6/joint7/joint8/joint24/joint25/joint26
+        weight: 1
+      - path: joint4/joint5/joint6/joint7/joint8/joint24/joint25/joint26/joint27
+        weight: 1
+      - path: joint4/joint5/joint6/joint7/joint8/joint24/joint25/joint26/joint27/joint28
+        weight: 1
+      - path: joint4/joint5/joint6/joint7/joint8/joint29
+        weight: 1
+      - path: joint4/joint5/joint6/joint7/joint8/joint29/joint30
+        weight: 1
+      - path: joint4/joint5/joint6/joint7/joint8/joint29/joint30/joint31
+        weight: 1
+      - path: joint4/joint5/joint6/joint7/joint8/joint29/joint30/joint31/joint32
+        weight: 1
+      - path: joint4/joint5/joint6/joint7/joint8/joint29/joint30/joint31/joint32/joint33
+        weight: 1
+      - path: joint4/joint10
+        weight: 1
+      - path: joint4/joint10/joint11
+        weight: 1
+      - path: joint4/joint10/joint11/joint12
+        weight: 1
+      - path: joint4/joint10/joint11/joint12/joint13
+        weight: 1
+      - path: joint4/joint10/joint11/joint12/joint13/joint14
+        weight: 1
+      - path: joint4/joint10/joint11/joint12/joint13/joint14/joint15
+        weight: 1
+      - path: joint4/joint10/joint11/joint12/joint13/joint14/joint15/joint16
+        weight: 1
+      - path: joint4/joint10/joint11/joint12/joint13/joint14/joint15/joint16/joint17
+        weight: 1
+      - path: joint4/joint10/joint11/joint12/joint13/joint14/joint15/joint16/joint17/joint18
+        weight: 1
+      - path: joint4/joint19
+        weight: 1
+      - path: joint4/joint19/joint20
+        weight: 1
+      - path: joint4/joint19/joint20/joint21
+        weight: 1
+      - path: joint4/joint19/joint20/joint21/joint22
+        weight: 1
+      - path: joint4/joint19/joint20/joint21/joint22/joint23
+        weight: 1
+      - path: joint4/joint34
+        weight: 1
+      - path: joint4/joint34/joint35
+        weight: 1
+      - path: joint4/joint34/joint35/joint36
+        weight: 1
+      - path: joint4/joint34/joint35/joint36/joint37
+        weight: 1
+      - path: joint4/joint34/joint35/joint36/joint37/joint38
+        weight: 1
+      - path: nurbsCircle1
+        weight: 1
+      - path: nurbsCircle1/nurbsCircle19
+        weight: 1
+      - path: nurbsCircle1/nurbsCircle19/ikHandle4
+        weight: 1
+      - path: nurbsCircle1/nurbsCircle19/ikHandle5
+        weight: 1
+      - path: nurbsCircle1/nurbsCircle19/nurbsCircle17
+        weight: 1
+      - path: nurbsCircle1/nurbsCircle21
+        weight: 1
+      - path: nurbsCircle1/nurbsCircle21/ikHandle3
+        weight: 1
+      - path: nurbsCircle1/nurbsCircle21/ikHandle6
+        weight: 1
+      - path: nurbsCircle1/nurbsCircle21/nurbsCircle22
+        weight: 1
+      - path: nurbsCircle1/nurbsCircle24
+        weight: 1
+      - path: nurbsCircle1/nurbsCircle24/ikHandle2
+        weight: 1
+      - path: nurbsCircle1/nurbsCircle24/ikHandle8
+        weight: 1
+      - path: nurbsCircle1/nurbsCircle25
+        weight: 1
+      - path: nurbsCircle1/nurbsCircle29
+        weight: 1
+      - path: nurbsCircle1/nurbsCircle29/ikHandle1
+        weight: 1
+      - path: nurbsCircle1/nurbsCircle29/ikHandle7
+        weight: 1
+      - path: nurbsCircle1/nurbsCircle31
+        weight: 1
+      - path: nurbsCircle1/nurbsCircle32
+        weight: 1
+      - path: nurbsCircle1/nurbsCircle32/nurbsCircle9
+        weight: 1
+      - path: nurbsCircle1/nurbsCircle32/nurbsCircle9/nurbsCircle8
+        weight: 1
+      - path: nurbsCircle1/nurbsCircle32/nurbsCircle9/nurbsCircle8/nurbsCircle7
+        weight: 1
+      - path: nurbsCircle1/nurbsCircle32/nurbsCircle9/nurbsCircle8/nurbsCircle7/nurbsCircle6
+        weight: 1
+      - path: nurbsCircle1/nurbsCircle32/nurbsCircle9/nurbsCircle8/nurbsCircle7/nurbsCircle6/nurbsCircle5
+        weight: 1
+      - path: nurbsCircle1/nurbsCircle32/nurbsCircle9/nurbsCircle8/nurbsCircle7/nurbsCircle6/nurbsCircle5/nurbsCircle4
+        weight: 1
+      - path: nurbsCircle1/nurbsCircle32/nurbsCircle9/nurbsCircle8/nurbsCircle7/nurbsCircle6/nurbsCircle5/nurbsCircle4/nurbsCircle3
+        weight: 1
+      - path: nurbsCircle1/nurbsCircle32/nurbsCircle9/nurbsCircle8/nurbsCircle7/nurbsCircle6/nurbsCircle5/nurbsCircle4/nurbsCircle3/nurbsCircle2
+        weight: 1
+      - path: nurbsCircle1/nurbsCircle32/nurbsCircle10
+        weight: 1
+      - path: nurbsCircle1/nurbsCircle32/nurbsCircle10/nurbsCircle11
+        weight: 1
+      - path: nurbsCircle1/nurbsCircle32/nurbsCircle10/nurbsCircle11/nurbsCircle12
+        weight: 1
+      - path: nurbsCircle1/nurbsCircle32/nurbsCircle10/nurbsCircle11/nurbsCircle12/nurbsCircle13
+        weight: 1
+      - path: nurbsCircle1/nurbsCircle32/nurbsCircle10/nurbsCircle11/nurbsCircle12/nurbsCircle13/nurbsCircle14
+        weight: 1
+      - path: nurbsCircle1/nurbsCircle32/nurbsCircle10/nurbsCircle11/nurbsCircle12/nurbsCircle13/nurbsCircle14/nurbsCircle15
+        weight: 1
+      - path: pCube1
+        weight: 1
+      - path: pCube1/transform30
+        weight: 1
+      - path: pCube2
+        weight: 1
+      - path: pCube2/transform31
+        weight: 1
+      - path: pCube3
+        weight: 1
+      - path: pCube3/transform29
+        weight: 1
+      - path: pCube4
+        weight: 1
+      - path: pCube4/transform28
+        weight: 1
+      - path: pCube5
+        weight: 1
+      - path: pCube5/transform27
+        weight: 1
+      - path: pCube6
+        weight: 1
+      - path: pCube6/transform26
+        weight: 1
+      - path: pCube7
+        weight: 1
+      - path: pCube7/transform25
+        weight: 1
+      - path: pCube8
+        weight: 1
+      - path: pCube8/transform24
+        weight: 1
+      - path: pCube9
+        weight: 1
+      - path: pCube9/transform23
+        weight: 1
+      - path: pCube10
+        weight: 1
+      - path: pCube10/transform22
+        weight: 1
+      - path: pCube11
+        weight: 1
+      - path: pCube11/transform21
+        weight: 1
+      - path: pCube12
+        weight: 1
+      - path: pCube12/transform20
+        weight: 1
+      - path: pCube13
+        weight: 1
+      - path: pCube13/transform19
+        weight: 1
+      - path: pCube14
+        weight: 1
+      - path: pCube14/transform18
+        weight: 1
+      - path: pCube15
+        weight: 1
+      - path: pCube15/transform17
+        weight: 1
+      - path: pCube16
+        weight: 1
+      - path: pCube16/transform16
+        weight: 1
+      - path: pCube17
+        weight: 1
+      - path: pCube17/transform15
+        weight: 1
+      - path: pCube18
+        weight: 1
+      - path: pCube18/transform14
+        weight: 1
+      - path: pCube19
+        weight: 1
+      - path: pCube19/transform13
+        weight: 1
+      - path: pCube24
+        weight: 1
+      - path: pCube24/transform12
+        weight: 1
+      - path: pCube25
+        weight: 1
+      - path: pCube25/transform11
+        weight: 1
+      - path: pCube26
+        weight: 1
+      - path: pCube26/transform10
+        weight: 1
+      - path: pCube27
+        weight: 1
+      - path: pCube27/transform9
+        weight: 1
+      - path: pCube28
+        weight: 1
+      - path: pCube28/transform8
+        weight: 1
+      - path: pCube29
+        weight: 1
+      - path: pCube29/transform7
+        weight: 1
+      - path: pCube30
+        weight: 1
+      - path: pCube30/transform6
+        weight: 1
+      - path: pCube31
+        weight: 1
+      - path: pCube31/transform5
+        weight: 1
+      - path: pCube32
+        weight: 1
+      - path: pCube32/transform4
+        weight: 1
+      - path: pCube33
+        weight: 1
+      - path: pCube33/transform3
+        weight: 1
+      - path: pCube34
+        weight: 1
+      - path: pCube34/transform2
+        weight: 1
+      - path: pCube35
+        weight: 1
+      - path: pCube35/transform1
+        weight: 1
+      - path: polySurface1
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
