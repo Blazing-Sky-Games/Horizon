@@ -25,22 +25,20 @@ namespace Horizon.Combat.Views
 		protected override void Init ()
 		{
 			base.Init ();
-			HorizonCamera.Main.WeakSubscribeToEvent(
-				HorizonCamera.Main.PostRenderEventName, 
-				(sender,args) => 
-				{
-					DrawGridlines();
-				}
-			);
+			HorizonCamera.Main.PostRenderEvent +=
+			(sender,args) => 
+			{
+				DrawGridlines();
+			};
+		
 		} 
 		private void DrawGridlines()
 		{
 			GLUtility.DefaultMaterial.SetPass (0);
 			GL.Begin( GL.LINES );
 			GL.Color(GridLineColor * new Color(1,1,1,0.8f));
-			Grid grid = model;
 
-			foreach (GridLine line in grid.GridLines)
+			foreach (GridLine line in model.GridLines)
 			{
 				if(line.AdjacentCells.Any(cell => cell.Passable))
 				{

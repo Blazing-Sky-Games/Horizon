@@ -23,8 +23,17 @@ namespace Horizon.Combat.Editor
 		protected override void Init ()
 		{
 			base.Init ();
+
+			PassableColor = Color.cyan.SetAlpha(0.1f);
+			ImpassableColor = Color.black.SetAlpha(0.4f);
+
 			m_rectangleGizmo = new RectangleGizmo(model);
-			m_rectangleGizmo.color = Color.cyan.SetAlpha(0.4f);
+
+			m_rectangleGizmo.color = model.Passable ? PassableColor : ImpassableColor;
+			model.WeakSubscribeToProperty(()=>model.Passable, (s,a) => {
+				m_rectangleGizmo.color = model.Passable ? PassableColor : ImpassableColor;
+			});
+
 			m_rectangleGizmo.Size = model.CellSize;
 			model.WeakSubscribeToProperty(() => model.CellSize, (s,a) => m_rectangleGizmo.Size = model.CellSize);
 		}
@@ -36,6 +45,9 @@ namespace Horizon.Combat.Editor
 		}
 
 		private RectangleGizmo m_rectangleGizmo;
+
+		private Color PassableColor;
+		private Color ImpassableColor;
 	}
 }
 
