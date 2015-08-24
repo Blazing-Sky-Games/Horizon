@@ -19,6 +19,8 @@ using Horizon.Core.ExtensionMethods;
 
 namespace Horizon.Combat.Models
 {
+	//helper class that representd information about a gridline
+	//a gridline is a line where two cells meat, or where a cell meets the edge of the grid
 	public struct GridLine
 	{
 		public GridLine(Vector3 start,Vector3 end, Cell left, Cell right)
@@ -29,12 +31,15 @@ namespace Horizon.Combat.Models
 			this.rightCell = right;
 		}
 		
+		// end points
 		public readonly Vector3 start;
 		public readonly Vector3 end;
 		
+		// the adjacent cells
 		public readonly Cell leftCell;
 		public readonly Cell rightCell;
 
+		// all non null adjacent cells
 		public IEnumerable<Cell> AdjacentCells
 		{
 			get
@@ -52,14 +57,9 @@ namespace Horizon.Combat.Models
 
 	public class Grid : ModelBase
 	{
-		public int CellCount
-		{
-			get
-			{
-				return m_cells.Count == 0 ? 0 : m_cells.Count * m_cells[0].Count;
-			}
-		}
-
+		//returns a colum of cells
+		// to get the cell at space (i,j) from a Grid named "grid", use
+		// grid[i][j]
 		public ReadOnlyCollection<Cell> this[int x]
 		{
 			get
@@ -68,6 +68,9 @@ namespace Horizon.Combat.Models
 			}
 		}
 
+		//gets a cell from a grid point
+		//to get a cell at point (i,j) from a Grid named "grid", use
+		//grid[new gridpoint(i,j)]
 		public Cell this[GridPoint point]
 		{
 			get
@@ -76,24 +79,25 @@ namespace Horizon.Combat.Models
 			}
 		}
 
-
-
+		//iterate over all the gridlins
 		public IEnumerable<GridLine> GridLines
 		{
 			get
 			{
+				//iterate over horizontal lines
 				for(int j = 0; j <= Dimensions.y; j += 1)
 				{
 					for(int i = 0; i < Dimensions.x; i += 1)
 					{
+						// the grid lins have there y pos slighly elavated so they show above the physcial grid
 						Vector3 start = new Vector3( transform.position.x + i * CellSize, transform.position.y + 0.01f, transform.position.z + j * CellSize );
 						Vector3 end = new Vector3( transform.position.x + (i+1) * CellSize, transform.position.y + 0.01f, transform.position.z + j * CellSize );
 
-						if(j == 0)
+						if(j == 0) // bottom edge
 						{
 							yield return new GridLine(start,end,this[i][j],null);
 						}
-						else if(j == Dimensions.y)
+						else if(j == Dimensions.y) // top edge
 						{
 							yield return new GridLine(start,end,null,this[i][j-1]);
 						}
@@ -105,18 +109,20 @@ namespace Horizon.Combat.Models
 					
 				}
 				
+				//iterate over vertical lines
 				for(int i = 0; i <= Dimensions.x; i += 1)
 				{
 					for(int j = 0; j < Dimensions.y; j += 1)
 					{
+						// the grid lins have there y pos slighly elavated so they show above the physcial grid
 						Vector3 start = new Vector3( transform.position.x + i * CellSize, transform.position.y + 0.01f, transform.position.z + j * CellSize );
 						Vector3 end = new Vector3( transform.position.x + i * CellSize, transform.position.y + 0.01f, transform.position.z + (j+1) * CellSize );
 
-						if(i == 0)
+						if(i == 0) //left most edge
 						{
 							yield return new GridLine(start,end,this[i][j],null);
 						}
-						else if(i == Dimensions.x)
+						else if(i == Dimensions.x)//right most edge
 						{
 							yield return new GridLine(start,end,null,this[i-1][j]);
 						}
@@ -129,6 +135,7 @@ namespace Horizon.Combat.Models
 			}
 		}
 
+		// x and y Dimensions
 		public GridPoint Dimensions
 		{
 			get
@@ -141,11 +148,14 @@ namespace Horizon.Combat.Models
 				if(value.y < 0) value = new GridPoint(value.x,0);
 				if(SetPropertyFeild(ref m_dimensionsSerilized,value,()=> Dimensions))
 				{
+					//if the dim changed, we need to resize
 					resizeGrid();
 				}
 			}
 		}
 
+		//orginal cell
+		//all cells in the grid are copys of this cell
 		public GameObject CellPrefab
 		{
 			get
@@ -156,20 +166,21 @@ namespace Horizon.Combat.Models
 			{
 				if(value == null || value.GetComponent<Cell>() == null)
 				{
-					Debug.LogError("gameobject must have the cell script attached to be assigned to the grids cell prefab");
+					Debug.LogError("gameobject must have the cell script attached to be assigned to the grid's cell prefab");
 				}
 				else
 				{
 					if(SetPropertyFeild(ref m_cellPrefabSerilized,value,() => CellPrefab))
 					{
 						GridPoint oldDim = Dimensions;
-						Dimensions = new GridPoint(0,0);
-						Dimensions = oldDim;
+						Dimensions = new GridPoint(0,0); // deleat all the old cells
+						Dimensions = oldDim; // recreate the grid
 					}
 				}
 			}
 		}
 
+		//cell size in x and y
 		public float CellSize
 		{
 			get
@@ -194,7 +205,7 @@ namespace Horizon.Combat.Models
 				resizeGrid();
 			}
 
-			if(CellCount != 0 && this[new GridPoint()].CellSize != CellSize)
+			if(m_cells.Count() != 0 && this[new GridPoint()].CellSize != CellSize)
 			{
 				resizeCells();
 			}
@@ -323,6 +334,7 @@ namespace Horizon.Combat.Models
 			}
 		}
 
+		//update all of the cells when size changes
 		private void resizeCells()
 		{
 			for(int i = 0; i < Dimensions.x; i++)
@@ -337,7 +349,7 @@ namespace Horizon.Combat.Models
 
 		//unity cannot serilize nested lists, so we creat a wrapper class to fix that
 		[Serializable]
-		private class CellList
+		private class CellList // cell list is bassically just List<Cell>
 		{
 			public List<Cell> cells = new List<Cell>();
 

@@ -7,16 +7,34 @@ using UnityEngine;
 
 namespace Horizon.Core
 {
+	//wraps all rendering call backs so that they get called in the editor
+	[ExecuteInEditMode]
+	public class RenderCallBacks : MonoBehaviour
+	{
+		//subscribe to this event to do GL drawing
+		public event EventHandler<EventArgs> PostRenderEvent;
+
+		private void OnPostRender()
+		{
+			if(PostRenderEvent != null)
+				PostRenderEvent(this,null);
+		}
+	}
+
+	//base class of all horizon specific cameras
 	public class HorizonCamera : ModelBase
 	{
-		public event EventHandler<EventArgs> PostRenderEvent;
-		public readonly EventName PostRenderEventName;
-
-		public HorizonCamera()
+		public RenderCallBacks renderCallbacks
 		{
-			PostRenderEventName = this.GetEventNameFromExpresion(() => PostRenderEvent);
+			get
+			{
+				if(gameObject.GetComponent<RenderCallBacks>() == null) gameObject.AddComponent<RenderCallBacks>();
+
+				return gameObject.GetComponent<RenderCallBacks>();
+			}
 		}
 
+		//referance the main horizon camera in the scene
 		public static HorizonCamera Main
 		{
 			get
@@ -29,12 +47,6 @@ namespace Horizon.Core
 		{
 			base.Init ();
 			m_mainCamera = this;
-		}
-
-		private void OnPostRender()
-		{
-			if(PostRenderEvent != null)
-				PostRenderEvent(this,null);
 		}
 
 		private static HorizonCamera m_mainCamera;

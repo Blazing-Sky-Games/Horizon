@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using Horizon.Core.WeakSubscription;
 using System.Threading;
 
+//class to handel calling stuff on the main thread from the loading thread
 [ExecuteInEditMode]
 public class Dispatcher : MonoBehaviour
 {

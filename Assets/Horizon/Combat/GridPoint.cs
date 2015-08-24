@@ -13,6 +13,7 @@ namespace Horizon.Combat
 	[Serializable]
 	public struct GridPoint
 	{
+		//bassically an int vec2
 		public GridPoint(int x, int y)
 		{
 			this.x = x;

@@ -20,17 +20,19 @@ namespace Horizon.Combat.Views
 {
 	public class GridView : ViewBase<Grid>
 	{
+		//what color the grid lins will be
 		public Color GridLineColor = Color.black;
 
 		protected override void Init ()
 		{
 			base.Init ();
-			HorizonCamera.Main.PostRenderEvent +=
+
+			//do gl drawing onpostrender
+			HorizonCamera.Main.renderCallbacks.PostRenderEvent +=
 			(sender,args) => 
 			{
 				DrawGridlines();
 			};
-		
 		} 
 		private void DrawGridlines()
 		{
@@ -38,6 +40,8 @@ namespace Horizon.Combat.Views
 			GL.Begin( GL.LINES );
 			GL.Color(GridLineColor * new Color(1,1,1,0.8f));
 
+			//iterate over the gridlins.
+			//if i=one of the adjacent cells is passable, draw the gridline
 			foreach (GridLine line in model.GridLines)
 			{
 				if(line.AdjacentCells.Any(cell => cell.Passable))

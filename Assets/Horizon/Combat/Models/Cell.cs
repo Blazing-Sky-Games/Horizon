@@ -17,6 +17,7 @@ namespace Horizon.Combat.Models
 {
 	public class Cell : ModelBase
 	{
+		//can the cell be walked over
 		public bool Passable
 		{
 			get
@@ -29,6 +30,7 @@ namespace Horizon.Combat.Models
 			}
 		}
 
+		//the x and y size of the cell
 		public float CellSize
 		{
 			get
@@ -43,12 +45,6 @@ namespace Horizon.Combat.Models
 
 		[SerializeField]
 		private float m_cellSizeSerilized = 1;
-
-		[SerializeField]
-		private Grid m_gridSerilized;
-
-		[SerializeField]
-		private GridPoint m_gridPoint;
 
 		[SerializeField]
 		private bool m_passableSerilized;
