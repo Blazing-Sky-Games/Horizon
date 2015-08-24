@@ -10,13 +10,25 @@
 using System;
 using Horizon.Combat.Models;
 using Horizon.Core.Editor;
+using UnityEngine;
+using UnityEditor;
 
 
 namespace Horizon.Combat.Editor
 {
 	public class GridSceneView : SceneView<Grid>
 	{
+		protected override void SceneViewUpdate ()
+		{
+			base.SceneViewUpdate ();
 
+			Handles.color = Handles.color*new Color(1,1,1,0.5f);
+
+			foreach(GridLine line in model.GridLines)
+			{
+				Handles.DrawDottedLine(line.start,line.end,4);
+			}
+		}
 	}
 }
 
