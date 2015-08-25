@@ -13,6 +13,8 @@ namespace Horizon.Core
 		public virtual void SetModel(ModelBase model){}
 		public virtual ModelBase GetModel(){return null;}
 
+		public virtual void OnSceneGUI(){}
+
 		//call when destroying a view
 		public virtual void Dispose (){}
 	}

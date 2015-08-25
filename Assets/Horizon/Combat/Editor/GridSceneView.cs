@@ -22,7 +22,7 @@ namespace Horizon.Combat.Editor
 		{
 			base.SceneViewUpdate ();
 
-			Handles.color = Handles.color*new Color(1,1,1,0.5f);
+			Handles.color = Handles.color*new Color(1,1,1,0.25f);
 
 			foreach(GridLine line in model.GridLines)
 			{

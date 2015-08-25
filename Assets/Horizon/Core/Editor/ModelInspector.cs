@@ -97,6 +97,19 @@ namespace Horizon.Core.Editor
 				}
 		}
 
+		private void OnSceneGUI()
+		{
+			if(views == null)
+				views = (List<ViewBaseNonGeneric>)(typeof(ModelBase).GetField("m_views", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(target));
+
+			//Handles.ScaleValueHandle(0,Vector3.zero,Quaternion.identity,30,Handles.ArrowCap,1);
+
+			foreach(var view in views)
+			{
+				view.OnSceneGUI();
+			}
+		}
+
 		// show all properties
 		public override void OnInspectorGUI()
 		{
@@ -117,7 +130,9 @@ namespace Horizon.Core.Editor
 			Dictionary<Type, List<ViewBaseNonGeneric>> viewLookup = new Dictionary<Type, List<ViewBaseNonGeneric>>();
 			foreach(object obj in targets)
 			{
-				List<ViewBaseNonGeneric> views = (List<ViewBaseNonGeneric>)(typeof(ModelBase).GetField("m_views", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(obj));
+				if(views == null)
+					views = (List<ViewBaseNonGeneric>)(typeof(ModelBase).GetField("m_views", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(obj));
+
 				foreach(ViewBaseNonGeneric view in views)
 				{
 					if(viewLookup.ContainsKey(view.GetType()) == false) viewLookup[view.GetType()] = new List<ViewBaseNonGeneric>(); 
@@ -148,6 +163,8 @@ namespace Horizon.Core.Editor
 				this.DisposeAndDestroy(obj);
 			}
 		}
+
+		List<ViewBaseNonGeneric> views;
 
 		//private bool showSubscribers = false;
 		//private Dictionary<UnityEngine.Object, foldOutSet> foldOutSets = new Dictionary<UnityEngine.Object, foldOutSet>();

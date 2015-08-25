@@ -70,7 +70,12 @@ namespace Horizon.Core.Editor
 				mixed = targets.Any(
 					(obj) => 
 					{
-						return info.GetValue(targets[0],null).Equals(info.GetValue(obj,null)) == false;
+						object val = info.GetValue(targets[0],null);
+						
+						if(val == null)
+							return info.GetValue(obj,null) != null;
+						
+						return val.Equals(info.GetValue(obj,null)) == false;
 					}
 				);
 			}

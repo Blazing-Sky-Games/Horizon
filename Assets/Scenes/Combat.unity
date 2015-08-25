@@ -130,11 +130,7 @@ MonoBehaviour:
   - {fileID: 671069646}
   - {fileID: 647790946}
   m_cellSizeSerilized: 1
-  m_gridSerilized: {fileID: 0}
-  m_gridPoint:
-    x: 0
-    y: 0
-  m_passableSerilized: 0
+  m_passableSerilized: 1
 --- !u!114 &10703746
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -214,11 +210,7 @@ MonoBehaviour:
   - {fileID: 2075918100}
   - {fileID: 164681115}
   m_cellSizeSerilized: 1
-  m_gridSerilized: {fileID: 0}
-  m_gridPoint:
-    x: 0
-    y: 0
-  m_passableSerilized: 0
+  m_passableSerilized: 1
 --- !u!1 &43267229
 GameObject:
   m_ObjectHideFlags: 0
@@ -262,11 +254,7 @@ MonoBehaviour:
   - {fileID: 349771321}
   - {fileID: 1826153867}
   m_cellSizeSerilized: 1
-  m_gridSerilized: {fileID: 0}
-  m_gridPoint:
-    x: 0
-    y: 0
-  m_passableSerilized: 0
+  m_passableSerilized: 1
 --- !u!1 &45036258
 GameObject:
   m_ObjectHideFlags: 0
@@ -310,10 +298,6 @@ MonoBehaviour:
   - {fileID: 101662835}
   - {fileID: 866401807}
   m_cellSizeSerilized: 1
-  m_gridSerilized: {fileID: 0}
-  m_gridPoint:
-    x: 0
-    y: 0
   m_passableSerilized: 1
 --- !u!1 &46195518
 GameObject:
@@ -358,11 +342,7 @@ MonoBehaviour:
   - {fileID: 1304993609}
   - {fileID: 218809093}
   m_cellSizeSerilized: 1
-  m_gridSerilized: {fileID: 0}
-  m_gridPoint:
-    x: 0
-    y: 0
-  m_passableSerilized: 0
+  m_passableSerilized: 1
 --- !u!114 &78952887
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -418,11 +398,7 @@ MonoBehaviour:
   - {fileID: 460922172}
   - {fileID: 1576955625}
   m_cellSizeSerilized: 1
-  m_gridSerilized: {fileID: 0}
-  m_gridPoint:
-    x: 0
-    y: 0
-  m_passableSerilized: 0
+  m_passableSerilized: 1
 --- !u!114 &86670893
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -478,11 +454,7 @@ MonoBehaviour:
   - {fileID: 746586798}
   - {fileID: 1497642743}
   m_cellSizeSerilized: 1
-  m_gridSerilized: {fileID: 0}
-  m_gridPoint:
-    x: 0
-    y: 0
-  m_passableSerilized: 0
+  m_passableSerilized: 1
 --- !u!114 &91837974
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -586,11 +558,7 @@ MonoBehaviour:
   - {fileID: 552947090}
   - {fileID: 1437510094}
   m_cellSizeSerilized: 1
-  m_gridSerilized: {fileID: 0}
-  m_gridPoint:
-    x: 0
-    y: 0
-  m_passableSerilized: 0
+  m_passableSerilized: 1
 --- !u!114 &134046430
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -646,11 +614,7 @@ MonoBehaviour:
   - {fileID: 914871098}
   - {fileID: 184160887}
   m_cellSizeSerilized: 1
-  m_gridSerilized: {fileID: 0}
-  m_gridPoint:
-    x: 0
-    y: 0
-  m_passableSerilized: 0
+  m_passableSerilized: 1
 --- !u!114 &142671599
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -706,10 +670,6 @@ MonoBehaviour:
   - {fileID: 1785725996}
   - {fileID: 1301386350}
   m_cellSizeSerilized: 1
-  m_gridSerilized: {fileID: 0}
-  m_gridPoint:
-    x: 0
-    y: 0
   m_passableSerilized: 1
 --- !u!1 &158117514
 GameObject:
@@ -754,11 +714,7 @@ MonoBehaviour:
   - {fileID: 1162367296}
   - {fileID: 1146362309}
   m_cellSizeSerilized: 1
-  m_gridSerilized: {fileID: 0}
-  m_gridPoint:
-    x: 0
-    y: 0
-  m_passableSerilized: 0
+  m_passableSerilized: 1
 --- !u!1 &159161363
 GameObject:
   m_ObjectHideFlags: 0
@@ -802,11 +758,7 @@ MonoBehaviour:
   - {fileID: 237044651}
   - {fileID: 1805111794}
   m_cellSizeSerilized: 1
-  m_gridSerilized: {fileID: 0}
-  m_gridPoint:
-    x: 0
-    y: 0
-  m_passableSerilized: 0
+  m_passableSerilized: 1
 --- !u!114 &164681115
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -862,11 +814,7 @@ MonoBehaviour:
   - {fileID: 798417354}
   - {fileID: 1061092356}
   m_cellSizeSerilized: 1
-  m_gridSerilized: {fileID: 0}
-  m_gridPoint:
-    x: 0
-    y: 0
-  m_passableSerilized: 0
+  m_passableSerilized: 1
 --- !u!114 &173186574
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -922,11 +870,7 @@ MonoBehaviour:
   - {fileID: 278346216}
   - {fileID: 334515925}
   m_cellSizeSerilized: 1
-  m_gridSerilized: {fileID: 0}
-  m_gridPoint:
-    x: 0
-    y: 0
-  m_passableSerilized: 0
+  m_passableSerilized: 1
 --- !u!114 &184160887
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1007,11 +951,7 @@ MonoBehaviour:
   - {fileID: 142671599}
   - {fileID: 1661248862}
   m_cellSizeSerilized: 1
-  m_gridSerilized: {fileID: 0}
-  m_gridPoint:
-    x: 0
-    y: 0
-  m_passableSerilized: 0
+  m_passableSerilized: 1
 --- !u!114 &214086160
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1079,11 +1019,7 @@ MonoBehaviour:
   - {fileID: 596867714}
   - {fileID: 667599804}
   m_cellSizeSerilized: 1
-  m_gridSerilized: {fileID: 0}
-  m_gridPoint:
-    x: 0
-    y: 0
-  m_passableSerilized: 0
+  m_passableSerilized: 1
 --- !u!1 &221073084
 GameObject:
   m_ObjectHideFlags: 0
@@ -1127,11 +1063,7 @@ MonoBehaviour:
   - {fileID: 497848446}
   - {fileID: 1489894494}
   m_cellSizeSerilized: 1
-  m_gridSerilized: {fileID: 0}
-  m_gridPoint:
-    x: 0
-    y: 0
-  m_passableSerilized: 0
+  m_passableSerilized: 1
 --- !u!114 &223654653
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1187,11 +1119,7 @@ MonoBehaviour:
   - {fileID: 1640973882}
   - {fileID: 1195741924}
   m_cellSizeSerilized: 1
-  m_gridSerilized: {fileID: 0}
-  m_gridPoint:
-    x: 0
-    y: 0
-  m_passableSerilized: 0
+  m_passableSerilized: 1
 --- !u!114 &237044651
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1271,11 +1199,7 @@ MonoBehaviour:
   - {fileID: 342916024}
   - {fileID: 253286508}
   m_cellSizeSerilized: 1
-  m_gridSerilized: {fileID: 0}
-  m_gridPoint:
-    x: 0
-    y: 0
-  m_passableSerilized: 0
+  m_passableSerilized: 1
 --- !u!114 &262366883
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1343,10 +1267,6 @@ MonoBehaviour:
   - {fileID: 409294720}
   - {fileID: 2070209853}
   m_cellSizeSerilized: 1
-  m_gridSerilized: {fileID: 0}
-  m_gridPoint:
-    x: 0
-    y: 0
   m_passableSerilized: 1
 --- !u!4 &291233790
 Transform:
@@ -1403,11 +1323,7 @@ MonoBehaviour:
   - {fileID: 2136181780}
   - {fileID: 1911352395}
   m_cellSizeSerilized: 1
-  m_gridSerilized: {fileID: 0}
-  m_gridPoint:
-    x: 0
-    y: 0
-  m_passableSerilized: 0
+  m_passableSerilized: 1
 --- !u!114 &291547441
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1487,121 +1403,7 @@ MonoBehaviour:
   - {fileID: 1557797506}
   - {fileID: 1083775148}
   m_cellSizeSerilized: 1
-  m_gridSerilized: {fileID: 0}
-  m_gridPoint:
-    x: 0
-    y: 0
-  m_passableSerilized: 0
---- !u!1 &327895451
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 327895456}
-  - 20: {fileID: 327895455}
-  - 92: {fileID: 327895454}
-  - 124: {fileID: 327895453}
-  - 81: {fileID: 327895452}
-  - 114: {fileID: 327895457}
-  - 114: {fileID: 327895458}
-  m_Layer: 0
-  m_Name: Main Camera
-  m_TagString: MainCamera
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!81 &327895452
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 327895451}
-  m_Enabled: 1
---- !u!124 &327895453
-Behaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 327895451}
-  m_Enabled: 1
---- !u!92 &327895454
-Behaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 327895451}
-  m_Enabled: 1
---- !u!20 &327895455
-Camera:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 327895451}
-  m_Enabled: 1
-  serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: .192156866, g: .301960796, b: .474509805, a: .0196078438}
-  m_NormalizedViewPortRect:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 1
-    height: 1
-  near clip plane: .300000012
-  far clip plane: 1000
-  field of view: 60
-  orthographic: 0
-  orthographic size: 5
-  m_Depth: -1
-  m_CullingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_RenderingPath: -1
-  m_TargetTexture: {fileID: 0}
-  m_TargetDisplay: 0
-  m_HDR: 0
-  m_OcclusionCulling: 1
-  m_StereoConvergence: 10
-  m_StereoSeparation: .0219999999
-  m_StereoMirrorMode: 0
---- !u!4 &327895456
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 327895451}
-  m_LocalRotation: {x: .353553414, y: -.353553414, z: .14644663, w: .853553355}
-  m_LocalPosition: {x: 10, y: 5, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 0
---- !u!114 &327895457
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 327895451}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6fc364d79aea79541bb321305e907b91, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_views: []
---- !u!114 &327895458
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 327895451}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 1425242799}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_passableSerilized: 1
 --- !u!114 &330281154
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1741,11 +1543,7 @@ MonoBehaviour:
   - {fileID: 1379866502}
   - {fileID: 2076571941}
   m_cellSizeSerilized: 1
-  m_gridSerilized: {fileID: 0}
-  m_gridPoint:
-    x: 0
-    y: 0
-  m_passableSerilized: 0
+  m_passableSerilized: 1
 --- !u!114 &409088071
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1897,11 +1695,7 @@ MonoBehaviour:
   - {fileID: 1821901369}
   - {fileID: 291547441}
   m_cellSizeSerilized: 1
-  m_gridSerilized: {fileID: 0}
-  m_gridPoint:
-    x: 0
-    y: 0
-  m_passableSerilized: 0
+  m_passableSerilized: 1
 --- !u!114 &497848446
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1969,10 +1763,6 @@ MonoBehaviour:
   - {fileID: 1908489979}
   - {fileID: 1159511638}
   m_cellSizeSerilized: 1
-  m_gridSerilized: {fileID: 0}
-  m_gridPoint:
-    x: 0
-    y: 0
   m_passableSerilized: 1
 --- !u!114 &509706340
 MonoBehaviour:
@@ -2029,11 +1819,7 @@ MonoBehaviour:
   - {fileID: 1216213742}
   - {fileID: 330281154}
   m_cellSizeSerilized: 1
-  m_gridSerilized: {fileID: 0}
-  m_gridPoint:
-    x: 0
-    y: 0
-  m_passableSerilized: 0
+  m_passableSerilized: 1
 --- !u!1 &514635242
 GameObject:
   m_ObjectHideFlags: 0
@@ -2077,11 +1863,7 @@ MonoBehaviour:
   - {fileID: 509706340}
   - {fileID: 1357586864}
   m_cellSizeSerilized: 1
-  m_gridSerilized: {fileID: 0}
-  m_gridPoint:
-    x: 0
-    y: 0
-  m_passableSerilized: 0
+  m_passableSerilized: 1
 --- !u!1 &531374865
 GameObject:
   m_ObjectHideFlags: 0
@@ -2125,11 +1907,7 @@ MonoBehaviour:
   - {fileID: 1244301407}
   - {fileID: 1379292523}
   m_cellSizeSerilized: 1
-  m_gridSerilized: {fileID: 0}
-  m_gridPoint:
-    x: 0
-    y: 0
-  m_passableSerilized: 0
+  m_passableSerilized: 1
 --- !u!114 &552947090
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2185,10 +1963,6 @@ MonoBehaviour:
   - {fileID: 1602909287}
   - {fileID: 1913670313}
   m_cellSizeSerilized: 1
-  m_gridSerilized: {fileID: 0}
-  m_gridPoint:
-    x: 0
-    y: 0
   m_passableSerilized: 1
 --- !u!1 &586634470
 GameObject:
@@ -2233,11 +2007,7 @@ MonoBehaviour:
   - {fileID: 947083046}
   - {fileID: 1696966059}
   m_cellSizeSerilized: 1
-  m_gridSerilized: {fileID: 0}
-  m_gridPoint:
-    x: 0
-    y: 0
-  m_passableSerilized: 0
+  m_passableSerilized: 1
 --- !u!114 &596867714
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2293,11 +2063,105 @@ MonoBehaviour:
   - {fileID: 1964060637}
   - {fileID: 123034927}
   m_cellSizeSerilized: 1
-  m_gridSerilized: {fileID: 0}
-  m_gridPoint:
+  m_passableSerilized: 1
+--- !u!1 &599721441
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 599721447}
+  - 20: {fileID: 599721446}
+  - 124: {fileID: 599721445}
+  - 92: {fileID: 599721444}
+  - 81: {fileID: 599721443}
+  - 114: {fileID: 599721442}
+  m_Layer: 0
+  m_Name: Main Camera
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &599721442
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 599721441}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fc364d79aea79541bb321305e907b91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_views: []
+--- !u!81 &599721443
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 599721441}
+  m_Enabled: 1
+--- !u!92 &599721444
+Behaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 599721441}
+  m_Enabled: 1
+--- !u!124 &599721445
+Behaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 599721441}
+  m_Enabled: 1
+--- !u!20 &599721446
+Camera:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 599721441}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_ClearFlags: 1
+  m_BackGroundColor: {r: .192156866, g: .301960796, b: .474509805, a: .0196078438}
+  m_NormalizedViewPortRect:
+    serializedVersion: 2
     x: 0
     y: 0
-  m_passableSerilized: 1
+    width: 1
+    height: 1
+  near clip plane: .300000012
+  far clip plane: 1000
+  field of view: 60
+  orthographic: 0
+  orthographic size: 5
+  m_Depth: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingPath: -1
+  m_TargetTexture: {fileID: 0}
+  m_TargetDisplay: 0
+  m_HDR: 0
+  m_OcclusionCulling: 1
+  m_StereoConvergence: 10
+  m_StereoSeparation: .0219999999
+  m_StereoMirrorMode: 0
+--- !u!4 &599721447
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 599721441}
+  m_LocalRotation: {x: .353553414, y: -.353553414, z: .14644663, w: .853553355}
+  m_LocalPosition: {x: 10, y: 6, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
 --- !u!1 &603153821
 GameObject:
   m_ObjectHideFlags: 0
@@ -2341,11 +2205,7 @@ MonoBehaviour:
   - {fileID: 825907247}
   - {fileID: 1976776744}
   m_cellSizeSerilized: 1
-  m_gridSerilized: {fileID: 0}
-  m_gridPoint:
-    x: 0
-    y: 0
-  m_passableSerilized: 0
+  m_passableSerilized: 1
 --- !u!114 &647790946
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2473,10 +2333,6 @@ MonoBehaviour:
   - {fileID: 1289226502}
   - {fileID: 2145367888}
   m_cellSizeSerilized: 1
-  m_gridSerilized: {fileID: 0}
-  m_gridPoint:
-    x: 0
-    y: 0
   m_passableSerilized: 1
 --- !u!114 &680327449
 MonoBehaviour:
@@ -2533,11 +2389,7 @@ MonoBehaviour:
   - {fileID: 804252396}
   - {fileID: 2085723308}
   m_cellSizeSerilized: 1
-  m_gridSerilized: {fileID: 0}
-  m_gridPoint:
-    x: 0
-    y: 0
-  m_passableSerilized: 0
+  m_passableSerilized: 1
 --- !u!1 &683694570
 GameObject:
   m_ObjectHideFlags: 0
@@ -2581,11 +2433,7 @@ MonoBehaviour:
   - {fileID: 1122921083}
   - {fileID: 1012062148}
   m_cellSizeSerilized: 1
-  m_gridSerilized: {fileID: 0}
-  m_gridPoint:
-    x: 0
-    y: 0
-  m_passableSerilized: 0
+  m_passableSerilized: 1
 --- !u!114 &688921389
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2641,11 +2489,7 @@ MonoBehaviour:
   - {fileID: 1778773660}
   - {fileID: 1674398662}
   m_cellSizeSerilized: 1
-  m_gridSerilized: {fileID: 0}
-  m_gridPoint:
-    x: 0
-    y: 0
-  m_passableSerilized: 0
+  m_passableSerilized: 1
 --- !u!114 &697091801
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2701,10 +2545,6 @@ MonoBehaviour:
   - {fileID: 2097310127}
   - {fileID: 2041202294}
   m_cellSizeSerilized: 1
-  m_gridSerilized: {fileID: 0}
-  m_gridPoint:
-    x: 0
-    y: 0
   m_passableSerilized: 1
 --- !u!114 &703784926
 MonoBehaviour:
@@ -2761,10 +2601,6 @@ MonoBehaviour:
   - {fileID: 223654653}
   - {fileID: 2005211323}
   m_cellSizeSerilized: 1
-  m_gridSerilized: {fileID: 0}
-  m_gridPoint:
-    x: 0
-    y: 0
   m_passableSerilized: 1
 --- !u!1 &712527754
 GameObject:
@@ -2809,11 +2645,7 @@ MonoBehaviour:
   - {fileID: 1455417539}
   - {fileID: 1270310670}
   m_cellSizeSerilized: 1
-  m_gridSerilized: {fileID: 0}
-  m_gridPoint:
-    x: 0
-    y: 0
-  m_passableSerilized: 0
+  m_passableSerilized: 1
 --- !u!1 &713021416
 GameObject:
   m_ObjectHideFlags: 0
@@ -2857,11 +2689,7 @@ MonoBehaviour:
   - {fileID: 1290607878}
   - {fileID: 384167586}
   m_cellSizeSerilized: 1
-  m_gridSerilized: {fileID: 0}
-  m_gridPoint:
-    x: 0
-    y: 0
-  m_passableSerilized: 0
+  m_passableSerilized: 1
 --- !u!1 &723898410
 GameObject:
   m_ObjectHideFlags: 0
@@ -2905,11 +2733,7 @@ MonoBehaviour:
   - {fileID: 2080045124}
   - {fileID: 1100532756}
   m_cellSizeSerilized: 1
-  m_gridSerilized: {fileID: 0}
-  m_gridPoint:
-    x: 0
-    y: 0
-  m_passableSerilized: 0
+  m_passableSerilized: 1
 --- !u!1 &730823417
 GameObject:
   m_ObjectHideFlags: 0
@@ -2953,11 +2777,7 @@ MonoBehaviour:
   - {fileID: 793531881}
   - {fileID: 355384043}
   m_cellSizeSerilized: 1
-  m_gridSerilized: {fileID: 0}
-  m_gridPoint:
-    x: 0
-    y: 0
-  m_passableSerilized: 0
+  m_passableSerilized: 1
 --- !u!114 &746586798
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3013,11 +2833,7 @@ MonoBehaviour:
   - {fileID: 1532211261}
   - {fileID: 1174901775}
   m_cellSizeSerilized: 1
-  m_gridSerilized: {fileID: 0}
-  m_gridPoint:
-    x: 0
-    y: 0
-  m_passableSerilized: 0
+  m_passableSerilized: 1
 --- !u!1 &761342491
 GameObject:
   m_ObjectHideFlags: 0
@@ -3061,11 +2877,7 @@ MonoBehaviour:
   - {fileID: 928796064}
   - {fileID: 1229159750}
   m_cellSizeSerilized: 1
-  m_gridSerilized: {fileID: 0}
-  m_gridPoint:
-    x: 0
-    y: 0
-  m_passableSerilized: 0
+  m_passableSerilized: 1
 --- !u!114 &770089976
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3133,11 +2945,7 @@ MonoBehaviour:
   - {fileID: 1890892383}
   - {fileID: 1922789778}
   m_cellSizeSerilized: 1
-  m_gridSerilized: {fileID: 0}
-  m_gridPoint:
-    x: 0
-    y: 0
-  m_passableSerilized: 0
+  m_passableSerilized: 1
 --- !u!1 &784433170
 GameObject:
   m_ObjectHideFlags: 0
@@ -3181,11 +2989,7 @@ MonoBehaviour:
   - {fileID: 10703746}
   - {fileID: 1216243358}
   m_cellSizeSerilized: 1
-  m_gridSerilized: {fileID: 0}
-  m_gridPoint:
-    x: 0
-    y: 0
-  m_passableSerilized: 0
+  m_passableSerilized: 1
 --- !u!114 &787447827
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3265,10 +3069,6 @@ MonoBehaviour:
   - {fileID: 1074396314}
   - {fileID: 913571844}
   m_cellSizeSerilized: 1
-  m_gridSerilized: {fileID: 0}
-  m_gridPoint:
-    x: 0
-    y: 0
   m_passableSerilized: 1
 --- !u!114 &804252396
 MonoBehaviour:
@@ -3325,10 +3125,6 @@ MonoBehaviour:
   - {fileID: 1511896017}
   - {fileID: 134046430}
   m_cellSizeSerilized: 1
-  m_gridSerilized: {fileID: 0}
-  m_gridPoint:
-    x: 0
-    y: 0
   m_passableSerilized: 1
 --- !u!1 &820141724
 GameObject:
@@ -3373,11 +3169,7 @@ MonoBehaviour:
   - {fileID: 409088071}
   - {fileID: 770089976}
   m_cellSizeSerilized: 1
-  m_gridSerilized: {fileID: 0}
-  m_gridPoint:
-    x: 0
-    y: 0
-  m_passableSerilized: 0
+  m_passableSerilized: 1
 --- !u!1 &822921527
 GameObject:
   m_ObjectHideFlags: 0
@@ -3421,11 +3213,7 @@ MonoBehaviour:
   - {fileID: 888643921}
   - {fileID: 1096309122}
   m_cellSizeSerilized: 1
-  m_gridSerilized: {fileID: 0}
-  m_gridPoint:
-    x: 0
-    y: 0
-  m_passableSerilized: 0
+  m_passableSerilized: 1
 --- !u!114 &825907247
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3517,11 +3305,7 @@ MonoBehaviour:
   - {fileID: 1949313472}
   - {fileID: 1948883551}
   m_cellSizeSerilized: 1
-  m_gridSerilized: {fileID: 0}
-  m_gridPoint:
-    x: 0
-    y: 0
-  m_passableSerilized: 0
+  m_passableSerilized: 1
 --- !u!1 &880284522
 GameObject:
   m_ObjectHideFlags: 0
@@ -3565,10 +3349,6 @@ MonoBehaviour:
   - {fileID: 1087191339}
   - {fileID: 1868212366}
   m_cellSizeSerilized: 1
-  m_gridSerilized: {fileID: 0}
-  m_gridPoint:
-    x: 0
-    y: 0
   m_passableSerilized: 1
 --- !u!114 &888643921
 MonoBehaviour:
@@ -3685,11 +3465,7 @@ MonoBehaviour:
   - {fileID: 909160680}
   - {fileID: 100024087}
   m_cellSizeSerilized: 1
-  m_gridSerilized: {fileID: 0}
-  m_gridPoint:
-    x: 0
-    y: 0
-  m_passableSerilized: 0
+  m_passableSerilized: 1
 --- !u!114 &928796064
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3745,10 +3521,6 @@ MonoBehaviour:
   - {fileID: 475166723}
   - {fileID: 1544341331}
   m_cellSizeSerilized: 1
-  m_gridSerilized: {fileID: 0}
-  m_gridPoint:
-    x: 0
-    y: 0
   m_passableSerilized: 1
 --- !u!1 &944980532
 GameObject:
@@ -3793,11 +3565,7 @@ MonoBehaviour:
   - {fileID: 12584764}
   - {fileID: 1500732401}
   m_cellSizeSerilized: 1
-  m_gridSerilized: {fileID: 0}
-  m_gridPoint:
-    x: 0
-    y: 0
-  m_passableSerilized: 0
+  m_passableSerilized: 1
 --- !u!114 &945377951
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3963,11 +3731,7 @@ MonoBehaviour:
   - {fileID: 1144251142}
   - {fileID: 1637739868}
   m_cellSizeSerilized: 1
-  m_gridSerilized: {fileID: 0}
-  m_gridPoint:
-    x: 0
-    y: 0
-  m_passableSerilized: 0
+  m_passableSerilized: 1
 --- !u!1 &965866275
 GameObject:
   m_ObjectHideFlags: 0
@@ -4011,11 +3775,7 @@ MonoBehaviour:
   - {fileID: 945377951}
   - {fileID: 487278645}
   m_cellSizeSerilized: 1
-  m_gridSerilized: {fileID: 0}
-  m_gridPoint:
-    x: 0
-    y: 0
-  m_passableSerilized: 0
+  m_passableSerilized: 1
 --- !u!114 &976647972
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4064,6 +3824,60 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   model: {fileID: 1481071031}
+--- !u!1001 &1027353151
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 400206, guid: dc44b33d7625fa441a696ac002da58a2, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 4.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 400206, guid: dc44b33d7625fa441a696ac002da58a2, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400206, guid: dc44b33d7625fa441a696ac002da58a2, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: .5
+      objectReference: {fileID: 0}
+    - target: {fileID: 400206, guid: dc44b33d7625fa441a696ac002da58a2, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400206, guid: dc44b33d7625fa441a696ac002da58a2, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400206, guid: dc44b33d7625fa441a696ac002da58a2, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400206, guid: dc44b33d7625fa441a696ac002da58a2, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400206, guid: dc44b33d7625fa441a696ac002da58a2, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400206, guid: dc44b33d7625fa441a696ac002da58a2, type: 3}
+      propertyPath: m_LocalScale.x
+      value: .00999999978
+      objectReference: {fileID: 0}
+    - target: {fileID: 400206, guid: dc44b33d7625fa441a696ac002da58a2, type: 3}
+      propertyPath: m_LocalScale.y
+      value: .00999999978
+      objectReference: {fileID: 0}
+    - target: {fileID: 400206, guid: dc44b33d7625fa441a696ac002da58a2, type: 3}
+      propertyPath: m_LocalScale.z
+      value: .00999999978
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: dc44b33d7625fa441a696ac002da58a2, type: 3}
+  m_IsPrefabParent: 0
 --- !u!114 &1061092356
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4131,11 +3945,7 @@ MonoBehaviour:
   - {fileID: 173186574}
   - {fileID: 440363599}
   m_cellSizeSerilized: 1
-  m_gridSerilized: {fileID: 0}
-  m_gridPoint:
-    x: 0
-    y: 0
-  m_passableSerilized: 0
+  m_passableSerilized: 1
 --- !u!114 &1083775148
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4191,11 +4001,7 @@ MonoBehaviour:
   - {fileID: 787447827}
   - {fileID: 1157389719}
   m_cellSizeSerilized: 1
-  m_gridSerilized: {fileID: 0}
-  m_gridPoint:
-    x: 0
-    y: 0
-  m_passableSerilized: 0
+  m_passableSerilized: 1
 --- !u!114 &1087191339
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4311,11 +4117,7 @@ MonoBehaviour:
   - {fileID: 680327449}
   - {fileID: 1685736645}
   m_cellSizeSerilized: 1
-  m_gridSerilized: {fileID: 0}
-  m_gridPoint:
-    x: 0
-    y: 0
-  m_passableSerilized: 0
+  m_passableSerilized: 1
 --- !u!114 &1144251142
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4352,6 +4154,66 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   model: {fileID: 1646418615}
+--- !u!1 &1154982367
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1154982369}
+  - 108: {fileID: 1154982368}
+  m_Layer: 0
+  m_Name: Directional light
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!108 &1154982368
+Light:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1154982367}
+  m_Enabled: 1
+  serializedVersion: 6
+  m_Type: 1
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Intensity: 1
+  m_Range: 10
+  m_SpotAngle: 30
+  m_CookieSize: 10
+  m_Shadows:
+    m_Type: 0
+    m_Resolution: -1
+    m_Strength: 1
+    m_Bias: .0500000007
+    m_NormalBias: .400000006
+  m_Cookie: {fileID: 0}
+  m_DrawHalo: 0
+  m_Flare: {fileID: 0}
+  m_RenderMode: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_Lightmapping: 4
+  m_BounceIntensity: 1
+  m_ShadowRadius: 0
+  m_ShadowAngle: 0
+  m_AreaSize: {x: 1, y: 1}
+--- !u!4 &1154982369
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1154982367}
+  m_LocalRotation: {x: .408217937, y: -.234569728, z: .109381676, w: .875426054}
+  m_LocalPosition: {x: -1.40252876, y: 18.81036, z: 16.7705574}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
 --- !u!114 &1157389719
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4455,11 +4317,7 @@ MonoBehaviour:
   - {fileID: 1990678200}
   - {fileID: 1920679887}
   m_cellSizeSerilized: 1
-  m_gridSerilized: {fileID: 0}
-  m_gridPoint:
-    x: 0
-    y: 0
-  m_passableSerilized: 0
+  m_passableSerilized: 1
 --- !u!1 &1188302535
 GameObject:
   m_ObjectHideFlags: 0
@@ -4503,11 +4361,7 @@ MonoBehaviour:
   - {fileID: 1753877596}
   - {fileID: 420912150}
   m_cellSizeSerilized: 1
-  m_gridSerilized: {fileID: 0}
-  m_gridPoint:
-    x: 0
-    y: 0
-  m_passableSerilized: 0
+  m_passableSerilized: 1
 --- !u!1 &1193596154
 GameObject:
   m_ObjectHideFlags: 0
@@ -4551,11 +4405,7 @@ MonoBehaviour:
   - {fileID: 1503015425}
   - {fileID: 443685164}
   m_cellSizeSerilized: 1
-  m_gridSerilized: {fileID: 0}
-  m_gridPoint:
-    x: 0
-    y: 0
-  m_passableSerilized: 0
+  m_passableSerilized: 1
 --- !u!114 &1195741924
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4611,11 +4461,7 @@ MonoBehaviour:
   - {fileID: 2092174689}
   - {fileID: 1379605663}
   m_cellSizeSerilized: 1
-  m_gridSerilized: {fileID: 0}
-  m_gridPoint:
-    x: 0
-    y: 0
-  m_passableSerilized: 0
+  m_passableSerilized: 1
 --- !u!114 &1210253867
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4671,11 +4517,7 @@ MonoBehaviour:
   - {fileID: 1649593054}
   - {fileID: 1608406333}
   m_cellSizeSerilized: 1
-  m_gridSerilized: {fileID: 0}
-  m_gridPoint:
-    x: 0
-    y: 0
-  m_passableSerilized: 0
+  m_passableSerilized: 1
 --- !u!114 &1216213742
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4767,11 +4609,7 @@ MonoBehaviour:
   - {fileID: 653098041}
   - {fileID: 356216936}
   m_cellSizeSerilized: 1
-  m_gridSerilized: {fileID: 0}
-  m_gridPoint:
-    x: 0
-    y: 0
-  m_passableSerilized: 0
+  m_passableSerilized: 1
 --- !u!114 &1264139480
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4839,10 +4677,6 @@ MonoBehaviour:
   - {fileID: 10990959}
   - {fileID: 2141887072}
   m_cellSizeSerilized: 1
-  m_gridSerilized: {fileID: 0}
-  m_gridPoint:
-    x: 0
-    y: 0
   m_passableSerilized: 1
 --- !u!114 &1289226502
 MonoBehaviour:
@@ -4959,11 +4793,7 @@ MonoBehaviour:
   - {fileID: 498138560}
   - {fileID: 1949917591}
   m_cellSizeSerilized: 1
-  m_gridSerilized: {fileID: 0}
-  m_gridPoint:
-    x: 0
-    y: 0
-  m_passableSerilized: 0
+  m_passableSerilized: 1
 --- !u!1 &1331014891
 GameObject:
   m_ObjectHideFlags: 0
@@ -5007,10 +4837,6 @@ MonoBehaviour:
   - {fileID: 362035627}
   - {fileID: 2047725075}
   m_cellSizeSerilized: 1
-  m_gridSerilized: {fileID: 0}
-  m_gridPoint:
-    x: 0
-    y: 0
   m_passableSerilized: 1
 --- !u!1 &1346327462
 GameObject:
@@ -5055,10 +4881,6 @@ MonoBehaviour:
   - {fileID: 688921389}
   - {fileID: 697091801}
   m_cellSizeSerilized: 1
-  m_gridSerilized: {fileID: 0}
-  m_gridPoint:
-    x: 0
-    y: 0
   m_passableSerilized: 1
 --- !u!114 &1357586864
 MonoBehaviour:
@@ -5115,10 +4937,6 @@ MonoBehaviour:
   - {fileID: 837751545}
   - {fileID: 1834863778}
   m_cellSizeSerilized: 1
-  m_gridSerilized: {fileID: 0}
-  m_gridPoint:
-    x: 0
-    y: 0
   m_passableSerilized: 1
 --- !u!114 &1362300290
 MonoBehaviour:
@@ -5211,10 +5029,6 @@ MonoBehaviour:
   - {fileID: 1496434707}
   - {fileID: 1106135049}
   m_cellSizeSerilized: 1
-  m_gridSerilized: {fileID: 0}
-  m_gridPoint:
-    x: 0
-    y: 0
   m_passableSerilized: 1
 --- !u!1 &1422889319
 GameObject:
@@ -5259,26 +5073,7 @@ MonoBehaviour:
   - {fileID: 976647972}
   - {fileID: 919202356}
   m_cellSizeSerilized: 1
-  m_gridSerilized: {fileID: 0}
-  m_gridPoint:
-    x: 0
-    y: 0
-  m_passableSerilized: 0
---- !u!115 &1425242799
-MonoScript:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: 
-  serializedVersion: 4
-  m_Script: 
-  m_DefaultReferences: {}
-  m_Icon: {fileID: 0}
-  m_ExecutionOrder: 0
-  m_ClassName: RenderCallBacks
-  m_Namespace: Horizon.Core
-  m_AssemblyName: Assembly-CSharp.dll
-  m_IsEditorScript: 0
+  m_passableSerilized: 1
 --- !u!114 &1431094298
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5346,11 +5141,7 @@ MonoBehaviour:
   - {fileID: 1185449362}
   - {fileID: 1524788217}
   m_cellSizeSerilized: 1
-  m_gridSerilized: {fileID: 0}
-  m_gridPoint:
-    x: 0
-    y: 0
-  m_passableSerilized: 0
+  m_passableSerilized: 1
 --- !u!114 &1455417539
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5406,11 +5197,7 @@ MonoBehaviour:
   - {fileID: 214086160}
   - {fileID: 1024045748}
   m_cellSizeSerilized: 1
-  m_gridSerilized: {fileID: 0}
-  m_gridPoint:
-    x: 0
-    y: 0
-  m_passableSerilized: 0
+  m_passableSerilized: 1
 --- !u!114 &1489894494
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5598,11 +5385,7 @@ MonoBehaviour:
   - {fileID: 1988446850}
   - {fileID: 1711221407}
   m_cellSizeSerilized: 1
-  m_gridSerilized: {fileID: 0}
-  m_gridPoint:
-    x: 0
-    y: 0
-  m_passableSerilized: 0
+  m_passableSerilized: 1
 --- !u!114 &1557797506
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5658,11 +5441,7 @@ MonoBehaviour:
   - {fileID: 91837974}
   - {fileID: 1715494139}
   m_cellSizeSerilized: 1
-  m_gridSerilized: {fileID: 0}
-  m_gridPoint:
-    x: 0
-    y: 0
-  m_passableSerilized: 0
+  m_passableSerilized: 1
 --- !u!114 &1576955625
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5718,11 +5497,7 @@ MonoBehaviour:
   - {fileID: 86670893}
   - {fileID: 1549210115}
   m_cellSizeSerilized: 1
-  m_gridSerilized: {fileID: 0}
-  m_gridPoint:
-    x: 0
-    y: 0
-  m_passableSerilized: 0
+  m_passableSerilized: 1
 --- !u!114 &1588194863
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5862,11 +5637,7 @@ MonoBehaviour:
   - {fileID: 238721039}
   - {fileID: 1631185434}
   m_cellSizeSerilized: 1
-  m_gridSerilized: {fileID: 0}
-  m_gridPoint:
-    x: 0
-    y: 0
-  m_passableSerilized: 0
+  m_passableSerilized: 1
 --- !u!114 &1641407136
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5922,11 +5693,7 @@ MonoBehaviour:
   - {fileID: 1525842452}
   - {fileID: 1150855234}
   m_cellSizeSerilized: 1
-  m_gridSerilized: {fileID: 0}
-  m_gridPoint:
-    x: 0
-    y: 0
-  m_passableSerilized: 0
+  m_passableSerilized: 1
 --- !u!114 &1649593054
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6042,11 +5809,7 @@ MonoBehaviour:
   - {fileID: 114173928}
   - {fileID: 1667146842}
   m_cellSizeSerilized: 1
-  m_gridSerilized: {fileID: 0}
-  m_gridPoint:
-    x: 0
-    y: 0
-  m_passableSerilized: 0
+  m_passableSerilized: 1
 --- !u!114 &1711221407
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6114,11 +5877,7 @@ MonoBehaviour:
   - {fileID: 1588194863}
   - {fileID: 293910243}
   m_cellSizeSerilized: 1
-  m_gridSerilized: {fileID: 0}
-  m_gridPoint:
-    x: 0
-    y: 0
-  m_passableSerilized: 0
+  m_passableSerilized: 1
 --- !u!114 &1753877596
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6186,11 +5945,7 @@ MonoBehaviour:
   - {fileID: 859627407}
   - {fileID: 1009203400}
   m_cellSizeSerilized: 1
-  m_gridSerilized: {fileID: 0}
-  m_gridPoint:
-    x: 0
-    y: 0
-  m_passableSerilized: 0
+  m_passableSerilized: 1
 --- !u!1 &1764412991
 GameObject:
   m_ObjectHideFlags: 0
@@ -6568,11 +6323,7 @@ MonoBehaviour:
   - {fileID: 953017406}
   - {fileID: 1806134376}
   m_cellSizeSerilized: 1
-  m_gridSerilized: {fileID: 0}
-  m_gridPoint:
-    x: 0
-    y: 0
-  m_passableSerilized: 0
+  m_passableSerilized: 1
 --- !u!114 &1805111794
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6664,10 +6415,6 @@ MonoBehaviour:
   - {fileID: 1817871642}
   - {fileID: 1620814597}
   m_cellSizeSerilized: 1
-  m_gridSerilized: {fileID: 0}
-  m_gridPoint:
-    x: 0
-    y: 0
   m_passableSerilized: 1
 --- !u!114 &1826153867
 MonoBehaviour:
@@ -6724,11 +6471,7 @@ MonoBehaviour:
   - {fileID: 1854242089}
   - {fileID: 770258168}
   m_cellSizeSerilized: 1
-  m_gridSerilized: {fileID: 0}
-  m_gridPoint:
-    x: 0
-    y: 0
-  m_passableSerilized: 0
+  m_passableSerilized: 1
 --- !u!1 &1832667406
 GameObject:
   m_ObjectHideFlags: 0
@@ -6772,11 +6515,7 @@ MonoBehaviour:
   - {fileID: 1614641941}
   - {fileID: 1641407136}
   m_cellSizeSerilized: 1
-  m_gridSerilized: {fileID: 0}
-  m_gridPoint:
-    x: 0
-    y: 0
-  m_passableSerilized: 0
+  m_passableSerilized: 1
 --- !u!1 &1832865024
 GameObject:
   m_ObjectHideFlags: 0
@@ -6820,10 +6559,6 @@ MonoBehaviour:
   - {fileID: 671728633}
   - {fileID: 1909460773}
   m_cellSizeSerilized: 1
-  m_gridSerilized: {fileID: 0}
-  m_gridPoint:
-    x: 0
-    y: 0
   m_passableSerilized: 1
 --- !u!114 &1834863778
 MonoBehaviour:
@@ -7024,10 +6759,6 @@ MonoBehaviour:
   - {fileID: 279419664}
   - {fileID: 432664092}
   m_cellSizeSerilized: 1
-  m_gridSerilized: {fileID: 0}
-  m_gridPoint:
-    x: 0
-    y: 0
   m_passableSerilized: 1
 --- !u!1 &1946063189
 GameObject:
@@ -7072,11 +6803,7 @@ MonoBehaviour:
   - {fileID: 197325224}
   - {fileID: 1919978867}
   m_cellSizeSerilized: 1
-  m_gridSerilized: {fileID: 0}
-  m_gridPoint:
-    x: 0
-    y: 0
-  m_passableSerilized: 0
+  m_passableSerilized: 1
 --- !u!114 &1948883551
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7216,11 +6943,7 @@ MonoBehaviour:
   - {fileID: 262366883}
   - {fileID: 954564849}
   m_cellSizeSerilized: 1
-  m_gridSerilized: {fileID: 0}
-  m_gridPoint:
-    x: 0
-    y: 0
-  m_passableSerilized: 0
+  m_passableSerilized: 1
 --- !u!114 &2005211323
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7276,11 +6999,7 @@ MonoBehaviour:
   - {fileID: 651318982}
   - {fileID: 703784926}
   m_cellSizeSerilized: 1
-  m_gridSerilized: {fileID: 0}
-  m_gridPoint:
-    x: 0
-    y: 0
-  m_passableSerilized: 0
+  m_passableSerilized: 1
 --- !u!114 &2041202294
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7348,11 +7067,7 @@ MonoBehaviour:
   - {fileID: 1431094298}
   - {fileID: 1308598606}
   m_cellSizeSerilized: 1
-  m_gridSerilized: {fileID: 0}
-  m_gridPoint:
-    x: 0
-    y: 0
-  m_passableSerilized: 0
+  m_passableSerilized: 1
 --- !u!1 &2064631914
 GameObject:
   m_ObjectHideFlags: 0
@@ -7396,11 +7111,7 @@ MonoBehaviour:
   - {fileID: 1933547719}
   - {fileID: 1311431965}
   m_cellSizeSerilized: 1
-  m_gridSerilized: {fileID: 0}
-  m_gridPoint:
-    x: 0
-    y: 0
-  m_passableSerilized: 0
+  m_passableSerilized: 1
 --- !u!1 &2066562821
 GameObject:
   m_ObjectHideFlags: 0
@@ -7444,11 +7155,7 @@ MonoBehaviour:
   - {fileID: 1122124380}
   - {fileID: 1514013068}
   m_cellSizeSerilized: 1
-  m_gridSerilized: {fileID: 0}
-  m_gridPoint:
-    x: 0
-    y: 0
-  m_passableSerilized: 0
+  m_passableSerilized: 1
 --- !u!114 &2070209853
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7528,11 +7235,7 @@ MonoBehaviour:
   - {fileID: 293655851}
   - {fileID: 1210253867}
   m_cellSizeSerilized: 1
-  m_gridSerilized: {fileID: 0}
-  m_gridPoint:
-    x: 0
-    y: 0
-  m_passableSerilized: 0
+  m_passableSerilized: 1
 --- !u!114 &2080045124
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7612,11 +7315,7 @@ MonoBehaviour:
   - {fileID: 1753891041}
   - {fileID: 896542803}
   m_cellSizeSerilized: 1
-  m_gridSerilized: {fileID: 0}
-  m_gridPoint:
-    x: 0
-    y: 0
-  m_passableSerilized: 0
+  m_passableSerilized: 1
 --- !u!114 &2097310127
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7672,10 +7371,6 @@ MonoBehaviour:
   - {fileID: 78952887}
   - {fileID: 1781167125}
   m_cellSizeSerilized: 1
-  m_gridSerilized: {fileID: 0}
-  m_gridPoint:
-    x: 0
-    y: 0
   m_passableSerilized: 1
 --- !u!1 &2104173463
 GameObject:
@@ -7720,11 +7415,7 @@ MonoBehaviour:
   - {fileID: 655127040}
   - {fileID: 1362300290}
   m_cellSizeSerilized: 1
-  m_gridSerilized: {fileID: 0}
-  m_gridPoint:
-    x: 0
-    y: 0
-  m_passableSerilized: 0
+  m_passableSerilized: 1
 --- !u!1 &2135915289
 GameObject:
   m_ObjectHideFlags: 0
@@ -7768,11 +7459,7 @@ MonoBehaviour:
   - {fileID: 1995424370}
   - {fileID: 1264139480}
   m_cellSizeSerilized: 1
-  m_gridSerilized: {fileID: 0}
-  m_gridPoint:
-    x: 0
-    y: 0
-  m_passableSerilized: 0
+  m_passableSerilized: 1
 --- !u!114 &2136181780
 MonoBehaviour:
   m_ObjectHideFlags: 0

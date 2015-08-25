@@ -90,8 +90,8 @@ namespace Horizon.Combat.Models
 					for(int i = 0; i < Dimensions.x; i += 1)
 					{
 						// the grid lins have there y pos slighly elavated so they show above the physcial grid
-						Vector3 start = new Vector3( transform.position.x + i * CellSize, transform.position.y + 0.01f, transform.position.z + j * CellSize );
-						Vector3 end = new Vector3( transform.position.x + (i+1) * CellSize, transform.position.y + 0.01f, transform.position.z + j * CellSize );
+						Vector3 start = transform.rotation * new Vector3( transform.position.x + i * CellSize, transform.position.y + 0.01f, transform.position.z + j * CellSize );
+						Vector3 end = transform.rotation * new Vector3( transform.position.x + (i+1) * CellSize, transform.position.y + 0.01f, transform.position.z + j * CellSize );
 
 						if(j == 0) // bottom edge
 						{
@@ -115,8 +115,8 @@ namespace Horizon.Combat.Models
 					for(int j = 0; j < Dimensions.y; j += 1)
 					{
 						// the grid lins have there y pos slighly elavated so they show above the physcial grid
-						Vector3 start = new Vector3( transform.position.x + i * CellSize, transform.position.y + 0.01f, transform.position.z + j * CellSize );
-						Vector3 end = new Vector3( transform.position.x + i * CellSize, transform.position.y + 0.01f, transform.position.z + (j+1) * CellSize );
+						Vector3 start = transform.rotation * new Vector3( transform.position.x + i * CellSize, transform.position.y + 0.01f, transform.position.z + j * CellSize );
+						Vector3 end = transform.rotation * new Vector3( transform.position.x + i * CellSize, transform.position.y + 0.01f, transform.position.z + (j+1) * CellSize );
 
 						if(i == 0) //left most edge
 						{
