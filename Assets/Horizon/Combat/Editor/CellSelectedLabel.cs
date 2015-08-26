@@ -25,6 +25,8 @@ namespace Horizon.Combat.Editor
 		{
 			base.WhileSelected ();
 
+			if(Selection.activeTransform == null || Selection.activeTransform.gameObject == null || Selection.activeTransform.gameObject.GetComponent<Cell>() == null) return;
+
 			if (string.IsNullOrEmpty(model.name)) return;
 			var color = GUI.color;
 			GUI.color = Color.white;

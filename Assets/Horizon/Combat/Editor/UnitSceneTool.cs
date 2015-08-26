@@ -4,12 +4,13 @@ using Horizon.Core.Editor;
 using Horizon.Combat.Models;
 using UnityEditor;
 using System.Linq;
+using Horizon.Core.ExtensionMethods;
 
 namespace Horizon.Combat.Editor
 {
 	public class UnitSceneTool : SceneView<Unit>
 	{
-		bool move;
+		bool move = true;
 		
 		public override void OnSceneGUI ()
 		{
@@ -20,25 +21,33 @@ namespace Horizon.Combat.Editor
 			else if(Tools.current == Tool.Rotate)
 				move = false;
 
-
-
 			Tools.current = Tool.None;
 
-			Handles.color = Color.blue;
-			float dragY = Handles.Slider(model.transform.position,model.grid.transform.forward).z - model.transform.position.z;
-			//Debug.Log("dragy " + dragY);
-			if(dragY > model.grid.CellSize)
-				model.Position = new GridPoint(model.Position.x,model.Position.y+1);
-			else if(dragY < model.grid.CellSize * -1)
-				model.Position = new GridPoint(model.Position.x,model.Position.y-1);
+			if(move)
+			{
+				Vector3 dragVec = Handles.Slider2D(model.transform.position,Vector3.up,Vector3.forward,Vector3.right,0.3f,Handles.SphereCap,1);
 
-			Handles.color = Color.red;
-			float dragX = Handles.Slider(model.transform.position,model.grid.transform.right).x - model.transform.position.x;
-			//Debug.Log("dragx " + dragX);
-			if(dragX > model.grid.CellSize)
-				model.Position = new GridPoint(model.Position.x+1,model.Position.y);
-			else if(dragX < model.grid.CellSize * -1)
-				model.Position = new GridPoint(model.Position.x-1,model.Position.y);
+				if(dragVec.z - model.transform.position.z > model.grid.CellSize / 2.0f)
+					model.Position = new GridPoint(model.Position.x,model.Position.y+1);
+				else if(dragVec.z - model.transform.position.z < model.grid.CellSize / 2.0f * -1)
+					model.Position = new GridPoint(model.Position.x,model.Position.y-1);
+
+				if(dragVec.x - model.transform.position.x > model.grid.CellSize / 2.0f)
+					model.Position = new GridPoint(model.Position.x+1,model.Position.y);
+				else if(dragVec.x - model.transform.position.x < model.grid.CellSize / 2.0f * -1)
+					model.Position = new GridPoint(model.Position.x-1,model.Position.y);
+			}
+			else
+			{
+				Handles.color = Color.white.SetAlpha(0.1f);
+				Handles.DrawWireDisc(model.transform.position,model.transform.up,model.grid.CellSize * 0.75f);
+
+				Handles.color = Color.white;
+				if(Handles.Button(model.transform.position + Vector3.forward * model.grid.CellSize * 0.75f, Quaternion.identity,0.1f,0.1f,Handles.ConeCap)) model.DirectionFacing = GridDirection.North;
+				if(Handles.Button(model.transform.position + Vector3.right * model.grid.CellSize * 0.75f, Quaternion.FromToRotation(Vector3.forward,Vector3.right),0.1f,0.1f,Handles.ConeCap)) model.DirectionFacing = GridDirection.East;
+				if(Handles.Button(model.transform.position + Vector3.back * model.grid.CellSize * 0.75f, Quaternion.AngleAxis(180,Vector3.up),0.1f,0.1f,Handles.ConeCap)) model.DirectionFacing = GridDirection.South;
+				if(Handles.Button(model.transform.position + Vector3.left * model.grid.CellSize * 0.75f, Quaternion.FromToRotation(Vector3.forward,Vector3.left),0.1f,0.1f,Handles.ConeCap)) model.DirectionFacing = GridDirection.West;
+			}
 		}
 	}
 }

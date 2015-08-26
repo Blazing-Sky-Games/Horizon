@@ -71,7 +71,7 @@ namespace Horizon.Combat.Models
 				transform.localRotation = Quaternion.FromToRotation(Vector3.forward,Vector3.right);
 				break;
 			case GridDirection.South:
-				transform.localRotation = Quaternion.FromToRotation(Vector3.forward,Vector3.back);
+				transform.localRotation = Quaternion.AngleAxis(180,Vector3.up);
 				break;
 			case GridDirection.West:
 				transform.localRotation = Quaternion.FromToRotation(Vector3.forward,Vector3.left);

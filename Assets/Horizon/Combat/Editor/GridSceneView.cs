@@ -18,6 +18,12 @@ namespace Horizon.Combat.Editor
 {
 	public class GridSceneView : SceneView<Grid>
 	{
+		[MenuItem("GameObject/Grid/Add Unit", false, 0)]
+		static void AddUnit()
+		{
+			Debug.Log("add unit ui");
+		}
+
 		protected override void SceneViewUpdate ()
 		{
 			base.SceneViewUpdate ();
