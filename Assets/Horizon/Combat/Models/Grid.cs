@@ -57,7 +57,7 @@ namespace Horizon.Combat.Models
 
 	public class Grid : ModelBase
 	{
-		private GameObject cellsParent;
+		internal GameObject cellsParent;
 
 		//returns a colum of cells
 		// to get the cell at space (i,j) from a Grid named "grid", use
@@ -92,8 +92,8 @@ namespace Horizon.Combat.Models
 					for(int i = 0; i < Dimensions.x; i += 1)
 					{
 						// the grid lins have there y pos slighly elavated so they show above the physcial grid
-						Vector3 start = transform.rotation * new Vector3( transform.position.x + i * CellSize, transform.position.y + 0.01f, transform.position.z + j * CellSize );
-						Vector3 end = transform.rotation * new Vector3( transform.position.x + (i+1) * CellSize, transform.position.y + 0.01f, transform.position.z + j * CellSize );
+						Vector3 start = transform.rotation * new Vector3( transform.position.x + i, transform.position.y + 0.01f, transform.position.z + j );
+						Vector3 end = transform.rotation * new Vector3( transform.position.x + (i+1), transform.position.y + 0.01f, transform.position.z + j );
 
 						if(j == 0) // bottom edge
 						{
@@ -117,8 +117,8 @@ namespace Horizon.Combat.Models
 					for(int j = 0; j < Dimensions.y; j += 1)
 					{
 						// the grid lins have there y pos slighly elavated so they show above the physcial grid
-						Vector3 start = transform.rotation * new Vector3( transform.position.x + i * CellSize, transform.position.y + 0.01f, transform.position.z + j * CellSize );
-						Vector3 end = transform.rotation * new Vector3( transform.position.x + i * CellSize, transform.position.y + 0.01f, transform.position.z + (j+1) * CellSize );
+						Vector3 start = transform.rotation * new Vector3( transform.position.x + i, transform.position.y + 0.01f, transform.position.z + j );
+						Vector3 end = transform.rotation * new Vector3( transform.position.x + i, transform.position.y + 0.01f, transform.position.z + (j+1) );
 
 						if(i == 0) //left most edge
 						{
@@ -182,22 +182,6 @@ namespace Horizon.Combat.Models
 			}
 		}
 
-		//cell size in x and y
-		public float CellSize
-		{
-			get
-			{
-				return m_cellSizeSerilized;
-			}
-			set
-			{
-				if(SetPropertyFeild(ref m_cellSizeSerilized, value, () => CellSize))
-				{
-					resizeCells();
-				}
-			}
-		}
-
 		protected override void Init ()
 		{
 			base.Init();
@@ -220,11 +204,22 @@ namespace Horizon.Combat.Models
 			{
 				resizeGrid();
 			}
+		}
 
-			if(m_cells.Count() != 0 && this[new GridPoint()].CellSize != CellSize)
-			{
-				resizeCells();
-			}
+		private Cell NewCellAt (int x, int y)
+		{
+			GameObject newCell = Instantiate (CellPrefab);
+			newCell.transform.parent = cellsParent.transform;
+			Cell cellComponent = newCell.GetComponent<Cell> ();
+			cellComponent.grid = this;
+			cellComponent.GridPosition = new GridPoint (x, y);
+			return cellComponent;
+		}
+
+		public void AddUnit (Unit unitInstance)
+		{
+			unitInstance.grid = this;
+			unitInstance.transform.parent = transform;
 		}
 
 		private void resizeGrid()
@@ -264,14 +259,7 @@ namespace Horizon.Combat.Models
 						
 						for(int j = 0; j<Dimensions.y; j++)
 						{
-							GameObject newCell = Instantiate(CellPrefab);
-							newCell.name = "(" + i + "," + j + ")";
-							newCell.transform.parent = cellsParent.transform;
-							newCell.transform.localPosition = new Vector3(i,0,j) * CellSize + new Vector3(CellSize/2,0,CellSize/2);
-							Cell cellComponent = newCell.GetComponent<Cell>();
-							cellComponent.grid = this;
-							cellComponent.GridPosition = new GridPoint(i,j);
-							cellComponent.CellSize = CellSize;
+							Cell cellComponent = NewCellAt (i, j);
 							cells.Add(cellComponent);
 						}
 						
@@ -322,14 +310,7 @@ namespace Horizon.Combat.Models
 					{
 						for(int j = m_cells[i].Count; j < Dimensions.y ; j++)
 						{
-							GameObject newCell = Instantiate(CellPrefab);
-							newCell.name = "(" + i + "," + j + ")";
-							newCell.transform.parent = cellsParent.transform;
-							newCell.transform.localPosition = new Vector3(i,0,j) * CellSize + new Vector3(CellSize/2,0,CellSize/2);
-							Cell cellComponent = newCell.GetComponent<Cell>();
-							cellComponent.grid = this;
-							cellComponent.GridPosition = new GridPoint(i,j);
-							cellComponent.CellSize = CellSize;
+							Cell cellComponent = NewCellAt (i, j);
 							m_cells[i].Add(cellComponent);
 						}
 					}
@@ -350,19 +331,6 @@ namespace Horizon.Combat.Models
 
 						cells.RemoveRange(Dimensions.y, cells.Count - Dimensions.y);
 					}
-				}
-			}
-		}
-
-		//update all of the cells when size changes
-		private void resizeCells()
-		{
-			for(int i = 0; i < Dimensions.x; i++)
-			{
-				for(int j = 0; j < Dimensions.y; j++)
-				{
-					this[i][j].transform.localPosition = new Vector3(i,0,j) * CellSize + new Vector3(CellSize/2,0,CellSize/2);
-					this[i][j].CellSize = CellSize;
 				}
 			}
 		}
@@ -417,9 +385,6 @@ namespace Horizon.Combat.Models
 
 		[SerializeField]
 		private GameObject m_cellPrefabSerilized;
-
-		[SerializeField]
-		private float m_cellSizeSerilized = 1;
 	}
 }
 

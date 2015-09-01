@@ -7,30 +7,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.IO;
 using Horizon.Combat.Models;
-namespace Horizon.Core.Editor
+
+namespace Horizon.Combat.Editor
 {
-	public class AddUnitToCells : EditorWindow
+	public class AddUnitToCellsWindow : EditorWindow
 	{
-		[MenuItem("Assets/Create/GO Prefab")]
-		static void NewEmptyPrefab()
-		{
-			GameObject go = new GameObject();
-
-			string path = AssetDatabase.GetAssetPath (Selection.activeObject);
-			if (path == "")
-			{
-				path = "Assets";
-			}
-			else if (Path.GetExtension(path) != "")
-			{
-				path = path.Replace(Path.GetFileName (AssetDatabase.GetAssetPath (Selection.activeObject)), "");
-			}
-
-			PrefabUtility.CreatePrefab(AssetDatabase.GenerateUniqueAssetPath(path + "/New Prefab.prefab"),go);
-
-			DestroyImmediate(go);
-		}
-
 		private bool init = false;
 
 		void OnGUI()
@@ -52,9 +33,7 @@ namespace Horizon.Core.Editor
 					foreach(Cell cell in Selection.gameObjects.Where(go => go.GetComponent<Cell>() != null).Select(go => go.GetComponent<Cell>()))
 					{
 						Unit unitInstance = (PrefabUtility.InstantiatePrefab(unit) as GameObject).GetComponent<Unit>();
-						unitInstance.gameObject.name = unit.name;
-						unitInstance.transform.parent = cell.grid.transform;
-						unitInstance.grid = cell.grid;
+						cell.grid.AddUnit(unitInstance);
 						unitInstance.GridPosition = cell.GridPosition;
 					}
 				}
@@ -62,11 +41,11 @@ namespace Horizon.Core.Editor
 			}
 		}
 
-		[MenuItem("Horizon/Combat/Add Unit To Cells")]
+		[MenuItem("Horizon/Add Unit To Cells")]
 		static void Init()
 		{
-			EditorWindow.GetWindow<AddUnitToCells>().Close();
-			EditorWindow.GetWindow<AddUnitToCells>();
+			EditorWindow.GetWindow<AddUnitToCellsWindow>().Close();
+			EditorWindow.GetWindow<AddUnitToCellsWindow>();
 		}
 	}
 }

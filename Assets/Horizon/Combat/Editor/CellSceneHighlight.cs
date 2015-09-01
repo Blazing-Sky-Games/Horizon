@@ -33,9 +33,6 @@ namespace Horizon.Combat.Editor
 			model.WeakSubscribeToProperty(()=>model.Passable, (s,a) => {
 				m_rectangleGizmo.color = model.Passable ? PassableColor : ImpassableColor;
 			});
-
-			m_rectangleGizmo.Size = model.CellSize;
-			model.WeakSubscribeToProperty(() => model.CellSize, (s,a) => m_rectangleGizmo.Size = model.CellSize);
 		}
 
 		public override void Dispose ()

@@ -30,27 +30,44 @@ namespace Horizon.Combat.Models
 			}
 		}
 
-		//the x and y size of the cell
-		public float CellSize
+		public GridPoint GridPosition
 		{
 			get
 			{
-				return m_cellSizeSerilized;
+				return m_gridPositionSerilized;
 			}
-			set
+			internal set
 			{
-				SetPropertyFeild(ref m_cellSizeSerilized, value, () => CellSize);
+				if(SetPropertyFeild(ref m_gridPositionSerilized, value,() => GridPosition))
+				{
+					gameObject.name = "(" + GridPosition.x + "," + GridPosition.y + ")";
+					transform.localPosition = new Vector3(GridPosition.x + 0.5f,0,GridPosition.y + 0.5f);
+				}
+			}
+		}
+		public Grid grid
+		{
+			get
+			{
+				return m_gridSerilized;
+			}
+			internal set
+			{
+				if(SetPropertyFeild(ref m_gridSerilized, value,() => grid))
+				{
+					transform.localPosition = new Vector3(GridPosition.x + 0.5f,0,GridPosition.y + 0.5f);
+				}
 			}
 		}
 
-		public GridPoint GridPosition;
-		public Grid grid;
-
-		[SerializeField]
-		private float m_cellSizeSerilized = 1;
-
 		[SerializeField]
 		private bool m_passableSerilized;
+
+		[SerializeField]
+		private GridPoint m_gridPositionSerilized;
+
+		[SerializeField]
+		private Grid m_gridSerilized;
 	}
 }
 

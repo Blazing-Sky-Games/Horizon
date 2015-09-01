@@ -12,6 +12,7 @@ using Horizon.Combat.Models;
 using Horizon.Core.Editor;
 using UnityEngine;
 using UnityEditor;
+using Horizon.Core.ExtensionMethods;
 
 
 namespace Horizon.Combat.Editor
@@ -22,7 +23,7 @@ namespace Horizon.Combat.Editor
 		{
 			base.SceneViewUpdate ();
 
-			Handles.color = Handles.color*new Color(1,1,1,0.25f);
+			Handles.color = Color.white.SetAlpha(0.25f);
 
 			foreach(GridLine line in model.GridLines)
 			{
