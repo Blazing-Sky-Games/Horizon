@@ -28,7 +28,7 @@ namespace Horizon.Combat.Views
 			base.Init ();
 
 			//do gl drawing onpostrender
-			HorizonCamera.Main.renderCallbacks.PostRenderEvent +=
+			Camera.main.GetComponent<HorizonCamera>().renderCallbacks.PostRenderEvent +=
 			(sender,args) => 
 			{
 				DrawGridlines();

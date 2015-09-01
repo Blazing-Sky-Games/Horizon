@@ -16,6 +16,8 @@ namespace Horizon.Combat.Editor
 		{
 			base.OnSceneGUI ();
 			
+			if(model.grid == null) return;
+
 			if(Tools.current == Tool.Move)
 				move = true;
 			else if(Tools.current == Tool.Rotate)
@@ -28,14 +30,14 @@ namespace Horizon.Combat.Editor
 				Vector3 dragVec = Handles.Slider2D(model.transform.position,Vector3.up,Vector3.forward,Vector3.right,0.3f,Handles.SphereCap,1);
 
 				if(dragVec.z - model.transform.position.z > model.grid.CellSize / 2.0f)
-					model.Position = new GridPoint(model.Position.x,model.Position.y+1);
+					model.GridPosition = new GridPoint(model.GridPosition.x,model.GridPosition.y+1);
 				else if(dragVec.z - model.transform.position.z < model.grid.CellSize / 2.0f * -1)
-					model.Position = new GridPoint(model.Position.x,model.Position.y-1);
+					model.GridPosition = new GridPoint(model.GridPosition.x,model.GridPosition.y-1);
 
 				if(dragVec.x - model.transform.position.x > model.grid.CellSize / 2.0f)
-					model.Position = new GridPoint(model.Position.x+1,model.Position.y);
+					model.GridPosition = new GridPoint(model.GridPosition.x+1,model.GridPosition.y);
 				else if(dragVec.x - model.transform.position.x < model.grid.CellSize / 2.0f * -1)
-					model.Position = new GridPoint(model.Position.x-1,model.Position.y);
+					model.GridPosition = new GridPoint(model.GridPosition.x-1,model.GridPosition.y);
 			}
 			else
 			{

@@ -11,6 +11,20 @@ namespace Horizon.Combat.Models
 
 	public class Unit : ModelBase
 	{
+		public AnimatedMesh animatedMesh;
+
+		protected override void Init ()
+		{
+			base.Init ();
+
+			if(animatedMesh == null)
+			{
+				animatedMesh = new AnimatedMesh();
+			}
+			
+			animatedMesh.setParent(gameObject);
+		}
+
 		public Grid grid
 		{
 			get
@@ -20,10 +34,10 @@ namespace Horizon.Combat.Models
 			set
 			{
 				SetPropertyFeild(ref m_gridSerilized, value, () => grid);
-				Position = Position;
+				GridPosition = GridPosition;
 			}
 		}
-		public GridPoint Position
+		public GridPoint GridPosition
 		{
 			get
 			{
@@ -39,10 +53,9 @@ namespace Horizon.Combat.Models
 				if(value.x >= grid.Dimensions.x) value.x = grid.Dimensions.x - 1;
 				if(value.y >= grid.Dimensions.y) value.y = grid.Dimensions.y - 1;
 
-				if(SetPropertyFeild(ref m_positionSerilized, value, () => Position))
-				{
-					updateModelPosition();
-				}
+				SetPropertyFeild(ref m_positionSerilized, value, () => GridPosition);
+				updateModelPosition();
+
 			}
 		}
 		public GridDirection DirectionFacing
@@ -53,10 +66,8 @@ namespace Horizon.Combat.Models
 			}
 			set
 			{
-				if(SetPropertyFeild(ref m_directionFacingSerilized, value, () => DirectionFacing))
-				{
-					updateModelRotation();
-				}
+				SetPropertyFeild(ref m_directionFacingSerilized, value, () => DirectionFacing);
+				updateModelRotation();
 			}
 		}
 
@@ -81,7 +92,7 @@ namespace Horizon.Combat.Models
 
 		private void updateModelPosition()
 		{
-			transform.localPosition = new Vector3(grid.CellSize * Position.x + grid.CellSize / 2.0f, 0, grid.CellSize * Position.y + grid.CellSize / 2.0f);
+			transform.localPosition = new Vector3(grid.CellSize * GridPosition.x + grid.CellSize / 2.0f, 0, grid.CellSize * GridPosition.y + grid.CellSize / 2.0f);
 		}
 
 		[SerializeField]

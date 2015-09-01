@@ -43,6 +43,9 @@ namespace Horizon.Combat.Models
 			}
 		}
 
+		public GridPoint GridPosition;
+		public Grid grid;
+
 		[SerializeField]
 		private float m_cellSizeSerilized = 1;
 

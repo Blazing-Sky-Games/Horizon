@@ -93,12 +93,12 @@ Material:
         second: .5
       data:
         first:
-          name: _Parallax
-        second: .0199999996
-      data:
-        first:
           name: _ZWrite
         second: 1
+      data:
+        first:
+          name: _Parallax
+        second: .0199999996
       data:
         first:
           name: _Glossiness
@@ -135,4 +135,4 @@ Material:
       data:
         first:
           name: _Color
-        second: {r: .400000006, g: .400000006, b: .400000006, a: 1}
+        second: {r: .411764681, g: .411764681, b: .411764681, a: 1}

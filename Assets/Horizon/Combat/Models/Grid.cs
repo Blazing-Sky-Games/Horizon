@@ -57,6 +57,8 @@ namespace Horizon.Combat.Models
 
 	public class Grid : ModelBase
 	{
+		private GameObject cellsParent;
+
 		//returns a colum of cells
 		// to get the cell at space (i,j) from a Grid named "grid", use
 		// grid[i][j]
@@ -200,6 +202,20 @@ namespace Horizon.Combat.Models
 		{
 			base.Init();
 
+			Transform cellsParentTran = transform.FindChild("cells");
+			if(cellsParentTran == null)
+			{
+				cellsParent = new GameObject("cells");
+				cellsParent.transform.parent = transform;
+				cellsParent.transform.localPosition = Vector3.zero;
+				cellsParent.transform.localRotation = Quaternion.identity;
+				cellsParent.transform.localScale = new Vector3(1,1,1);
+			}
+			else
+			{
+				cellsParent = cellsParentTran.gameObject;
+			}
+
 			if(m_cells.Count != Dimensions.x || (m_cells.Count == 0 ? 0 : m_cells[0].Count) != Dimensions.y)
 			{
 				resizeGrid();
@@ -250,9 +266,11 @@ namespace Horizon.Combat.Models
 						{
 							GameObject newCell = Instantiate(CellPrefab);
 							newCell.name = "(" + i + "," + j + ")";
-							newCell.transform.parent = this.transform;
+							newCell.transform.parent = cellsParent.transform;
 							newCell.transform.localPosition = new Vector3(i,0,j) * CellSize + new Vector3(CellSize/2,0,CellSize/2);
 							Cell cellComponent = newCell.GetComponent<Cell>();
+							cellComponent.grid = this;
+							cellComponent.GridPosition = new GridPoint(i,j);
 							cellComponent.CellSize = CellSize;
 							cells.Add(cellComponent);
 						}
@@ -306,9 +324,11 @@ namespace Horizon.Combat.Models
 						{
 							GameObject newCell = Instantiate(CellPrefab);
 							newCell.name = "(" + i + "," + j + ")";
-							newCell.transform.parent = this.transform;
+							newCell.transform.parent = cellsParent.transform;
 							newCell.transform.localPosition = new Vector3(i,0,j) * CellSize + new Vector3(CellSize/2,0,CellSize/2);
 							Cell cellComponent = newCell.GetComponent<Cell>();
+							cellComponent.grid = this;
+							cellComponent.GridPosition = new GridPoint(i,j);
 							cellComponent.CellSize = CellSize;
 							m_cells[i].Add(cellComponent);
 						}

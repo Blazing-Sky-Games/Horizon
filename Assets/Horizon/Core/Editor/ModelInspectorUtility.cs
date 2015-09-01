@@ -102,7 +102,17 @@ namespace Horizon.Core.Editor
 				};
 				get = () => info.GetValue(targets[0]);
 				Name = info.Name;
-				mixed = targets.Any(obj => info.GetValue(targets[0]) != info.GetValue(obj));
+				mixed = targets.Any(
+					(obj) => 
+					{
+						object val = info.GetValue(targets[0]);
+						
+						if(val == null)
+							return info.GetValue(obj) != null;
+
+						return val.Equals(info.GetValue(obj)) == false;
+					}
+				);
 			}
 		}
 
@@ -193,17 +203,28 @@ namespace Horizon.Core.Editor
 			{
 				Display<Vector4>(memberValue, EditorGUILayout.Vector4Field);
 			}
-			else if( memberValue.ValueType == typeof(UnityEngine.Object) || memberValue.ValueType.IsSubclassOf(typeof(UnityEngine.Object)))
-			{
-				Display<UnityEngine.Object>(memberValue, (label,obj,options) => EditorGUILayout.ObjectField(label,obj,memberValue.ValueType,true,options));
-			}
 			else if(memberValue.ValueType == typeof(EventName))
 			{
 				//todo
 			}
 			else if(customDrawFunctions.ContainsKey(memberValue.ValueType))
 			{
-				memberValue.set(customDrawFunctions[memberValue.ValueType].Draw(memberValue.Name.SplitCamelCase(),memberValue.get()));
+				EditorGUI.showMixedValue = memberValue.mixed;
+				
+				EditorGUI.BeginChangeCheck();
+				
+				object val = customDrawFunctions[memberValue.ValueType].Draw(memberValue.Name.SplitCamelCase(),memberValue.get());
+				
+				if(EditorGUI.EndChangeCheck())
+				{
+					memberValue.set(val);
+				}
+				
+				EditorGUI.showMixedValue = false;
+			}
+			else if( memberValue.ValueType == typeof(UnityEngine.Object) || memberValue.ValueType.IsSubclassOf(typeof(UnityEngine.Object)))
+			{
+				Display<UnityEngine.Object>(memberValue, (label,obj,options) => EditorGUILayout.ObjectField(label,obj,memberValue.ValueType,true,options));
 			}
 			else
 			{
