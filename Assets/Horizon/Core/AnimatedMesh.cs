@@ -82,6 +82,7 @@ namespace Horizon.Core
 				meshParent = Parent.AddComponent<PrefabInstance>();
 			}
 
+			meshParent.hideFlags = HideFlags.HideInInspector;
 			meshParent.prefab = mesh;
 			meshParent.OnValidate();
 

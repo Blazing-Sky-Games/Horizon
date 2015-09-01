@@ -72,7 +72,7 @@ namespace Horizon.Core.Editor
 
 		private void DisplayObjectsThroughReflection(UnityEngine.Object[] objs)
 		{
-			foreach(FieldInfo field in objs[0].GetType().GetFields())
+			foreach(FieldInfo field in objs[0].GetType().GetFields().Where(x => x.GetCustomAttributes(typeof(HideInInspector),true).Count() == 0))
 			{
 				ModelInspectorUtility.DisplayMemberValue(field,objs);
 			}
@@ -86,7 +86,8 @@ namespace Horizon.Core.Editor
 					&& x.DeclaringType != typeof(Component) 
 					&& x.DeclaringType != typeof(Behaviour) 
 					&& x.DeclaringType != typeof(MonoBehaviour)
-				);
+				)
+				.Where(x => x.GetCustomAttributes(typeof(HideInInspector),true).Count() == 0);
 
 				foreach(PropertyInfo property in props)
 				{

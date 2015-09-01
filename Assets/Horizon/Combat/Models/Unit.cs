@@ -20,13 +20,14 @@ namespace Horizon.Combat.Models
 			animatedMesh.setParent(gameObject);
 		}
 
+		[HideInInspector]
 		public Grid grid
 		{
 			get
 			{
 				return m_gridSerilized;
 			}
-			internal set
+			set
 			{
 				SetPropertyFeild(ref m_gridSerilized, value, () => grid);
 				GridPosition = GridPosition;

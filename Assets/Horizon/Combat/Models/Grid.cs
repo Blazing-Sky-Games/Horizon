@@ -57,7 +57,8 @@ namespace Horizon.Combat.Models
 
 	public class Grid : ModelBase
 	{
-		internal GameObject cellsParent;
+		[HideInInspector]
+		public GameObject cellsParent;
 
 		//returns a colum of cells
 		// to get the cell at space (i,j) from a Grid named "grid", use

@@ -30,13 +30,14 @@ namespace Horizon.Combat.Models
 			}
 		}
 
+		[HideInInspector]
 		public GridPoint GridPosition
 		{
 			get
 			{
 				return m_gridPositionSerilized;
 			}
-			internal set
+			set
 			{
 				if(SetPropertyFeild(ref m_gridPositionSerilized, value,() => GridPosition))
 				{
@@ -45,13 +46,15 @@ namespace Horizon.Combat.Models
 				}
 			}
 		}
+
+		[HideInInspector]
 		public Grid grid
 		{
 			get
 			{
 				return m_gridSerilized;
 			}
-			internal set
+			set
 			{
 				if(SetPropertyFeild(ref m_gridSerilized, value,() => grid))
 				{
