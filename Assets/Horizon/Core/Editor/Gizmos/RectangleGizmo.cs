@@ -5,6 +5,7 @@ using Horizon.Core.ExtensionMethods;
 
 namespace Horizon.Core.Editor.Gizmos
 {
+	//rectangle highlight in sceneview
 	public class RectangleGizmo : Gizmo
 	{
 		static GameObject Temp

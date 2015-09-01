@@ -19,7 +19,7 @@ using Horizon.Core.ExtensionMethods;
 
 namespace Horizon.Combat.Models
 {
-	//helper class that representd information about a gridline
+	//helper class that represents information about a gridline
 	//a gridline is a line where two cells meat, or where a cell meets the edge of the grid
 	public struct GridLine
 	{
@@ -58,6 +58,7 @@ namespace Horizon.Combat.Models
 	public class Grid : ModelBase
 	{
 		[HideInInspector]
+		//the parent of all the cells. cells are grouped like this to make the hierarchy easyer to look at
 		public GameObject cellsParent;
 
 		//returns a colum of cells
@@ -187,6 +188,7 @@ namespace Horizon.Combat.Models
 		{
 			base.Init();
 
+			//create the gameobject to parent cells to
 			Transform cellsParentTran = transform.FindChild("cells");
 			if(cellsParentTran == null)
 			{
@@ -201,6 +203,7 @@ namespace Horizon.Combat.Models
 				cellsParent = cellsParentTran.gameObject;
 			}
 
+			//resize the grid if needed
 			if(m_cells.Count != Dimensions.x || (m_cells.Count == 0 ? 0 : m_cells[0].Count) != Dimensions.y)
 			{
 				resizeGrid();
@@ -217,12 +220,14 @@ namespace Horizon.Combat.Models
 			return cellComponent;
 		}
 
+		//todo: add alot more stuff to this. hmm.... maybe this should be in the combat main!
 		public void AddUnit (Unit unitInstance)
 		{
 			unitInstance.grid = this;
 			unitInstance.transform.parent = transform;
 		}
 
+		//long tedious code to handle the dims changing
 		private void resizeGrid()
 		{
 			if(CellPrefab == null)

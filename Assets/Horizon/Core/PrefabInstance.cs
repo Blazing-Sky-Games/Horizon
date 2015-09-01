@@ -6,6 +6,7 @@ using UnityEditor.Callbacks;
 using System.Collections.Generic;
 
 [ExecuteInEditMode]
+//code from here http://framebunker.com/blog/poor-mans-nested-prefabs/
 public class PrefabInstance : MonoBehaviour
 {
 	public GameObject prefab;

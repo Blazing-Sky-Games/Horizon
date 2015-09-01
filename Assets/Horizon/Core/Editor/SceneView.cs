@@ -4,6 +4,7 @@ using Horizon.Core.WeakSubscription;
 
 namespace Horizon.Core.Editor
 {
+	//inherit from this class to do scene view specific stuff
 	public class SceneView<HorizonObjectType> :  ViewBase<HorizonObjectType> 
 		where HorizonObjectType:ModelBase
 	{
@@ -14,7 +15,7 @@ namespace Horizon.Core.Editor
 			model.WeakSubscribeToEvent(model.OnDrawGizmosSelectedEventName, (sender,args) => WhileSelected());
 		}
 
-		protected virtual void SceneViewUpdate(){}
-		protected virtual void WhileSelected(){}
+		protected virtual void SceneViewUpdate(){} // called everyframe in the scene view
+		protected virtual void WhileSelected(){} // called while the model is selected
 	}
 }

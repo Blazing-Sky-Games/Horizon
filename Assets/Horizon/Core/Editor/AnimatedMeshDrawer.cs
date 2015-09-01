@@ -9,6 +9,7 @@ namespace Horizon.Core.Editor
 	[CustomDrawerAtribute(typeof(AnimatedMesh))]
 	public class AnimatedMeshDrawer : CustomDrawer
 	{
+		// user selects value for the mesh
 		public override object Draw (string label, object val)
 		{
 			if (val != null)

@@ -17,6 +17,7 @@ using Horizon.Core.ExtensionMethods;
 
 namespace Horizon.Combat.Editor
 {
+	//draw dotted grid lins in the sceneview
 	public class GridSceneView : SceneView<Grid>
 	{
 		protected override void SceneViewUpdate ()

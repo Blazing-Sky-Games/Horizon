@@ -19,6 +19,7 @@ using UnityEditor;
 
 namespace Horizon.Combat.Editor
 {
+	//the little blue lable that pops up when you select a cell
 	public class CellSelectedLabel : SceneView<Cell>
 	{
 		protected override void WhileSelected ()

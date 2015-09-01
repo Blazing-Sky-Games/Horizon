@@ -24,6 +24,7 @@ namespace Horizon.Core.Editor
 	{
 		static ModelInspectorUtility()
 		{
+			// get all of the custom drawers. a custom drawer lets you create a unique editor display for a custom class
 			foreach(Assembly assembly in AppDomain.CurrentDomain.GetAssemblies())
 			{
 				foreach(Type type in assembly.GetTypes())
@@ -37,23 +38,16 @@ namespace Horizon.Core.Editor
 			}
 		}
 
+		//homogeneous acsess to both propertyinfo and fieldinfo over a set of objects
 		private class MemberValueWrapper
 		{
 			public readonly Type ValueType;
 			public readonly Action<object> set;
 			public readonly Func<object> get;
 			public readonly string Name;
-			public readonly bool mixed;
-			
-			public MemberValueWrapper(PropertyInfo info, object target)
-			{
-				ValueType = info.PropertyType;
-				set = (obj) => info.GetSetMethod().Invoke(target,new object[]{obj});
-				get = () => info.GetValue(target,null);
-				Name = info.Name;
-				mixed = false;
-			}
+			public readonly bool mixed; //should this membervalue be displayed as mixed
 
+			// if the property value is differant on multiple targets, set mixed to true
 			public MemberValueWrapper(PropertyInfo info, object[] targets)
 			{
 				ValueType = info.PropertyType;
@@ -80,15 +74,7 @@ namespace Horizon.Core.Editor
 				);
 			}
 			
-			public MemberValueWrapper(FieldInfo info, object target)
-			{
-				ValueType = info.FieldType;
-				set = (obj) => info.SetValue(target,obj);
-				get = () => info.GetValue(target);
-				Name = info.Name;
-				mixed = false;
-			}
-
+			//same function for fieldinfo
 			public MemberValueWrapper(FieldInfo info, object[] targets)
 			{
 				ValueType = info.FieldType;
@@ -116,14 +102,17 @@ namespace Horizon.Core.Editor
 			}
 		}
 
+		//display a member value given a delegate to a drawing function
 		private static void Display<T>(MemberValueWrapper value, Func<string,T,GUILayoutOption[],T> DisplayFunction)
 		{
+			//should this value be mixed
 			EditorGUI.showMixedValue = value.mixed;
 
 			EditorGUI.BeginChangeCheck();
 
 			T val = DisplayFunction(value.Name.SplitCamelCase(),(T)value.get(),new GUILayoutOption[]{});
 
+			//if the editor changed, set the value
 			if(EditorGUI.EndChangeCheck())
 			{
 				value.set(val);
@@ -209,18 +198,7 @@ namespace Horizon.Core.Editor
 			}
 			else if(customDrawFunctions.ContainsKey(memberValue.ValueType))
 			{
-				EditorGUI.showMixedValue = memberValue.mixed;
-				
-				EditorGUI.BeginChangeCheck();
-				
-				object val = customDrawFunctions[memberValue.ValueType].Draw(memberValue.Name.SplitCamelCase(),memberValue.get());
-				
-				if(EditorGUI.EndChangeCheck())
-				{
-					memberValue.set(val);
-				}
-				
-				EditorGUI.showMixedValue = false;
+				Display<object>(memberValue, (name, value, options) => customDrawFunctions[memberValue.ValueType].Draw(name, value)); 
 			}
 			else if( memberValue.ValueType == typeof(UnityEngine.Object) || memberValue.ValueType.IsSubclassOf(typeof(UnityEngine.Object)))
 			{
@@ -233,16 +211,6 @@ namespace Horizon.Core.Editor
 			//todo, list, type, delegate
 		}
 
-		//public static void DisplayMemberValue(FieldInfo info, object target)
-		//{
-			//DisplayMemberValue(new MemberValueWrapper(info, target));
-		//}
-
-		//public static void DisplayMemberValue(PropertyInfo info, object target)
-		//{
-			//DisplayMemberValue(new MemberValueWrapper(info, target));
-		//}
-
 		public static void DisplayMemberValue(FieldInfo info, object[] targets)
 		{
 			DisplayMemberValue(new MemberValueWrapper(info, targets));
@@ -253,6 +221,7 @@ namespace Horizon.Core.Editor
 			DisplayMemberValue(new MemberValueWrapper(info, targets));
 		}
 
+		//store all sutom drawers
 		private static Dictionary<Type, CustomDrawer> customDrawFunctions = new Dictionary<Type, CustomDrawer>();
 	}
 }

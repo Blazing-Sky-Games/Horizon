@@ -10,6 +10,7 @@ namespace Horizon.Core
 	//base class of all horizon specific cameras
 	public class HorizonCamera : ModelBase
 	{
+		// hook gl calls into this
 		public RenderCallBacks renderCallbacks
 		{
 			get

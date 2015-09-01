@@ -10,11 +10,13 @@
 using System;
 namespace Horizon.Core.Editor
 {
+	//inherit from this to make impliment a custom editor display for custom classes
 	public class CustomDrawer
 	{
 		public virtual object Draw(string label, object val){ return null; }
 	}
 
+	//used to tag a custom drawer for a specific kind of class
 	public class CustomDrawerAtribute : Attribute
 	{
 		public Type type;

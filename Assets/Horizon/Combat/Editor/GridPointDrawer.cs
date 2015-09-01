@@ -15,6 +15,7 @@ using UnityEngine;
 
 namespace Horizon.Combat.Editor
 {
+	//display a grid point
 	[CustomDrawerAtribute(typeof(GridPoint))]
 	public class GridPointDrawer : CustomDrawer
 	{
@@ -34,6 +35,7 @@ namespace Horizon.Combat.Editor
 
 			Color old = GUI.color;
 
+			//bug, this needs to change during play mode
 			GUI.color = new Color(0.85f, 0.85f, 0.85f);
 			EditorGUILayout.BeginVertical(SplitterStyle);
 			x = EditorGUILayout.IntField("X",value.x,GUILayout.ExpandWidth(false));

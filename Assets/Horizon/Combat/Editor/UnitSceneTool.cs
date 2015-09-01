@@ -8,16 +8,20 @@ using Horizon.Core.ExtensionMethods;
 
 namespace Horizon.Combat.Editor
 {
+	//unit positioning tools for the scene view
 	public class UnitSceneTool : SceneView<Unit>
 	{
+		//is the move tool selected
 		bool move = true;
 		
 		public override void OnSceneGUI ()
 		{
 			base.OnSceneGUI ();
 			
+			//no grid! jump ship!
 			if(model.grid == null) return;
 
+			//dont shopw the unity move/rotate tools, but keep tract of what is selected
 			if(Tools.current == Tool.Move)
 				move = true;
 			else if(Tools.current == Tool.Rotate)
@@ -27,6 +31,7 @@ namespace Horizon.Combat.Editor
 
 			if(move)
 			{
+				//draw a dragable sphear. user click and drag sphear to move unit
 				Handles.color = Color.white.SetAlpha(0.25f);
 				Vector3 dragVec = Handles.Slider2D(model.transform.position,Vector3.up,Vector3.forward,Vector3.right,0.3f,Handles.SphereCap,1);
 
@@ -42,6 +47,7 @@ namespace Horizon.Combat.Editor
 			}
 			else
 			{
+				//draw compase control. click on arrow to rotate unit
 				Handles.color = Color.white.SetAlpha(0.25f);
 				Handles.DrawWireDisc(model.transform.position,model.transform.up, 0.75f);
 

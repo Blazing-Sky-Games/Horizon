@@ -40,8 +40,7 @@ namespace Horizon.Combat.Views
 			GL.Begin( GL.LINES );
 			GL.Color(GridLineColor * new Color(1,1,1,0.8f));
 
-			//iterate over the gridlins.
-			//if i=one of the adjacent cells is passable, draw the gridline
+			//iterate over the gridlins. if one of the adjacent cells is passable, draw the gridline
 			foreach (GridLine line in model.GridLines)
 			{
 				if(line.AdjacentCells.Any(cell => cell.Passable))

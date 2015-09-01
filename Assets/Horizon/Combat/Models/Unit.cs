@@ -12,6 +12,7 @@ namespace Horizon.Combat.Models
 		{
 			base.Init ();
 
+			//set up the animated mesh. you have to make sure it is not null and that its parent is set
 			if(animatedMesh == null)
 			{
 				animatedMesh = new AnimatedMesh();
@@ -33,6 +34,7 @@ namespace Horizon.Combat.Models
 				GridPosition = GridPosition;
 			}
 		}
+
 		public GridPoint GridPosition
 		{
 			get
@@ -41,18 +43,22 @@ namespace Horizon.Combat.Models
 			}
 			set
 			{
+				//no grid! jump ship!
 				if(grid == null) return;
 
+				//make sure value is in bounds
 				if(value.x < 0) value.x = 0;
 				if(value.y < 0) value.y = 0;
 
 				if(value.x >= grid.Dimensions.x) value.x = grid.Dimensions.x - 1;
 				if(value.y >= grid.Dimensions.y) value.y = grid.Dimensions.y - 1;
 
+				// set pos to position of cell we are in
 				SetPropertyFeild(ref m_positionSerilized, value, () => GridPosition);
-				transform.localPosition = grid[GridPosition.x][GridPosition.y].transform.localPosition;
+				transform.localPosition = grid[GridPosition.x][GridPosition.y].transform.localPosition; 
 			}
 		}
+
 		public GridDirection DirectionFacing
 		{
 			get

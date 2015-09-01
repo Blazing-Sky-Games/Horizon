@@ -4,6 +4,7 @@ using Horizon.Core;
 
 namespace Horizon.Combat
 {
+	//cardinal direction in a grid
 	public enum GridDirection
 	{
 		North,East,South,West

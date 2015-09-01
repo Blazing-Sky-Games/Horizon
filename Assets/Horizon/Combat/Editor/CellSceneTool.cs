@@ -7,6 +7,7 @@ using System.Linq;
 
 namespace Horizon.Combat.Editor
 {
+	//disable move/rotate/scale for cells
 	public class CellSceneTool : SceneView<Cell>
 	{
 		public override void OnSceneGUI ()

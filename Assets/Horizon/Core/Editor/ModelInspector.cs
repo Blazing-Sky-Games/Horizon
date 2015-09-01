@@ -12,40 +12,11 @@ using Horizon.Core.WeakSubscription;
 
 namespace Horizon.Core.Editor
 {
-	//TODO: support multiobject editing. use showmixedvalue
 	[CustomEditor(typeof( ModelBase ), true, isFallback = true)]
 	[CanEditMultipleObjects]
 	public class ModelInspector : UnityEditor.Editor
 	{
-		//todo make it so you can close the foldouts
-		//private bool showFeilds = true;
-		//private bool showProps = false;
-
-		private class foldOutSet
-		{
-			public bool fields;
-			public bool props;
-
-			public foldOutSet()
-			{
-				fields = false;
-				props = false;
-			}
-		}
-
-		public class Indent : IDisposable
-		{
-			public Indent()
-			{
-				EditorGUI.indentLevel++;
-			}
-
-			public void Dispose()
-			{
-				EditorGUI.indentLevel--;
-			}
-		}
-
+		//draw a grey dividing line in the inspector
 		private static void Splitter()
 		{
 			float thickness = 1;
@@ -70,9 +41,9 @@ namespace Horizon.Core.Editor
 			}
 		}
 
-		private void DisplayObjectsThroughReflection(UnityEngine.Object[] objs)
+		private void DisplayObjectThroughReflection(UnityEngine.Object[] objs)
 		{
-			foreach(FieldInfo field in objs[0].GetType().GetFields().Where(x => x.GetCustomAttributes(typeof(HideInInspector),true).Count() == 0))
+			foreach(FieldInfo field in objs[0].GetType().GetFields().Where(x => x.GetCustomAttributes(typeof(HideInInspector),true).Count() == 0)) // dont show hidden fields
 			{
 				ModelInspectorUtility.DisplayMemberValue(field,objs);
 			}
@@ -86,8 +57,8 @@ namespace Horizon.Core.Editor
 					&& x.DeclaringType != typeof(Component) 
 					&& x.DeclaringType != typeof(Behaviour) 
 					&& x.DeclaringType != typeof(MonoBehaviour)
-				)
-				.Where(x => x.GetCustomAttributes(typeof(HideInInspector),true).Count() == 0);
+				) // dont show inherited props
+				.Where(x => x.GetCustomAttributes(typeof(HideInInspector),true).Count() == 0); // dont show hidden props
 
 				foreach(PropertyInfo property in props)
 				{
@@ -98,20 +69,18 @@ namespace Horizon.Core.Editor
 				}
 		}
 
+		//hmm ... this is kinda hacky right now. this is to call the OnSceneGUI for all views of the target
 		private void OnSceneGUI()
 		{
-			if(views == null)
-				views = (List<ViewBaseNonGeneric>)(typeof(ModelBase).GetField("m_views", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(target));
+			if(m_views == null) m_views = (List<ViewBaseNonGeneric>)(typeof(ModelBase).GetField("m_views", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(target));
 
-			//Handles.ScaleValueHandle(0,Vector3.zero,Quaternion.identity,30,Handles.ArrowCap,1);
-
-			foreach(var view in views)
+			foreach(var view in m_views)
 			{
 				view.OnSceneGUI();
 			}
 		}
 
-		// show all properties
+		// show all properties and fields
 		public override void OnInspectorGUI()
 		{
 			EditorGUI.BeginChangeCheck();
@@ -121,20 +90,19 @@ namespace Horizon.Core.Editor
 
 			GUILayout.Label("Model",boldAndItalicStyle);
 
-			DisplayObjectsThroughReflection(targets);
+			DisplayObjectThroughReflection(targets);
 
 			Splitter();
 		
 			GUILayout.Label("Views",boldAndItalicStyle);
 
-			// stores the views of all selected models, based on type
+			// stores the views of all selected models, based on type. this is so we can pass all of one type of view down to the display function
 			Dictionary<Type, List<ViewBaseNonGeneric>> viewLookup = new Dictionary<Type, List<ViewBaseNonGeneric>>();
 			foreach(object obj in targets)
 			{
-				if(views == null)
-					views = (List<ViewBaseNonGeneric>)(typeof(ModelBase).GetField("m_views", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(obj));
+				if(m_views == null) m_views = (List<ViewBaseNonGeneric>)(typeof(ModelBase).GetField("m_views", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(obj));
 
-				foreach(ViewBaseNonGeneric view in views)
+				foreach(ViewBaseNonGeneric view in m_views)
 				{
 					if(viewLookup.ContainsKey(view.GetType()) == false) viewLookup[view.GetType()] = new List<ViewBaseNonGeneric>(); 
 
@@ -142,12 +110,12 @@ namespace Horizon.Core.Editor
 				}
 			}
 
-			//foreach type of view on this type of model
+			//foreach type of view on this type of model, display the view
 			foreach(KeyValuePair<Type, List<ViewBaseNonGeneric>> entry in viewLookup)
 			{
 				EditorGUILayout.InspectorTitlebar(true,entry.Value[0]);
 				
-				DisplayObjectsThroughReflection(entry.Value.ToArray());
+				DisplayObjectThroughReflection(entry.Value.ToArray());
 			}
 
 			if(EditorGUI.EndChangeCheck())
@@ -156,6 +124,7 @@ namespace Horizon.Core.Editor
 			}
 		}
 
+		//call destroy if we have deleted the model
 		public void OnDestroy()
 		{
 			if(!this.target)
@@ -165,10 +134,7 @@ namespace Horizon.Core.Editor
 			}
 		}
 
-		List<ViewBaseNonGeneric> views;
-
-		//private bool showSubscribers = false;
-		//private Dictionary<UnityEngine.Object, foldOutSet> foldOutSets = new Dictionary<UnityEngine.Object, foldOutSet>();
+		private List<ViewBaseNonGeneric> m_views;
 	}
 }
 

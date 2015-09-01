@@ -5,6 +5,7 @@ using Horizon.Core.WeakSubscription;
 
 namespace Horizon.Core.Editor.Gizmos
 {
+	//inherit from this if you want to bundle up the code for a type of gizmo into a class
 	public abstract class Gizmo : IDisposable
 	{
 		public bool Enabled = true;
