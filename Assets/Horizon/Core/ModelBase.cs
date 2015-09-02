@@ -19,32 +19,6 @@ namespace Horizon.Core
 		// impliment INotifyPropertyChanged. backend that makes observable propeties work
 		public event PropertyChangedEventHandler PropertyChanged;
 
-		//events
-		public event EventHandler<EventArgs> StartEvent;
-		public event EventHandler<EventArgs> UpdateEvent; 
-		public event EventHandler<EventArgs> LateUpdateEvent; 
-		public event EventHandler<EventArgs> OnDrawGizmosEvent;
-		public event EventHandler<EventArgs> OnDrawGizmosSelectedEvent;
-
-		//events in c# are weird. the cannot be referanced outside the class the are defined in
-		//event names are a way to get around that
-		public readonly EventName StartEventName;
-		public readonly EventName UpdateEventName;
-		public readonly EventName LateUpdateEventName;
-		public readonly EventName OnDrawGizmosEventName;
-		public readonly EventName OnDrawGizmosSelectedEventName;
-
-		public ModelBase()
-		{
-			//eventnames!
-			//todo: getrid of events names, they are confusing and weird
-			StartEventName = this.GetEventNameFromExpresion(() => StartEvent);
-			UpdateEventName = this.GetEventNameFromExpresion(() => UpdateEvent);
-			LateUpdateEventName = this.GetEventNameFromExpresion(() => LateUpdateEvent);
-			OnDrawGizmosEventName = this.GetEventNameFromExpresion(() => OnDrawGizmosEvent);
-			OnDrawGizmosSelectedEventName = this.GetEventNameFromExpresion(() => OnDrawGizmosSelectedEvent);
-		}
-
 		//hook up all views through reflection
 		protected virtual void Init()
 		{
@@ -155,27 +129,42 @@ namespace Horizon.Core
 		//unity callbacks
 		protected virtual void Start()
 		{
-			StartEvent.FireIfNotNull(this, EventArgs.Empty);
+			foreach(ViewBaseNonGeneric view in m_views)
+			{
+				view.Start();
+			}
 		}
 
 		protected virtual void Update()
 		{
-			UpdateEvent.FireIfNotNull(this, EventArgs.Empty);
+			foreach(ViewBaseNonGeneric view in m_views)
+			{
+				view.Update();
+			}
 		}
 
 		protected virtual void LateUpdate()
 		{
-			LateUpdateEvent.FireIfNotNull(this, EventArgs.Empty);
+			foreach(ViewBaseNonGeneric view in m_views)
+			{
+				view.LateUpdate();
+			}
 		}
 
 		private void OnDrawGizmos()
 		{
-			OnDrawGizmosEvent.FireIfNotNull(this, EventArgs.Empty);
+			foreach(ViewBaseNonGeneric view in m_views)
+			{
+				view.SceneViewUpdate();
+			}
 		}
 		
 		private void OnDrawGizmosSelected()
 		{
-			OnDrawGizmosSelectedEvent.FireIfNotNull(this, EventArgs.Empty);
+			foreach(ViewBaseNonGeneric view in m_views)
+			{
+				view.WhileSelected();
+			}
 		}
 
 

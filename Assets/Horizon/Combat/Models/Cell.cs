@@ -11,12 +11,78 @@ using System;
 using Horizon.Core;
 using UnityEngine;
 using Horizon.Core.WeakSubscription;
+using System.Linq;
 
 
 namespace Horizon.Combat.Models
 {
-	public class Cell : ModelBase
+	[Flags]
+	// all the differant types of highlights, and their priority
+	public enum LogicalHighlightState
 	{
+		// values must be power of two
+		// lower valus have lower priority
+		//None = 0,
+		MovementRange = 1,
+		MovementPath = 2,
+		TargetingRange = 4,
+		EffectRange = 8
+		//these are just example states. we should come up with different ones when we know what we need
+	}
+
+	public static class LogicalHighlightStateExtension
+	{
+		public static LogicalHighlightState EnableHighlightState(this LogicalHighlightState self, LogicalHighlightState other)
+		{
+			return self |= other;
+		}
+
+		public static LogicalHighlightState DisableHighlightState(this LogicalHighlightState self, LogicalHighlightState other)
+		{
+			return self ^= other; 
+		}
+
+		public static bool stateIsEnabled(this LogicalHighlightState self, LogicalHighlightState other)
+		{
+			return (self & other) == other;
+		}
+
+		public static LogicalHighlightState EffectiveHighlightState(this LogicalHighlightState self)
+		{
+			//set to the lowest priority
+			LogicalHighlightState effectiveState = LogicalHighlightState.MovementRange ^ LogicalHighlightState.MovementRange;
+
+			foreach(var State in Enum.GetValues(typeof(LogicalHighlightState)).Cast<LogicalHighlightState>())
+			{
+				if((int)State > (int)effectiveState &&  self.stateIsEnabled(State)) effectiveState = State;
+			}
+
+			return effectiveState;
+		}
+	}
+
+	public class Cell : ModelBase
+	{		
+		[HideInInspector]
+		public LogicalHighlightState HighlightState
+		{
+			get
+			{
+				return m_highlightState;
+			}
+			set
+			{
+
+				SetPropertyFeild(ref m_highlightState, value, () => HighlightState);
+			}
+		}
+
+		protected override void Init ()
+		{
+			base.Init ();
+			resetPosition ();
+		}
+
 		//can the cell be walked over
 		public bool Passable
 		{
@@ -30,24 +96,59 @@ namespace Horizon.Combat.Models
 			}
 		}
 
-		//the x and y size of the cell
-		public float CellSize
+		private void resetPosition ()
+		{
+			transform.localPosition = new Vector3 (GridPosition.x + 0.5f, 0, GridPosition.y + 0.5f);
+		}
+
+		void resetName ()
+		{
+			gameObject.name = "(" + GridPosition.x + "," + GridPosition.y + ")";
+		}
+
+		[HideInInspector]
+		public GridPoint GridPosition
 		{
 			get
 			{
-				return m_cellSizeSerilized;
+				return m_gridPositionSerilized;
 			}
 			set
 			{
-				SetPropertyFeild(ref m_cellSizeSerilized, value, () => CellSize);
+				if(SetPropertyFeild(ref m_gridPositionSerilized, value,() => GridPosition))
+				{
+					resetName ();
+					resetPosition ();
+				}
+			}
+		}
+
+		[HideInInspector]
+		public Grid grid
+		{
+			get
+			{
+				return m_gridSerilized;
+			}
+			set
+			{
+				if(SetPropertyFeild(ref m_gridSerilized, value,() => grid))
+				{
+					resetPosition ();
+				}
 			}
 		}
 
 		[SerializeField]
-		private float m_cellSizeSerilized = 1;
+		private bool m_passableSerilized = true;
 
 		[SerializeField]
-		private bool m_passableSerilized;
+		private GridPoint m_gridPositionSerilized;
+
+		[SerializeField]
+		private Grid m_gridSerilized;
+
+		private LogicalHighlightState m_highlightState = LogicalHighlightState.MovementRange ^ LogicalHighlightState.MovementRange;
 	}
 }
 

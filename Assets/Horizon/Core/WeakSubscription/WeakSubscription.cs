@@ -172,49 +172,14 @@ namespace Horizon.Core.WeakSubscription
 		}
 	}
 
-	public class GeneralEventSubscription
-		: WeakEventSubscription<object, EventArgs>
-	{
-		public GeneralEventSubscription(object source,
-		                                   EventInfo eventInfo,
-		                                   EventHandler<EventArgs> eventHandler)
-			: base(source, eventInfo, eventHandler)
-		{
-		}
-		
-		protected override Delegate CreateEventHandler()
-		{
-			return new EventHandler<EventArgs>(OnSourceEvent);
-		}
-	}
-
-	public class EventName
-	{
-		public readonly string Name;
-		public EventName(object source, Expression<Func<EventHandler<EventArgs>>> eventExpression)
-		{
-			Name = source.GetEventNameStringFromExpresion(eventExpression);
-		}
-	}
-	
 	public static class WeakSubscriptionExtensionMethods
 	{
-		public static NamedNotifyPropertyChangedEventSubscription<T> WeakSubscribeToProperty<T>(this INotifyPropertyChanged source,
+		public static NamedNotifyPropertyChangedEventSubscription<T> WeakSubscribe<T>(this INotifyPropertyChanged source,
 		                                                                              Expression<Func<T>> property,
 		                                                                              EventHandler<PropertyChangedEventArgs>
 		                                                                              eventHandler)
 		{
 			return new NamedNotifyPropertyChangedEventSubscription<T>(source, property, eventHandler);
-		}
-
-		public static GeneralEventSubscription WeakSubscribeToEvent(this object source, EventName eventName, EventHandler<EventArgs> eventHandler)
-		{
-			if(eventName == null)
-			{
-				throw new ArgumentNullException("eventName","you are trying to subscribe to an event that has not been initilized yet");
-			}
-
-			return new GeneralEventSubscription(source, source.GetType().GetEvent(eventName.Name), eventHandler);
 		}
 	}
 }

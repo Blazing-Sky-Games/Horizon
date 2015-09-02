@@ -12,17 +12,20 @@ using Horizon.Combat.Models;
 using Horizon.Core.Editor;
 using UnityEngine;
 using UnityEditor;
+using Horizon.Core.ExtensionMethods;
+using Horizon.Core;
 
 
 namespace Horizon.Combat.Editor
 {
-	public class GridSceneView : SceneView<Grid>
+	//draw dotted grid lins in the sceneview
+	public class GridSceneView : ViewBase<Grid>
 	{
-		protected override void SceneViewUpdate ()
+		public override void SceneViewUpdate ()
 		{
 			base.SceneViewUpdate ();
 
-			Handles.color = Handles.color*new Color(1,1,1,0.5f);
+			Handles.color = Color.white.SetAlpha(0.25f);
 
 			foreach(GridLine line in model.GridLines)
 			{

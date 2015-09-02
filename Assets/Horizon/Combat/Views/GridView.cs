@@ -28,7 +28,7 @@ namespace Horizon.Combat.Views
 			base.Init ();
 
 			//do gl drawing onpostrender
-			HorizonCamera.Main.renderCallbacks.PostRenderEvent +=
+			Camera.main.GetComponent<HorizonCamera>().renderCallbacks.PostRenderEvent +=
 			(sender,args) => 
 			{
 				DrawGridlines();
@@ -37,11 +37,11 @@ namespace Horizon.Combat.Views
 		private void DrawGridlines()
 		{
 			GLUtility.DefaultMaterial.SetPass (0);
+			GLUtility.DefaultMaterial.color = GridLineColor * new Color(1,1,1,0.8f);
 			GL.Begin( GL.LINES );
 			GL.Color(GridLineColor * new Color(1,1,1,0.8f));
 
-			//iterate over the gridlins.
-			//if i=one of the adjacent cells is passable, draw the gridline
+			//iterate over the gridlins. if one of the adjacent cells is passable, draw the gridline
 			foreach (GridLine line in model.GridLines)
 			{
 				if(line.AdjacentCells.Any(cell => cell.Passable))
