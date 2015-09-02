@@ -16,6 +16,9 @@ using UnityEngine;
 using System.Collections.ObjectModel;
 using Horizon.Core.ExtensionMethods;
 
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 namespace Horizon.Combat.Models
 {
@@ -87,6 +90,8 @@ namespace Horizon.Combat.Models
 		{
 			get
 			{
+				if(Dimensions.x == 0 || Dimensions.y == 0) yield break;
+
 				//iterate over horizontal lines
 				for(int j = 0; j <= Dimensions.y; j += 1)
 				{
@@ -125,7 +130,7 @@ namespace Horizon.Combat.Models
 						{
 							yield return new GridLine(start,end,this[i][j],null);
 						}
-						else if(i == Dimensions.x)//right most edge
+						else if(i == Dimensions.x)//right most edges
 						{
 							yield return new GridLine(start,end,null,this[i-1][j]);
 						}
@@ -211,8 +216,13 @@ namespace Horizon.Combat.Models
 
 		private Cell NewCellAt (int x, int y)
 		{
+#if UNITY_EDITOR
+			GameObject newCell = PrefabUtility.InstantiatePrefab(CellPrefab) as GameObject;
+#elif
 			GameObject newCell = Instantiate (CellPrefab);
+#endif
 			newCell.transform.parent = cellsParent.transform;
+			newCell.name = "(" + x + "," + y + ")";
 			Cell cellComponent = newCell.GetComponent<Cell> ();
 			cellComponent.grid = this;
 			cellComponent.GridPosition = new GridPoint (x, y);

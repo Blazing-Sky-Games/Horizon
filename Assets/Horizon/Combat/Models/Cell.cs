@@ -22,23 +22,24 @@ namespace Horizon.Combat.Models
 	{
 		// values must be power of two
 		// lower valus have lower priority
-		None = 0,
+		//None = 0,
 		MovementRange = 1,
 		MovementPath = 2,
 		TargetingRange = 4,
 		EffectRange = 8
+		//these are just example states. we should come up with different ones when we know what we need
 	}
 
 	public static class LogicalHighlightStateExtension
 	{
-		public static void EnableHighlightState(this LogicalHighlightState self, LogicalHighlightState other)
+		public static LogicalHighlightState EnableHighlightState(this LogicalHighlightState self, LogicalHighlightState other)
 		{
-			self |= other;
+			return self |= other;
 		}
 
-		public static void DisableHighlightState(this LogicalHighlightState self, LogicalHighlightState other)
+		public static LogicalHighlightState DisableHighlightState(this LogicalHighlightState self, LogicalHighlightState other)
 		{
-			self ^= other; 
+			return self ^= other; 
 		}
 
 		public static bool stateIsEnabled(this LogicalHighlightState self, LogicalHighlightState other)
@@ -49,7 +50,7 @@ namespace Horizon.Combat.Models
 		public static LogicalHighlightState EffectiveHighlightState(this LogicalHighlightState self)
 		{
 			//set to the lowest priority
-			LogicalHighlightState effectiveState = LogicalHighlightState.None;
+			LogicalHighlightState effectiveState = LogicalHighlightState.MovementRange ^ LogicalHighlightState.MovementRange;
 
 			foreach(var State in Enum.GetValues(typeof(LogicalHighlightState)).Cast<LogicalHighlightState>())
 			{
@@ -62,7 +63,25 @@ namespace Horizon.Combat.Models
 
 	public class Cell : ModelBase
 	{		
-		public LogicalHighlightState HighlightState = LogicalHighlightState.None;
+		[HideInInspector]
+		public LogicalHighlightState HighlightState
+		{
+			get
+			{
+				return m_highlightState;
+			}
+			set
+			{
+
+				SetPropertyFeild(ref m_highlightState, value, () => HighlightState);
+			}
+		}
+
+		protected override void Init ()
+		{
+			base.Init ();
+			resetPosition ();
+		}
 
 		//can the cell be walked over
 		public bool Passable
@@ -77,6 +96,16 @@ namespace Horizon.Combat.Models
 			}
 		}
 
+		private void resetPosition ()
+		{
+			transform.localPosition = new Vector3 (GridPosition.x + 0.5f, 0, GridPosition.y + 0.5f);
+		}
+
+		void resetName ()
+		{
+			gameObject.name = "(" + GridPosition.x + "," + GridPosition.y + ")";
+		}
+
 		[HideInInspector]
 		public GridPoint GridPosition
 		{
@@ -88,8 +117,8 @@ namespace Horizon.Combat.Models
 			{
 				if(SetPropertyFeild(ref m_gridPositionSerilized, value,() => GridPosition))
 				{
-					gameObject.name = "(" + GridPosition.x + "," + GridPosition.y + ")";
-					transform.localPosition = new Vector3(GridPosition.x + 0.5f,0,GridPosition.y + 0.5f);
+					resetName ();
+					resetPosition ();
 				}
 			}
 		}
@@ -105,19 +134,21 @@ namespace Horizon.Combat.Models
 			{
 				if(SetPropertyFeild(ref m_gridSerilized, value,() => grid))
 				{
-					transform.localPosition = new Vector3(GridPosition.x + 0.5f,0,GridPosition.y + 0.5f);
+					resetPosition ();
 				}
 			}
 		}
 
 		[SerializeField]
-		private bool m_passableSerilized;
+		private bool m_passableSerilized = true;
 
 		[SerializeField]
 		private GridPoint m_gridPositionSerilized;
 
 		[SerializeField]
 		private Grid m_gridSerilized;
+
+		private LogicalHighlightState m_highlightState = LogicalHighlightState.MovementRange ^ LogicalHighlightState.MovementRange;
 	}
 }
 
