@@ -5,11 +5,12 @@ using Horizon.Combat.Models;
 using UnityEditor;
 using System.Linq;
 using Horizon.Core.ExtensionMethods;
+using Horizon.Core;
 
 namespace Horizon.Combat.Editor
 {
 	//unit positioning tools for the scene view
-	public class UnitSceneTool : SceneView<Unit>
+	public class UnitSceneTool : ViewBase<Unit>
 	{
 		//is the move tool selected
 		bool move = true;

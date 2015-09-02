@@ -17,6 +17,14 @@ namespace Horizon.Core
 
 		//call when destroying a view
 		public virtual void Dispose (){}
+
+		//override these in a derived view
+		public virtual void Start(){}
+		public virtual void Update(){}
+		public virtual void LateUpdate(){}
+
+		public virtual void SceneViewUpdate(){} // called everyframe in the scene view
+		public virtual void WhileSelected(){} // called while the model is selected
 	}
 	
 	// the base class of all generic views
@@ -36,20 +44,8 @@ namespace Horizon.Core
 			return model;
 		}
 
-		// override this function to hook up to other model properties
 		// called whenever the object is loaded, in or out of gameplay
-		protected virtual void Init()
-		{
-			//hook up to events in the model
-			model.WeakSubscribeToEvent(model.StartEventName,(s,e) => Start());
-			model.WeakSubscribeToEvent(model.UpdateEventName,(s,e) => Update());
-			model.WeakSubscribeToEvent(model.LateUpdateEventName,(s,e) => LateUpdate());
-		}
-
-		//override these in a derived view
-		protected virtual void Start(){}
-		protected virtual void Update(){}
-		protected virtual void LateUpdate(){}
+		protected virtual void Init(){}
 
 		[SerializeField]
 		protected ModelType model;

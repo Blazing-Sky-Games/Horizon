@@ -33,7 +33,9 @@ namespace Horizon.Combat.Editor
 					foreach(Cell cell in Selection.gameObjects.Where(go => go.GetComponent<Cell>() != null).Select(go => go.GetComponent<Cell>()))
 					{
 						Unit unitInstance = (PrefabUtility.InstantiatePrefab(unit) as GameObject).GetComponent<Unit>();
-						cell.grid.AddUnit(unitInstance);
+						//todo: replace with somthing like addunit() function
+						unitInstance.transform.parent = cell.transform;
+						unitInstance.grid = cell.grid;
 						unitInstance.GridPosition = cell.GridPosition;
 					}
 				}

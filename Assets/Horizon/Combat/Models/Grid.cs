@@ -57,9 +57,8 @@ namespace Horizon.Combat.Models
 
 	public class Grid : ModelBase
 	{
-		[HideInInspector]
 		//the parent of all the cells. cells are grouped like this to make the hierarchy easyer to look at
-		public GameObject cellsParent;
+		private GameObject cellsParent;
 
 		//returns a colum of cells
 		// to get the cell at space (i,j) from a Grid named "grid", use
@@ -218,13 +217,6 @@ namespace Horizon.Combat.Models
 			cellComponent.grid = this;
 			cellComponent.GridPosition = new GridPoint (x, y);
 			return cellComponent;
-		}
-
-		//todo: add alot more stuff to this. hmm.... maybe this should be in the combat main!
-		public void AddUnit (Unit unitInstance)
-		{
-			unitInstance.grid = this;
-			unitInstance.transform.parent = transform;
 		}
 
 		//long tedious code to handle the dims changing

@@ -11,12 +11,59 @@ using System;
 using Horizon.Core;
 using UnityEngine;
 using Horizon.Core.WeakSubscription;
+using System.Linq;
 
 
 namespace Horizon.Combat.Models
 {
-	public class Cell : ModelBase
+	[Flags]
+	// all the differant types of highlights, and their priority
+	public enum LogicalHighlightState
 	{
+		// values must be power of two
+		// lower valus have lower priority
+		None = 0,
+		MovementRange = 1,
+		MovementPath = 2,
+		TargetingRange = 4,
+		EffectRange = 8
+	}
+
+	public static class LogicalHighlightStateExtension
+	{
+		public static void EnableHighlightState(this LogicalHighlightState self, LogicalHighlightState other)
+		{
+			self |= other;
+		}
+
+		public static void DisableHighlightState(this LogicalHighlightState self, LogicalHighlightState other)
+		{
+			self ^= other; 
+		}
+
+		public static bool stateIsEnabled(this LogicalHighlightState self, LogicalHighlightState other)
+		{
+			return (self & other) == other;
+		}
+
+		public static LogicalHighlightState EffectiveHighlightState(this LogicalHighlightState self)
+		{
+			//set to the lowest priority
+			LogicalHighlightState effectiveState = LogicalHighlightState.None;
+
+			foreach(var State in Enum.GetValues(typeof(LogicalHighlightState)).Cast<LogicalHighlightState>())
+			{
+				if((int)State > (int)effectiveState &&  self.stateIsEnabled(State)) effectiveState = State;
+			}
+
+			return effectiveState;
+		}
+	}
+
+	public class Cell : ModelBase
+	{		
+		public LogicalHighlightState HighlightState = LogicalHighlightState.None;
+
 		//can the cell be walked over
 		public bool Passable
 		{

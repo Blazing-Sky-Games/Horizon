@@ -10,15 +10,15 @@
 using System;
 using Horizon.Combat.Models;
 using Horizon.Core.Editor;
-using Horizon.Core.Editor.Gizmos;
 using UnityEngine;
 using Horizon.Core.ExtensionMethods;
 using Horizon.Core.WeakSubscription;
+using Horizon.Core;
 
 
 namespace Horizon.Combat.Editor
 {
-	public class CellSceneHighlight : SceneView<Cell>
+	public class CellSceneHighlight : ViewBase<Cell>
 	{
 		protected override void Init ()
 		{
@@ -26,22 +26,49 @@ namespace Horizon.Combat.Editor
 
 			PassableColor = Color.cyan.SetAlpha(0.1f);
 			ImpassableColor = Color.black.SetAlpha(0.4f);
-
-			m_rectangleGizmo = new RectangleGizmo(model);
-
-			m_rectangleGizmo.color = model.Passable ? PassableColor : ImpassableColor;
-			model.WeakSubscribeToProperty(()=>model.Passable, (s,a) => {
-				m_rectangleGizmo.color = model.Passable ? PassableColor : ImpassableColor;
-			});
 		}
 
-		public override void Dispose ()
+		public override void SceneViewUpdate ()
 		{
-			if(m_rectangleGizmo != null)
-				m_rectangleGizmo.Dispose();
+			base.SceneViewUpdate ();
+			UnityEngine.Gizmos.color = model.Passable ? PassableColor : ImpassableColor;
+			UnityEngine.Gizmos.DrawMesh(rectangleMesh,model.transform.position,model.transform.rotation,model.transform.localScale);
 		}
 
-		private RectangleGizmo m_rectangleGizmo;
+		private Mesh rectangleMesh
+		{
+			get
+			{
+				if(m_rectangleMesh == null)
+				{
+					m_rectangleMesh = new Mesh();
+					m_rectangleMesh.hideFlags = HideFlags.HideAndDontSave;
+					m_rectangleMesh.vertices = new Vector3[]{ 
+						new Vector3(0.5f,0.0f,0.5f), 
+						new Vector3(-0.5f,0.0f,0.5f), 
+						new Vector3(-0.5f,0.0f,-0.5f), 
+						new Vector3(0.5f,0.0f,-0.5f)
+					};
+					
+					m_rectangleMesh.triangles = new int[]{
+						2,1,0,
+						3,2,0
+					};
+					
+					m_rectangleMesh.normals = new Vector3[]
+					{
+						Vector3.up,
+						Vector3.up,
+						Vector3.up,
+						Vector3.up
+					};
+				}
+				
+				return m_rectangleMesh;
+			}
+		}
+		
+		private static Mesh m_rectangleMesh;
 
 		private Color PassableColor;
 		private Color ImpassableColor;

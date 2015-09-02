@@ -13,14 +13,15 @@ using Horizon.Core.Editor;
 using UnityEngine;
 using UnityEditor;
 using Horizon.Core.ExtensionMethods;
+using Horizon.Core;
 
 
 namespace Horizon.Combat.Editor
 {
 	//draw dotted grid lins in the sceneview
-	public class GridSceneView : SceneView<Grid>
+	public class GridSceneView : ViewBase<Grid>
 	{
-		protected override void SceneViewUpdate ()
+		public override void SceneViewUpdate ()
 		{
 			base.SceneViewUpdate ();
 

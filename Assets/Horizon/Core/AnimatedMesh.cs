@@ -24,7 +24,10 @@ namespace Horizon.Core
 	[Serializable]
 	public class AnimatedMesh
 	{
+		//TODO: function and etc to enable controling animation from script
+
 		[SerializeField]
+		// where do we find the prefab instance
 		private GameObject Parent;
 		
 		[SerializeField]
@@ -34,7 +37,7 @@ namespace Horizon.Core
 		{
 			this.Parent = Parent;
 #if UNITY_EDITOR
-			RefreshMesh();
+			RefreshMesh(); // here so it gets initilized
 #endif
 		}
 
@@ -72,6 +75,7 @@ namespace Horizon.Core
 			}
 		}
 
+		//set the prefab. refresh the animator controler. TODO: make it possible to manually refresh the animator controler
 		public void RefreshMesh()
 		{
 			PrefabInstance meshParent = Parent.GetComponent<PrefabInstance>();

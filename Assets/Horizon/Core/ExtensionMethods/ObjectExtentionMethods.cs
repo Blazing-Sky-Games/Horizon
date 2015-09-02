@@ -72,11 +72,6 @@ namespace Horizon.Core.ExtensionMethods
 
 			return memberExpression.Member.Name;
 		}
-
-		public static EventName GetEventNameFromExpresion(this object target, Expression<Func<EventHandler<EventArgs>>> expression)
-		{
-			return new EventName(target,expression);
-		}
 		
 		public static MemberExpression FindMemberExpression<T>(this Expression<Func<T>> expression)
 		{

@@ -192,10 +192,6 @@ namespace Horizon.Core.Editor
 			{
 				Display<Vector4>(memberValue, EditorGUILayout.Vector4Field);
 			}
-			else if(memberValue.ValueType == typeof(EventName))
-			{
-				//todo
-			}
 			else if(customDrawFunctions.ContainsKey(memberValue.ValueType))
 			{
 				Display<object>(memberValue, (name, value, options) => customDrawFunctions[memberValue.ValueType].Draw(name, value)); 

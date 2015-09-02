@@ -37,6 +37,7 @@ namespace Horizon.Combat.Views
 		private void DrawGridlines()
 		{
 			GLUtility.DefaultMaterial.SetPass (0);
+			GLUtility.DefaultMaterial.color = GridLineColor * new Color(1,1,1,0.8f);
 			GL.Begin( GL.LINES );
 			GL.Color(GridLineColor * new Color(1,1,1,0.8f));
 

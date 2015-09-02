@@ -10,19 +10,19 @@
 using System;
 using Horizon.Combat.Models;
 using Horizon.Core.Editor;
-using Horizon.Core.Editor.Gizmos;
 using UnityEngine;
 using Horizon.Core.ExtensionMethods;
 using Horizon.Core.WeakSubscription;
 using UnityEditor;
+using Horizon.Core;
 
 
 namespace Horizon.Combat.Editor
 {
 	//the little blue lable that pops up when you select a cell
-	public class CellSelectedLabel : SceneView<Cell>
+	public class CellSelectedLabel : ViewBase<Cell>
 	{
-		protected override void WhileSelected ()
+		public override void WhileSelected ()
 		{
 			base.WhileSelected ();
 
