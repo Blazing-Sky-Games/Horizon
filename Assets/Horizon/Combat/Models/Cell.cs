@@ -63,7 +63,7 @@ namespace Horizon.Combat.Models
 
 	public class Cell : ModelBase
 	{		
-		[HideInInspector]
+		//[HideInInspector]
 		public LogicalHighlightState HighlightState
 		{
 			get

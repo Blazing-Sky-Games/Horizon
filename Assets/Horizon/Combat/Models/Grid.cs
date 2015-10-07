@@ -162,6 +162,12 @@ namespace Horizon.Combat.Models
 			}
 		}
 
+		// is a grid point in range
+		public bool Contains (GridPoint pointUnderMouse)
+		{
+			return (0 <= pointUnderMouse.x && pointUnderMouse.x < Dimensions.x && 0 <= pointUnderMouse.y && pointUnderMouse.y < Dimensions.y);
+		}
+
 		//orginal cell
 		//all cells in the grid are copys of this cell
 		public GameObject CellPrefab

@@ -34,7 +34,7 @@ namespace Horizon.Combat.Editor
 					{
 						Unit unitInstance = (PrefabUtility.InstantiatePrefab(unit) as GameObject).GetComponent<Unit>();
 						//todo: replace with somthing like addunit() function
-						unitInstance.transform.parent = cell.transform;
+						unitInstance.transform.parent = cell.grid.transform;
 						unitInstance.grid = cell.grid;
 						unitInstance.GridPosition = cell.GridPosition;
 					}
