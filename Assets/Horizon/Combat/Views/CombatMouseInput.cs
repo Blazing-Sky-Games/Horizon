@@ -1,4 +1,5 @@
 using Horizon.Core;
+using Horizon.Core.ExtensionMethods;
 using Horizon.Combat.Models;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -57,6 +58,28 @@ namespace Horizon.Combat.Views
 				//null is interpreted as hovering outside the grid
 				model.MouseOverCell = null;
 			}
+
+			//raycast to check for units
+			// this migth break later if there are other colliders in the scene
+			RaycastHit hit; 
+			if (Physics.Raycast (mouseRay,out hit)) 
+			{
+				hitUnit = hit.collider.gameObject.GetComponentInParentRecursive<Unit>();
+
+				if (hitUnit != null) 
+				{
+					model.MouseOverUnit = hitUnit;
+				}
+				else 
+				{
+					model.MouseOverUnit = null;
+				}
+			} 
+			else 
+			{
+				hitUnit = null;
+				model.MouseOverUnit = null;
+			}
 		}
 
 		//handle clicks
@@ -68,11 +91,18 @@ namespace Horizon.Combat.Views
 				{
 					model.ClickCell(PointUnderMouse);
 				}
+
+				if(hitUnit != null)
+				{
+					model.ClickUnit(hitUnit);
+				}
 			}
 		}
 
 		private Ray mouseRay;
 		private GridPoint PointUnderMouse;
+
+		private Unit hitUnit;
 	}
 }
 

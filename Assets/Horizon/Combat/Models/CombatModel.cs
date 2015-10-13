@@ -1,5 +1,6 @@
 using Horizon.Combat.Models; 
 using Horizon.Core;
+using Horizon.Core.ExtensionMethods;
 using UnityEngine;
 
 namespace Horizon.Combat.Models
@@ -27,6 +28,31 @@ namespace Horizon.Combat.Models
 			}
 		}
 
+		public Unit MouseOverUnit
+		{
+			get
+			{
+				return mouseOverUnit;
+			}
+			set
+			{
+				if(mouseOverUnit != null)
+					mouseOverUnit.gameObject.SetLayerRecursively(0);
+
+				mouseOverUnit = value;
+
+				if(mouseOverUnit != null)
+				{
+					mouseOverUnit.gameObject.SetLayerRecursively(9);
+				}
+			}
+		}
+
+		public void ClickUnit(Unit clicked)
+		{
+			Debug.Log (clicked.name);
+		}
+
 		public void ClickCell(GridPoint clicked)
 		{
 			ClickCell (grid [clicked]);
@@ -47,5 +73,6 @@ namespace Horizon.Combat.Models
 
 		private Cell mouseOverCell;
 		private Cell LastClicked;
+		private Unit mouseOverUnit;
 	}
 }

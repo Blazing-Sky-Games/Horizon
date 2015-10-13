@@ -4,6 +4,7 @@ using UnityEditor;
 using UnityEditor.Callbacks;
 #endif
 using System.Collections.Generic;
+using Horizon.Core.ExtensionMethods;
 
 [ExecuteInEditMode]
 //code from here http://framebunker.com/blog/poor-mans-nested-prefabs/
@@ -113,6 +114,7 @@ public class PrefabInstance : MonoBehaviour
 		Quaternion rot = go.transform.localRotation;
 		Vector3 scale = go.transform.localScale;
 		go.transform.parent = pi.transform;
+		go.SetLayerRecursively(pi.gameObject.layer);
 		go.transform.localPosition = Vector3.zero;
 		go.transform.localScale = scale;
 		go.transform.localRotation = rot;

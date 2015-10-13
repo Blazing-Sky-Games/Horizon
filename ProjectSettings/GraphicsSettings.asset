@@ -17,6 +17,9 @@ GraphicsSettings:
   - {fileID: 15106, guid: 0000000000000000f000000000000000, type: 0}
   - {fileID: 10770, guid: 0000000000000000f000000000000000, type: 0}
   - {fileID: 10782, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 4800000, guid: b412719e8a6d57344943fe53e62b6e9b, type: 3}
+  - {fileID: 4800000, guid: b7648390d734e82468297ffbc6a0297a, type: 3}
+  - {fileID: 4800000, guid: 0e3ed795ccbcbb545b83ab78426d581f, type: 3}
   m_PreloadedShaders: []
   m_LightmapStripping: 0
   m_LightmapKeepPlain: 1
