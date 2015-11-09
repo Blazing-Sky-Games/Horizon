@@ -103,7 +103,7 @@ namespace Horizon.Core.Editor
 		}
 
 		//display a member value given a delegate to a drawing function
-		private static void Display<T>(MemberValueWrapper value, Func<string,T,GUILayoutOption[],T> DisplayFunction)
+		private static bool Display<T>(MemberValueWrapper value, Func<string,T,GUILayoutOption[],T> DisplayFunction)
 		{
 			//should this value be mixed
 			EditorGUI.showMixedValue = value.mixed;
@@ -112,109 +112,116 @@ namespace Horizon.Core.Editor
 
 			T val = DisplayFunction(value.Name.SplitCamelCase(),(T)value.get(),new GUILayoutOption[]{});
 
+			bool ret = false;
 			//if the editor changed, set the value
 			if(EditorGUI.EndChangeCheck())
 			{
 				value.set(val);
+				ret = true;
 			}
 
 			EditorGUI.showMixedValue = false;
+
+			return ret;
 		}
 
-		private static void DisplayMemberValue(MemberValueWrapper memberValue)
+		private static bool DisplayMemberValue(MemberValueWrapper memberValue)
 		{
+			bool ret = false;
 			// display value editor ui based on property type
 			if(memberValue.ValueType == typeof(Bounds))
 			{
-				Display<Bounds>(memberValue, EditorGUILayout.BoundsField);
+				ret = Display<Bounds>(memberValue, EditorGUILayout.BoundsField);
 			}
 			else if(memberValue.ValueType == typeof(Color))
 			{
-				Display<Color>(memberValue, EditorGUILayout.ColorField);
+				ret = Display<Color>(memberValue, EditorGUILayout.ColorField);
 			}
 			else if(memberValue.ValueType == typeof(AnimationCurve))
 			{
 				if(memberValue.get() != null)
-					Display<AnimationCurve>(memberValue, EditorGUILayout.CurveField);
+					ret = Display<AnimationCurve>(memberValue, EditorGUILayout.CurveField);
 			}
 			else if(memberValue.ValueType == typeof(double))
 			{
-				Display<double>(memberValue, EditorGUILayout.DoubleField);
+				ret = Display<double>(memberValue, EditorGUILayout.DoubleField);
 			}
 			else if(memberValue.ValueType.IsEnum)
 			{
 				if(memberValue.ValueType.GetCustomAttributes(typeof(FlagsAttribute),true).Length > 0)
 				{
-					Display<Enum>(memberValue, EditorGUILayout.EnumMaskField);
+					ret = Display<Enum>(memberValue, EditorGUILayout.EnumMaskField);
 				}
 				else
 				{
-					Display<Enum>(memberValue, EditorGUILayout.EnumPopup);
+					ret = Display<Enum>(memberValue, EditorGUILayout.EnumPopup);
 				}
 			}
 			else if(memberValue.ValueType == typeof(float))
 			{
-				Display<float>(memberValue, EditorGUILayout.FloatField);
+				ret = Display<float>(memberValue, EditorGUILayout.FloatField);
 			}
 			else if(memberValue.ValueType == typeof(int))
 			{
-				Display<int>(memberValue, EditorGUILayout.IntField);
+				ret = Display<int>(memberValue, EditorGUILayout.IntField);
 			}
 			else if(memberValue.ValueType == typeof(LayerMask))
 			{
-				Display<LayerMask>(memberValue, (label,layer,options) => (LayerMask)EditorGUILayout.LayerField(label,layer.value,options));
+				ret = Display<LayerMask>(memberValue, (label,layer,options) => (LayerMask)EditorGUILayout.LayerField(label,layer.value,options));
 			}
 			else if(memberValue.ValueType == typeof(long))
 			{
-				Display<long>(memberValue, EditorGUILayout.LongField);
+				ret = Display<long>(memberValue, EditorGUILayout.LongField);
 			}
 			else if(memberValue.ValueType == typeof(Rect))
 			{
-				Display<Rect>(memberValue, EditorGUILayout.RectField);
+				ret = Display<Rect>(memberValue, EditorGUILayout.RectField);
 			}
 			else if(memberValue.ValueType == typeof(string))
 			{
-				Display<string>(memberValue, EditorGUILayout.TextField);
+				ret = Display<string>(memberValue, EditorGUILayout.TextField);
 			}
 			else if(memberValue.ValueType == typeof(bool))
 			{
-				Display<bool>(memberValue, EditorGUILayout.Toggle);
+				ret = Display<bool>(memberValue, EditorGUILayout.Toggle);
 			}
 			else if(memberValue.ValueType == typeof(Vector2))
 			{
-				Display<Vector2>(memberValue, EditorGUILayout.Vector2Field);
+				ret = Display<Vector2>(memberValue, EditorGUILayout.Vector2Field);
 			}
 			else if(memberValue.ValueType == typeof(Vector3))
 			{
-				Display<Vector3>(memberValue, EditorGUILayout.Vector3Field);
+				ret = Display<Vector3>(memberValue, EditorGUILayout.Vector3Field);
 			}
 			else if(memberValue.ValueType == typeof(Vector4))
 			{
-				Display<Vector4>(memberValue, EditorGUILayout.Vector4Field);
+				ret = Display<Vector4>(memberValue, EditorGUILayout.Vector4Field);
 			}
 			else if(customDrawFunctions.ContainsKey(memberValue.ValueType))
 			{
-				Display<object>(memberValue, (name, value, options) => customDrawFunctions[memberValue.ValueType].Draw(name, value)); 
+				ret = Display<object>(memberValue, (name, value, options) => customDrawFunctions[memberValue.ValueType].Draw(name, value)); 
 			}
 			else if( memberValue.ValueType == typeof(UnityEngine.Object) || memberValue.ValueType.IsSubclassOf(typeof(UnityEngine.Object)))
 			{
-				Display<UnityEngine.Object>(memberValue, (label,obj,options) => EditorGUILayout.ObjectField(label,obj,memberValue.ValueType,true,options));
+				ret = Display<UnityEngine.Object>(memberValue, (label,obj,options) => EditorGUILayout.ObjectField(label,obj,memberValue.ValueType,true,options));
 			}
 			else
 			{
 				EditorGUILayout.LabelField(memberValue.Name.SplitCamelCase(),"cannot display");
 			}
 			//todo, list, type, delegate
+
+			return ret;
 		}
 
-		public static void DisplayMemberValue(FieldInfo info, object[] targets)
+		public static bool DisplayMemberValue(FieldInfo info, object[] targets)
 		{
-			DisplayMemberValue(new MemberValueWrapper(info, targets));
+			return DisplayMemberValue(new MemberValueWrapper(info, targets));
 		}
 
-		public static void DisplayMemberValue(PropertyInfo info, object[] targets)
+		public static bool DisplayMemberValue(PropertyInfo info, object[] targets)
 		{
-			DisplayMemberValue(new MemberValueWrapper(info, targets));
+			return DisplayMemberValue(new MemberValueWrapper(info, targets));
 		}
 
 		//store all sutom drawers

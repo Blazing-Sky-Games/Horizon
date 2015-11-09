@@ -45,7 +45,7 @@ namespace Horizon.Core.Editor
 		{
 			foreach(FieldInfo field in objs[0].GetType().GetFields().Where(x => x.GetCustomAttributes(typeof(HideInInspector),true).Count() == 0)) // dont show hidden fields
 			{
-				ModelInspectorUtility.DisplayMemberValue(field,objs);
+				if(ModelInspectorUtility.DisplayMemberValue(field,objs)) EditorUtility.SetDirty(target);
 			}
 
 			var props =

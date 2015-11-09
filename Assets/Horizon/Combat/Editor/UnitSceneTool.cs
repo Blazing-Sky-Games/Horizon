@@ -45,6 +45,8 @@ namespace Horizon.Combat.Editor
 					model.GridPosition = new GridPoint(model.GridPosition.x+1,model.GridPosition.y);
 				else if(dragVec.x - model.transform.position.x < -0.5f)
 					model.GridPosition = new GridPoint(model.GridPosition.x-1,model.GridPosition.y);
+
+				EditorUtility.SetDirty(model);
 			}
 			else
 			{
@@ -53,10 +55,10 @@ namespace Horizon.Combat.Editor
 				Handles.DrawWireDisc(model.transform.position,model.transform.up, 0.75f);
 
 				Handles.color = Color.white;
-				if(Handles.Button(model.transform.position + Vector3.forward * 0.75f, GridDirection.North.Rotation() ,0.1f,0.1f,Handles.ConeCap)) model.DirectionFacing = GridDirection.North;
-				if(Handles.Button(model.transform.position + Vector3.right   * 0.75f, GridDirection.East.Rotation()  ,0.1f,0.1f,Handles.ConeCap)) model.DirectionFacing = GridDirection.East;
-				if(Handles.Button(model.transform.position + Vector3.back    * 0.75f, GridDirection.South.Rotation() ,0.1f,0.1f,Handles.ConeCap)) model.DirectionFacing = GridDirection.South;
-				if(Handles.Button(model.transform.position + Vector3.left    * 0.75f, GridDirection.West.Rotation()  ,0.1f,0.1f,Handles.ConeCap)) model.DirectionFacing = GridDirection.West;
+				if(Handles.Button(model.transform.position + Vector3.forward * 0.75f, GridDirection.North.Rotation() ,0.1f,0.1f,Handles.ConeCap)) {model.DirectionFacing = GridDirection.North; EditorUtility.SetDirty(model);}
+				if(Handles.Button(model.transform.position + Vector3.right   * 0.75f, GridDirection.East.Rotation()  ,0.1f,0.1f,Handles.ConeCap)) {model.DirectionFacing = GridDirection.East; EditorUtility.SetDirty(model);}
+				if(Handles.Button(model.transform.position + Vector3.back    * 0.75f, GridDirection.South.Rotation() ,0.1f,0.1f,Handles.ConeCap)) {model.DirectionFacing = GridDirection.South; EditorUtility.SetDirty(model);}
+				if(Handles.Button(model.transform.position + Vector3.left    * 0.75f, GridDirection.West.Rotation()  ,0.1f,0.1f,Handles.ConeCap)) {model.DirectionFacing = GridDirection.West; EditorUtility.SetDirty(model);}
 			}
 		}
 	}

@@ -8,6 +8,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 using System;
+using UnityEngine;
+
+
 namespace Horizon.Combat
 {
 	[Serializable]
@@ -20,7 +23,9 @@ namespace Horizon.Combat
 			this.y = y;
 		}
 
+		[SerializeField]
 		public int x;
+		[SerializeField]
 		public int y;
 	}
 }

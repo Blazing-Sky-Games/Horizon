@@ -10,8 +10,6 @@ GameObject:
   - 4: {fileID: 462512}
   - 114: {fileID: 11449324}
   - 114: {fileID: 11481318}
-  - 64: {fileID: 6470354}
-  - 65: {fileID: 6532224}
   m_Layer: 0
   m_Name: Animus
   m_TagString: Untagged
@@ -31,30 +29,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!64 &6470354
-MeshCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 198378}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Convex: 0
-  m_Mesh: {fileID: 0}
---- !u!65 &6532224
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 198378}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &11449324
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -68,6 +42,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_views:
   - {fileID: 0}
+  id: 0
   animatedMesh:
     Parent: {fileID: 198378}
     m_mesh: {fileID: 100000, guid: 19841969a9aa66443ae49f66274b8a7f, type: 3}

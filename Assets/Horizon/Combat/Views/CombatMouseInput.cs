@@ -11,12 +11,20 @@ namespace Horizon.Combat.Views
 		//should mouse clicks be proccesed
 		public bool HandleInput;
 
+		private CombatCamera combatCamera;
+
+		public override void Start ()
+		{
+			base.Start ();
+			combatCamera = Camera.main.GetComponent<CombatCamera> ();
+		}
+
 		public override void Update ()
 		{
 			base.Update ();
 
 			UpdatePointUnderMouse();
-			
+
 			if(HandleInput)
 			{
 				ProcessInput();
@@ -59,25 +67,15 @@ namespace Horizon.Combat.Views
 				model.MouseOverCell = null;
 			}
 
-			//raycast to check for units
-			// this migth break later if there are other colliders in the scene
-			RaycastHit hit; 
-			if (Physics.Raycast (mouseRay,out hit)) 
+			//check the screenspaceunitidtexture to see what unit the mouse is over, if any
+			unitAtScreenPoint = combatCamera.UnitUnderScreenPoint (Input.mousePosition);
+			if (unitAtScreenPoint != null ) 
 			{
-				hitUnit = hit.collider.gameObject.GetComponentInParentRecursive<Unit>();
-
-				if (hitUnit != null) 
-				{
-					model.MouseOverUnit = hitUnit;
-				}
-				else 
-				{
-					model.MouseOverUnit = null;
-				}
-			} 
+				model.MouseOverUnit = unitAtScreenPoint;
+				model.MouseOverCell = null; // we may need to change this if we want to select a cell behind a unit
+			}
 			else 
 			{
-				hitUnit = null;
 				model.MouseOverUnit = null;
 			}
 		}
@@ -87,22 +85,32 @@ namespace Horizon.Combat.Views
 		{
 			if (Input.GetMouseButtonDown(0) && EventSystem.current.IsPointerOverGameObject() == false)
 			{
-				if (model.grid.Contains(PointUnderMouse))
+				if(unitAtScreenPoint != null)
 				{
-					model.ClickCell(PointUnderMouse);
+					model.LastClickedUnit = unitAtScreenPoint;
 				}
+				else
+				{
+					model.LastClickedUnit = null;
+					if (model.grid.Contains(PointUnderMouse))
+					{
+						model.LastClickedCell = model.grid[PointUnderMouse];
+					}
+					else
+					{
+						model.LastClickedCell = null;
+					}
+				}
+				// we may need to change this if we want to select a cell behind a unit
+				// ooo...or we could expose a setting which controlled this behavior
 
-				if(hitUnit != null)
-				{
-					model.ClickUnit(hitUnit);
-				}
 			}
 		}
 
 		private Ray mouseRay;
 		private GridPoint PointUnderMouse;
 
-		private Unit hitUnit;
+		private Unit unitAtScreenPoint;
 	}
 }
 

@@ -20,9 +20,9 @@ namespace Horizon.Combat.Views
 
 			cellSpriteRenderer.color = GetHighlightColor(model.HighlightState.EffectiveHighlightState());
 			model.WeakSubscribe(() => model.HighlightState, 
-			(s, e) => 
+			(oldval, newval) => 
 			{
-				cellSpriteRenderer.color = GetHighlightColor(model.HighlightState.EffectiveHighlightState());
+				cellSpriteRenderer.color = GetHighlightColor(newval.EffectiveHighlightState());
 			});
 		}
 

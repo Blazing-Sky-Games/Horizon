@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using Horizon.Core;
 
@@ -6,6 +7,12 @@ namespace Horizon.Combat.Models
 {
 	public class Unit : ModelBase
 	{
+		private static int currId = 1;
+		[HideInInspector]
+		public static Dictionary<int, Unit> unitLookup = new Dictionary<int, Unit> ();
+
+		public int id;
+
 		public AnimatedMesh animatedMesh;
 
 		protected override void Init ()
@@ -19,6 +26,14 @@ namespace Horizon.Combat.Models
 			}
 			
 			animatedMesh.setParent(gameObject);
+		}
+
+		protected override void Start ()
+		{
+			base.Start ();
+			id = currId;
+			currId++;
+			unitLookup [id] = this;
 		}
 
 		[HideInInspector]
@@ -70,6 +85,26 @@ namespace Horizon.Combat.Models
 				SetPropertyFeild(ref m_directionFacingSerilized, value, () => DirectionFacing);
 				transform.localRotation = DirectionFacing.Rotation();
 			}
+		}
+
+		[HideInInspector]
+		public bool Highlighted
+		{
+			get
+			{
+				return highlighted;
+			}
+			set
+			{
+				SetPropertyFeild(ref highlighted, value,()=>Highlighted);
+			}
+		}
+		private bool highlighted;
+
+		public override void Dispose ()
+		{
+			base.Dispose ();
+			unitLookup.Remove (id);
 		}
 
 		[SerializeField]

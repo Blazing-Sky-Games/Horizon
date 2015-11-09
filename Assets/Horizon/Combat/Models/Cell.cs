@@ -12,6 +12,7 @@ using Horizon.Core;
 using UnityEngine;
 using Horizon.Core.WeakSubscription;
 using System.Linq;
+using System.Collections;
 
 
 namespace Horizon.Combat.Models
@@ -63,7 +64,22 @@ namespace Horizon.Combat.Models
 
 	public class Cell : ModelBase
 	{		
-		//[HideInInspector]
+		public void EnableHighlightState(LogicalHighlightState state)
+		{
+			HighlightState = HighlightState.EnableHighlightState (state);
+		}
+
+		public void DisableHighlightState(LogicalHighlightState state)
+		{
+			HighlightState = HighlightState.DisableHighlightState (state);
+		}
+
+		public LogicalHighlightState EffectiveHighlightState()
+		{
+			return HighlightState.EffectiveHighlightState ();
+		}
+
+		[HideInInspector]
 		public LogicalHighlightState HighlightState
 		{
 			get

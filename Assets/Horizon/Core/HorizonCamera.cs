@@ -21,21 +21,6 @@ namespace Horizon.Core
 			}
 		}
 
-		//referance the main horizon camera in the scene
-		public static HorizonCamera Main
-		{
-			get
-			{
-				return m_mainCamera;
-			}
-		}
-
-		protected override void Init ()
-		{
-			base.Init ();
-			m_mainCamera = this;
-		}
-
 		private static HorizonCamera m_mainCamera;
 	}
 }

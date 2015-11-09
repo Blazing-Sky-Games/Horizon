@@ -8,16 +8,17 @@ using UnityEngine;
 using Horizon.Core;
 using Horizon.Core.ExtensionMethods;
 using Horizon.Core.WeakSubscription;
+using System.Collections;
 
 namespace Horizon.Core
 {
 	//base class of all models
 	// attach a model to a gameobject, and all the related views will be attached as well
 	// models also provide a way to create observable properties through weak subscribtion
-	public class ModelBase : MonoBehaviour, INotifyPropertyChanged, ISerializationCallbackReceiver, IDisposable
+	public class ModelBase : MonoBehaviour, ISerializationCallbackReceiver, IDisposable
 	{
 		// impliment INotifyPropertyChanged. backend that makes observable propeties work
-		public event PropertyChangedEventHandler PropertyChanged;
+		public event Action<string, object, object> PropertyChanged;
 
 		//hook up all views through reflection
 		protected virtual void Init()
@@ -137,6 +138,15 @@ namespace Horizon.Core
 
 		protected virtual void Update()
 		{
+			PropsChangedLastFrame.Clear ();
+
+			foreach (string key in PropsChangedThisFrame.Keys)
+			{
+				PropsChangedLastFrame[key] = PropsChangedThisFrame[key];
+			}
+			
+			PropsChangedThisFrame.Clear ();
+
 			foreach(ViewBaseNonGeneric view in m_views)
 			{
 				view.Update();
@@ -184,39 +194,21 @@ namespace Horizon.Core
 			{
 				return false;
 			}
-			
+
+			if(PropsChangedThisFrame.ContainsKey(propertyName) == false)
+				PropsChangedThisFrame [propertyName] = storage;
+
+			RaisePropertyChanged(propertyName, storage, value);
 			storage = value;
-			RaisePropertyChanged(propertyName);
 			return true;
 		}
 
 		//RaisePropertyChanged("PropertyName")
 		//indicates the property has changed
-		private void RaisePropertyChanged(string whichProperty = "")
-		{
-			var changedArgs = new PropertyChangedEventArgs(whichProperty);
-			RaisePropertyChanged(changedArgs);
-		}
-
-		// fires the property changed event
-		private void RaisePropertyChanged(PropertyChangedEventArgs changedArgs)
+		private void RaisePropertyChanged(string whichProperty, object oldval, object newval)
 		{
 			if (PropertyChanged != null)
-				PropertyChanged(this, changedArgs);
-		}
-		
-		//RaisePropertyChanged(() => PropertyName)
-		//hmmm ... make this protected if we ever need it
-		private void RaisePropertyChanged<T>(Expression<Func<T>> property)
-		{
-			var name = this.GetPropertyNameFromExpression(property);
-			RaisePropertyChanged(name);
-		}
-
-		private void RaiseAllPropertiesChanged()
-		{
-			var changedArgs = new PropertyChangedEventArgs(string.Empty);
-			RaisePropertyChanged(changedArgs);
+				PropertyChanged(whichProperty, oldval, newval);
 		}
 
 		//clean up all of the views
@@ -227,6 +219,53 @@ namespace Horizon.Core
 				this.DisposeAndDestroy(subscriber);
 			}
 		}
+
+		private Dictionary<String, System.Object> PropsChangedLastFrame = new Dictionary<String, System.Object>();
+		private Dictionary<String, System.Object> PropsChangedThisFrame = new Dictionary<String, System.Object>();
+
+		public bool PropertyChangedLastFrame<T>(Expression<Func<T>> property)
+		{
+			return PropsChangedLastFrame.ContainsKey (this.GetPropertyNameFromExpression (property));
+		}
+
+		public bool PropertyChangedLastFrame<T>(Expression<Func<T>> property, out T oldValue)
+		{
+			if (PropertyChangedLastFrame (property))
+			{
+				oldValue = (T)PropsChangedLastFrame[this.GetPropertyNameFromExpression (property)];
+				return true;
+			}
+
+			oldValue = default(T);
+			return false;
+		}
+
+		public Coroutine StartCoroutinePausable(IEnumerator routine, out bool? pause)
+		{
+			pause = new Nullable<bool> ();
+			pause = false;
+			return StartCoroutine (WrapWithPause (routine, pause));
+		}
+		
+		private IEnumerator WrapWithPause(IEnumerator routine, bool? pause)
+		{
+			while (true)
+			{
+				if(pause.Value)
+				{
+					yield return null;
+				}
+				else if(routine.MoveNext() != false)
+				{
+					yield return routine.Current;
+				}
+				else
+				{
+					yield break;
+				}
+			}
+		}
+
 
 		// maintain referances to the views
 		[SerializeField]

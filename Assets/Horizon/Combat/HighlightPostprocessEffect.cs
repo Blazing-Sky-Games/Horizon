@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+
+//TODO refactor this so that you dont have to have two cameras in the scene, like how i do it in combat camera
+//in fact, this should probably be moved to combat camera
 public class HighlightPostprocessEffect : MonoBehaviour {
 
 	//camera which ojnly renders a layer with what we want to highlight on it
