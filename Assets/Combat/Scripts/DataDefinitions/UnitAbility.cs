@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public struct AbilityUsedMessageContext
+public struct AbilityUsedMessageContent
 {
 	public readonly Unit Caster;
 	public readonly Unit Target;
@@ -10,7 +10,7 @@ public struct AbilityUsedMessageContext
 	public readonly bool Crit;
 	public readonly UnitAbility Ability;
 
-	public AbilityUsedMessageContext(Unit Caster, UnitAbility Ability,Unit Target, int Dmg, bool Crit)
+	public AbilityUsedMessageContent(Unit Caster, UnitAbility Ability,Unit Target, int Dmg, bool Crit)
 	{
 		this.Caster = Caster;
 		this.Ability = Ability;
@@ -40,11 +40,11 @@ public class UnitAbility : ScriptableObject
 		int dmg = Caster.CalcDamageAgainst (power, damageType, Target, out crit);
 
 		//notify that this ability has been used (play animations, sounds, trigger hurt animations, trigger dmg, trigger death.... etc)
-		Caster.AbilityUsedMessage.SendMessage (new AbilityUsedMessageContext(Caster,this,Target,dmg,crit));
+		Caster.AbilityUsedMessage.SendMessage (new AbilityUsedMessageContent(Caster,this,Target,dmg,crit));
 		return Caster.AbilityUsedMessage.WaitTillMessageProcessed ();
 	}
 
-	public IEnumerator EndUseAbilityRoutine(AbilityUsedMessageContext content)
+	public IEnumerator AffectTarget(AbilityUsedMessageContent content)
 	{
 		return content.Target.RespondToAttackRoutine(content.Dmg);
 	}

@@ -5,70 +5,80 @@ using System.Collections.Generic;
 
 public class CombatArea : MonoBehaviour {
 
+	//supplyed in editor
 	public UnitView UnitViewPrefab;
 	public Vector2 UnitStride;
 	public Vector2 AIUnitOffset;
 	public Vector2 PlayerUnitOffset;
 
-	public void Init(TurnOrder TurnOrder ,MessageChannel<Unit> SelectUnitMessage)
+	// call to supply dependancies
+	public void Init(TurnOrder TurnOrder , MessageChannel<Unit> SelectUnitMessage)
 	{
+		//set backing fields
 		m_turnOrder = TurnOrder;
 		m_selectUnitMessage = SelectUnitMessage;
 
+		//init
 		UpdateCombatArea ();
 
+		//start main
 		StartCoroutine (CombatAreaMain());
 	}
 
+	// remove dead units, and reposition units
+	// TODO fix bug related to this
 	void UpdateCombatArea ()
 	{
-		PlayerUnits.Clear ();
-		AIUnits.Clear ();
+		// clear unit lists
+		m_playerUnits.Clear ();
+		m_aIUnits.Clear ();
 
+		// add units from turn order to lists
 		foreach (Unit unit in m_turnOrder)
 		{
 			if(unit.Faction == Faction.Player)
 			{
-				PlayerUnits.Add(unit);
+				m_playerUnits.Add(unit);
 			}
 			else if(unit.Faction == Faction.AI)
 			{
-				AIUnits.Add(unit);
+				m_aIUnits.Add(unit);
 			}
 		}
 
-		foreach (UnitView view in PlayerUnitViews)
+		// remove the old unit views
+		foreach (UnitView view in m_playerUnitViews)
 		{
 			//hmm....we have to wait for all pending messages to be done
 			Destroy(view.gameObject);
 		}
+		m_playerUnitViews.Clear ();
 
-		PlayerUnitViews.Clear ();
-
-		foreach(Unit unit in PlayerUnits)
-		{
-			PlayerUnitViews.Add (InstantiateUnitView (unit));
-		}
-
-		foreach (UnitView view in AIUnitViews)
+		foreach (UnitView view in m_aIUnitViews)
 		{
 			Destroy(view.gameObject);
 		}
-		
-		AIUnitViews.Clear ();
-		
-		foreach(Unit unit in AIUnits)
+		m_aIUnitViews.Clear ();
+
+		//create new unit views
+		foreach(Unit unit in m_playerUnits)
 		{
-			AIUnitViews.Add (InstantiateUnitView (unit));
+			m_playerUnitViews.Add (InstantiateUnitView (unit));
+		}
+		
+		foreach(Unit unit in m_aIUnits)
+		{
+			m_aIUnitViews.Add (InstantiateUnitView (unit));
 		}
 
-		for(int i = 0; i < PlayerUnitViews.Count; i++)
+		// position unit views
+		for(int i = 0; i < m_playerUnitViews.Count; i++)
 		{
-			PlayerUnitViews[i].transform.localPosition = new Vector3(PlayerUnitOffset.x + i * UnitStride.x,PlayerUnitOffset.y + i * UnitStride.y,0);
+			m_playerUnitViews[i].transform.localPosition = new Vector3(PlayerUnitOffset.x + i * UnitStride.x,PlayerUnitOffset.y + i * UnitStride.y,0);
 		}
-		for(int i = 0; i < AIUnitViews.Count; i++)
+		for(int i = 0; i < m_aIUnitViews.Count; i++)
 		{
-			AIUnitViews[i].transform.localPosition = new Vector3(AIUnitOffset.x + i * UnitStride.x, AIUnitOffset.y + i * UnitStride.y,0);
+			m_aIUnitViews[i].transform.localPosition = new Vector3(AIUnitOffset.x + i * UnitStride.x, AIUnitOffset.y + i * UnitStride.y,0);
 		}
 	}
 
@@ -76,12 +86,14 @@ public class CombatArea : MonoBehaviour {
 	{
 		while (true)
 		{
+			//wait for a message we care about
 			yield return m_turnOrder.UnitKilledMessage.WaitForMessage();
 			yield return m_turnOrder.UnitKilledMessage.WaitTillMessageProcessed();
-			//UpdateCombatArea(); MEGA BUG
+			//UpdateCombatArea(); TODO MEGA BUG
 		}
 	}
 
+	//creat a new unit view
 	private UnitView InstantiateUnitView(Unit unit)
 	{
 		UnitView newView = Instantiate<UnitView> (UnitViewPrefab);
@@ -92,10 +104,10 @@ public class CombatArea : MonoBehaviour {
 		return newView;
 	}
 
-	private List<Unit> PlayerUnits = new List<Unit>();
-	private List<UnitView> PlayerUnitViews = new List<UnitView> ();
-	private List<Unit> AIUnits = new List<Unit>();
-	private List<UnitView> AIUnitViews = new List<UnitView> ();
+	private List<Unit> m_playerUnits = new List<Unit>();
+	private List<UnitView> m_playerUnitViews = new List<UnitView> ();
+	private List<Unit> m_aIUnits = new List<Unit>();
+	private List<UnitView> m_aIUnitViews = new List<UnitView> ();
 	private MessageChannel<Unit> m_selectUnitMessage;
 	private TurnOrder m_turnOrder;
 }

@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -31,7 +31,7 @@ public class Unit : ScriptableObject
 	
 	//this unit has been hurt
 	public readonly MessageChannel<int> HurtMessage = new MessageChannel<int> ();
-	public readonly MessageChannel<AbilityUsedMessageContext> AbilityUsedMessage = new MessageChannel<AbilityUsedMessageContext> ();
+	public readonly MessageChannel<AbilityUsedMessageContent> AbilityUsedMessage = new MessageChannel<AbilityUsedMessageContent> ();
 
 	public void SetTurnOrder(TurnOrder turnOrder)
 	{

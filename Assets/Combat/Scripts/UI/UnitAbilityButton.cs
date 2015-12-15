@@ -5,10 +5,13 @@ using System.Collections.Generic;
 
 public class UnitAbilityButton : MonoBehaviour
 {
+	// ability name display. must be child of button
 	public Text abilityName;
+	// click this to use the ability
 	public Button AbilityButton;
 	
-	public RectTransform rectTrasform
+	// use this to position the button
+	public RectTransform ButtonTrasform
 	{
 		get
 		{
@@ -16,29 +19,36 @@ public class UnitAbilityButton : MonoBehaviour
 		}
 	}
 
-	public void Init (UnitAbility ability, MessageChannel<UnitAbility> UnitAbilitySelectedMessage)
+	// By convention, Init must be called on UI elements to supply them with dependacies
+	public void Init (UnitAbility ability, MessageChannel<UnitAbility> UnitAbilitySelectedMessageChannel)
 	{
-		m_unitAbilitySelectedMessage = UnitAbilitySelectedMessage;
+		//set backing fields
+		m_unitAbilitySelectedMessageChannel = UnitAbilitySelectedMessageChannel;
 		m_ability = ability;
-		abilityName.text = m_ability.AbilityName;
 
+		//init
+		abilityName.text = m_ability.AbilityName;
 		AbilityButton.onClick.AddListener (OnClick);
 	}
 
-	public UnitAbility ability
-	{
-		get
-		{
-			return m_ability;
-		}
-	}
-
+	// when the button is clicked, send a Ability selected message
 	void OnClick ()
 	{
-		m_unitAbilitySelectedMessage.SendMessage (m_ability);
+		StartCoroutine (OnClickRoutine ());
 	}
 
+	IEnumerator OnClickRoutine()
+	{
+		// TODO fix this weird thing. should you always have to wait for a message to be processed?
+		AbilityButton.enabled = false;
+		m_unitAbilitySelectedMessageChannel.SendMessage (m_ability);
+		yield return m_unitAbilitySelectedMessageChannel.WaitTillMessageProcessed ();
+		AbilityButton.enabled = true;
+	}
+
+	// the ability this view is displaying
 	private UnitAbility m_ability;
-	private MessageChannel<UnitAbility> m_unitAbilitySelectedMessage;
+	// send a message down this to select an ability
+	private MessageChannel<UnitAbility> m_unitAbilitySelectedMessageChannel;
 }
 

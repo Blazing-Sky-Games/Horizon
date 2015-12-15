@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System;
@@ -24,6 +24,7 @@ public class CombatLogic : MonoBehaviour
 
 	public void Init ()
 	{
+		// deep copy so we are not editing the original version
 		Scenario = Scenario.DeepCopy ();
 
 		m_turnOrder = new TurnOrder (Scenario);
@@ -53,9 +54,9 @@ public class CombatLogic : MonoBehaviour
 				//wait for the current actor to decide an action
 				yield return FactionLeader.ActionDecidedMessage.WaitForMessage();
 				//perform that action and wait for it to finish
-				m_turnOrder.CombatEncounterOverMessage.BeginProccesMessage();
+				m_turnOrder.CombatEncounterOverMessage.BeginProccesMessage();// TODO whaaa.....
 				FactionLeader.ActionDecidedMessage.BeginProccesMessage();
-				yield return FactionLeader.ActionDecidedMessage.Content.WaitPerformAction();
+				yield return FactionLeader.ActionDecidedMessage.MessageContent.WaitPerformAction();
 				FactionLeader.ActionDecidedMessage.EndProccesMessage();
 
 				yield return FactionLeader.ActionDecidedMessage.WaitTillMessageProcessed();

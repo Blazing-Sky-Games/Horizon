@@ -5,23 +5,29 @@ using System.Collections.Generic;
 
 public class HotbarUI : MonoBehaviour
 {
-	//supplyed in editor
-	public Text statsDisplay;
+	//ui elements supplyed in editor
+	public Text StatsDisplay;
 	public Button PassTurnBtn;
 	public UnitAbilityButton UnitAbilityButtonPrefab;
-	public Vector2 abilityButtonOffset;
-	public Vector2 abilityButtonStep;
+	public Vector2 AbilityButtonOffset; // controls how the buttons are layed out
+	public Vector2 AbilityButtonStride; // controls how the buttons are layed out
 	
 	// the pass turn button was clicked
-	public readonly MessageChannel PassTurnMessage = new MessageChannel ();
+	public readonly MessageChannel PassTurnMessageChannel = new MessageChannel ();
 	// an ability was selected
 	public readonly MessageChannel<UnitAbility> UnitAbilitySelectedMessage = new MessageChannel<UnitAbility> ();
 
+	// by convention init is called on ui elements to provide dependaceis
 	public void Init(TurnOrder turnOrder)
 	{
+		// set backing fields
 		m_turnOrder = turnOrder;
 		SelectedUnit = turnOrder.ActiveUnit;
+
+		//init
 		PassTurnBtn.onClick.AddListener (OnClickPassTurn);
+
+		//start main
 		StartCoroutine (HotbarMain());
 	}
 
@@ -29,19 +35,23 @@ public class HotbarUI : MonoBehaviour
 	{
 		while (true)
 		{
+			//wait for a message we care about
 			yield return m_turnOrder.AdvanceTurnOrderMessage.WaitForMessage();
 
+			//turn order advanced
 			m_turnOrder.AdvanceTurnOrderMessage.BeginProccesMessage();
 				
+				//write to combat log
 				Debug.Log("advance turn order");
+				SelectedUnit = m_turnOrder.ActiveUnit;
 
 			m_turnOrder.AdvanceTurnOrderMessage.EndProccesMessage();
 
-			SelectedUnit = m_turnOrder.ActiveUnit;
 			yield return m_turnOrder.AdvanceTurnOrderMessage.WaitTillMessageProcessed();
 		}
 	}
 
+	// the unit displayed in the hot bar
 	public Unit SelectedUnit
 	{ 
 		get
@@ -58,9 +68,10 @@ public class HotbarUI : MonoBehaviour
 		}
 	}
 
+	// send pass turn message when pass turn button clicked
 	private void OnClickPassTurn ()
 	{
-		PassTurnMessage.SendMessage ();
+		PassTurnMessageChannel.SendMessage (); // TODO wait for PassTurnMessageChannel
 	}
 
 	private void SetSelectedUnit (Unit newUnit)
@@ -77,41 +88,49 @@ public class HotbarUI : MonoBehaviour
 		newStatDisplayString += "Insight : " + newUnit.Insight + "\n";
 		newStatDisplayString += "Skill : " + newUnit.Skill + "\n";
 		newStatDisplayString += "Vitality : " + newUnit.Vitality + "\n";
-		statsDisplay.text = newStatDisplayString;
+		StatsDisplay.text = newStatDisplayString;
 
 
-		foreach (UnitAbilityButton button in abilityButtons)
+		// destory the ability buttons
+		// TODO uh oh, we are destroying views
+		foreach (UnitAbilityButton button in m_abilityButtons)
 		{
 			Destroy(button.gameObject);
 		}
+		m_abilityButtons.Clear ();
 
-		abilityButtons.Clear ();
-
-		//if there are too few, add some
+		// re create the ability Buttons
 		for (int i = 0; i < newUnit.abilities.Count; i++)
 		{
-			abilityButtons.Add (instatiateAbilityButton (newUnit.abilities[i]));
+			m_abilityButtons.Add (instatiateAbilityButton (newUnit.abilities[i]));
 		}
 
-		//set the abilities on the ability buttons
+		// set the abilities on the ability buttons
 		// and put them in the right place
-		for (int i = 0; i < abilityButtons.Count; i++)
+		for (int i = 0; i < m_abilityButtons.Count; i++)
 		{
-			abilityButtons [i].rectTrasform.localPosition = new Vector3 (abilityButtonOffset.x + abilityButtonStep.x * i, abilityButtonOffset.y + abilityButtonStep.y * i, 0);
+			m_abilityButtons [i].ButtonTrasform.localPosition = new Vector3 (AbilityButtonOffset.x + AbilityButtonStride.x * i, AbilityButtonOffset.y + AbilityButtonStride.y * i, 0);
 		}
 	}
 
+	// creat a new ability button based on prefab
 	private UnitAbilityButton instatiateAbilityButton (UnitAbility ability)
 	{
+		//instantiate the prefab
 		UnitAbilityButton newbutton = Instantiate (UnitAbilityButtonPrefab);
 		newbutton.Init (ability, UnitAbilitySelectedMessage);
+
+		//make sure the button is scalled correctly
 		newbutton.transform.SetParent (transform, false);
 		newbutton.transform.localScale = new Vector3 (1, 1, 1);
 
 		return newbutton;
 	}
 
+	// the unit this view is displaying
 	private Unit m_showUnit;
+	// use this to update the selected unit when the turn order advances
 	private TurnOrder m_turnOrder;
-	private List<UnitAbilityButton> abilityButtons = new List<UnitAbilityButton> ();
+	// where we store the ability buttons
+	private List<UnitAbilityButton> m_abilityButtons = new List<UnitAbilityButton> ();
 }

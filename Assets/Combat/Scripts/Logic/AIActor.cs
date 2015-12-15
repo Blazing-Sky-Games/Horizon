@@ -10,6 +10,7 @@ public class AIActor : Actor
 		m_logic = logic;
 	}
 
+	//pick a random ability and a random target and use that ability
 	public override void DecideAction ()
 	{
 		Unit activeUnit = m_logic.TurnOrder.ActiveUnit;

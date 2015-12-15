@@ -42,12 +42,14 @@ public class Actor
 	{
 		passedTurn = true;
 		ActionDecidedMessage.SendMessage (new PassTurnAction ());
+		// TODO wait for ActionDecidedMessage
 	}
 	
 	public void UseUnitAbility (Unit caster, UnitAbility ability, Unit target)
 	{
 		UsedAction = true;
 		ActionDecidedMessage.SendMessage (new UnitAbilityUsageAction (caster, ability, target));
+		// TODO wait for ActionDecidedMessage
 	}
 
 	string m_actorName;
