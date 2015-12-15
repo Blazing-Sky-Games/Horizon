@@ -17,18 +17,6 @@ public class HotbarUI : MonoBehaviour
 	// an ability was selected
 	public readonly MessageChannel<UnitAbility> UnitAbilitySelectedMessage = new MessageChannel<UnitAbility> ();
 
-	public IEnumerator WaitForSecondsMessage(float seconds, string message)
-	{
-		yield return 0;
-		float elapsed = 0;
-		while (elapsed < seconds)
-		{
-			Debug.Log(message);
-			yield return 0;
-			elapsed += Time.deltaTime;
-		}
-	}
-
 	public void Init(TurnOrder turnOrder)
 	{
 		m_turnOrder = turnOrder;
@@ -44,7 +32,9 @@ public class HotbarUI : MonoBehaviour
 			yield return m_turnOrder.AdvanceTurnOrderMessage.WaitForMessage();
 
 			m_turnOrder.AdvanceTurnOrderMessage.BeginProccesMessage();
-			yield return StartCoroutine(WaitForSecondsMessage(Random.value / 2,"turnorder Advancing")); //this should be moved to a turn order view
+				
+				Debug.Log("advance turn order");
+
 			m_turnOrder.AdvanceTurnOrderMessage.EndProccesMessage();
 
 			SelectedUnit = m_turnOrder.ActiveUnit;

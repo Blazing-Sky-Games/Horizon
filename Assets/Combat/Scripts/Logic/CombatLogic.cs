@@ -3,11 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 
-#if UNITY_EDITOR
-using UnityEditor;
-using System.Reflection;
-#endif
-
 public class CombatLogic : MonoBehaviour
 {
 	//supplyed in Editor
@@ -75,14 +70,6 @@ public class CombatLogic : MonoBehaviour
 
 			//advance the turn order
 			yield return m_turnOrder.WaitAdvanceTurnOrder ();
-
-			#if UNITY_EDITOR
-			//clear consol to display a new turn
-			Assembly assembly = Assembly.GetAssembly(typeof(SceneView));
-			Type type = assembly.GetType("UnityEditorInternal.LogEntries");
-			MethodInfo method = type.GetMethod("Clear");
-			method.Invoke(new object(), null);
-			#endif
 		}
 	}
 	

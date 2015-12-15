@@ -21,18 +21,6 @@ public class UnitView : MonoBehaviour {
 		StartCoroutine (UnitViewMain ());
 	}
 
-	public IEnumerator WaitForSecondsMessage(float seconds, string message)
-	{
-		yield return 0;
-		float elapsed = 0;
-		while (elapsed < seconds)
-		{
-			Debug.Log(message);
-			yield return 0;
-			elapsed += Time.deltaTime;
-		}
-	}
-
 	private void OnClickUnitSelect()
 	{
 		m_selectUnitMessage.SendMessage (m_unit);
@@ -55,37 +43,26 @@ public class UnitView : MonoBehaviour {
 			{
 				m_unit.HurtMessage.BeginProccesMessage();
 
-					Coroutine displayDamage = StartCoroutine(WaitForSecondsMessage(Random.value / 2, m_unit.UnitName + " taking " + m_unit.HurtMessage.Content +  " points of damage"));
-					Coroutine hurtAnim = StartCoroutine(WaitForSecondsMessage(Random.value / 2,"hurt animation"));
-
-					yield return displayDamage;
-					yield return hurtAnim;
+					Debug.Log(m_unit.UnitName + " took " + m_unit.HurtMessage.Content +  " points of damage");
+					DisplayText.text = m_unit.UnitName + " HP : " + m_unit.Health + " / " + m_unit.MaxHealth;
 
 				m_unit.HurtMessage.EndProccesMessage();
 
-				DisplayText.text = m_unit.UnitName + " HP : " + m_unit.Health + " / " + m_unit.MaxHealth;
 				yield return m_unit.HurtMessage.WaitTillMessageProcessed();
 			}
 			else if(m_unit.AbilityUsedMessage.State == MessageChannelState.MessagePending)
 			{
-				AbilityUsedMessageContext context = m_unit.AbilityUsedMessage.Content;
-
 				m_unit.AbilityUsedMessage.BeginProccesMessage();
 
-					//play attack animation. 
-					yield return StartCoroutine(WaitForSecondsMessage(Random.value / 2,context.Caster.UnitName + " using " + context.Ability.AbilityName + " on " + context.Target.UnitName + " : wind up"));
+					AbilityUsedMessageContext context = m_unit.AbilityUsedMessage.Content;
+					Debug.Log(context.Caster.UnitName + " used " + context.Ability.AbilityName + " on " + context.Target.UnitName);
+					
+					if(context.Crit)
+					{
+						Debug.Log("critical hit");
+					}
 
-					//when the animation reaches the "time of impact", trigger hurt animation, etc
-					Coroutine endUseRotuine = StartCoroutine(context.Ability.EndUseAbilityRoutine (context));
-					//continue the attack animation
-					Coroutine coolDownRoutine = StartCoroutine(WaitForSecondsMessage(Random.value / 2,context.Caster.UnitName + " using " + context.Ability.AbilityName + " on " + context.Target.UnitName + " : cool down"));
-					// critical hit display
-					Coroutine critHit = StartCoroutine(WaitForSecondsMessage(Random.value / 2, "critical hit!"));
-
-					//an ability is donw being used when its own animation is done and the resulting hurt/death animations are done
-					yield return endUseRotuine;
-					yield return coolDownRoutine;
-					yield return critHit;
+					yield return StartCoroutine(context.Ability.EndUseAbilityRoutine (context));;
 
 				m_unit.AbilityUsedMessage.EndProccesMessage();
 
@@ -94,8 +71,6 @@ public class UnitView : MonoBehaviour {
 			else if(m_turnOrder.UnitKilledMessage.State == MessageChannelState.MessagePending && m_turnOrder.UnitKilledMessage.Content == m_unit)
 			{
 				m_turnOrder.UnitKilledMessage.BeginProccesMessage();
-
-					yield return StartCoroutine(WaitForSecondsMessage(Random.value / 2,"DeathAnimation"));
 
 					UnitSelectButton.gameObject.SetActive(false);
 

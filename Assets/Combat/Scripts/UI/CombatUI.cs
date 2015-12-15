@@ -14,18 +14,6 @@ public class CombatUI : MonoBehaviour
 	// pass this to ui elements that need it
 	public readonly MessageChannel<Unit> UnitSelectedMessage = new MessageChannel<Unit> ();
 
-	public IEnumerator WaitForSecondsMessage(float seconds, string message)
-	{
-		yield return 0;
-		float elapsed = 0;
-		while (elapsed < seconds)
-		{
-			Debug.Log(message);
-			yield return 0;
-			elapsed += Time.deltaTime;
-		}
-	}
-
 	private void Start ()
 	{
 		StartCoroutine (UiMain ());
@@ -107,7 +95,6 @@ public class CombatUI : MonoBehaviour
 		Logic.TurnOrder.CombatEncounterOverMessage.EndProccesMessage();
 		yield return Logic.TurnOrder.CombatEncounterOverMessage.WaitTillMessageProcessed ();
 
-		yield return StartCoroutine (WaitForSecondsMessage (Random.value + 0.5f, win ? "you win" : "you lose"));
 		Application.LoadLevel (win ? 1 : 2);
 	}
 
