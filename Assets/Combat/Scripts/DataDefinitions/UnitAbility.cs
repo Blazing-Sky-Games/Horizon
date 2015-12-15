@@ -1,0 +1,52 @@
+using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
+
+public struct AbilityUsedMessageContext
+{
+	public readonly Unit Caster;
+	public readonly Unit Target;
+	public readonly int Dmg;
+	public readonly bool Crit;
+	public readonly UnitAbility Ability;
+
+	public AbilityUsedMessageContext(Unit Caster, UnitAbility Ability,Unit Target, int Dmg, bool Crit)
+	{
+		this.Caster = Caster;
+		this.Ability = Ability;
+
+		this.Target = Target;
+		
+		this.Dmg = Dmg;
+		this.Crit = Crit;
+	}
+}
+
+public class UnitAbility : ScriptableObject
+{
+	//suppled in editor
+	public int power;
+	public DmgType damageType;
+	public string AbilityName;
+
+	public UnitAbility DeepCopy()
+	{
+		return UnityEngine.Object.Instantiate<UnitAbility> (this);
+	}
+
+	public Coroutine WaitStartUseAbility (Unit Caster, Unit Target)
+	{
+		bool crit = false;
+		int dmg = Caster.CalcDamageAgainst (power, damageType, Target, out crit);
+
+		//notify that this ability has been used (play animations, sounds, trigger hurt animations, trigger dmg, trigger death.... etc)
+		Caster.AbilityUsedMessage.SendMessage (new AbilityUsedMessageContext(Caster,this,Target,dmg,crit));
+		return Caster.AbilityUsedMessage.WaitTillMessageProcessed ();
+	}
+
+	public IEnumerator EndUseAbilityRoutine(AbilityUsedMessageContext content)
+	{
+		return content.Target.RespondToAttackRoutine(content.Dmg);
+	}
+}
+
