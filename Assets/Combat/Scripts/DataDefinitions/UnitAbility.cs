@@ -27,6 +27,7 @@ public class UnitAbility : ScriptableObject
 	//suppled in editor
 	public int power;
 	public DmgType damageType;
+	public string conditioncause;
 	public string AbilityName;
 
 	public UnitAbility DeepCopy()
@@ -37,7 +38,7 @@ public class UnitAbility : ScriptableObject
 	public Coroutine WaitStartUseAbility (Unit Caster, Unit Target)
 	{
 		bool crit = false;
-		int dmg = Caster.CalcDamageAgainst (power, damageType, Target, out crit);
+		int dmg = Caster.CalcDamageAgainst (power, damageType, Target, conditioncause, out crit);
 
 		//notify that this ability has been used (play animations, sounds, trigger hurt animations, trigger dmg, trigger death.... etc)
 		Caster.AbilityUsedMessage.SendMessage (new AbilityUsedMessageContent(Caster,this,Target,dmg,crit));

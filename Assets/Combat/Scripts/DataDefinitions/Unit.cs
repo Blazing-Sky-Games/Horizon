@@ -53,7 +53,7 @@ public class Unit : ScriptableObject
 		return newUnit;
 	}
 
-	public int CalcDamageAgainst (int BaseDmg, DmgType dmgType, Unit Defender, out bool crit)
+	public int CalcDamageAgainst (int BaseDmg, DmgType dmgType, Unit Defender, string condition, out bool crit)
 	{
 		Unit Attacker = this;
 
@@ -63,23 +63,33 @@ public class Unit : ScriptableObject
 		double minimum = 0.8;
 		
 		double AttackPower = Random.value * (maximum - minimum) + minimum;
-		
-		double CombatComparison = (dmgType == DmgType.Physical ? Attacker.Strength : Attacker.Intelligence) / (dmgType == DmgType.Physical ? Defender.Stability : Defender.Insight);
-		
-		// dmg = (str or Int of attacker) / (stability or insight of defender) * basedmg  * (random number between 0.8 and 1);
-		double calcdmg = CombatComparison * BaseDmg * AttackPower;
+		Debug.Log (AttackPower + "That is the Attackpower");
+		double CombatComparison = (float)(dmgType == DmgType.Physical ? Attacker.Strength : Attacker.Intelligence) / (dmgType == DmgType.Physical ? Defender.Stability : Defender.Insight);
+		//Debug.Log (CombatComparison);
+
+		//dmg = (str or Int of attacker) / (stability or insight of defender) * basedmg  * (random number between 0.8 and 1);
+		double calcdmg = CombatComparison * BaseDmg * AttackPower * .6 + 5;
 		
 		// crit chance = (str or Int of attacker) / (stability or insight of defender) / 2 * 0.4
-		double critChance = (dmgType == DmgType.Physical ? Attacker.Strength : Attacker.Intelligence) / Defender.Vitality / 2 * 0.4;
-		double CritSuccess = Random.Range (0, 1);
-		if (CritSuccess < critChance)
+		double critChance = (dmgType == DmgType.Physical ? (float)Attacker.Strength : (float)Attacker.Intelligence) / (float)Defender.Vitality / 2 * 0.4;
+		double CritSuccess = Random.value;
+		//Debug.Log (CritSuccess + " Critical chance? " + critChance);
+		if (CritSuccess <= critChance)
 		{
+			double critMult = 1.0 + (double)Attacker.Skill /  (double)(dmgType == DmgType.Physical ? Defender.Stability : Defender.Insight) / 2.0;
+			//Debug.Log ("CRITICAL!!!");
 			crit = true;
-			
-			// crit multiplier = 1 + (skill of attacker / vitality of defender / 2);
-			double critMult = 1.0 + (double)Attacker.Skill / (double)Defender.Vitality / 2.0;
-			
-			calcdmg *= critMult;
+			if (condition != "None") 
+			{
+				Debug.Log (Defender.UnitName + " is now " + condition + " At this power " + critMult);
+			} 
+			else 
+			{
+				// crit multiplier = 1 + (skill of attacker / vitality of defender / 2);
+
+				Debug.Log ("CRITICAL!!!!!!!!!!!!!  At times " + critMult);
+				calcdmg *= critMult;
+			}
 		}
 		
 		return (int)calcdmg;

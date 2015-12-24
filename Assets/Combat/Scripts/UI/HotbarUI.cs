@@ -42,7 +42,7 @@ public class HotbarUI : MonoBehaviour
 			m_turnOrder.AdvanceTurnOrderMessage.BeginProccesMessage();
 				
 				//write to combat log
-				Debug.Log("advance turn order");
+	//			Debug.Log("advance turn order");
 				SelectedUnit = m_turnOrder.ActiveUnit;
 
 			m_turnOrder.AdvanceTurnOrderMessage.EndProccesMessage();

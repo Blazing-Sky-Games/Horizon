@@ -72,7 +72,7 @@ public class UnitView : MonoBehaviour {
 					// if there was a crit, write it to the combat log
 					if(content.Crit)
 					{
-						Debug.Log("critical hit");
+						//Debug.Log("critical hit");
 					}
 
 					// affect the target
