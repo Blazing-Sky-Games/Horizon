@@ -7,7 +7,7 @@ public abstract class AbilityEffect : UnityEngine.ScriptableObject
 {
 	public EffectType EffectType;
 
-	public abstract IEnumerator Trigger(Unit Attacker, Unit Defender,int abilityPower, bool IsCritical);
+	public abstract IEnumerator WaitTrigger(Unit Attacker, Unit Defender,int abilityPower, bool IsCritical);
 
 	// skill based multiplyer
 	protected float GetCriticalPotency(Unit Attacker, Unit Defender)

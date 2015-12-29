@@ -15,14 +15,14 @@ public class WeakenEffect : AbilityEffect
 {
 	public UnitStat StatToWeaken = UnitStat.Strength;
 
-	public override IEnumerator Trigger (Unit Attacker, Unit Defender, int abilityPower, bool IsCritical)
+	public override IEnumerator WaitTrigger (Unit Attacker, Unit Defender, int abilityPower, bool IsCritical)
 	{
-		yield return TurnBasedEffectManager.StartTurnBasedEffect(WeakenTurnBasedEffect(Attacker,Defender,abilityPower,IsCritical));
+		yield return TurnBasedEffectManager.WaitStartTurnBasedEffect(WaitWeakenEffect(Attacker,Defender,abilityPower,IsCritical));
 	}
 
-	IEnumerator WeakenTurnBasedEffect(Unit Attacker, Unit Defender, int abilityPower, bool IsCritical)
+	IEnumerator WaitWeakenEffect(Unit Attacker, Unit Defender, int abilityPower, bool IsCritical)
 	{
-		yield return Defender.SetStatus(UnitStatus.Weakened, true);
+		yield return Defender.WaitSetStatus(UnitStatus.Weakened, true);
 
 		float Potency = GetPotency(Attacker,Defender,IsCritical);
 
@@ -39,7 +39,7 @@ public class WeakenEffect : AbilityEffect
 		}
 
 		Defender.SetStat(StatToWeaken,oldval);
-		yield return Defender.SetStatus(UnitStatus.Weakened, false);
+		yield return Defender.WaitSetStatus(UnitStatus.Weakened, false);
 	}
 }
 

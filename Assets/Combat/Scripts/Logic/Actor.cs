@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class Actor
@@ -19,7 +19,7 @@ public class Actor
 		UsedAction = false;
 	}
 
-	public virtual IEnumerator DecideAction()
+	public virtual IEnumerator WaitDecideAction()
 	{
 		yield break;
 	}
@@ -37,16 +37,16 @@ public class Actor
 		m_actorName = name;
 	}
 
-	public IEnumerator PassTurn ()
+	public IEnumerator WaitPassTurn ()
 	{
 		passedTurn = true;
-		yield return ActionDecidedMessage.Send (new PassTurnAction ());
+		yield return ActionDecidedMessage.WaitSend (new PassTurnAction ());
 	}
 	
-	public IEnumerator UseUnitAbility (Unit caster, UnitAbility ability, Unit target)
+	public IEnumerator WaitUseUnitAbility (Unit caster, UnitAbility ability, Unit target)
 	{
 		UsedAction = true;
-		yield return ActionDecidedMessage.Send(new UnitAbilityUsageAction (caster, ability, target));
+		yield return ActionDecidedMessage.WaitSend(new UnitAbilityUsageAction (caster, ability, target));
 	}
 
 	string m_actorName;

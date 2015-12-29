@@ -9,14 +9,14 @@ class PoisonEffect : AbilityEffect
 	// the minimum number of turns posioning lasts
 	private const int MINDUR = 3;
 
-	public override IEnumerator Trigger (Unit Attacker, Unit Defender, int abilityPower, bool IsCritical)
+	public override IEnumerator WaitTrigger (Unit Attacker, Unit Defender, int abilityPower, bool IsCritical)
 	{
-		yield return TurnBasedEffectManager.StartTurnBasedEffect(PoisonRoutine(Attacker,Defender,IsCritical));
+		yield return TurnBasedEffectManager.WaitStartTurnBasedEffect(WaitPoisonEffect(Attacker,Defender,IsCritical));
 	}
 
-	private IEnumerator PoisonRoutine(Unit Attacker, Unit Defender, bool IsCritical)
+	private IEnumerator WaitPoisonEffect(Unit Attacker, Unit Defender, bool IsCritical)
 	{
-		yield return Defender.SetStatus(UnitStatus.Poisoned, true);
+		yield return Defender.WaitSetStatus(UnitStatus.Poisoned, true);
 
 		float potency = GetPotency(Attacker, Defender, IsCritical);
 
@@ -30,10 +30,10 @@ class PoisonEffect : AbilityEffect
 		{
 			yield return new WaitForNextTurn();
 			duration--;
-			yield return Defender.TakeDamage((int)dmg,false);
+			yield return Defender.WaitTakeDamage((int)dmg,false);
 		}
 
-		yield return Defender.SetStatus(UnitStatus.Poisoned, false);
+		yield return Defender.WaitSetStatus(UnitStatus.Poisoned, false);
 	}
 }
 

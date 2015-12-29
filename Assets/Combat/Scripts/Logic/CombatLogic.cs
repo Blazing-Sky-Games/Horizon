@@ -34,10 +34,10 @@ public class CombatLogic : MonoBehaviour
 		factionLeaders [Faction.Player] = new Actor ("player");
 		factionLeaders [Faction.AI] = new AIActor("AI",this);
 
-		CoroutineManager.Main.StartCoroutine (CombatMain ());
+		CoroutineManager.Main.StartCoroutine (WaitCombatMain ());
 	}
 
-	private IEnumerator CombatMain ()
+	private IEnumerator WaitCombatMain ()
 	{
 		bool EncounterOver = false;
 
@@ -50,7 +50,7 @@ public class CombatLogic : MonoBehaviour
 			while (FactionLeader.CanTakeAction)
 			{
 				//tell the actor to decide what to do
-				CoroutineManager.Main.StartCoroutine(FactionLeader.DecideAction());
+				CoroutineManager.Main.StartCoroutine(FactionLeader.WaitDecideAction());
 
 				//wait for the current actor to decide an action
 				while(FactionLeader.ActionDecidedMessage.Idle)
@@ -58,7 +58,7 @@ public class CombatLogic : MonoBehaviour
 					yield return 0;
 				}
 				//perform that action and wait for it to finish
-				yield return FactionLeader.ActionDecidedMessage.HandleMessage(handleActionDecided);
+				yield return FactionLeader.ActionDecidedMessage.HandleMessage(WaitHandleActionDecided);
 
 				if(m_turnOrder.CombatEncounterOverMessage.MessagePending)
 				{
@@ -67,14 +67,14 @@ public class CombatLogic : MonoBehaviour
 			}
 
 			//advance the turn order
-			yield return m_turnOrder.Advance ();
-			yield return TurnBasedEffectManager.UpdateTurnBassedEffects();
+			yield return m_turnOrder.WaitAdvance ();
+			yield return TurnBasedEffectManager.WaitUpdateTurnBasedEffects();
 		}
 	}
 
-	private IEnumerator handleActionDecided(IActorAction action)
+	private IEnumerator WaitHandleActionDecided(IActorAction action)
 	{
-		yield return action.Perform();
+		yield return action.WaitPerform();
 	}
 	
 	private TurnOrder m_turnOrder;

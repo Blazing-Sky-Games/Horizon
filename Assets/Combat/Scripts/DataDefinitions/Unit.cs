@@ -101,10 +101,10 @@ public class Unit : UnityEngine.ScriptableObject
 		m_turnOrder = turnOrder;
 	}
 
-	public IEnumerator SetStatus (UnitStatus status, bool active)
+	public IEnumerator WaitSetStatus (UnitStatus status, bool active)
 	{
 		m_status[status] = active;
-		yield return StatusChangedMessage.Send(status);
+		yield return StatusChangedMessage.WaitSend(status);
 	}
 
 	public bool GetStatus (UnitStatus status)
@@ -127,15 +127,15 @@ public class Unit : UnityEngine.ScriptableObject
 		return newUnit;
 	}
 
-	public IEnumerator TakeDamage(int dmg, bool IsCritical)
+	public IEnumerator WaitTakeDamage(int dmg, bool IsCritical)
 	{
 		Health -= dmg;
 
-		yield return HurtMessage.Send(dmg);
+		yield return HurtMessage.WaitSend(dmg);
 
 		if(Health <= 0)
 		{
-			yield return m_turnOrder.UnitKilled(this);
+			yield return m_turnOrder.WaitKillUnit(this);
 		}
 	}
 

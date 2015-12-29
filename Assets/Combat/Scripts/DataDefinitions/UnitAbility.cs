@@ -40,9 +40,9 @@ public class UnitAbility : UnityEngine.ScriptableObject
 		return UnityEngine.Object.Instantiate<UnitAbility> (this);
 	}
 
-	public IEnumerator Use (Unit Caster, Unit Target)
+	public IEnumerator WaitUse (Unit Caster, Unit Target)
 	{
-		yield return Caster.AbilityUsedMessage.Send(new AbilityUsedMessageContent(Caster,this,Target,0,false));
+		yield return Caster.AbilityUsedMessage.WaitSend(new AbilityUsedMessageContent(Caster,this,Target,0,false));
 
 		//later on, do somthing like this
 		// startabilitymessage.send() to start animations
@@ -51,7 +51,7 @@ public class UnitAbility : UnityEngine.ScriptableObject
 
 		foreach(AbilityEffect effect in CombatEffects)
 		{
-			yield return effect.Trigger(Caster,Target,AbilityPower,false);
+			yield return effect.WaitTrigger(Caster,Target,AbilityPower,false);
 		}
 
 		//TODO: should this be the formula for crit chance? also, it seems like skill is over powered because it makes all crits better
@@ -66,7 +66,7 @@ public class UnitAbility : UnityEngine.ScriptableObject
 			//TODO send out critical hit message
 			foreach(AbilityEffect effect in CriticalEffects)
 			{
-				yield return effect.Trigger(Caster,Target,AbilityPower,true);
+				yield return effect.WaitTrigger(Caster,Target,AbilityPower,true);
 			}
 		}
 	}

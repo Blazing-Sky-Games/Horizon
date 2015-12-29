@@ -22,7 +22,7 @@ public class TurnBassedEffect
 		}
 	}
 
-	public IEnumerator Update ()
+	public IEnumerator WaitUpdate ()
 	{
 		while(!Done)
 		{
@@ -87,18 +87,18 @@ public class TurnBassedEffect
 
 public class TurnBasedEffectManager
 {
-	public static IEnumerator StartTurnBasedEffect(IEnumerator effectRoutine)
+	public static IEnumerator WaitStartTurnBasedEffect(IEnumerator effectRoutine)
 	{
 		TurnBassedEffect effect = new TurnBassedEffect(effectRoutine);
 		effects.Add(effect);
-		yield return CoroutineManager.Main.StartCoroutine(effect.Update());
+		yield return CoroutineManager.Main.StartCoroutine(effect.WaitUpdate());
 	}
 
-	public static IEnumerator UpdateTurnBassedEffects()
+	public static IEnumerator WaitUpdateTurnBasedEffects()
 	{
 		foreach(TurnBassedEffect effect in effects)
 		{
-			yield return CoroutineManager.Main.StartCoroutine(effect.Update());
+			yield return CoroutineManager.Main.StartCoroutine(effect.WaitUpdate());
 		}
 
 		effects = effects.Where (x => x.Done == false).ToList();

@@ -3,7 +3,7 @@ using System.Collections;
 
 public class PassTurnAction : IActorAction
 {
-	public IEnumerator Perform ()
+	public IEnumerator WaitPerform ()
 	{
 		yield return null;
 	}

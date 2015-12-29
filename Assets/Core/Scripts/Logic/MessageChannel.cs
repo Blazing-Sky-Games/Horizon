@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class MessageChannel
 {
-	public IEnumerator Send ()
+	public IEnumerator WaitSend ()
 	{
 		if (m_idle == false) {
 			throw new InvalidOperationException ("send can only be called when a previose call to send has finised");
@@ -44,7 +44,7 @@ public class MessageChannel
 		m_handlers.Remove(handler);
 	}
 	
-	public IEnumerator HandleMessage (Func<IEnumerator> handler)
+	public IEnumerator WaitHandleMessage (Func<IEnumerator> handler)
 	{
 		m_processors++;
 		yield return handler ();
@@ -75,10 +75,10 @@ public class MessageChannel
 
 public class MessageChannel<MessageContent>
 {
-	public IEnumerator Send (MessageContent content)
+	public IEnumerator WaitSend (MessageContent content)
 	{
 		m_content = content;
-		yield return m_innerMessage.Send ();
+		yield return m_innerMessage.WaitSend ();
 	}
 
 	public void AddHandler (Func<MessageContent, IEnumerator> handler)
@@ -100,7 +100,7 @@ public class MessageChannel<MessageContent>
 	
 	public IEnumerator HandleMessage (Func<MessageContent, IEnumerator> handler)
 	{
-		yield return m_innerMessage.HandleMessage(ConvertHandler(handler));
+		yield return m_innerMessage.WaitHandleMessage(ConvertHandler(handler));
 	}
 	
 	public bool Idle {

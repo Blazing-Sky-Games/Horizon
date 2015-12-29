@@ -25,16 +25,16 @@ public class UnitView : MonoBehaviour {
 		UnitSelectButton.onClick.AddListener (OnClickUnitSelect);
 
 		// start main
-		CoroutineManager.Main.StartCoroutine (UnitViewMain ());
+		CoroutineManager.Main.StartCoroutine (WaitUnitViewMain ());
 	}
 
 	// when the user clicks on the unit, send a unit selected message
 	private void OnClickUnitSelect()
 	{
-		CoroutineManager.Main.StartCoroutine(m_unitSelectedMessageChannel.Send (m_unit));
+		CoroutineManager.Main.StartCoroutine(m_unitSelectedMessageChannel.WaitSend (m_unit));
 	}
 
-	IEnumerator HandleHurt (int arg)
+	IEnumerator WaitHandleHurt (int arg)
 	{
 		//write to combat log
 		Debug.Log(m_unit.UnitName + " took " + arg +  " points of damage");
@@ -43,7 +43,7 @@ public class UnitView : MonoBehaviour {
 		yield break;
 	}
 
-	IEnumerator HandleUnitKilled (Unit arg)
+	IEnumerator WaitHandleUnitKilled (Unit arg)
 	{
 		if(arg == m_unit)
 		{
@@ -57,13 +57,13 @@ public class UnitView : MonoBehaviour {
 		yield break;
 	}
 
-	IEnumerator HandleAbilityUsed (AbilityUsedMessageContent arg)
+	IEnumerator WaitHandleAbilityUsed (AbilityUsedMessageContent arg)
 	{
 		Debug.Log(arg.Caster.UnitName + " used " + arg.Ability.AbilityName + " on " + arg.Target.UnitName);
 		yield break;
 	}
 
-	IEnumerator HandleStatusChange (UnitStatus arg)
+	IEnumerator WaitHandleStatusChange (UnitStatus arg)
 	{
 		if(m_unit.GetStatus(arg))
 		{
@@ -77,7 +77,7 @@ public class UnitView : MonoBehaviour {
 		yield break;
 	}
 
-	private IEnumerator UnitViewMain()
+	private IEnumerator WaitUnitViewMain()
 	{
 		// every frame while this game object is active
 		while (true)
@@ -94,21 +94,21 @@ public class UnitView : MonoBehaviour {
 			//the unit was hurt
 			if(m_unit.HurtMessage.MessagePending)
 			{
-				yield return m_unit.HurtMessage.HandleMessage(HandleHurt);
+				yield return m_unit.HurtMessage.HandleMessage(WaitHandleHurt);
 			}
 			else if(m_unit.StatusChangedMessage.MessagePending)
 			{
-				yield return m_unit.StatusChangedMessage.HandleMessage(HandleStatusChange);
+				yield return m_unit.StatusChangedMessage.HandleMessage(WaitHandleStatusChange);
 			}
 			// the unit used an ability
 			else if(m_unit.AbilityUsedMessage.MessagePending)
 			{
-				yield return m_unit.AbilityUsedMessage.HandleMessage(HandleAbilityUsed);
+				yield return m_unit.AbilityUsedMessage.HandleMessage(WaitHandleAbilityUsed);
 			}
 			// the unit was killed
 			else if(m_turnOrder.UnitKilledMessage.MessagePending)
 			{
-				yield return m_turnOrder.UnitKilledMessage.HandleMessage(HandleUnitKilled);
+				yield return m_turnOrder.UnitKilledMessage.HandleMessage(WaitHandleUnitKilled);
 			}
 		}
 	}

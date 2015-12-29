@@ -30,17 +30,17 @@ public class TargetingUI : MonoBehaviour
 
 	bool canceled = false;
 
-	IEnumerator HandleUnitSelected (Unit arg)
+	IEnumerator WaitHandleUnitSelected (Unit arg)
 	{
 		// the user has selected a target, so declare that they have used an ability
-		yield return m_logic.GetFactionLeader (m_caster.Faction).UseUnitAbility (m_caster, m_ability, arg);
+		yield return m_logic.GetFactionLeader (m_caster.Faction).WaitUseUnitAbility (m_caster, m_ability, arg);
 	}
 
 	Unit m_caster;
 	UnitAbility m_ability;
 
 	// call this to bring up the ui and select a target for an ability
-	public IEnumerator SelectTarget (Unit caster, UnitAbility ability)
+	public IEnumerator WaitSelectTarget (Unit caster, UnitAbility ability)
 	{
 		m_caster = caster;
 		m_ability = ability;
@@ -61,7 +61,7 @@ public class TargetingUI : MonoBehaviour
 		// if we recived a message (not the cancel message)
 		if (m_selectUnitMessage.MessagePending)
 		{
-			yield return m_selectUnitMessage.HandleMessage(HandleUnitSelected);
+			yield return m_selectUnitMessage.HandleMessage(WaitHandleUnitSelected);
 		}
 	}
 

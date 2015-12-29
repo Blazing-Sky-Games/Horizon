@@ -38,7 +38,7 @@ public class TurnOrder : IEnumerable<Unit>
 	}
 
 	// remove a unit from the turn order
-	public IEnumerator UnitKilled(Unit killedUnit)
+	public IEnumerator WaitKillUnit(Unit killedUnit)
 	{
 		int killedIndex = m_units.IndexOf (killedUnit);
 		m_units.Remove (killedUnit); // need to handle the case where the active unit dies
@@ -74,15 +74,15 @@ public class TurnOrder : IEnumerable<Unit>
 		}
 		
 		// send message that a unit has been killed
-		yield return UnitKilledMessage.Send(killedUnit);
+		yield return UnitKilledMessage.WaitSend(killedUnit);
 
 		if (numPlayer == 0)
 		{
-			yield return CombatEncounterOverMessage.Send (false);
+			yield return CombatEncounterOverMessage.WaitSend (false);
 		}
 		else if (numAI == 0)
 		{
-			yield return CombatEncounterOverMessage.Send (true);
+			yield return CombatEncounterOverMessage.WaitSend (true);
 		}
 	}
 
@@ -99,12 +99,12 @@ public class TurnOrder : IEnumerable<Unit>
 	}
 
 	//advance the turn order and wait for it to finish
-	public IEnumerator Advance ()
+	public IEnumerator WaitAdvance ()
 	{
 		m_activeUnitIndex++;
 		m_activeUnitIndex %= m_units.Count;
 
-		yield return AdvanceTurnOrderMessage.Send ();
+		yield return AdvanceTurnOrderMessage.WaitSend ();
 	}
 
 	private List<Unit> m_units;

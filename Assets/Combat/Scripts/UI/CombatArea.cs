@@ -22,7 +22,7 @@ public class CombatArea : MonoBehaviour {
 		UpdateCombatArea ();
 
 		//start main
-		CoroutineManager.Main.StartCoroutine (CombatAreaMain());
+		CoroutineManager.Main.StartCoroutine (WaitCombatAreaMain());
 	}
 
 	// remove dead units, and reposition units
@@ -82,7 +82,7 @@ public class CombatArea : MonoBehaviour {
 		}
 	}
 
-	private IEnumerator CombatAreaMain()
+	private IEnumerator WaitCombatAreaMain()
 	{
 		while (true)
 		{

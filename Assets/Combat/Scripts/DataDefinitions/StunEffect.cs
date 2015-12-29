@@ -3,14 +3,14 @@ using System.Collections;
 
 class StunEffect : AbilityEffect
 {
-	public override IEnumerator Trigger (Unit Attacker, Unit Defender, int abilityPower, bool IsCritical)
+	public override IEnumerator WaitTrigger (Unit Attacker, Unit Defender, int abilityPower, bool IsCritical)
 	{
-		yield return TurnBasedEffectManager.StartTurnBasedEffect(StunTurnBasedEffect(Attacker,Defender,abilityPower,IsCritical));
+		yield return TurnBasedEffectManager.WaitStartTurnBasedEffect(WaitStunEffect(Attacker,Defender,abilityPower,IsCritical));
 	}
 
-	IEnumerator StunTurnBasedEffect(Unit Attacker, Unit Defender, int abilityPower, bool IsCritical)
+	IEnumerator WaitStunEffect(Unit Attacker, Unit Defender, int abilityPower, bool IsCritical)
 	{
-		yield return Defender.SetStatus(UnitStatus.Stunned, true);
+		yield return Defender.WaitSetStatus(UnitStatus.Stunned, true);
 
 		float Potency = GetPotency(Attacker,Defender,IsCritical);
 		int duration = 1 + (int)Math.Floor((Potency - 1) * 1.5);
@@ -21,7 +21,7 @@ class StunEffect : AbilityEffect
 			duration--;
 		}
 
-		yield return Defender.SetStatus(UnitStatus.Stunned, false);
+		yield return Defender.WaitSetStatus(UnitStatus.Stunned, false);
 	}
 }
 
