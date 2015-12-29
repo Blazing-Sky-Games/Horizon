@@ -11,19 +11,19 @@ public class DamageEffect : AbilityEffect
 	// tuning variable
 	private const float DMGCOEF = 0.6f;
 
-	public override IEnumerator WaitTrigger (Unit Attacker, Unit Defender, int abilityPower, bool IsCritical)
+	public override IEnumerator WaitTrigger(Unit Attacker, Unit Defender, int abilityPower, bool IsCritical)
 	{
 		// roll a die to see how strong the attack is
-		float attackRoll = Random.Range(0.8f,1f);
+		float attackRoll = Random.Range(0.8f, 1f);
 
 		int dmg = 
-			(int)(    GetPotency(Attacker, Defender, IsCritical) 
-			      	* abilityPower 
-					* attackRoll 
-					* DMGCOEF 
-					+ MINDMG);
+			(int)(GetPotency(Attacker, Defender, IsCritical) 
+			* abilityPower 
+			* attackRoll 
+			* DMGCOEF 
+			+ MINDMG);
 
-		yield return Defender.WaitTakeDamage(dmg,IsCritical);
+		yield return Defender.WaitTakeDamage(dmg, IsCritical);
 	}
 
 }

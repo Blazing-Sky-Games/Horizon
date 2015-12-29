@@ -10,24 +10,24 @@ using UnityEngine;
 public class ScriptableObjectFactory
 {
 	[MenuItem("Assets/Create/ScriptableObject")]
-	public static void CreateScriptableObject ()
+	public static void CreateScriptableObject()
 	{
-		var assembly = GetAssembly ();
+		var assembly = GetAssembly();
 		
 		// Get all classes derived from ScriptableObject
-		var allScriptableObjects = (from t in assembly.GetTypes ()
-		                            where t.IsSubclassOf (typeof(ScriptableObject))
-		                            select t).ToArray ();
+		var allScriptableObjects = (from t in assembly.GetTypes()
+		                            where t.IsSubclassOf(typeof(ScriptableObject))
+		                            select t).ToArray();
 		
 		// Show the selection window.
-		ScriptableObjectWindow.Init (allScriptableObjects);
+		ScriptableObjectWindow.Init(allScriptableObjects);
 	}
 	
 	/// <summary>
 	/// Returns the assembly that contains the script code for this project (currently hard coded)
 	/// </summary>
-	private static Assembly GetAssembly ()
+	private static Assembly GetAssembly()
 	{
-		return Assembly.Load (new AssemblyName ("Assembly-CSharp"));
+		return Assembly.Load(new AssemblyName("Assembly-CSharp"));
 	}
 }

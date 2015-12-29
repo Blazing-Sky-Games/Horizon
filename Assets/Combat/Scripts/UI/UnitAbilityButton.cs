@@ -15,12 +15,12 @@ public class UnitAbilityButton : MonoBehaviour
 	{
 		get
 		{
-			return AbilityButton.GetComponent<RectTransform> ();
+			return AbilityButton.GetComponent<RectTransform>();
 		}
 	}
 
 	// By convention, Init must be called on UI elements to supply them with dependacies
-	public void Init (UnitAbility ability, MessageChannel<UnitAbility> UnitAbilitySelectedMessageChannel)
+	public void Init(UnitAbility ability, MessageChannel<UnitAbility> UnitAbilitySelectedMessageChannel)
 	{
 		//set backing fields
 		m_unitAbilitySelectedMessageChannel = UnitAbilitySelectedMessageChannel;
@@ -28,13 +28,13 @@ public class UnitAbilityButton : MonoBehaviour
 
 		//init
 		abilityName.text = m_ability.AbilityName;
-		AbilityButton.onClick.AddListener (OnClick);
+		AbilityButton.onClick.AddListener(OnClick);
 	}
 
 	// when the button is clicked, send a Ability selected message
-	void OnClick ()
+	void OnClick()
 	{
-		CoroutineManager.Main.StartCoroutine (WaitHandleOnClick ());
+		CoroutineManager.Main.StartCoroutine(WaitHandleOnClick());
 	}
 
 	IEnumerator WaitHandleOnClick()

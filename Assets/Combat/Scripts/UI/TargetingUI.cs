@@ -19,34 +19,34 @@ public class TargetingUI : MonoBehaviour
 		m_selectUnitMessage = SelectUnitMessage;
 		m_logic = Logic;
 
-		Cancel.onClick.AddListener (OnCancleClick);
+		Cancel.onClick.AddListener(OnCancleClick);
 	}
 
 	// send cancel message if the user backs out of selecting a unit
-	void OnCancleClick ()
+	void OnCancleClick()
 	{
 		canceled = true;
 	}
 
 	bool canceled = false;
 
-	IEnumerator WaitHandleUnitSelected (Unit arg)
+	IEnumerator WaitHandleUnitSelected(Unit arg)
 	{
 		// the user has selected a target, so declare that they have used an ability
-		yield return m_logic.GetFactionLeader (m_caster.Faction).WaitUseUnitAbility (m_caster, m_ability, arg);
+		yield return m_logic.GetFactionLeader(m_caster.Faction).WaitUseUnitAbility(m_caster, m_ability, arg);
 	}
 
 	Unit m_caster;
 	UnitAbility m_ability;
 
 	// call this to bring up the ui and select a target for an ability
-	public IEnumerator WaitSelectTarget (Unit caster, UnitAbility ability)
+	public IEnumerator WaitSelectTarget(Unit caster, UnitAbility ability)
 	{
 		m_caster = caster;
 		m_ability = ability;
 
 		//show the ui
-		TargetingPrompt.SetActive (true);
+		TargetingPrompt.SetActive(true);
 		canceled = false;
 
 		// wait for a unit to be selected
@@ -56,10 +56,10 @@ public class TargetingUI : MonoBehaviour
 		}
 
 		//hide the ui
-		TargetingPrompt.SetActive (false);
+		TargetingPrompt.SetActive(false);
 
 		// if we recived a message (not the cancel message)
-		if (m_selectUnitMessage.MessagePending)
+		if(m_selectUnitMessage.MessagePending)
 		{
 			yield return m_selectUnitMessage.HandleMessage(WaitHandleUnitSelected);
 		}

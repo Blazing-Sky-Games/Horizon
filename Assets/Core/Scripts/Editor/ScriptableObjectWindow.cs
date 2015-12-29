@@ -7,9 +7,9 @@ using UnityEngine;
 internal class EndNameEdit : EndNameEditAction
 {
 	#region implemented abstract members of EndNameEditAction
-	public override void Action (int instanceId, string pathName, string resourceFile)
+	public override void Action(int instanceId, string pathName, string resourceFile)
 	{
-		AssetDatabase.CreateAsset (EditorUtility.InstanceIDToObject (instanceId), AssetDatabase.GenerateUniqueAssetPath (pathName));
+		AssetDatabase.CreateAsset(EditorUtility.InstanceIDToObject(instanceId), AssetDatabase.GenerateUniqueAssetPath(pathName));
 	}
 	
 	#endregion
@@ -30,34 +30,34 @@ public class ScriptableObjectWindow : EditorWindow
 		set
 		{
 			types = value;
-			names = types.Select (t => t.FullName).ToArray ();
+			names = types.Select(t => t.FullName).ToArray();
 		}
 	}
 	
-	public static void Init (Type[] scriptableObjects)
+	public static void Init(Type[] scriptableObjects)
 	{
 		Types = scriptableObjects;
 		
-		var window = EditorWindow.GetWindow<ScriptableObjectWindow> (true, "Create a new ScriptableObject", true);
-		window.ShowPopup ();
+		var window = EditorWindow.GetWindow<ScriptableObjectWindow>(true, "Create a new ScriptableObject", true);
+		window.ShowPopup();
 	}
 	
-	public void OnGUI ()
+	public void OnGUI()
 	{
-		GUILayout.Label ("ScriptableObject Class");
-		selectedIndex = EditorGUILayout.Popup (selectedIndex, names);
+		GUILayout.Label("ScriptableObject Class");
+		selectedIndex = EditorGUILayout.Popup(selectedIndex, names);
 		
-		if (GUILayout.Button ("Create"))
+		if(GUILayout.Button("Create"))
 		{
-			var asset = ScriptableObject.CreateInstance (types [selectedIndex]);
-			ProjectWindowUtil.StartNameEditingIfProjectWindowExists (
-				asset.GetInstanceID (),
-				ScriptableObject.CreateInstance<EndNameEdit> (),
-				string.Format ("{0}.asset", names [selectedIndex]),
-				AssetPreview.GetMiniThumbnail (asset), 
+			var asset = ScriptableObject.CreateInstance(types[selectedIndex]);
+			ProjectWindowUtil.StartNameEditingIfProjectWindowExists(
+				asset.GetInstanceID(),
+				ScriptableObject.CreateInstance<EndNameEdit>(),
+				string.Format("{0}.asset", names[selectedIndex]),
+				AssetPreview.GetMiniThumbnail(asset), 
 				null);
 			
-			Close ();
+			Close();
 		}
 	}
 }

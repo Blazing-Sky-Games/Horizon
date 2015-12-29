@@ -44,22 +44,22 @@ public class Unit : UnityEngine.ScriptableObject
 		{
 		case(UnitStat.Insight):
 			return Insight;
-			//break;
+		//break;
 		case(UnitStat.Intelligence):
 			return Intelligence;
-			//break;
+		//break;
 		case(UnitStat.Skill):
 			return Skill;
-			//break;
+		//break;
 		case(UnitStat.Stability):
 			return Stability;
-			//break;
+		//break;
 		case(UnitStat.Strength):
 			return Strength;
-			//break;
+		//break;
 		case(UnitStat.Vitality):
 			return Vitality;
-			//break;
+		//break;
 		default:
 			return 0;
 		}
@@ -91,23 +91,22 @@ public class Unit : UnityEngine.ScriptableObject
 	}
 
 	//this unit has been hurt
-	public readonly MessageChannel<int> HurtMessage = new MessageChannel<int> ();
-	public readonly MessageChannel<AbilityUsedMessageContent> AbilityUsedMessage = new MessageChannel<AbilityUsedMessageContent> ();
-
-	public readonly MessageChannel<UnitStatus> StatusChangedMessage = new MessageChannel<UnitStatus>(); 
+	public readonly MessageChannel<int> HurtMessage = new MessageChannel<int>();
+	public readonly MessageChannel<AbilityUsedMessageContent> AbilityUsedMessage = new MessageChannel<AbilityUsedMessageContent>();
+	public readonly MessageChannel<UnitStatus> StatusChangedMessage = new MessageChannel<UnitStatus>();
 
 	public void SetTurnOrder(TurnOrder turnOrder)
 	{
 		m_turnOrder = turnOrder;
 	}
 
-	public IEnumerator WaitSetStatus (UnitStatus status, bool active)
+	public IEnumerator WaitSetStatus(UnitStatus status, bool active)
 	{
 		m_status[status] = active;
 		yield return StatusChangedMessage.WaitSend(status);
 	}
 
-	public bool GetStatus (UnitStatus status)
+	public bool GetStatus(UnitStatus status)
 	{
 		return m_status.ContainsKey(status) && m_status[status];
 	}
@@ -116,10 +115,10 @@ public class Unit : UnityEngine.ScriptableObject
 	{
 		Unit newUnit = UnityEngine.Object.Instantiate<Unit>(this);
 
-		List<UnitAbility> newAbilities = new List<UnitAbility> ();
-		foreach (UnitAbility ability in abilities)
+		List<UnitAbility> newAbilities = new List<UnitAbility>();
+		foreach(UnitAbility ability in abilities)
 		{
-			newAbilities.Add (ability.DeepCopy());
+			newAbilities.Add(ability.DeepCopy());
 		}
 
 		newUnit.abilities = newAbilities;

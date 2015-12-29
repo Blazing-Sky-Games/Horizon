@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Actor
 {
-	public readonly MessageChannel<IActorAction> ActionDecidedMessage = new MessageChannel<IActorAction> ();
+	public readonly MessageChannel<IActorAction> ActionDecidedMessage = new MessageChannel<IActorAction>();
 
 	public bool CanTakeAction
 	{
@@ -13,7 +13,7 @@ public class Actor
 		}
 	}
 
-	public void ResetCanTakeAction ()
+	public void ResetCanTakeAction()
 	{
 		passedTurn = false;
 		UsedAction = false;
@@ -32,21 +32,21 @@ public class Actor
 		}
 	}
 
-	public Actor (string name)
+	public Actor(string name)
 	{
 		m_actorName = name;
 	}
 
-	public IEnumerator WaitPassTurn ()
+	public IEnumerator WaitPassTurn()
 	{
 		passedTurn = true;
-		yield return ActionDecidedMessage.WaitSend (new PassTurnAction ());
+		yield return ActionDecidedMessage.WaitSend(new PassTurnAction());
 	}
 	
-	public IEnumerator WaitUseUnitAbility (Unit caster, UnitAbility ability, Unit target)
+	public IEnumerator WaitUseUnitAbility(Unit caster, UnitAbility ability, Unit target)
 	{
 		UsedAction = true;
-		yield return ActionDecidedMessage.WaitSend(new UnitAbilityUsageAction (caster, ability, target));
+		yield return ActionDecidedMessage.WaitSend(new UnitAbilityUsageAction(caster, ability, target));
 	}
 
 	string m_actorName;

@@ -13,9 +13,9 @@ public class HotbarUI : MonoBehaviour
 	public Vector2 AbilityButtonStride; // controls how the buttons are layed out
 	
 	// the pass turn button was clicked
-	public readonly MessageChannel PassTurnMessageChannel = new MessageChannel ();
+	public readonly MessageChannel PassTurnMessageChannel = new MessageChannel();
 	// an ability was selected
-	public readonly MessageChannel<UnitAbility> UnitAbilitySelectedMessage = new MessageChannel<UnitAbility> ();
+	public readonly MessageChannel<UnitAbility> UnitAbilitySelectedMessage = new MessageChannel<UnitAbility>();
 
 	// by convention init is called on ui elements to provide dependaceis
 	public void Init(TurnOrder turnOrder)
@@ -25,13 +25,13 @@ public class HotbarUI : MonoBehaviour
 		SelectedUnit = turnOrder.ActiveUnit;
 
 		//init
-		PassTurnBtn.onClick.AddListener (OnClickPassTurn);
+		PassTurnBtn.onClick.AddListener(OnClickPassTurn);
 
 		//start main
-		CoroutineManager.Main.StartCoroutine (WaitHotbarMain());
+		CoroutineManager.Main.StartCoroutine(WaitHotbarMain());
 	}
 
-	IEnumerator WaitHandleTurnOrderAdvance ()
+	IEnumerator WaitHandleTurnOrderAdvance()
 	{
 		//write to combat log
 		Debug.Log("advance turn order");
@@ -39,9 +39,9 @@ public class HotbarUI : MonoBehaviour
 		yield break;
 	}
 
-	IEnumerator WaitHotbarMain ()
+	IEnumerator WaitHotbarMain()
 	{
-		while (true)
+		while(true)
 		{
 			//wait for a message we care about
 			while(m_turnOrder.AdvanceTurnOrderMessage.Idle)
@@ -63,21 +63,21 @@ public class HotbarUI : MonoBehaviour
 		} 
 		set
 		{
-			if (value != m_showUnit)
+			if(value != m_showUnit)
 			{
-				SetSelectedUnit (value);
+				SetSelectedUnit(value);
 				m_showUnit = value;
 			}
 		}
 	}
 
 	// send pass turn message when pass turn button clicked
-	private void OnClickPassTurn ()
+	private void OnClickPassTurn()
 	{
 		CoroutineManager.Main.StartCoroutine(PassTurnMessageChannel.WaitSend());
 	}
 
-	private void SetSelectedUnit (Unit newUnit)
+	private void SetSelectedUnit(Unit newUnit)
 	{
 		//update stat display
 		string newStatDisplayString = "";
@@ -96,36 +96,36 @@ public class HotbarUI : MonoBehaviour
 
 		// destory the ability buttons
 		// TODO uh oh, we are destroying views
-		foreach (UnitAbilityButton button in m_abilityButtons)
+		foreach(UnitAbilityButton button in m_abilityButtons)
 		{
 			Destroy(button.gameObject);
 		}
-		m_abilityButtons.Clear ();
+		m_abilityButtons.Clear();
 
 		// re create the ability Buttons
-		for (int i = 0; i < newUnit.abilities.Count; i++)
+		for(int i = 0; i < newUnit.abilities.Count; i++)
 		{
-			m_abilityButtons.Add (instatiateAbilityButton (newUnit.abilities[i]));
+			m_abilityButtons.Add(instatiateAbilityButton(newUnit.abilities[i]));
 		}
 
 		// set the abilities on the ability buttons
 		// and put them in the right place
-		for (int i = 0; i < m_abilityButtons.Count; i++)
+		for(int i = 0; i < m_abilityButtons.Count; i++)
 		{
-			m_abilityButtons [i].ButtonTrasform.localPosition = new Vector3 (AbilityButtonOffset.x + AbilityButtonStride.x * i, AbilityButtonOffset.y + AbilityButtonStride.y * i, 0);
+			m_abilityButtons[i].ButtonTrasform.localPosition = new Vector3(AbilityButtonOffset.x + AbilityButtonStride.x * i, AbilityButtonOffset.y + AbilityButtonStride.y * i, 0);
 		}
 	}
 
 	// creat a new ability button based on prefab
-	private UnitAbilityButton instatiateAbilityButton (UnitAbility ability)
+	private UnitAbilityButton instatiateAbilityButton(UnitAbility ability)
 	{
 		//instantiate the prefab
-		UnitAbilityButton newbutton = Instantiate (UnitAbilityButtonPrefab);
-		newbutton.Init (ability, UnitAbilitySelectedMessage);
+		UnitAbilityButton newbutton = Instantiate(UnitAbilityButtonPrefab);
+		newbutton.Init(ability, UnitAbilitySelectedMessage);
 
 		//make sure the button is scalled correctly
-		newbutton.transform.SetParent (transform, false);
-		newbutton.transform.localScale = new Vector3 (1, 1, 1);
+		newbutton.transform.SetParent(transform, false);
+		newbutton.transform.localScale = new Vector3(1, 1, 1);
 
 		return newbutton;
 	}
@@ -135,5 +135,5 @@ public class HotbarUI : MonoBehaviour
 	// use this to update the selected unit when the turn order advances
 	private TurnOrder m_turnOrder;
 	// where we store the ability buttons
-	private List<UnitAbilityButton> m_abilityButtons = new List<UnitAbilityButton> ();
+	private List<UnitAbilityButton> m_abilityButtons = new List<UnitAbilityButton>();
 }

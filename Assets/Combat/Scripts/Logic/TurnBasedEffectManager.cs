@@ -8,26 +8,26 @@ using System.Linq;
 
 public class TurnBassedEffect
 {
-	public TurnBassedEffect (IEnumerator routine)
+	public TurnBassedEffect(IEnumerator routine)
 	{
-		m_callStack = new Stack<IEnumerator> ();
-		m_callStack.Push (routine);
+		m_callStack = new Stack<IEnumerator>();
+		m_callStack.Push(routine);
 	}
 
-	public bool Done 
+	public bool Done
 	{
-		get 
+		get
 		{
 			return m_callStack.Count == 0;
 		}
 	}
 
-	public IEnumerator WaitUpdate ()
+	public IEnumerator WaitUpdate()
 	{
 		while(!Done)
 		{
 			//update the routine
-			bool stackFrameRunning = m_callStack.Peek().MoveNext ();
+			bool stackFrameRunning = m_callStack.Peek().MoveNext();
 			
 			// this routine is finished running, return to caller
 			if(!stackFrameRunning)
@@ -39,7 +39,7 @@ public class TurnBassedEffect
 			//the current routine is still running
 			
 			//what has the routine yielded
-			object current = m_callStack.Peek ().Current;
+			object current = m_callStack.Peek().Current;
 			
 			// if it is null, move along....
 			if(current == null)
@@ -47,7 +47,7 @@ public class TurnBassedEffect
 				continue;
 			}
 			// if its a corutine, wait for it to finish (wait for frames)
-			else if( current as Coroutine != null)
+			else if(current as Coroutine != null)
 			{
 				Coroutine blockingRoutine = current as Coroutine;
 				//if it isnt done
@@ -68,10 +68,10 @@ public class TurnBassedEffect
 				yield break;
 			}
 			// if its a ienumerator, step into it
-			else if ( current as IEnumerator != null) 
+			else if(current as IEnumerator != null)
 			{
 				IEnumerator cr = current as IEnumerator;
-				m_callStack.Push (cr);
+				m_callStack.Push(cr);
 				continue;
 			}
 			// somthing else was yielded. wait a frame
@@ -101,7 +101,7 @@ public class TurnBasedEffectManager
 			yield return CoroutineManager.Main.StartCoroutine(effect.WaitUpdate());
 		}
 
-		effects = effects.Where (x => x.Done == false).ToList();
+		effects = effects.Where(x => x.Done == false).ToList();
 	}
 
 	private static List<TurnBassedEffect> effects = new List<TurnBassedEffect>();

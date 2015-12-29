@@ -11,10 +11,10 @@ public class CombatScenario : ScriptableObject
 	// TODO will proabaly get removed
 	public CombatScenario DeepCopy()
 	{
-		CombatScenario cs = UnityEngine.Object.Instantiate (this);
+		CombatScenario cs = UnityEngine.Object.Instantiate(this);
 
-		List<Unit> newUnits = new List<Unit> ();
-		foreach (Unit unit in Units)
+		List<Unit> newUnits = new List<Unit>();
+		foreach(Unit unit in Units)
 		{
 			newUnits.Add(unit.DeepCopy());
 		}

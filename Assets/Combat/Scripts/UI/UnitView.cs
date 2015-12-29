@@ -4,7 +4,8 @@ using System.Collections;
 using UnityEngine.UI;
 
 // displayes a unit in combat
-public class UnitView : MonoBehaviour {
+public class UnitView : MonoBehaviour
+{
 	
 	// where the name and health are displayed
 	// must be a child of the button
@@ -22,28 +23,28 @@ public class UnitView : MonoBehaviour {
 
 		// initilization
 		DisplayText.text = m_unit.UnitName + " HP : " + m_unit.Health + " / " + m_unit.MaxHealth;
-		UnitSelectButton.onClick.AddListener (OnClickUnitSelect);
+		UnitSelectButton.onClick.AddListener(OnClickUnitSelect);
 
 		// start main
-		CoroutineManager.Main.StartCoroutine (WaitUnitViewMain ());
+		CoroutineManager.Main.StartCoroutine(WaitUnitViewMain());
 	}
 
 	// when the user clicks on the unit, send a unit selected message
 	private void OnClickUnitSelect()
 	{
-		CoroutineManager.Main.StartCoroutine(m_unitSelectedMessageChannel.WaitSend (m_unit));
+		CoroutineManager.Main.StartCoroutine(m_unitSelectedMessageChannel.WaitSend(m_unit));
 	}
 
-	IEnumerator WaitHandleHurt (int arg)
+	IEnumerator WaitHandleHurt(int arg)
 	{
 		//write to combat log
-		Debug.Log(m_unit.UnitName + " took " + arg +  " points of damage");
+		Debug.Log(m_unit.UnitName + " took " + arg + " points of damage");
 		// update the health display
 		DisplayText.text = m_unit.UnitName + " HP : " + m_unit.Health + " / " + m_unit.MaxHealth;
 		yield break;
 	}
 
-	IEnumerator WaitHandleUnitKilled (Unit arg)
+	IEnumerator WaitHandleUnitKilled(Unit arg)
 	{
 		if(arg == m_unit)
 		{
@@ -57,13 +58,13 @@ public class UnitView : MonoBehaviour {
 		yield break;
 	}
 
-	IEnumerator WaitHandleAbilityUsed (AbilityUsedMessageContent arg)
+	IEnumerator WaitHandleAbilityUsed(AbilityUsedMessageContent arg)
 	{
 		Debug.Log(arg.Caster.UnitName + " used " + arg.Ability.AbilityName + " on " + arg.Target.UnitName);
 		yield break;
 	}
 
-	IEnumerator WaitHandleStatusChange (UnitStatus arg)
+	IEnumerator WaitHandleStatusChange(UnitStatus arg)
 	{
 		if(m_unit.GetStatus(arg))
 		{
@@ -80,7 +81,7 @@ public class UnitView : MonoBehaviour {
 	private IEnumerator WaitUnitViewMain()
 	{
 		// every frame while this game object is active
-		while (true)
+		while(true)
 		{
 			//wait for a message we care about
 			while(m_unit.HurtMessage.Idle &&

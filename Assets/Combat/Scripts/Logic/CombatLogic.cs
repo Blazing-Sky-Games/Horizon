@@ -17,37 +17,37 @@ public class CombatLogic : MonoBehaviour
 	}
 
 	//get the Actor Associated with a faction
-	public Actor GetFactionLeader (Faction faction)
+	public Actor GetFactionLeader(Faction faction)
 	{
-		return factionLeaders [faction];
+		return factionLeaders[faction];
 	}
 
-	public void Init ()
+	public void Init()
 	{
 		// deep copy so we are not editing the original version
-		Scenario = Scenario.DeepCopy ();
+		Scenario = Scenario.DeepCopy();
 
-		m_turnOrder = new TurnOrder (Scenario);
+		m_turnOrder = new TurnOrder(Scenario);
 
 		//creat the actors that will be playing
-		factionLeaders = new Dictionary<Faction, Actor> ();
-		factionLeaders [Faction.Player] = new Actor ("player");
-		factionLeaders [Faction.AI] = new AIActor("AI",this);
+		factionLeaders = new Dictionary<Faction, Actor>();
+		factionLeaders[Faction.Player] = new Actor("player");
+		factionLeaders[Faction.AI] = new AIActor("AI", this);
 
-		CoroutineManager.Main.StartCoroutine (WaitCombatMain ());
+		CoroutineManager.Main.StartCoroutine(WaitCombatMain());
 	}
 
-	private IEnumerator WaitCombatMain ()
+	private IEnumerator WaitCombatMain()
 	{
 		bool EncounterOver = false;
 
-		while (!EncounterOver)
+		while(!EncounterOver)
 		{
-			Actor FactionLeader = GetFactionLeader (m_turnOrder.ActiveUnit.Faction);
+			Actor FactionLeader = GetFactionLeader(m_turnOrder.ActiveUnit.Faction);
 
 			FactionLeader.ResetCanTakeAction();
 
-			while (FactionLeader.CanTakeAction)
+			while(FactionLeader.CanTakeAction)
 			{
 				//tell the actor to decide what to do
 				CoroutineManager.Main.StartCoroutine(FactionLeader.WaitDecideAction());
@@ -67,7 +67,7 @@ public class CombatLogic : MonoBehaviour
 			}
 
 			//advance the turn order
-			yield return m_turnOrder.WaitAdvance ();
+			yield return m_turnOrder.WaitAdvance();
 			yield return TurnBasedEffectManager.WaitUpdateTurnBasedEffects();
 		}
 	}

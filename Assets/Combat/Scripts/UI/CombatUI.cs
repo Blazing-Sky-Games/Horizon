@@ -13,11 +13,11 @@ public class CombatUI : MonoBehaviour
 	
 	// notify that a unit has been selected
 	// pass this to ui elements that need it
-	public readonly MessageChannel<Unit> UnitSelectedMessage = new MessageChannel<Unit> ();
+	public readonly MessageChannel<Unit> UnitSelectedMessage = new MessageChannel<Unit>();
 
-	private void Start ()
+	private void Start()
 	{
-		CoroutineManager.Main.StartCoroutine (WaitUiMain ());
+		CoroutineManager.Main.StartCoroutine(WaitUiMain());
 	}
 
 	private void Update()
@@ -26,19 +26,19 @@ public class CombatUI : MonoBehaviour
 	}
 
 	//initilize UI elements
-	private void Init ()
+	private void Init()
 	{
 		//logic first
-		Logic.Init ();
+		Logic.Init();
 		// the hotbar needs the turn order
-		HotbarInterface.Init (Logic.TurnOrder);
+		HotbarInterface.Init(Logic.TurnOrder);
 		//the targeting infterface needs the selection channel and logic
-		TargetingInterface.Init (UnitSelectedMessage, Logic);
+		TargetingInterface.Init(UnitSelectedMessage, Logic);
 		// combat display needs the turn order and the selected message
-		CombatDisplay.Init (Logic.TurnOrder, UnitSelectedMessage);
+		CombatDisplay.Init(Logic.TurnOrder, UnitSelectedMessage);
 	}
 
-	IEnumerator WaitHandleCombatOver (bool arg)
+	IEnumerator WaitHandleCombatOver(bool arg)
 	{
 		win = arg;
 		yield break;
@@ -46,34 +46,34 @@ public class CombatUI : MonoBehaviour
 
 	bool win = false;
 
-	IEnumerator WaitHandleUnitSelected (Unit arg)
+	IEnumerator WaitHandleUnitSelected(Unit arg)
 	{
 		HotbarInterface.SelectedUnit = arg;
 		yield break;
 	}
 
-	IEnumerator WaitHandleAbilitySelected (UnitAbility arg)
+	IEnumerator WaitHandleAbilitySelected(UnitAbility arg)
 	{
 		//yuk TODO clean up this logic
-		if (HotbarInterface.SelectedUnit == Logic.TurnOrder.ActiveUnit && Logic.TurnOrder.ActiveUnit.Faction == Faction.Player)
+		if(HotbarInterface.SelectedUnit == Logic.TurnOrder.ActiveUnit && Logic.TurnOrder.ActiveUnit.Faction == Faction.Player)
 		{
 			//bring up unit targeting diolouge and wait for it to close
-			yield return TargetingInterface.WaitSelectTarget (Logic.TurnOrder.ActiveUnit, arg);
+			yield return TargetingInterface.WaitSelectTarget(Logic.TurnOrder.ActiveUnit, arg);
 		}
 	}
 
-	private IEnumerator WaitUiMain ()
+	private IEnumerator WaitUiMain()
 	{
-		Init ();
+		Init();
 
 		// book keeping vaiables to know when to exit
 		// TODO clean this up
 		bool EncounterOver = false;
 
-		while (!EncounterOver)
+		while(!EncounterOver)
 		{
 			//wait for an message we care about
-			while (UnitSelectedMessage.Idle && 
+			while(UnitSelectedMessage.Idle && 
 			       HotbarInterface.UnitAbilitySelectedMessage.Idle && 
 			       HotbarInterface.PassTurnMessageChannel.Idle &&
 			       Logic.TurnOrder.CombatEncounterOverMessage.Idle)
@@ -82,7 +82,7 @@ public class CombatUI : MonoBehaviour
 			}
 
 			//the game is over
-			if (Logic.TurnOrder.CombatEncounterOverMessage.MessagePending)
+			if(Logic.TurnOrder.CombatEncounterOverMessage.MessagePending)
 			{
 				EncounterOver = true;
 				yield return Logic.TurnOrder.CombatEncounterOverMessage.HandleMessage(WaitHandleCombatOver);
@@ -93,7 +93,7 @@ public class CombatUI : MonoBehaviour
 			if(Logic.TurnOrder.ActiveUnit.Faction != Faction.Player)
 			{
 				//wait for the messages to be proccessed
-				while (!(UnitSelectedMessage.Idle && 
+				while(!(UnitSelectedMessage.Idle && 
 				       	 HotbarInterface.UnitAbilitySelectedMessage.Idle && 
 				       	 HotbarInterface.PassTurnMessageChannel.Idle))
 				{
@@ -105,25 +105,25 @@ public class CombatUI : MonoBehaviour
 			}
 			
 			//the pass turn button was pressed
-			if (HotbarInterface.PassTurnMessageChannel.MessagePending)
+			if(HotbarInterface.PassTurnMessageChannel.MessagePending)
 			{
 				// the user clikced the pass turn button, so declare that the chose to pass the turn
-				yield return HotbarInterface.PassTurnMessageChannel.WaitHandleMessage(Logic.GetFactionLeader (Logic.TurnOrder.ActiveUnit.Faction).WaitPassTurn);
+				yield return HotbarInterface.PassTurnMessageChannel.WaitHandleMessage(Logic.GetFactionLeader(Logic.TurnOrder.ActiveUnit.Faction).WaitPassTurn);
 			}
 			//a unit was selected hmm TODO should this be moved to hotbar ui
-			else if (UnitSelectedMessage.MessagePending)
+			else if(UnitSelectedMessage.MessagePending)
 			{
 				//update the hot bar
 				yield return UnitSelectedMessage.HandleMessage(WaitHandleUnitSelected);
 			} 
 			// an ability was selected
-			else if (HotbarInterface.UnitAbilitySelectedMessage.MessagePending)
+			else if(HotbarInterface.UnitAbilitySelectedMessage.MessagePending)
 			{
 				yield return HotbarInterface.UnitAbilitySelectedMessage.HandleMessage(WaitHandleAbilitySelected);
 			}
 		}
 
 		// load the correct level with the game over message
-		Application.LoadLevel (win ? 1 : 2);
+		Application.LoadLevel(win ? 1 : 2);
 	}
 }

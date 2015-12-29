@@ -7,15 +7,15 @@ using System;
 // also keeps track of units in general (death, etc)
 public class TurnOrder : IEnumerable<Unit>
 {
-	public readonly MessageChannel AdvanceTurnOrderMessage = new MessageChannel ();
-	public readonly MessageChannel<bool> CombatEncounterOverMessage = new MessageChannel<bool> (); 
+	public readonly MessageChannel AdvanceTurnOrderMessage = new MessageChannel();
+	public readonly MessageChannel<bool> CombatEncounterOverMessage = new MessageChannel<bool>();
 	public readonly MessageChannel<Unit> UnitKilledMessage = new MessageChannel<Unit>();
 
 	public TurnOrder(CombatScenario scenario)
 	{
 		m_units = scenario.Units;
 
-		foreach (Unit unit in m_units)
+		foreach(Unit unit in m_units)
 		{
 			unit.SetTurnOrder(this);
 		}
@@ -25,7 +25,7 @@ public class TurnOrder : IEnumerable<Unit>
 	{
 		get
 		{
-			return m_units [ActiveUnitIndex];
+			return m_units[ActiveUnitIndex];
 		}
 	}
 
@@ -40,8 +40,8 @@ public class TurnOrder : IEnumerable<Unit>
 	// remove a unit from the turn order
 	public IEnumerator WaitKillUnit(Unit killedUnit)
 	{
-		int killedIndex = m_units.IndexOf (killedUnit);
-		m_units.Remove (killedUnit); // need to handle the case where the active unit dies
+		int killedIndex = m_units.IndexOf(killedUnit);
+		m_units.Remove(killedUnit); // need to handle the case where the active unit dies
 
 		if(killedIndex > m_activeUnitIndex)
 		{
@@ -61,7 +61,7 @@ public class TurnOrder : IEnumerable<Unit>
 		int numAI = 0;
 		int numPlayer = 0;
 		
-		foreach (Unit unit in m_units)
+		foreach(Unit unit in m_units)
 		{
 			if(unit.Faction == Faction.AI)
 			{
@@ -76,35 +76,35 @@ public class TurnOrder : IEnumerable<Unit>
 		// send message that a unit has been killed
 		yield return UnitKilledMessage.WaitSend(killedUnit);
 
-		if (numPlayer == 0)
+		if(numPlayer == 0)
 		{
-			yield return CombatEncounterOverMessage.WaitSend (false);
+			yield return CombatEncounterOverMessage.WaitSend(false);
 		}
-		else if (numAI == 0)
+		else if(numAI == 0)
 		{
-			yield return CombatEncounterOverMessage.WaitSend (true);
+			yield return CombatEncounterOverMessage.WaitSend(true);
 		}
 	}
 
 	//for IEnumerable<Unit>
 	public IEnumerator<Unit> GetEnumerator()
 	{
-		return m_units.GetEnumerator ();
+		return m_units.GetEnumerator();
 	}
 
 	//for IEnumerable<Unit>
-	IEnumerator IEnumerable.GetEnumerator ()
+	IEnumerator IEnumerable.GetEnumerator()
 	{
-		return GetEnumerator ();
+		return GetEnumerator();
 	}
 
 	//advance the turn order and wait for it to finish
-	public IEnumerator WaitAdvance ()
+	public IEnumerator WaitAdvance()
 	{
 		m_activeUnitIndex++;
 		m_activeUnitIndex %= m_units.Count;
 
-		yield return AdvanceTurnOrderMessage.WaitSend ();
+		yield return AdvanceTurnOrderMessage.WaitSend();
 	}
 
 	private List<Unit> m_units;
