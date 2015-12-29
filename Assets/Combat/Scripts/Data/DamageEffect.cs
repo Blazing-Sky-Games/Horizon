@@ -1,9 +1,6 @@
-using System;
 using System.Collections;
-
 using Random = UnityEngine.Random;
 
-[Serializable]
 public class DamageEffect : AbilityEffect
 {
 	// the minimum damage a damage effect can cause

@@ -1,11 +1,10 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 
 public class CombatArea : MonoBehaviour
 {
-
 	//supplyed in editor
 	public UnitView UnitViewPrefab;
 	public Vector2 UnitStride;
@@ -13,11 +12,11 @@ public class CombatArea : MonoBehaviour
 	public Vector2 PlayerUnitOffset;
 
 	// call to supply dependancies
-	public void Init(TurnOrder TurnOrder, MessageChannel<Unit> SelectUnitMessage)
+	public void Init(TurnOrder turnOrder, Message<Unit> selectUnitMessage)
 	{
 		//set backing fields
-		m_turnOrder = TurnOrder;
-		m_selectUnitMessage = SelectUnitMessage;
+		m_turnOrder = turnOrder;
+		m_selectUnitMessage = selectUnitMessage;
 
 		//init
 		UpdateCombatArea();
@@ -106,10 +105,10 @@ public class CombatArea : MonoBehaviour
 		return newView;
 	}
 
-	private List<Unit> m_playerUnits = new List<Unit>();
-	private List<UnitView> m_playerUnitViews = new List<UnitView>();
-	private List<Unit> m_aIUnits = new List<Unit>();
-	private List<UnitView> m_aIUnitViews = new List<UnitView>();
-	private MessageChannel<Unit> m_selectUnitMessage;
+	private readonly  List<Unit> m_playerUnits = new List<Unit>();
+	private readonly List<UnitView> m_playerUnitViews = new List<UnitView>();
+	private readonly List<Unit> m_aIUnits = new List<Unit>();
+	private readonly List<UnitView> m_aIUnitViews = new List<UnitView>();
+	private Message<Unit> m_selectUnitMessage;
 	private TurnOrder m_turnOrder;
 }

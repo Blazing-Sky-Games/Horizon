@@ -13,7 +13,7 @@ public class CombatUI : MonoBehaviour
 	
 	// notify that a unit has been selected
 	// pass this to ui elements that need it
-	public readonly MessageChannel<Unit> UnitSelectedMessage = new MessageChannel<Unit>();
+	public readonly Message<Unit> UnitSelectedMessage = new Message<Unit>();
 
 	private void Start()
 	{
@@ -40,11 +40,9 @@ public class CombatUI : MonoBehaviour
 
 	IEnumerator WaitHandleCombatOver(bool arg)
 	{
-		win = arg;
+		m_win = arg;
 		yield break;
 	}
-
-	bool win = false;
 
 	IEnumerator WaitHandleUnitSelected(Unit arg)
 	{
@@ -85,7 +83,7 @@ public class CombatUI : MonoBehaviour
 			if(Logic.TurnOrder.CombatEncounterOverMessage.MessagePending)
 			{
 				EncounterOver = true;
-				yield return Logic.TurnOrder.CombatEncounterOverMessage.HandleMessage(WaitHandleCombatOver);
+				yield return Logic.TurnOrder.CombatEncounterOverMessage.WaitHandleMessage(WaitHandleCombatOver);
 			}
 
 			// it is not the players turn, so we are not going to process any other messages
@@ -114,16 +112,18 @@ public class CombatUI : MonoBehaviour
 			else if(UnitSelectedMessage.MessagePending)
 			{
 				//update the hot bar
-				yield return UnitSelectedMessage.HandleMessage(WaitHandleUnitSelected);
+				yield return UnitSelectedMessage.WaitHandleMessage(WaitHandleUnitSelected);
 			} 
 			// an ability was selected
 			else if(HotbarInterface.UnitAbilitySelectedMessage.MessagePending)
 			{
-				yield return HotbarInterface.UnitAbilitySelectedMessage.HandleMessage(WaitHandleAbilitySelected);
+				yield return HotbarInterface.UnitAbilitySelectedMessage.WaitHandleMessage(WaitHandleAbilitySelected);
 			}
 		}
 
 		// load the correct level with the game over message
-		Application.LoadLevel(win ? 1 : 2);
+		Application.LoadLevel(m_win ? 1 : 2);
 	}
+
+	private bool m_win = false;
 }

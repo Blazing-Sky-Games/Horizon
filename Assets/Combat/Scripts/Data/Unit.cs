@@ -1,27 +1,6 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-
 using Random = UnityEngine.Random;
-
-public enum EffectType
-{
-	Physical,
-	Tech
-}
-
-public enum Faction
-{
-	Player,
-	AI
-}
-
-public enum UnitStatus
-{
-	Poisoned,
-	Stunned,
-	Weakened
-}
 
 public class Unit : UnityEngine.ScriptableObject
 {
@@ -30,7 +9,7 @@ public class Unit : UnityEngine.ScriptableObject
 	public int MaxHealth;
 	public int Health;
 	public string UnitName;
-	public List<UnitAbility> abilities;
+	public List<UnitAbility> Abilities;
 	public int Strength; // phys dmg /crit
 	public int Intelligence; // tech dmg /crit
 	public int Stability; // phys def/crit res
@@ -38,63 +17,59 @@ public class Unit : UnityEngine.ScriptableObject
 	public int Skill; // crit dmg
 	public int Vitality; // - crit chance for defender. also HP
 
-	public int GetStat(UnitStat stat)
-	{
-		switch(stat)
-		{
-		case(UnitStat.Insight):
-			return Insight;
-		//break;
-		case(UnitStat.Intelligence):
-			return Intelligence;
-		//break;
-		case(UnitStat.Skill):
-			return Skill;
-		//break;
-		case(UnitStat.Stability):
-			return Stability;
-		//break;
-		case(UnitStat.Strength):
-			return Strength;
-		//break;
-		case(UnitStat.Vitality):
-			return Vitality;
-		//break;
-		default:
-			return 0;
-		}
-	}
-
-	public void SetStat(UnitStat stat, int value)
-	{
-		switch(stat)
-		{
-		case(UnitStat.Insight):
-			Insight = value;
-			break;
-		case(UnitStat.Intelligence):
-			Intelligence = value;
-			break;
-		case(UnitStat.Skill):
-			Skill = value;
-			break;
-		case(UnitStat.Stability):
-			Stability = value;
-			break;
-		case(UnitStat.Strength):
-			Strength = value;
-			break;
-		case(UnitStat.Vitality):
-			Vitality = value;
-			break;
-		}
-	}
-
 	//this unit has been hurt
-	public readonly MessageChannel<int> HurtMessage = new MessageChannel<int>();
-	public readonly MessageChannel<AbilityUsedMessageContent> AbilityUsedMessage = new MessageChannel<AbilityUsedMessageContent>();
-	public readonly MessageChannel<UnitStatus> StatusChangedMessage = new MessageChannel<UnitStatus>();
+	public readonly Message<int> HurtMessage = new Message<int>();
+	public readonly Message<AbilityUsedMessageContent> AbilityUsedMessage = new Message<AbilityUsedMessageContent>();
+	public readonly Message<UnitStatus> StatusChangedMessage = new Message<UnitStatus>();
 
+	public int GetStatistic(UnitStatatistic stat)
+	{
+		switch(stat)
+		{
+			case(UnitStatatistic.Insight):
+				return Insight;
+			case(UnitStatatistic.Intelligence):
+				return Intelligence;
+			case(UnitStatatistic.Skill):
+				return Skill;
+			case(UnitStatatistic.Stability):
+				return Stability;
+			case(UnitStatatistic.Strength):
+				return Strength;
+			case(UnitStatatistic.Vitality):
+				return Vitality;
+			default:
+				return 0;
+		}
+	}
+
+	//TODO hmm...should this be WaitSetStatistic and send a message
+	public void SetStatistic(UnitStatatistic stat, int value)
+	{
+		switch(stat)
+		{
+			case(UnitStatatistic.Insight):
+				Insight = value;
+				break;
+			case(UnitStatatistic.Intelligence):
+				Intelligence = value;
+				break;
+			case(UnitStatatistic.Skill):
+				Skill = value;
+				break;
+			case(UnitStatatistic.Stability):
+				Stability = value;
+				break;
+			case(UnitStatatistic.Strength):
+				Strength = value;
+				break;
+			case(UnitStatatistic.Vitality):
+				Vitality = value;
+				break;
+		}
+	}
+	
+	//TODO fix it so this is not needed
 	public void SetTurnOrder(TurnOrder turnOrder)
 	{
 		m_turnOrder = turnOrder;
@@ -116,17 +91,17 @@ public class Unit : UnityEngine.ScriptableObject
 		Unit newUnit = UnityEngine.Object.Instantiate<Unit>(this);
 
 		List<UnitAbility> newAbilities = new List<UnitAbility>();
-		foreach(UnitAbility ability in abilities)
+		foreach(UnitAbility ability in Abilities)
 		{
 			newAbilities.Add(ability.DeepCopy());
 		}
 
-		newUnit.abilities = newAbilities;
+		newUnit.Abilities = newAbilities;
 
 		return newUnit;
 	}
 
-	public IEnumerator WaitTakeDamage(int dmg, bool IsCritical)
+	public IEnumerator WaitTakeDamage(int dmg, bool isCritical)
 	{
 		Health -= dmg;
 

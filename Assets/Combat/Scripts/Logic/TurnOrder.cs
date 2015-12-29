@@ -7,9 +7,9 @@ using System;
 // also keeps track of units in general (death, etc)
 public class TurnOrder : IEnumerable<Unit>
 {
-	public readonly MessageChannel AdvanceTurnOrderMessage = new MessageChannel();
-	public readonly MessageChannel<bool> CombatEncounterOverMessage = new MessageChannel<bool>();
-	public readonly MessageChannel<Unit> UnitKilledMessage = new MessageChannel<Unit>();
+	public readonly Message AdvanceTurnOrderMessage = new Message();
+	public readonly Message<bool> CombatEncounterOverMessage = new Message<bool>();
+	public readonly Message<Unit> UnitKilledMessage = new Message<Unit>();
 
 	public TurnOrder(CombatScenario scenario)
 	{

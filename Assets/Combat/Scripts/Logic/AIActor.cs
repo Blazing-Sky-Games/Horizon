@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System;
 using System.Linq;
 using System.Collections;
@@ -22,7 +22,7 @@ public class AIActor : Actor
 
 		System.Random r = new System.Random();
 		Unit targetUnit = m_logic.TurnOrder.Where(x => x.Faction == Faction.Player).OrderBy(x => r.NextDouble()).First();
-		UnitAbility SelectedAbility = activeUnit.abilities.OrderBy(x => r.NextDouble()).First();
+		UnitAbility SelectedAbility = activeUnit.Abilities.OrderBy(x => r.NextDouble()).First();
 
 		yield return WaitUseUnitAbility(activeUnit, SelectedAbility, targetUnit);
 	}

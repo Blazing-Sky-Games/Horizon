@@ -1,7 +1,6 @@
-using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using System;
+using UnityEngine; // TODO fix this. just instatuite it in a view
 
 public class CombatLogic : MonoBehaviour
 {
@@ -19,7 +18,7 @@ public class CombatLogic : MonoBehaviour
 	//get the Actor Associated with a faction
 	public Actor GetFactionLeader(Faction faction)
 	{
-		return factionLeaders[faction];
+		return m_factionLeaders[faction];
 	}
 
 	public void Init()
@@ -30,9 +29,10 @@ public class CombatLogic : MonoBehaviour
 		m_turnOrder = new TurnOrder(Scenario);
 
 		//creat the actors that will be playing
-		factionLeaders = new Dictionary<Faction, Actor>();
-		factionLeaders[Faction.Player] = new Actor("player");
-		factionLeaders[Faction.AI] = new AIActor("AI", this);
+		//TODO better way to get actors
+		//TODO actually, get rid of the whole actor thing, and just ask units what they want to do, not "actors"
+		m_factionLeaders[Faction.Player] = new Actor("player");
+		m_factionLeaders[Faction.AI] = new AIActor("AI", this);
 
 		CoroutineManager.Main.StartCoroutine(WaitCombatMain());
 	}
@@ -58,7 +58,7 @@ public class CombatLogic : MonoBehaviour
 					yield return 0;
 				}
 				//perform that action and wait for it to finish
-				yield return FactionLeader.ActionDecidedMessage.HandleMessage(WaitHandleActionDecided);
+				yield return FactionLeader.ActionDecidedMessage.WaitHandleMessage(WaitHandleActionDecided);
 
 				if(m_turnOrder.CombatEncounterOverMessage.MessagePending)
 				{
@@ -78,5 +78,5 @@ public class CombatLogic : MonoBehaviour
 	}
 	
 	private TurnOrder m_turnOrder;
-	private Dictionary<Faction, Actor> factionLeaders;
+	private readonly Dictionary<Faction, Actor> m_factionLeaders = new Dictionary<Faction, Actor>();
 }

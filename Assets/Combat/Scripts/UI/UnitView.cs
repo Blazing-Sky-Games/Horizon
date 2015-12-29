@@ -1,12 +1,10 @@
-using UnityEngine;
-using System;
 using System.Collections;
+using UnityEngine;
 using UnityEngine.UI;
 
 // displayes a unit in combat
 public class UnitView : MonoBehaviour
 {
-	
 	// where the name and health are displayed
 	// must be a child of the button
 	public Text DisplayText;
@@ -14,11 +12,11 @@ public class UnitView : MonoBehaviour
 	public Button UnitSelectButton;
 	
 	// By convention, Init must be called on UI elements to supply them with dependacies
-	public void Init(Unit unit, MessageChannel<Unit> UnitSelectedMessageChannel, TurnOrder turnOrder)
+	public void Init(Unit unit, Message<Unit> unitSelectedMessageChannel, TurnOrder turnOrder)
 	{
 		//set backing fields
 		m_unit = unit;
-		m_unitSelectedMessageChannel = UnitSelectedMessageChannel;
+		m_unitSelectedMessageChannel = unitSelectedMessageChannel;
 		m_turnOrder = turnOrder;
 
 		// initilization
@@ -44,9 +42,9 @@ public class UnitView : MonoBehaviour
 		yield break;
 	}
 
-	IEnumerator WaitHandleUnitKilled(Unit arg)
+	IEnumerator WaitHandleUnitKilled(Unit unitKilled)
 	{
-		if(arg == m_unit)
+		if(unitKilled == m_unit)
 		{
 			//dont show the unit
 			//TODO fix bug related to this
@@ -58,9 +56,9 @@ public class UnitView : MonoBehaviour
 		yield break;
 	}
 
-	IEnumerator WaitHandleAbilityUsed(AbilityUsedMessageContent arg)
+	IEnumerator WaitHandleAbilityUsed(AbilityUsedMessageContent abilityUsedContent)
 	{
-		Debug.Log(arg.Caster.UnitName + " used " + arg.Ability.AbilityName + " on " + arg.Target.UnitName);
+		Debug.Log(abilityUsedContent.Caster.UnitName + " used " + abilityUsedContent.Ability.AbilityName + " on " + abilityUsedContent.Target.UnitName);
 		yield break;
 	}
 
@@ -95,21 +93,21 @@ public class UnitView : MonoBehaviour
 			//the unit was hurt
 			if(m_unit.HurtMessage.MessagePending)
 			{
-				yield return m_unit.HurtMessage.HandleMessage(WaitHandleHurt);
+				yield return m_unit.HurtMessage.WaitHandleMessage(WaitHandleHurt);
 			}
 			else if(m_unit.StatusChangedMessage.MessagePending)
 			{
-				yield return m_unit.StatusChangedMessage.HandleMessage(WaitHandleStatusChange);
+				yield return m_unit.StatusChangedMessage.WaitHandleMessage(WaitHandleStatusChange);
 			}
 			// the unit used an ability
 			else if(m_unit.AbilityUsedMessage.MessagePending)
 			{
-				yield return m_unit.AbilityUsedMessage.HandleMessage(WaitHandleAbilityUsed);
+				yield return m_unit.AbilityUsedMessage.WaitHandleMessage(WaitHandleAbilityUsed);
 			}
 			// the unit was killed
 			else if(m_turnOrder.UnitKilledMessage.MessagePending)
 			{
-				yield return m_turnOrder.UnitKilledMessage.HandleMessage(WaitHandleUnitKilled);
+				yield return m_turnOrder.UnitKilledMessage.WaitHandleMessage(WaitHandleUnitKilled);
 			}
 		}
 	}
@@ -117,7 +115,7 @@ public class UnitView : MonoBehaviour
 	// the unit this view is displaying
 	private Unit m_unit;
 	// send a message to this channel when this unit is selected
-	private MessageChannel<Unit> m_unitSelectedMessageChannel;
+	private Message<Unit> m_unitSelectedMessageChannel;
 	// use the turn order to check if a unit dies
 	// TODO fix it so we dont need this here
 	private TurnOrder m_turnOrder;

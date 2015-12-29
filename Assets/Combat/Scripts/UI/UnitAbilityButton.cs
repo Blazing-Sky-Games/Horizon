@@ -6,7 +6,7 @@ using System.Collections.Generic;
 public class UnitAbilityButton : MonoBehaviour
 {
 	// ability name display. must be child of button
-	public Text abilityName;
+	public Text AbilityName;
 	// click this to use the ability
 	public Button AbilityButton;
 	
@@ -20,14 +20,14 @@ public class UnitAbilityButton : MonoBehaviour
 	}
 
 	// By convention, Init must be called on UI elements to supply them with dependacies
-	public void Init(UnitAbility ability, MessageChannel<UnitAbility> UnitAbilitySelectedMessageChannel)
+	public void Init(UnitAbility ability, Message<UnitAbility> unitAbilitySelectedMessageChannel)
 	{
 		//set backing fields
-		m_unitAbilitySelectedMessageChannel = UnitAbilitySelectedMessageChannel;
+		m_unitAbilitySelectedMessageChannel = unitAbilitySelectedMessageChannel;
 		m_ability = ability;
 
 		//init
-		abilityName.text = m_ability.AbilityName;
+		AbilityName.text = m_ability.AbilityName;
 		AbilityButton.onClick.AddListener(OnClick);
 	}
 
@@ -49,6 +49,6 @@ public class UnitAbilityButton : MonoBehaviour
 	// the ability this view is displaying
 	private UnitAbility m_ability;
 	// send a message down this to select an ability
-	private MessageChannel<UnitAbility> m_unitAbilitySelectedMessageChannel;
+	private Message<UnitAbility> m_unitAbilitySelectedMessageChannel;
 }
 

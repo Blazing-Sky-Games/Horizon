@@ -5,22 +5,22 @@ using System.Collections;
 public class UnitAbilityUsageAction : IActorAction
 {
 	// the unit using the ability
-	public Unit caster;
+	public Unit Caster;
 	// the unit targeted by the ability
-	public Unit target;
+	public Unit Target;
 	// the ability being used
-	public UnitAbility ability;
+	public UnitAbility Ability;
 
-	public UnitAbilityUsageAction(Unit Caster, UnitAbility Ability, Unit Target)
+	public UnitAbilityUsageAction(Unit caster, UnitAbility ability, Unit target)
 	{
-		caster = Caster;
-		ability = Ability;
-		target = Target;
+		Caster = caster;
+		Ability = ability;
+		Target = target;
 	}
 
 	// execute this ability and wait for it to be finished
 	public IEnumerator WaitPerform()
 	{
-		yield return ability.WaitUse(caster, target);
+		yield return Ability.WaitUse(Caster, Target);
 	}
 }

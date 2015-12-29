@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
@@ -11,11 +11,10 @@ public class HotbarUI : MonoBehaviour
 	public UnitAbilityButton UnitAbilityButtonPrefab;
 	public Vector2 AbilityButtonOffset; // controls how the buttons are layed out
 	public Vector2 AbilityButtonStride; // controls how the buttons are layed out
-	
 	// the pass turn button was clicked
-	public readonly MessageChannel PassTurnMessageChannel = new MessageChannel();
+	public readonly Message PassTurnMessageChannel = new Message();
 	// an ability was selected
-	public readonly MessageChannel<UnitAbility> UnitAbilitySelectedMessage = new MessageChannel<UnitAbility>();
+	public readonly Message<UnitAbility> UnitAbilitySelectedMessage = new Message<UnitAbility>();
 
 	// by convention init is called on ui elements to provide dependaceis
 	public void Init(TurnOrder turnOrder)
@@ -103,9 +102,9 @@ public class HotbarUI : MonoBehaviour
 		m_abilityButtons.Clear();
 
 		// re create the ability Buttons
-		for(int i = 0; i < newUnit.abilities.Count; i++)
+		for(int i = 0; i < newUnit.Abilities.Count; i++)
 		{
-			m_abilityButtons.Add(instatiateAbilityButton(newUnit.abilities[i]));
+			m_abilityButtons.Add(instatiateAbilityButton(newUnit.Abilities[i]));
 		}
 
 		// set the abilities on the ability buttons

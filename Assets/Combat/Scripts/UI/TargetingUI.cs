@@ -9,15 +9,14 @@ public class TargetingUI : MonoBehaviour
 	//root game object of the ui elements, but NOT the game object this script is attached to
 	public GameObject TargetingPrompt;
 	public Button Cancel;
-
 	// the action selected as a result of briging this UI up
 	public IActorAction Result;
 
 	// By convention, Init must be called on UI elements to supply them with dependacies
-	public void Init(MessageChannel<Unit> SelectUnitMessage, CombatLogic Logic)
+	public void Init(Message<Unit> selectUnitMessage, CombatLogic logic)
 	{
-		m_selectUnitMessage = SelectUnitMessage;
-		m_logic = Logic;
+		m_selectUnitMessage = selectUnitMessage;
+		m_logic = logic;
 
 		Cancel.onClick.AddListener(OnCancleClick);
 	}
@@ -25,19 +24,14 @@ public class TargetingUI : MonoBehaviour
 	// send cancel message if the user backs out of selecting a unit
 	void OnCancleClick()
 	{
-		canceled = true;
+		m_canceled = true;
 	}
-
-	bool canceled = false;
-
+	
 	IEnumerator WaitHandleUnitSelected(Unit arg)
 	{
 		// the user has selected a target, so declare that they have used an ability
 		yield return m_logic.GetFactionLeader(m_caster.Faction).WaitUseUnitAbility(m_caster, m_ability, arg);
 	}
-
-	Unit m_caster;
-	UnitAbility m_ability;
 
 	// call this to bring up the ui and select a target for an ability
 	public IEnumerator WaitSelectTarget(Unit caster, UnitAbility ability)
@@ -47,10 +41,10 @@ public class TargetingUI : MonoBehaviour
 
 		//show the ui
 		TargetingPrompt.SetActive(true);
-		canceled = false;
+		m_canceled = false;
 
 		// wait for a unit to be selected
-		while(m_selectUnitMessage.Idle && ! canceled)
+		while(m_selectUnitMessage.Idle && ! m_canceled)
 		{
 			yield return 0;
 		}
@@ -61,12 +55,16 @@ public class TargetingUI : MonoBehaviour
 		// if we recived a message (not the cancel message)
 		if(m_selectUnitMessage.MessagePending)
 		{
-			yield return m_selectUnitMessage.HandleMessage(WaitHandleUnitSelected);
+			yield return m_selectUnitMessage.WaitHandleMessage(WaitHandleUnitSelected);
 		}
 	}
 
+	private bool m_canceled = false;
+	private Unit m_caster;
+	private UnitAbility m_ability;
 	//supplyed in Init
-	private MessageChannel<Unit> m_selectUnitMessage;
+	private Message<Unit> m_selectUnitMessage;
 	private CombatLogic m_logic;
+
 }
 

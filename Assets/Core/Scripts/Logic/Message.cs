@@ -2,11 +2,11 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class MessageChannel
+public class Message
 {
 	public IEnumerator WaitSend()
 	{
-		if(m_idle == false)
+		if(!Idle)
 		{
 			throw new InvalidOperationException("send can only be called when a previose call to send has finised");
 			//TODO should this be replaced with a qeue based system
@@ -26,10 +26,10 @@ public class MessageChannel
 			yield return runningHandler;
 		}
 		
-		// give a frame for calls to  "HandleMessage" to come in
+		// give a frame for late handlers to show up
 		yield return 0;
 
-		while(m_processors > 0)
+		while(m_lateHandlers > 0)
 		{
 			yield return 0;
 		}
@@ -49,9 +49,14 @@ public class MessageChannel
 	
 	public IEnumerator WaitHandleMessage(Func<IEnumerator> handler)
 	{
-		m_processors++;
+		if(Idle)
+		{
+			throw new InvalidOperationException("Can not handle an idle message");
+		}
+
+		m_lateHandlers++;
 		yield return handler();
-		m_processors--;
+		m_lateHandlers--;
 		
 		while(MessagePending)
 		{
@@ -75,20 +80,20 @@ public class MessageChannel
 		}
 	}
 	
-	private List<Func<IEnumerator>> m_handlers = new List<Func<IEnumerator>>();
 	private bool m_idle = true;
-	private int m_processors;
+	private int m_lateHandlers = 0;
+	private readonly List<Func<IEnumerator>> m_handlers = new List<Func<IEnumerator>>();
 }
 
-public class MessageChannel<MessageContent>
+public class Message<TArg>
 {
-	public IEnumerator WaitSend(MessageContent content)
+	public IEnumerator WaitSend(TArg arg)
 	{
-		m_content = content;
+		m_arg = arg;
 		yield return m_innerMessage.WaitSend();
 	}
 
-	public void AddHandler(Func<MessageContent, IEnumerator> handler)
+	public void AddHandler(Func<TArg, IEnumerator> handler)
 	{
 		if(!convertedHandlers.ContainsKey(handler))
 		{ 
@@ -98,7 +103,7 @@ public class MessageChannel<MessageContent>
 		m_innerMessage.AddHandler(convertedHandlers[handler]);
 	}
 
-	public void RemoveHandler(Func<MessageContent, IEnumerator> handler)
+	public void RemoveHandler(Func<TArg, IEnumerator> handler)
 	{
 		if(!convertedHandlers.ContainsKey(handler))
 		{ 
@@ -109,7 +114,7 @@ public class MessageChannel<MessageContent>
 		convertedHandlers.Remove(handler);
 	}
 	
-	public IEnumerator HandleMessage(Func<MessageContent, IEnumerator> handler)
+	public IEnumerator WaitHandleMessage(Func<TArg, IEnumerator> handler)
 	{
 		yield return m_innerMessage.WaitHandleMessage(ConvertHandler(handler));
 	}
@@ -130,12 +135,12 @@ public class MessageChannel<MessageContent>
 		}
 	}
 	
-	private Func<IEnumerator> ConvertHandler(Func<MessageContent, IEnumerator> handler)
+	private Func<IEnumerator> ConvertHandler(Func<TArg, IEnumerator> handler)
 	{
-		return () => handler(m_content);
+		return () => handler(m_arg);
 	}
 
-	private MessageChannel m_innerMessage = new MessageChannel();
-	private MessageContent m_content;
-	private static Dictionary<Func<MessageContent, IEnumerator>,Func<IEnumerator>> convertedHandlers = new Dictionary<Func<MessageContent, IEnumerator>, Func<IEnumerator>>();
+	private TArg m_arg;
+	private readonly Message m_innerMessage = new Message();
+	private static readonly Dictionary<Func<TArg, IEnumerator>,Func<IEnumerator>> convertedHandlers = new Dictionary<Func<TArg, IEnumerator>, Func<IEnumerator>>();
 }

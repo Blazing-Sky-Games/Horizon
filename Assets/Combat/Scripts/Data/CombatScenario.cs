@@ -9,6 +9,7 @@ public class CombatScenario : ScriptableObject
 
 	// boiler plate funtion to deal with some unity weirdness
 	// TODO will proabaly get removed
+	// TODO impliment this with reflection
 	public CombatScenario DeepCopy()
 	{
 		CombatScenario cs = UnityEngine.Object.Instantiate(this);

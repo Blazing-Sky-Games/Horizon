@@ -4,9 +4,7 @@ using System.Reflection;
 using UnityEditor;
 using UnityEngine;
 
-/// <summary>
-/// A helper class for instantiating ScriptableObjects in the editor.
-/// </summary>
+//A helper class for instantiating ScriptableObjects in the editor.
 public class ScriptableObjectFactory
 {
 	[MenuItem("Assets/Create/ScriptableObject")]
@@ -22,10 +20,8 @@ public class ScriptableObjectFactory
 		// Show the selection window.
 		ScriptableObjectWindow.Init(allScriptableObjects);
 	}
-	
-	/// <summary>
-	/// Returns the assembly that contains the script code for this project (currently hard coded)
-	/// </summary>
+
+	// Returns the assembly that contains the script code for this project (currently hard coded)
 	private static Assembly GetAssembly()
 	{
 		return Assembly.Load(new AssemblyName("Assembly-CSharp"));

@@ -3,30 +3,25 @@ using System.Collections;
 using System.Collections.Generic;
 using Random = UnityEngine.Random;
 
+//TODO get rid of this, and creat messages with more generic arguments
 public struct AbilityUsedMessageContent
 {
 	public readonly Unit Caster;
 	public readonly Unit Target;
-	public readonly int Dmg;
-	public readonly bool Crit;
 	public readonly UnitAbility Ability;
 
-	public AbilityUsedMessageContent(Unit Caster, UnitAbility Ability, Unit Target, int Dmg, bool Crit)
+	public AbilityUsedMessageContent(Unit caster, UnitAbility ability, Unit target)
 	{
-		this.Caster = Caster;
-		this.Ability = Ability;
-
-		this.Target = Target;
-		
-		this.Dmg = Dmg;
-		this.Crit = Crit;
+		Caster = caster;
+		Ability = ability;
+		Target = target;
 	}
 }
 
 public class UnitAbility : UnityEngine.ScriptableObject
 {
 	//suppled in editor
-	public EffectType effectType;
+	public EffectType EffectType;
 	public string AbilityName;
 	public int AbilityPower = 10;
 	public float CritChanceMultiplyer = 1;
@@ -38,9 +33,9 @@ public class UnitAbility : UnityEngine.ScriptableObject
 		return UnityEngine.Object.Instantiate<UnitAbility>(this);
 	}
 
-	public IEnumerator WaitUse(Unit Caster, Unit Target)
+	public IEnumerator WaitUse(Unit caster, Unit target)
 	{
-		yield return Caster.AbilityUsedMessage.WaitSend(new AbilityUsedMessageContent(Caster, this, Target, 0, false));
+		yield return caster.AbilityUsedMessage.WaitSend(new AbilityUsedMessageContent(caster, this, target));
 
 		//later on, do somthing like this
 		// startabilitymessage.send() to start animations
@@ -49,13 +44,13 @@ public class UnitAbility : UnityEngine.ScriptableObject
 
 		foreach(AbilityEffect effect in CombatEffects)
 		{
-			yield return effect.WaitTrigger(Caster, Target, AbilityPower, false);
+			yield return effect.WaitTrigger(caster, target, AbilityPower, false);
 		}
 
 		//TODO: should this be the formula for crit chance? also, it seems like skill is over powered because it makes all crits better
 		float criticalSuccessThreshold = 
-				(effectType == EffectType.Physical) ? (float)Caster.Strength : (float)Caster.Intelligence 
-			/ (float)Target.Vitality 
+				(EffectType == EffectType.Physical) ? (float)caster.Strength : (float)caster.Intelligence 
+			/ (float)target.Vitality 
 			/ 2 
 			* 0.4f; 
 
@@ -64,7 +59,7 @@ public class UnitAbility : UnityEngine.ScriptableObject
 			//TODO send out critical hit message
 			foreach(AbilityEffect effect in CriticalEffects)
 			{
-				yield return effect.WaitTrigger(Caster, Target, AbilityPower, true);
+				yield return effect.WaitTrigger(caster, target, AbilityPower, true);
 			}
 		}
 	}

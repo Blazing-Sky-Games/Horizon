@@ -8,11 +8,11 @@ class StunEffect : AbilityEffect
 		yield return TurnBasedEffectManager.WaitStartTurnBasedEffect(WaitStunEffect(Attacker, Defender, abilityPower, IsCritical));
 	}
 
-	IEnumerator WaitStunEffect(Unit Attacker, Unit Defender, int abilityPower, bool IsCritical)
+	IEnumerator WaitStunEffect(Unit attacker, Unit defender, int abilityPower, bool isCritical)
 	{
-		yield return Defender.WaitSetStatus(UnitStatus.Stunned, true);
+		yield return defender.WaitSetStatus(UnitStatus.Stunned, true);
 
-		float Potency = GetPotency(Attacker, Defender, IsCritical);
+		float Potency = GetPotency(attacker, defender, isCritical);
 		int duration = 1 + (int)Math.Floor((Potency - 1) * 1.5);
 
 		while(duration > 0)
@@ -21,7 +21,7 @@ class StunEffect : AbilityEffect
 			duration--;
 		}
 
-		yield return Defender.WaitSetStatus(UnitStatus.Stunned, false);
+		yield return defender.WaitSetStatus(UnitStatus.Stunned, false);
 	}
 }
 

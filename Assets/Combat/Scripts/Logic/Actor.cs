@@ -3,20 +3,20 @@ using System.Collections;
 
 public class Actor
 {
-	public readonly MessageChannel<IActorAction> ActionDecidedMessage = new MessageChannel<IActorAction>();
+	public readonly Message<IActorAction> ActionDecidedMessage = new Message<IActorAction>();
 
 	public bool CanTakeAction
 	{
 		get
 		{
-			return !passedTurn && !UsedAction;
+			return !m_passedTurn && !m_usedAction;
 		}
 	}
 
 	public void ResetCanTakeAction()
 	{
-		passedTurn = false;
-		UsedAction = false;
+		m_passedTurn = false;
+		m_usedAction = false;
 	}
 
 	public virtual IEnumerator WaitDecideAction()
@@ -39,17 +39,17 @@ public class Actor
 
 	public IEnumerator WaitPassTurn()
 	{
-		passedTurn = true;
+		m_passedTurn = true;
 		yield return ActionDecidedMessage.WaitSend(new PassTurnAction());
 	}
 	
 	public IEnumerator WaitUseUnitAbility(Unit caster, UnitAbility ability, Unit target)
 	{
-		UsedAction = true;
+		m_usedAction = true;
 		yield return ActionDecidedMessage.WaitSend(new UnitAbilityUsageAction(caster, ability, target));
 	}
 
-	string m_actorName;
-	bool passedTurn;
-	bool UsedAction;
+	private readonly string m_actorName;
+	private bool m_passedTurn = false;
+	private bool m_usedAction = false;
 }
