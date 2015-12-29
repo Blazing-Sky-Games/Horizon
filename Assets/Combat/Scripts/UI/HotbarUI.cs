@@ -28,7 +28,15 @@ public class HotbarUI : MonoBehaviour
 		PassTurnBtn.onClick.AddListener (OnClickPassTurn);
 
 		//start main
-		StartCoroutine (HotbarMain());
+		CoroutineManager.Main.StartCoroutine (HotbarMain());
+	}
+
+	IEnumerator HandleTurnOrderAdvance ()
+	{
+		//write to combat log
+		//Debug.Log("advance turn order");
+		SelectedUnit = m_turnOrder.ActiveUnit;
+		yield break;
 	}
 
 	IEnumerator HotbarMain ()
@@ -36,18 +44,13 @@ public class HotbarUI : MonoBehaviour
 		while (true)
 		{
 			//wait for a message we care about
-			yield return m_turnOrder.AdvanceTurnOrderMessage.WaitForMessage();
+			while(m_turnOrder.AdvanceTurnOrderMessage.Idle)
+			{
+				yield return 0;
+			}
 
 			//turn order advanced
-			m_turnOrder.AdvanceTurnOrderMessage.BeginProccesMessage();
-				
-				//write to combat log
-	//			Debug.Log("advance turn order");
-				SelectedUnit = m_turnOrder.ActiveUnit;
-
-			m_turnOrder.AdvanceTurnOrderMessage.EndProccesMessage();
-
-			yield return m_turnOrder.AdvanceTurnOrderMessage.WaitTillMessageProcessed();
+			yield return m_turnOrder.AdvanceTurnOrderMessage.HandleMessage(HandleTurnOrderAdvance);
 		}
 	}
 
@@ -71,7 +74,7 @@ public class HotbarUI : MonoBehaviour
 	// send pass turn message when pass turn button clicked
 	private void OnClickPassTurn ()
 	{
-		PassTurnMessageChannel.SendMessage (); // TODO wait for PassTurnMessageChannel
+		CoroutineManager.Main.StartCoroutine(PassTurnMessageChannel.Send());
 	}
 
 	private void SetSelectedUnit (Unit newUnit)

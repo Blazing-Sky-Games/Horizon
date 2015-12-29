@@ -25,40 +25,44 @@ public class TargetingUI : MonoBehaviour
 	// send cancel message if the user backs out of selecting a unit
 	void OnCancleClick ()
 	{
-		m_selectUnitMessage.SendCancel ();
+		canceled = true;
 	}
+
+	bool canceled = false;
+
+	IEnumerator HandleUnitSelected (Unit arg)
+	{
+		// the user has selected a target, so declare that they have used an ability
+		yield return m_logic.GetFactionLeader (m_caster.Faction).UseUnitAbility (m_caster, m_ability, arg);
+	}
+
+	Unit m_caster;
+	UnitAbility m_ability;
 
 	// call this to bring up the ui and select a target for an ability
-	public Coroutine WaitSelectTarget (Unit caster, UnitAbility ability)
+	public IEnumerator WaitSelectTarget (Unit caster, UnitAbility ability)
 	{
-		return StartCoroutine (WaitSelectTargetRoutine (caster, ability));
-	}
+		m_caster = caster;
+		m_ability = ability;
 
-	// called by WaitSelectTarget
-	private IEnumerator WaitSelectTargetRoutine (Unit caster, UnitAbility ability)
-	{
 		//show the ui
 		TargetingPrompt.SetActive (true);
+		canceled = false;
 
 		// wait for a unit to be selected
-		yield return m_selectUnitMessage.WaitForMessage (); 
+		//yield return m_selectUnitMessage.WaitForMessage ();
+		while(m_selectUnitMessage.Idle && ! canceled)
+		{
+			yield return 0;
+		}
 
 		//hide the ui
 		TargetingPrompt.SetActive (false);
 
 		// if we recived a message (not the cancel message)
-		if (m_selectUnitMessage.State == MessageChannelState.MessagePending)
+		if (m_selectUnitMessage.MessagePending)
 		{
-			m_selectUnitMessage.BeginProccesMessage();
-
-				// the user has selected a target, so declare that they have used an ability
-				m_logic.GetFactionLeader (caster.Faction).UseUnitAbility (caster, ability, m_selectUnitMessage.MessageContent);
-				//wait for the message to be processed
-				yield return m_logic.GetFactionLeader (caster.Faction).ActionDecidedMessage.WaitTillMessageProcessed ();
-
-			m_selectUnitMessage.EndProccesMessage();
-
-			yield return m_selectUnitMessage.WaitTillMessageProcessed();
+			yield return m_selectUnitMessage.HandleMessage(HandleUnitSelected);
 		}
 	}
 

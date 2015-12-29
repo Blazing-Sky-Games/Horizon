@@ -1,8 +1,10 @@
-using UnityEngine;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
-public enum DmgType
+using Random = UnityEngine.Random;
+
+public enum EffectType
 {
 	Physical,
 	Tech
@@ -14,7 +16,14 @@ public enum Faction
 	AI
 }
 
-public class Unit : ScriptableObject
+public enum UnitStatus
+{
+	Poisoned,
+	Stunned,
+	Weakened
+}
+
+public class Unit : UnityEngine.ScriptableObject
 {
 	//supplyed in editor
 	public Faction Faction;
@@ -28,14 +37,79 @@ public class Unit : ScriptableObject
 	public int Insight; // tech def/crit res
 	public int Skill; // crit dmg
 	public int Vitality; // - crit chance for defender. also HP
-	
+
+	public int GetStat(UnitStat stat)
+	{
+		switch(stat)
+		{
+		case(UnitStat.Insight):
+			return Insight;
+			//break;
+		case(UnitStat.Intelligence):
+			return Intelligence;
+			//break;
+		case(UnitStat.Skill):
+			return Skill;
+			//break;
+		case(UnitStat.Stability):
+			return Stability;
+			//break;
+		case(UnitStat.Strength):
+			return Strength;
+			//break;
+		case(UnitStat.Vitality):
+			return Vitality;
+			//break;
+		default:
+			return 0;
+		}
+	}
+
+	public void SetStat(UnitStat stat, int value)
+	{
+		switch(stat)
+		{
+		case(UnitStat.Insight):
+			Insight = value;
+			break;
+		case(UnitStat.Intelligence):
+			Intelligence = value;
+			break;
+		case(UnitStat.Skill):
+			Skill = value;
+			break;
+		case(UnitStat.Stability):
+			Stability = value;
+			break;
+		case(UnitStat.Strength):
+			Strength = value;
+			break;
+		case(UnitStat.Vitality):
+			Vitality = value;
+			break;
+		}
+	}
+
 	//this unit has been hurt
 	public readonly MessageChannel<int> HurtMessage = new MessageChannel<int> ();
 	public readonly MessageChannel<AbilityUsedMessageContent> AbilityUsedMessage = new MessageChannel<AbilityUsedMessageContent> ();
 
+	public readonly MessageChannel<UnitStatus> StatusChangedMessage = new MessageChannel<UnitStatus>(); 
+
 	public void SetTurnOrder(TurnOrder turnOrder)
 	{
 		m_turnOrder = turnOrder;
+	}
+
+	public IEnumerator SetStatus (UnitStatus status, bool active)
+	{
+		m_status[status] = active;
+		yield return StatusChangedMessage.Send(status);
+	}
+
+	public bool GetStatus (UnitStatus status)
+	{
+		return m_status.ContainsKey(status) && m_status[status];
 	}
 
 	public Unit DeepCopy()
@@ -53,61 +127,18 @@ public class Unit : ScriptableObject
 		return newUnit;
 	}
 
-	public int CalcDamageAgainst (int BaseDmg, DmgType dmgType, Unit Defender, string condition, out bool crit)
-	{
-		Unit Attacker = this;
-
-		crit = false;
-		
-		double maximum = 1;
-		double minimum = 0.8;
-		
-		double AttackPower = Random.value * (maximum - minimum) + minimum;
-		Debug.Log (AttackPower + "That is the Attackpower");
-		double CombatComparison = (float)(dmgType == DmgType.Physical ? Attacker.Strength : Attacker.Intelligence) / (dmgType == DmgType.Physical ? Defender.Stability : Defender.Insight);
-		//Debug.Log (CombatComparison);
-
-		//dmg = (str or Int of attacker) / (stability or insight of defender) * basedmg  * (random number between 0.8 and 1);
-		double calcdmg = CombatComparison * BaseDmg * AttackPower * .6 + 5;
-		
-		// crit chance = (str or Int of attacker) / (stability or insight of defender) / 2 * 0.4
-		double critChance = (dmgType == DmgType.Physical ? (float)Attacker.Strength : (float)Attacker.Intelligence) / (float)Defender.Vitality / 2 * 0.4;
-		double CritSuccess = Random.value;
-		//Debug.Log (CritSuccess + " Critical chance? " + critChance);
-		if (CritSuccess <= critChance)
-		{
-			double critMult = 1.0 + (double)Attacker.Skill /  (double)(dmgType == DmgType.Physical ? Defender.Stability : Defender.Insight) / 2.0;
-			//Debug.Log ("CRITICAL!!!");
-			crit = true;
-			if (condition != "None") 
-			{
-				Debug.Log (Defender.UnitName + " is now " + condition + " At this power " + critMult);
-			} 
-			else 
-			{
-				// crit multiplier = 1 + (skill of attacker / vitality of defender / 2);
-
-				Debug.Log ("CRITICAL!!!!!!!!!!!!!  At times " + critMult);
-				calcdmg *= critMult;
-			}
-		}
-		
-		return (int)calcdmg;
-	}
-
-	public IEnumerator RespondToAttackRoutine (int dmg)
+	public IEnumerator TakeDamage(int dmg, bool IsCritical)
 	{
 		Health -= dmg;
 
-		HurtMessage.SendMessage (dmg);
-		yield return HurtMessage.WaitTillMessageProcessed ();
+		yield return HurtMessage.Send(dmg);
 
-		if (Health <= 0)
+		if(Health <= 0)
 		{
-			m_turnOrder.UnitKilled(this);
-			yield return m_turnOrder.UnitKilledMessage.WaitTillMessageProcessed();
+			yield return m_turnOrder.UnitKilled(this);
 		}
 	}
 
 	private TurnOrder m_turnOrder;
+	private Dictionary<UnitStatus,bool> m_status = new Dictionary<UnitStatus, bool>();
 }

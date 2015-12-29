@@ -1,6 +1,7 @@
-using UnityEngine;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Random = UnityEngine.Random;
 
 public struct AbilityUsedMessageContent
 {
@@ -22,32 +23,59 @@ public struct AbilityUsedMessageContent
 	}
 }
 
-public class UnitAbility : ScriptableObject
+public class UnitAbility : UnityEngine.ScriptableObject
 {
 	//suppled in editor
-	public int power;
-	public DmgType damageType;
-	public string conditioncause;
+	public EffectType effectType;
 	public string AbilityName;
+
+	public int AbilityPower = 10;
+	public float CritChanceMultiplyer = 1;
+
+	public List<AbilityEffect> CombatEffects;
+	public List<AbilityEffect> CriticalEffects;
 
 	public UnitAbility DeepCopy()
 	{
 		return UnityEngine.Object.Instantiate<UnitAbility> (this);
 	}
 
-	public Coroutine WaitStartUseAbility (Unit Caster, Unit Target)
+	public IEnumerator WaitStartUseAbility (Unit Caster, Unit Target)
 	{
-		bool crit = false;
-		int dmg = Caster.CalcDamageAgainst (power, damageType, Target, conditioncause, out crit);
+		yield return Caster.AbilityUsedMessage.Send(new AbilityUsedMessageContent(Caster,this,Target,0,false));
 
-		//notify that this ability has been used (play animations, sounds, trigger hurt animations, trigger dmg, trigger death.... etc)
-		Caster.AbilityUsedMessage.SendMessage (new AbilityUsedMessageContent(Caster,this,Target,dmg,crit));
-		return Caster.AbilityUsedMessage.WaitTillMessageProcessed ();
-	}
+		//later on, do somthing like this
+		// startabilitymessage.send() to start animations
+		// wait for abilityconnectedMessage or somthing like that,
+		// then...
 
-	public IEnumerator AffectTarget(AbilityUsedMessageContent content)
-	{
-		return content.Target.RespondToAttackRoutine(content.Dmg);
+		List<Coroutine> effects = new List<Coroutine>();
+
+		foreach(AbilityEffect effect in CombatEffects)
+		{
+			effects.Add(CoroutineManager.Main.StartCoroutine(effect.Trigger(Caster,Target,AbilityPower,false)));
+		}
+
+		//TODO: should this be the formula for crit chance? also, it seems like skill is over powered because it makes all crits better
+		float criticalSuccessThreshold = 
+				(effectType == EffectType.Physical) ? (float)Caster.Strength : (float)Caster.Intelligence 
+				/ (float)Target.Vitality 
+				/ 2 
+				* 0.4f; 
+
+		if(Random.value < criticalSuccessThreshold * CritChanceMultiplyer)
+		{
+			//TODO send out critical hit message
+			foreach(AbilityEffect effect in CriticalEffects)
+			{
+				effects.Add(CoroutineManager.Main.StartCoroutine(effect.Trigger(Caster,Target,AbilityPower,true)));
+			}
+		}
+
+		foreach(Coroutine routine in effects)
+		{
+			yield return routine;
+		}
 	}
 }
 

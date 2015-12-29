@@ -3,8 +3,8 @@ using System.Collections;
 
 public class PassTurnAction : IActorAction
 {
-	public Coroutine WaitPerformAction ()
+	public IEnumerator WaitPerformAction ()
 	{
-		return null;
+		yield return null;
 	}
 }

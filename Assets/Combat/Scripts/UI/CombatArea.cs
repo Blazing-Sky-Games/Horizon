@@ -22,7 +22,7 @@ public class CombatArea : MonoBehaviour {
 		UpdateCombatArea ();
 
 		//start main
-		StartCoroutine (CombatAreaMain());
+		CoroutineManager.Main.StartCoroutine (CombatAreaMain());
 	}
 
 	// remove dead units, and reposition units
@@ -87,9 +87,10 @@ public class CombatArea : MonoBehaviour {
 		while (true)
 		{
 			//wait for a message we care about
-			yield return m_turnOrder.UnitKilledMessage.WaitForMessage();
-			yield return m_turnOrder.UnitKilledMessage.WaitTillMessageProcessed();
+			//yield return m_turnOrder.UnitKilledMessage.WaitForMessage();
+			//yield return m_turnOrder.UnitKilledMessage.WaitTillMessageProcessed();
 			//UpdateCombatArea(); TODO MEGA BUG
+			yield return 0;
 		}
 	}
 

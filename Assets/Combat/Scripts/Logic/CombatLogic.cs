@@ -34,7 +34,7 @@ public class CombatLogic : MonoBehaviour
 		factionLeaders [Faction.Player] = new Actor ("player");
 		factionLeaders [Faction.AI] = new AIActor("AI",this);
 
-		StartCoroutine (CombatMain ());
+		CoroutineManager.Main.StartCoroutine (CombatMain ());
 	}
 
 	private IEnumerator CombatMain ()
@@ -50,28 +50,31 @@ public class CombatLogic : MonoBehaviour
 			while (FactionLeader.CanTakeAction)
 			{
 				//tell the actor to decide what to do
-				FactionLeader.DecideAction();
+				CoroutineManager.Main.StartCoroutine(FactionLeader.DecideAction());
+
 				//wait for the current actor to decide an action
-				yield return FactionLeader.ActionDecidedMessage.WaitForMessage();
+				while(FactionLeader.ActionDecidedMessage.Idle)
+				{
+					yield return 0;
+				}
 				//perform that action and wait for it to finish
-				m_turnOrder.CombatEncounterOverMessage.BeginProccesMessage();// TODO whaaa.....
-				FactionLeader.ActionDecidedMessage.BeginProccesMessage();
-				yield return FactionLeader.ActionDecidedMessage.MessageContent.WaitPerformAction();
-				FactionLeader.ActionDecidedMessage.EndProccesMessage();
+				yield return FactionLeader.ActionDecidedMessage.HandleMessage(handleActionDecided);
 
-				yield return FactionLeader.ActionDecidedMessage.WaitTillMessageProcessed();
-
-				if(m_turnOrder.CombatEncounterOverMessage.State == MessageChannelState.MessagePending)
+				if(m_turnOrder.CombatEncounterOverMessage.MessagePending)
 				{
 					EncounterOver = true;
 				}
-
-				m_turnOrder.CombatEncounterOverMessage.EndProccesMessage();
 			}
 
 			//advance the turn order
 			yield return m_turnOrder.WaitAdvanceTurnOrder ();
+			yield return TurnBasedEffectManager.UpdateTurnBassedEffects();
 		}
+	}
+
+	private IEnumerator handleActionDecided(IActorAction action)
+	{
+		yield return action.WaitPerformAction();
 	}
 	
 	private TurnOrder m_turnOrder;

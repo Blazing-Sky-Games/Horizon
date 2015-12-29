@@ -19,10 +19,9 @@ public class Actor
 		UsedAction = false;
 	}
 
-	public virtual void DecideAction()
+	public virtual IEnumerator DecideAction()
 	{
-		//empty
-		//this is where an AI would decide what to do
+		yield break;
 	}
 
 	public string ActorName
@@ -38,18 +37,16 @@ public class Actor
 		m_actorName = name;
 	}
 
-	public void PassTurn ()
+	public IEnumerator PassTurn ()
 	{
 		passedTurn = true;
-		ActionDecidedMessage.SendMessage (new PassTurnAction ());
-		// TODO wait for ActionDecidedMessage
+		yield return ActionDecidedMessage.Send (new PassTurnAction ());
 	}
 	
-	public void UseUnitAbility (Unit caster, UnitAbility ability, Unit target)
+	public IEnumerator UseUnitAbility (Unit caster, UnitAbility ability, Unit target)
 	{
 		UsedAction = true;
-		ActionDecidedMessage.SendMessage (new UnitAbilityUsageAction (caster, ability, target));
-		// TODO wait for ActionDecidedMessage
+		yield return ActionDecidedMessage.Send(new UnitAbilityUsageAction (caster, ability, target));
 	}
 
 	string m_actorName;

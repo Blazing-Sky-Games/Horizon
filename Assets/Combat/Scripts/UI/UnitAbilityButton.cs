@@ -34,15 +34,14 @@ public class UnitAbilityButton : MonoBehaviour
 	// when the button is clicked, send a Ability selected message
 	void OnClick ()
 	{
-		StartCoroutine (OnClickRoutine ());
+		CoroutineManager.Main.StartCoroutine (OnClickRoutine ());
 	}
 
 	IEnumerator OnClickRoutine()
 	{
 		// TODO fix this weird thing. should you always have to wait for a message to be processed?
 		AbilityButton.enabled = false;
-		m_unitAbilitySelectedMessageChannel.SendMessage (m_ability);
-		yield return m_unitAbilitySelectedMessageChannel.WaitTillMessageProcessed ();
+		yield return m_unitAbilitySelectedMessageChannel.Send(m_ability);
 		AbilityButton.enabled = true;
 	}
 

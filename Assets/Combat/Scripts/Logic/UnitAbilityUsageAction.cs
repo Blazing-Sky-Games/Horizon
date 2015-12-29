@@ -19,8 +19,8 @@ public class UnitAbilityUsageAction : IActorAction
 	}
 
 	// execute this ability and wait for it to be finished
-	public Coroutine WaitPerformAction ()
+	public IEnumerator WaitPerformAction ()
 	{
-		return ability.WaitStartUseAbility (caster, target);
+		yield return ability.WaitStartUseAbility (caster, target);
 	}
 }

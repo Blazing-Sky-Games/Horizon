@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 using System.Collections;
 using UnityEngine.UI;
 
@@ -23,14 +24,59 @@ public class UnitView : MonoBehaviour {
 		DisplayText.text = m_unit.UnitName + " HP : " + m_unit.Health + " / " + m_unit.MaxHealth;
 		UnitSelectButton.onClick.AddListener (OnClickUnitSelect);
 
+		m_unit.StatusChangedMessage.AddHandler(HandleStatusChange);
+
 		// start main
-		StartCoroutine (UnitViewMain ());
+		CoroutineManager.Main.StartCoroutine (UnitViewMain ());
 	}
 
 	// when the user clicks on the unit, send a unit selected message
 	private void OnClickUnitSelect()
 	{
-		m_unitSelectedMessageChannel.SendMessage (m_unit); // TODO wait for m_unitSelectedMessageChannel
+		CoroutineManager.Main.StartCoroutine(m_unitSelectedMessageChannel.Send (m_unit));
+	}
+
+	IEnumerator HandleHurt (int arg)
+	{
+		//write to combat log
+		Debug.Log(m_unit.UnitName + " took " + arg +  " points of damage");
+		// update the health display
+		DisplayText.text = m_unit.UnitName + " HP : " + m_unit.Health + " / " + m_unit.MaxHealth;
+		yield break;
+	}
+
+	IEnumerator HandleUnitKilled (Unit arg)
+	{
+		if(arg == m_unit)
+		{
+			//dont show the unit
+			//TODO fix bug related to this
+			UnitSelectButton.gameObject.SetActive(false);
+			//write to combat log
+			Debug.Log(m_unit.UnitName + " died");
+		}
+
+		yield break;
+	}
+
+	IEnumerator HandleAbilityUsed (AbilityUsedMessageContent arg)
+	{
+		Debug.Log(arg.Caster.UnitName + " used " + arg.Ability.AbilityName + " on " + arg.Target.UnitName);
+		yield break;
+	}
+
+	IEnumerator HandleStatusChange (UnitStatus arg)
+	{
+		if(m_unit.GetStatus(arg))
+		{
+			Debug.Log(m_unit.UnitName + " was " + arg.ToString());
+		}
+		else
+		{
+			Debug.Log("status \"" + arg.ToString() + "\" ended for " + m_unit.UnitName);
+		}
+
+		yield break;
 	}
 
 	private IEnumerator UnitViewMain()
@@ -41,7 +87,8 @@ public class UnitView : MonoBehaviour {
 			//wait for a message we care about
 			while(m_unit.HurtMessage.Idle &&
 			      m_unit.AbilityUsedMessage.Idle &&
-			      (m_turnOrder.UnitKilledMessage.Idle || m_turnOrder.UnitKilledMessage.MessageContent != m_unit))
+			      m_turnOrder.UnitKilledMessage.Idle &&
+			      m_unit.StatusChangedMessage.Idle)
 			{
 				yield return 0;
 			}
@@ -49,53 +96,21 @@ public class UnitView : MonoBehaviour {
 			//the unit was hurt
 			if(m_unit.HurtMessage.MessagePending)
 			{
-				m_unit.HurtMessage.BeginProccesMessage();
-
-					//write to combat log
-					Debug.Log(m_unit.UnitName + " took " + m_unit.HurtMessage.MessageContent +  " points of damage");
-					// update the health display
-					DisplayText.text = m_unit.UnitName + " HP : " + m_unit.Health + " / " + m_unit.MaxHealth;
-
-				m_unit.HurtMessage.EndProccesMessage();
-
-				yield return m_unit.HurtMessage.WaitTillMessageProcessed();
+				yield return m_unit.HurtMessage.HandleMessage(HandleHurt);
+			}
+			else if(m_unit.StatusChangedMessage.MessagePending)
+			{
+				//yield return m_unit.StatusChangedMessage.HandleMessage(HandleStatusChange);
 			}
 			// the unit used an ability
 			else if(m_unit.AbilityUsedMessage.MessagePending)
 			{
-				m_unit.AbilityUsedMessage.BeginProccesMessage();
-
-					AbilityUsedMessageContent content = m_unit.AbilityUsedMessage.MessageContent;
-					//write to combat log
-					Debug.Log(content.Caster.UnitName + " used " + content.Ability.AbilityName + " on " + content.Target.UnitName);
-					
-					// if there was a crit, write it to the combat log
-					if(content.Crit)
-					{
-						//Debug.Log("critical hit");
-					}
-
-					// affect the target
-					yield return StartCoroutine(content.Ability.AffectTarget (content));
-
-				m_unit.AbilityUsedMessage.EndProccesMessage();
-
-				yield return m_unit.AbilityUsedMessage.WaitTillMessageProcessed();
+				yield return m_unit.AbilityUsedMessage.HandleMessage(HandleAbilityUsed);
 			}
 			// the unit was killed
-			else if(m_turnOrder.UnitKilledMessage.MessagePending && m_turnOrder.UnitKilledMessage.MessageContent == m_unit)
+			else if(m_turnOrder.UnitKilledMessage.MessagePending)
 			{
-				m_turnOrder.UnitKilledMessage.BeginProccesMessage();
-
-					//dont show the unit
-					//TODO fix bug related to this
-					UnitSelectButton.gameObject.SetActive(false);
-					//write to combat log
-					Debug.Log(m_unit.UnitName + " died");
-
-				m_turnOrder.UnitKilledMessage.EndProccesMessage();
-
-				yield return m_turnOrder.UnitKilledMessage.WaitTillMessageProcessed();
+				yield return m_turnOrder.UnitKilledMessage.HandleMessage(HandleUnitKilled);
 			}
 		}
 	}

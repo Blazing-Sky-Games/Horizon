@@ -11,7 +11,7 @@ public class AIActor : Actor
 	}
 
 	//pick a random ability and a random target and use that ability
-	public override void DecideAction ()
+	public override IEnumerator DecideAction ()
 	{
 		Unit activeUnit = m_logic.TurnOrder.ActiveUnit;
 
@@ -22,7 +22,7 @@ public class AIActor : Actor
 		Unit targetUnit = m_logic.TurnOrder.Where (x => x.Faction == Faction.Player).OrderBy(x => r.NextDouble ()).First ();
 		UnitAbility SelectedAbility = activeUnit.abilities.OrderBy (x => r.NextDouble ()).First ();
 
-		UseUnitAbility (activeUnit, SelectedAbility, targetUnit);
+		yield return UseUnitAbility (activeUnit, SelectedAbility, targetUnit);
 	}
 
 	private CombatLogic m_logic;
