@@ -24,8 +24,6 @@ public class UnitView : MonoBehaviour {
 		DisplayText.text = m_unit.UnitName + " HP : " + m_unit.Health + " / " + m_unit.MaxHealth;
 		UnitSelectButton.onClick.AddListener (OnClickUnitSelect);
 
-		m_unit.StatusChangedMessage.AddHandler(HandleStatusChange);
-
 		// start main
 		CoroutineManager.Main.StartCoroutine (UnitViewMain ());
 	}
@@ -100,7 +98,7 @@ public class UnitView : MonoBehaviour {
 			}
 			else if(m_unit.StatusChangedMessage.MessagePending)
 			{
-				//yield return m_unit.StatusChangedMessage.HandleMessage(HandleStatusChange);
+				yield return m_unit.StatusChangedMessage.HandleMessage(HandleStatusChange);
 			}
 			// the unit used an ability
 			else if(m_unit.AbilityUsedMessage.MessagePending)

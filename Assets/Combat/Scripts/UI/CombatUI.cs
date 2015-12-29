@@ -58,7 +58,7 @@ public class CombatUI : MonoBehaviour
 		if (HotbarInterface.SelectedUnit == Logic.TurnOrder.ActiveUnit && Logic.TurnOrder.ActiveUnit.Faction == Faction.Player)
 		{
 			//bring up unit targeting diolouge and wait for it to close
-			yield return TargetingInterface.WaitSelectTarget (Logic.TurnOrder.ActiveUnit, arg);
+			yield return TargetingInterface.SelectTarget (Logic.TurnOrder.ActiveUnit, arg);
 		}
 	}
 
@@ -110,7 +110,7 @@ public class CombatUI : MonoBehaviour
 				// the user clikced the pass turn button, so declare that the chose to pass the turn
 				yield return HotbarInterface.PassTurnMessageChannel.HandleMessage(Logic.GetFactionLeader (Logic.TurnOrder.ActiveUnit.Faction).PassTurn);
 			}
-			//a unit was selected hmm TODO should this be moved to turn order ui
+			//a unit was selected hmm TODO should this be moved to hotbar ui
 			else if (UnitSelectedMessage.MessagePending)
 			{
 				//update the hot bar

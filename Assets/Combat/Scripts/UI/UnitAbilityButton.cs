@@ -40,6 +40,7 @@ public class UnitAbilityButton : MonoBehaviour
 	IEnumerator OnClickRoutine()
 	{
 		// TODO fix this weird thing. should you always have to wait for a message to be processed?
+		// TODO lol i dont understand that old todo above this one
 		AbilityButton.enabled = false;
 		yield return m_unitAbilitySelectedMessageChannel.Send(m_ability);
 		AbilityButton.enabled = true;

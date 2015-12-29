@@ -40,7 +40,7 @@ public class TargetingUI : MonoBehaviour
 	UnitAbility m_ability;
 
 	// call this to bring up the ui and select a target for an ability
-	public IEnumerator WaitSelectTarget (Unit caster, UnitAbility ability)
+	public IEnumerator SelectTarget (Unit caster, UnitAbility ability)
 	{
 		m_caster = caster;
 		m_ability = ability;
@@ -50,7 +50,6 @@ public class TargetingUI : MonoBehaviour
 		canceled = false;
 
 		// wait for a unit to be selected
-		//yield return m_selectUnitMessage.WaitForMessage ();
 		while(m_selectUnitMessage.Idle && ! canceled)
 		{
 			yield return 0;

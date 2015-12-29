@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System;
@@ -99,7 +99,7 @@ public class TurnOrder : IEnumerable<Unit>
 	}
 
 	//advance the turn order and wait for it to finish
-	public IEnumerator WaitAdvanceTurnOrder ()
+	public IEnumerator Advance ()
 	{
 		m_activeUnitIndex++;
 		m_activeUnitIndex %= m_units.Count;

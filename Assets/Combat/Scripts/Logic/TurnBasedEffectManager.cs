@@ -12,7 +12,6 @@ public class TurnBassedEffect
 	{
 		m_callStack = new Stack<IEnumerator> ();
 		m_callStack.Push (routine);
-		CoroutineManager.Main.StartCoroutine(Update());
 	}
 
 	public bool Done 

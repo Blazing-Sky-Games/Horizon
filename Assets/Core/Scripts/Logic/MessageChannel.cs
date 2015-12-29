@@ -8,8 +8,8 @@ public class MessageChannel
 	{
 		if (m_idle == false) {
 			throw new InvalidOperationException ("send can only be called when a previose call to send has finised");
-			//TODO should this be replaced with a qeue bassed system
-			//what about recursive message calls...hmmm
+			//TODO should this be replaced with a qeue based system
+			//what about recursive message calls (where fireing a message caused that message to fire again, like a recursive function call...would that ever happen)...hmmm
 		}
 		
 		List<Coroutine> runningHandlers = new List<Coroutine> ();

@@ -67,14 +67,14 @@ public class CombatLogic : MonoBehaviour
 			}
 
 			//advance the turn order
-			yield return m_turnOrder.WaitAdvanceTurnOrder ();
+			yield return m_turnOrder.Advance ();
 			yield return TurnBasedEffectManager.UpdateTurnBassedEffects();
 		}
 	}
 
 	private IEnumerator handleActionDecided(IActorAction action)
 	{
-		yield return action.WaitPerformAction();
+		yield return action.Perform();
 	}
 	
 	private TurnOrder m_turnOrder;

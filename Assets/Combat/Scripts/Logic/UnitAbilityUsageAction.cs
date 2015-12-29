@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 // represents and actors choice to use a unit ability
@@ -19,8 +19,8 @@ public class UnitAbilityUsageAction : IActorAction
 	}
 
 	// execute this ability and wait for it to be finished
-	public IEnumerator WaitPerformAction ()
+	public IEnumerator Perform ()
 	{
-		yield return ability.WaitStartUseAbility (caster, target);
+		yield return ability.Use (caster, target);
 	}
 }
