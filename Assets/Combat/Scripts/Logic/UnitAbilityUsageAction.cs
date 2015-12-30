@@ -21,6 +21,6 @@ public class UnitAbilityUsageAction : IActorAction
 	// execute this ability and wait for it to be finished
 	public IEnumerator WaitPerform()
 	{
-		yield return Ability.WaitUse(Caster, Target);
+		yield return new Routine(Ability.WaitUse(Caster, Target));
 	}
 }

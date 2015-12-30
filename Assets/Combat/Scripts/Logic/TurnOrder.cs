@@ -41,6 +41,12 @@ public class TurnOrder : IEnumerable<Unit>
 	public IEnumerator WaitKillUnit(Unit killedUnit)
 	{
 		int killedIndex = m_units.IndexOf(killedUnit);
+
+		if(killedIndex == -1)
+		{
+			throw new InvalidOperationException("cannot kill unit not in the turn order");
+		}
+
 		m_units.Remove(killedUnit); // need to handle the case where the active unit dies
 
 		if(killedIndex > m_activeUnitIndex)
@@ -74,15 +80,15 @@ public class TurnOrder : IEnumerable<Unit>
 		}
 		
 		// send message that a unit has been killed
-		yield return UnitKilledMessage.WaitSend(killedUnit);
+		yield return new Routine(UnitKilledMessage.WaitSend(killedUnit));
 
 		if(numPlayer == 0)
 		{
-			yield return CombatEncounterOverMessage.WaitSend(false);
+			yield return new Routine(CombatEncounterOverMessage.WaitSend(false));
 		}
 		else if(numAI == 0)
 		{
-			yield return CombatEncounterOverMessage.WaitSend(true);
+			yield return new Routine(CombatEncounterOverMessage.WaitSend(true));
 		}
 	}
 
@@ -104,7 +110,7 @@ public class TurnOrder : IEnumerable<Unit>
 		m_activeUnitIndex++;
 		m_activeUnitIndex %= m_units.Count;
 
-		yield return AdvanceTurnOrderMessage.WaitSend();
+		yield return new Routine(AdvanceTurnOrderMessage.WaitSend());
 	}
 
 	private List<Unit> m_units;

@@ -40,13 +40,13 @@ public class Actor
 	public IEnumerator WaitPassTurn()
 	{
 		m_passedTurn = true;
-		yield return ActionDecidedMessage.WaitSend(new PassTurnAction());
+		yield return new Routine(ActionDecidedMessage.WaitSend(new PassTurnAction()));
 	}
 	
 	public IEnumerator WaitUseUnitAbility(Unit caster, UnitAbility ability, Unit target)
 	{
 		m_usedAction = true;
-		yield return ActionDecidedMessage.WaitSend(new UnitAbilityUsageAction(caster, ability, target));
+		yield return new Routine(ActionDecidedMessage.WaitSend(new UnitAbilityUsageAction(caster, ability, target)));
 	}
 
 	private readonly string m_actorName;

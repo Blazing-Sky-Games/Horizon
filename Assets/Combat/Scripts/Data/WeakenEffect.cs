@@ -6,12 +6,12 @@ public class WeakenEffect : AbilityEffect
 
 	public override IEnumerator WaitTrigger(Unit Attacker, Unit Defender, int abilityPower, bool IsCritical)
 	{
-		yield return TurnBasedEffectManager.WaitStartTurnBasedEffect(WaitWeakenEffect(Attacker, Defender, abilityPower, IsCritical));
+		yield return new Routine(TurnBasedEffectManager.WaitStartTurnBasedEffect(WaitWeakenEffect(Attacker, Defender, abilityPower, IsCritical)));
 	}
 
 	IEnumerator WaitWeakenEffect(Unit attacker, Unit defender, int abilityPower, bool isCritical)
 	{
-		yield return defender.WaitSetStatus(UnitStatus.Weakened, true);
+		yield return new Routine(defender.WaitSetStatus(UnitStatus.Weakened, true));
 
 		float Potency = GetPotency(attacker, defender, isCritical);
 
@@ -28,7 +28,7 @@ public class WeakenEffect : AbilityEffect
 		}
 
 		defender.SetStatistic(StatToWeaken, oldval);
-		yield return defender.WaitSetStatus(UnitStatus.Weakened, false);
+		yield return new Routine(defender.WaitSetStatus(UnitStatus.Weakened, false));
 	}
 }
 

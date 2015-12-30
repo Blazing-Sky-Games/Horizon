@@ -17,7 +17,7 @@ public class CoroutineManager
 
 	public Coroutine StartCoroutine(IEnumerator routine)
 	{
-		Coroutine c = new Coroutine(routine);
+		Coroutine c = new Coroutine(routine, StackHelper.Caller__METHOD__, StackHelper.Caller__FILE__, StackHelper.Caller__LINE__);
 		m_routines.Add(c);
 		
 		return c;

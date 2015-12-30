@@ -68,6 +68,14 @@ public class Unit : UnityEngine.ScriptableObject
 				break;
 		}
 	}
+
+	public bool Dead
+	{
+		get
+		{
+			return Health <= 0;
+		}
+	}
 	
 	//TODO fix it so this is not needed
 	public void SetTurnOrder(TurnOrder turnOrder)
@@ -78,7 +86,7 @@ public class Unit : UnityEngine.ScriptableObject
 	public IEnumerator WaitSetStatus(UnitStatus status, bool active)
 	{
 		m_status[status] = active;
-		yield return StatusChangedMessage.WaitSend(status);
+		yield return new Routine(StatusChangedMessage.WaitSend(status));
 	}
 
 	public bool GetStatus(UnitStatus status)
@@ -101,15 +109,16 @@ public class Unit : UnityEngine.ScriptableObject
 		return newUnit;
 	}
 
+	//TODO deal with this being called when the unit is dead
 	public IEnumerator WaitTakeDamage(int dmg, bool isCritical)
 	{
 		Health -= dmg;
 
-		yield return HurtMessage.WaitSend(dmg);
+		yield return new Routine(HurtMessage.WaitSend(dmg));
 
 		if(Health <= 0)
 		{
-			yield return m_turnOrder.WaitKillUnit(this);
+			yield return new Routine(m_turnOrder.WaitKillUnit(this));
 		}
 	}
 

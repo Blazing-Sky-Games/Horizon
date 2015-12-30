@@ -1,6 +1,56 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
+
+public static class StackHelper
+{
+	
+	public static String ReportError(string Message)
+	{
+		// Get the frame one step up the call tree
+		StackFrame CallStack = new StackFrame(1, true);
+		
+		// These will now show the file and line number of the ReportError
+		string SourceFile = CallStack.GetFileName();
+		int SourceLine = CallStack.GetFileLineNumber();
+		
+		return "Error: " + Message + "\nFile: " + SourceFile + "\nLine: " + SourceLine.ToString();
+	}
+	
+	public static int Caller__LINE__
+	{
+		get
+		{
+			StackFrame CallStack = new StackFrame(2, true);
+			int line = new int();
+			line += CallStack.GetFileLineNumber();
+			return line;
+		}
+	}
+	
+	public static string Caller__FILE__
+	{
+		get
+		{
+			StackFrame CallStack = new StackFrame(2, true);
+			string temp = CallStack.GetFileName();
+			String file = String.Copy(String.IsNullOrEmpty(temp) ? "" : temp);
+			return String.IsNullOrEmpty(file) ? "" : file;
+		}
+	}
+
+	public static string Caller__METHOD__
+	{
+		get
+		{
+			StackFrame CallStack = new StackFrame(2, true);
+			string temp = CallStack.GetMethod().Name;
+			String meth = String.Copy(String.IsNullOrEmpty(temp) ? "" : temp);
+			return String.IsNullOrEmpty(meth) ? "" : meth;
+		}
+	}
+}
 
 public class Message
 {
@@ -54,8 +104,9 @@ public class Message
 			throw new InvalidOperationException("Can not handle an idle message");
 		}
 
+		IEnumerator WaitHandler = handler();
 		m_lateHandlers++;
-		yield return handler();
+		yield return new Routine(WaitHandler);
 		m_lateHandlers--;
 		
 		while(MessagePending)
@@ -90,7 +141,7 @@ public class Message<TArg>
 	public IEnumerator WaitSend(TArg arg)
 	{
 		m_arg = arg;
-		yield return m_innerMessage.WaitSend();
+		yield return new Routine(m_innerMessage.WaitSend());
 	}
 
 	public void AddHandler(Func<TArg, IEnumerator> handler)
@@ -116,7 +167,7 @@ public class Message<TArg>
 	
 	public IEnumerator WaitHandleMessage(Func<TArg, IEnumerator> handler)
 	{
-		yield return m_innerMessage.WaitHandleMessage(ConvertHandler(handler));
+		yield return new Routine(m_innerMessage.WaitHandleMessage(ConvertHandler(handler)));
 	}
 	
 	public bool Idle
@@ -143,4 +194,130 @@ public class Message<TArg>
 	private TArg m_arg;
 	private readonly Message m_innerMessage = new Message();
 	private static readonly Dictionary<Func<TArg, IEnumerator>,Func<IEnumerator>> convertedHandlers = new Dictionary<Func<TArg, IEnumerator>, Func<IEnumerator>>();
+}
+
+public class Message<TArg0,TArg1>
+{
+	public IEnumerator WaitSend(TArg0 arg0, TArg1 arg1)
+	{
+		m_arg0 = arg0;
+		m_arg1 = arg1;
+		yield return new Routine(m_innerMessage.WaitSend());
+	}
+	
+	public void AddHandler(Func<TArg0, TArg1, IEnumerator> handler)
+	{
+		if(!convertedHandlers.ContainsKey(handler))
+		{ 
+			convertedHandlers[handler] = ConvertHandler(handler);
+		}
+		
+		m_innerMessage.AddHandler(convertedHandlers[handler]);
+	}
+	
+	public void RemoveHandler(Func<TArg0, TArg1, IEnumerator> handler)
+	{
+		if(!convertedHandlers.ContainsKey(handler))
+		{ 
+			return;
+		}
+		
+		m_innerMessage.AddHandler(convertedHandlers[handler]);
+		convertedHandlers.Remove(handler);
+	}
+	
+	public IEnumerator WaitHandleMessage(Func<TArg0, TArg1, IEnumerator> handler)
+	{
+		yield return new Routine(m_innerMessage.WaitHandleMessage(ConvertHandler(handler)));
+	}
+	
+	public bool Idle
+	{
+		get
+		{
+			return m_innerMessage.Idle;
+		}
+	}
+	
+	public bool MessagePending
+	{
+		get
+		{
+			return m_innerMessage.MessagePending;
+		}
+	}
+	
+	private Func<IEnumerator> ConvertHandler(Func<TArg0, TArg1, IEnumerator> handler)
+	{
+		return () => handler(m_arg0, m_arg1);
+	}
+	
+	private TArg0 m_arg0;
+	private TArg1 m_arg1;
+	private readonly Message m_innerMessage = new Message();
+	private static readonly Dictionary<Func<TArg0, TArg1, IEnumerator>,Func<IEnumerator>> convertedHandlers = new Dictionary<Func<TArg0, TArg1, IEnumerator>, Func<IEnumerator>>();
+}
+
+public class Message<TArg0,TArg1,TArg2>
+{
+	public IEnumerator WaitSend(TArg0 arg0, TArg1 arg1, TArg2 arg2)
+	{
+		m_arg0 = arg0;
+		m_arg1 = arg1;
+		m_arg2 = arg2;
+		yield return new Routine(m_innerMessage.WaitSend());
+	}
+	
+	public void AddHandler(Func<TArg0, TArg1,TArg2, IEnumerator> handler)
+	{
+		if(!convertedHandlers.ContainsKey(handler))
+		{ 
+			convertedHandlers[handler] = ConvertHandler(handler);
+		}
+		
+		m_innerMessage.AddHandler(convertedHandlers[handler]);
+	}
+	
+	public void RemoveHandler(Func<TArg0, TArg1,TArg2, IEnumerator> handler)
+	{
+		if(!convertedHandlers.ContainsKey(handler))
+		{ 
+			return;
+		}
+		
+		m_innerMessage.AddHandler(convertedHandlers[handler]);
+		convertedHandlers.Remove(handler);
+	}
+	
+	public IEnumerator WaitHandleMessage(Func<TArg0, TArg1,TArg2, IEnumerator> handler)
+	{
+		yield return new Routine(m_innerMessage.WaitHandleMessage(ConvertHandler(handler)));
+	}
+	
+	public bool Idle
+	{
+		get
+		{
+			return m_innerMessage.Idle;
+		}
+	}
+	
+	public bool MessagePending
+	{
+		get
+		{
+			return m_innerMessage.MessagePending;
+		}
+	}
+	
+	private Func<IEnumerator> ConvertHandler(Func<TArg0, TArg1,TArg2, IEnumerator> handler)
+	{
+		return () => handler(m_arg0, m_arg1, m_arg2);
+	}
+	
+	private TArg0 m_arg0;
+	private TArg1 m_arg1;
+	private TArg2 m_arg2;
+	private readonly Message m_innerMessage = new Message();
+	private static readonly Dictionary<Func<TArg0, TArg1,TArg2, IEnumerator>,Func<IEnumerator>> convertedHandlers = new Dictionary<Func<TArg0, TArg1,TArg2, IEnumerator>, Func<IEnumerator>>();
 }

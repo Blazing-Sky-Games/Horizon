@@ -20,7 +20,7 @@ public class DamageEffect : AbilityEffect
 			* DMGCOEF 
 			+ MINDMG);
 
-		yield return Defender.WaitTakeDamage(dmg, IsCritical);
+		yield return new Routine(Defender.WaitTakeDamage(dmg, IsCritical));
 	}
 
 }

@@ -36,11 +36,13 @@ public class CombatUI : MonoBehaviour
 		TargetingInterface.Init(UnitSelectedMessage, Logic);
 		// combat display needs the turn order and the selected message
 		CombatDisplay.Init(Logic.TurnOrder, UnitSelectedMessage);
+
+		Logic.TurnOrder.CombatEncounterOverMessage.AddHandler(WaitHandleCombatOver);
 	}
 
-	IEnumerator WaitHandleCombatOver(bool arg)
+	IEnumerator WaitHandleCombatOver(bool win)
 	{
-		m_win = arg;
+		Application.LoadLevel(win ? 1 : 2);
 		yield break;
 	}
 
@@ -56,7 +58,7 @@ public class CombatUI : MonoBehaviour
 		if(HotbarInterface.SelectedUnit == Logic.TurnOrder.ActiveUnit && Logic.TurnOrder.ActiveUnit.Faction == Faction.Player)
 		{
 			//bring up unit targeting diolouge and wait for it to close
-			yield return TargetingInterface.WaitSelectTarget(Logic.TurnOrder.ActiveUnit, arg);
+			yield return new Routine(TargetingInterface.WaitSelectTarget(Logic.TurnOrder.ActiveUnit, arg));
 		}
 	}
 
@@ -64,66 +66,34 @@ public class CombatUI : MonoBehaviour
 	{
 		Init();
 
-		// book keeping vaiables to know when to exit
-		// TODO clean this up
-		bool EncounterOver = false;
-
-		while(!EncounterOver)
+		while(true)
 		{
 			//wait for an message we care about
-			while(UnitSelectedMessage.Idle && 
-			       HotbarInterface.UnitAbilitySelectedMessage.Idle && 
-			       HotbarInterface.PassTurnMessageChannel.Idle &&
-			       Logic.TurnOrder.CombatEncounterOverMessage.Idle)
+			while((UnitSelectedMessage.Idle && 
+			      HotbarInterface.UnitAbilitySelectedMessage.Idle && 
+			      HotbarInterface.PassTurnMessageChannel.Idle) ||
+			      Logic.TurnOrder.ActiveUnit.Faction != Faction.Player)
 			{
 				yield return 0;
-			}
-
-			//the game is over
-			if(Logic.TurnOrder.CombatEncounterOverMessage.MessagePending)
-			{
-				EncounterOver = true;
-				yield return Logic.TurnOrder.CombatEncounterOverMessage.WaitHandleMessage(WaitHandleCombatOver);
-			}
-
-			// it is not the players turn, so we are not going to process any other messages
-			// TODO fix it so we dont need this weird logic to handel the case where it is not the players turn
-			if(Logic.TurnOrder.ActiveUnit.Faction != Faction.Player)
-			{
-				//wait for the messages to be proccessed
-				while(!(UnitSelectedMessage.Idle && 
-				       	 HotbarInterface.UnitAbilitySelectedMessage.Idle && 
-				       	 HotbarInterface.PassTurnMessageChannel.Idle))
-				{
-					yield return 0;
-				}
-
-				// start checking for messages again
-				continue;
 			}
 			
 			//the pass turn button was pressed
 			if(HotbarInterface.PassTurnMessageChannel.MessagePending)
 			{
 				// the user clikced the pass turn button, so declare that the chose to pass the turn
-				yield return HotbarInterface.PassTurnMessageChannel.WaitHandleMessage(Logic.GetFactionLeader(Logic.TurnOrder.ActiveUnit.Faction).WaitPassTurn);
+				yield return new Routine(HotbarInterface.PassTurnMessageChannel.WaitHandleMessage(Logic.GetFactionLeader(Logic.TurnOrder.ActiveUnit.Faction).WaitPassTurn));
 			}
 			//a unit was selected hmm TODO should this be moved to hotbar ui
 			else if(UnitSelectedMessage.MessagePending)
 			{
 				//update the hot bar
-				yield return UnitSelectedMessage.WaitHandleMessage(WaitHandleUnitSelected);
+				yield return new Routine(UnitSelectedMessage.WaitHandleMessage(WaitHandleUnitSelected));
 			} 
 			// an ability was selected
 			else if(HotbarInterface.UnitAbilitySelectedMessage.MessagePending)
 			{
-				yield return HotbarInterface.UnitAbilitySelectedMessage.WaitHandleMessage(WaitHandleAbilitySelected);
+				yield return new Routine(HotbarInterface.UnitAbilitySelectedMessage.WaitHandleMessage(WaitHandleAbilitySelected));
 			}
 		}
-
-		// load the correct level with the game over message
-		Application.LoadLevel(m_win ? 1 : 2);
 	}
-
-	private bool m_win = false;
 }

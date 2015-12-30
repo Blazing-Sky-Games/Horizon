@@ -31,17 +31,16 @@ public class CombatLogic : MonoBehaviour
 		//creat the actors that will be playing
 		//TODO better way to get actors
 		//TODO actually, get rid of the whole actor thing, and just ask units what they want to do, not "actors"
-		m_factionLeaders[Faction.Player] = new Actor("player");
-		m_factionLeaders[Faction.AI] = new AIActor("AI", this);
+		//m_factionLeaders[Faction.Player] = new Actor("player");
+		m_factionLeaders[Faction.Player] = new AIActor("AI", this, Faction.Player); // use ai for player for testing
+		m_factionLeaders[Faction.AI] = new AIActor("AI", this, Faction.AI);
 
 		CoroutineManager.Main.StartCoroutine(WaitCombatMain());
 	}
 
 	private IEnumerator WaitCombatMain()
 	{
-		bool EncounterOver = false;
-
-		while(!EncounterOver)
+		while(true)
 		{
 			Actor FactionLeader = GetFactionLeader(m_turnOrder.ActiveUnit.Faction);
 
@@ -58,23 +57,18 @@ public class CombatLogic : MonoBehaviour
 					yield return 0;
 				}
 				//perform that action and wait for it to finish
-				yield return FactionLeader.ActionDecidedMessage.WaitHandleMessage(WaitHandleActionDecided);
-
-				if(m_turnOrder.CombatEncounterOverMessage.MessagePending)
-				{
-					EncounterOver = true;
-				}
+				yield return new Routine(FactionLeader.ActionDecidedMessage.WaitHandleMessage(WaitHandleActionDecided));
 			}
 
 			//advance the turn order
-			yield return m_turnOrder.WaitAdvance();
-			yield return TurnBasedEffectManager.WaitUpdateTurnBasedEffects();
+			yield return new Routine(m_turnOrder.WaitAdvance());
+			yield return new Routine(TurnBasedEffectManager.WaitUpdateTurnBasedEffects());
 		}
 	}
 
 	private IEnumerator WaitHandleActionDecided(IActorAction action)
 	{
-		yield return action.WaitPerform();
+		yield return new Routine(action.WaitPerform());
 	}
 	
 	private TurnOrder m_turnOrder;

@@ -33,7 +33,7 @@ public class HotbarUI : MonoBehaviour
 	IEnumerator WaitHandleTurnOrderAdvance()
 	{
 		//write to combat log
-		Debug.Log("advance turn order");
+		LogManager.Log("advance turn order", LogDestination.Combat);
 		SelectedUnit = m_turnOrder.ActiveUnit;
 		yield break;
 	}
@@ -49,7 +49,7 @@ public class HotbarUI : MonoBehaviour
 			}
 
 			//turn order advanced
-			yield return m_turnOrder.AdvanceTurnOrderMessage.WaitHandleMessage(WaitHandleTurnOrderAdvance);
+			yield return new Routine(m_turnOrder.AdvanceTurnOrderMessage.WaitHandleMessage(WaitHandleTurnOrderAdvance));
 		}
 	}
 

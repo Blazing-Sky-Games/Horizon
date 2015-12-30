@@ -42,7 +42,7 @@ public class UnitAbilityButton : MonoBehaviour
 		// TODO fix this weird thing. should you always have to wait for a message to be processed?
 		// TODO lol i dont understand that old todo above this one
 		AbilityButton.enabled = false;
-		yield return m_unitAbilitySelectedMessageChannel.WaitSend(m_ability);
+		yield return new Routine(m_unitAbilitySelectedMessageChannel.WaitSend(m_ability));
 		AbilityButton.enabled = true;
 	}
 

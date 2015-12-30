@@ -3,11 +3,81 @@ using System.Collections.Generic;
 
 // a currently running "async"(sorta) process
 //TODO add debug info for stack traces that make sence
+using System;
+
+public class CoroutineException : Exception
+{
+	public override string Message
+	{
+		get
+		{
+			return m_message;
+		}
+	}
+
+	private string m_message;
+
+	public CoroutineException(Exception e, Stack<Routine> callStack) : base("",e)
+	{
+		string message = " Routine Call Stack (upto StartCorutine)\n";
+		while(callStack.Count > 0)
+		{
+			Routine r = callStack.Pop();
+			message += "\t" + r.callerMethod + " (at " + r.callerFilePath + ":" + r.callerLineNumber + ")\n";
+		}
+		m_message = message;
+	} 
+}
+
+public class Routine
+{
+	public readonly string callerMethod;
+	public readonly string callerFilePath;
+	public readonly int callerLineNumber;
+
+	public Routine(IEnumerator routine)
+	{
+		m_routine = routine;
+		callerMethod = StackHelper.Caller__METHOD__;
+		callerFilePath = StackHelper.Caller__FILE__;
+		callerLineNumber = StackHelper.Caller__LINE__;
+	}
+
+	public Routine(IEnumerator routine, string method, string FilePath, int lineNumber)
+	{
+		m_routine = routine;
+		callerMethod = method;
+		callerFilePath = FilePath;
+		callerLineNumber = lineNumber;
+	}
+
+	public bool MoveNext()
+	{
+		return m_routine.MoveNext();
+	}
+
+	public object Current
+	{
+		get
+		{
+			return m_routine.Current;
+		}
+	}
+
+
+	IEnumerator m_routine;
+}
+
 public class Coroutine
 {
-	public Coroutine(IEnumerator routine)
+	public CoroutineException error = null;
+
+	public Coroutine(IEnumerator routine, string meth = "", string file = "", int line = 0)
 	{
-		m_callStack.Push(routine);
+		meth = meth == "" ? StackHelper.Caller__METHOD__ : meth;
+		file = file == "" ? StackHelper.Caller__FILE__ : file;
+		line = line == 0 ? StackHelper.Caller__LINE__ : line;
+		m_callStack.Push(new Routine(routine, meth, file, line));
 		Update();
 	}
 	
@@ -23,8 +93,17 @@ public class Coroutine
 	{
 		while(!Done)
 		{
+			bool stackFrameRunning = false;
+
 			//update the routine
-			bool stackFrameRunning = m_callStack.Peek().MoveNext();
+			try
+			{   
+				stackFrameRunning = m_callStack.Peek().MoveNext();
+			}
+			catch(Exception e)
+			{
+				throw new CoroutineException(e, m_callStack);
+			}
 			
 			// this routine is finished running, return to caller
 			if(!stackFrameRunning)
@@ -55,23 +134,32 @@ public class Coroutine
 				//if it is, keep going
 				else
 				{
+					if(blockingRoutine.error != null)
+					{
+						throw new CoroutineException(blockingRoutine.error, m_callStack);
+					}
+
 					continue;
 				}
 			}
 			// if its a ienumerator, step into it
-			else if(yielded as IEnumerator != null)
+			else if(yielded as Routine != null)
 			{
-				IEnumerator cr = yielded as IEnumerator;
+				Routine cr = yielded as Routine;
 				m_callStack.Push(cr);
 				continue;
 			}
-			// somthing else was yielded. wait a frame
-			else
+			// int was yielded. wait a frame
+			else if(yielded.GetType().IsAssignableFrom(typeof(int)))
 			{
 				break;
+			}
+			else
+			{
+				throw new CoroutineException(new InvalidOperationException("yeilded object of invalid type. type was " + yielded.GetType().ToString()), m_callStack);
 			}
 		}
 	}
 	
-	private readonly Stack<IEnumerator> m_callStack = new Stack<IEnumerator>();
+	private readonly Stack<Routine> m_callStack = new Stack<Routine>();
 }

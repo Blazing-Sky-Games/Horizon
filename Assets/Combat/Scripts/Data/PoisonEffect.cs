@@ -11,12 +11,12 @@ class PoisonEffect : AbilityEffect
 
 	public override IEnumerator WaitTrigger(Unit attacker, Unit defender, int abilityPower, bool isCritical)
 	{
-		yield return TurnBasedEffectManager.WaitStartTurnBasedEffect(WaitPoisonEffect(attacker, defender, isCritical));
+		yield return new Routine(TurnBasedEffectManager.WaitStartTurnBasedEffect(WaitPoisonEffect(attacker, defender, isCritical)));
 	}
 
 	private IEnumerator WaitPoisonEffect(Unit attacker, Unit defender, bool isCritical)
 	{
-		yield return defender.WaitSetStatus(UnitStatus.Poisoned, true);
+		yield return new Routine(defender.WaitSetStatus(UnitStatus.Poisoned, true));
 
 		float potency = GetPotency(attacker, defender, isCritical);
 
@@ -26,14 +26,19 @@ class PoisonEffect : AbilityEffect
 		//how many turns does the poison last
 		int duration = (int)(MINDUR + DURCOEF * potency);
 
-		while(duration > 0)
+		while(duration > 0 && !defender.Dead)
 		{
 			yield return new WaitForNextTurn();
 			duration--;
-			yield return defender.WaitTakeDamage((int)dmg, false);
+
+			//TODO handle this better
+			if(!defender.Dead)
+			{
+				yield return new Routine(defender.WaitTakeDamage((int)dmg, false));
+			}
 		}
 
-		yield return defender.WaitSetStatus(UnitStatus.Poisoned, false);
+		yield return new Routine(defender.WaitSetStatus(UnitStatus.Poisoned, false));
 	}
 }
 
