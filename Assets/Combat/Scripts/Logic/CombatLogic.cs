@@ -40,6 +40,9 @@ public class CombatLogic : MonoBehaviour
 
 	private IEnumerator WaitCombatMain()
 	{
+		LogManager.NewCombatLog();
+		yield return LogManager.Log("begin combat", LogDestination.Combat);
+
 		while(true)
 		{
 			Actor FactionLeader = GetFactionLeader(m_turnOrder.ActiveUnit.Faction);

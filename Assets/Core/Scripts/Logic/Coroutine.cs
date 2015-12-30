@@ -19,11 +19,11 @@ public class CoroutineException : Exception
 
 	public CoroutineException(Exception e, Stack<Routine> callStack) : base("",e)
 	{
-		string message = " Routine Call Stack (upto StartCorutine)\n";
+		string message = "\nRoutine Call Stack (up to call to StartCorutine)\n";
 		while(callStack.Count > 0)
 		{
 			Routine r = callStack.Pop();
-			message += "\t" + r.callerMethod + " (at " + r.callerFilePath + ":" + r.callerLineNumber + ")\n";
+			message += ":    " + r.callerMethod + " (at " + r.callerFilePath + ":" + r.callerLineNumber + ")\n";
 		}
 		m_message = message;
 	} 

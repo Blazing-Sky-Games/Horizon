@@ -42,6 +42,7 @@ public class CombatUI : MonoBehaviour
 
 	IEnumerator WaitHandleCombatOver(bool win)
 	{
+		yield return LogManager.Log(win ? "win" : "loss", LogDestination.Combat);
 		Application.LoadLevel(win ? 1 : 2);
 		yield break;
 	}
