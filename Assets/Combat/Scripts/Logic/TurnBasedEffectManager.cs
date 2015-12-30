@@ -8,14 +8,14 @@ public class TurnBasedEffectManager
 	{
 		TurnBassedEffect effect = new TurnBassedEffect(effectRoutine, StackHelper.Caller__METHOD__, StackHelper.Caller__FILE__, StackHelper.Caller__LINE__);
 		m_effects.Add(effect);
-		yield return CoroutineManager.Main.StartCoroutine(effect.WaitUpdate());
+		yield return new Routine(effect.WaitUpdate());
 	}
 
 	public static IEnumerator WaitUpdateTurnBasedEffects()
 	{
 		foreach(TurnBassedEffect effect in m_effects)
 		{
-			yield return CoroutineManager.Main.StartCoroutine(effect.WaitUpdate());
+			yield return new Routine(effect.WaitUpdate());
 		}
 
 		m_effects = m_effects.Where(x => !x.Done).ToList();

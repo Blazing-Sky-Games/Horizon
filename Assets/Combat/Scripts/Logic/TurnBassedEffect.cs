@@ -94,7 +94,7 @@ public class TurnBassedEffect
 			// int was yielded. wait a frame
 			else if(current.GetType().IsAssignableFrom(typeof(int)))
 			{
-				break;
+				yield return 0;
 			}
 			else
 			{
