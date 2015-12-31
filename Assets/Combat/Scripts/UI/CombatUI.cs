@@ -26,6 +26,8 @@ public class CombatUI : MonoBehaviour
 	}
 
 	//initilize UI elements
+	//TODO get rid of the need to do this by creating a static "Globals" class
+	// that should be the only class with static members in the project, and it needs to be set up here
 	private void Init()
 	{
 		//logic first
@@ -79,6 +81,7 @@ public class CombatUI : MonoBehaviour
 			}
 			
 			//the pass turn button was pressed
+			//TODO this should be moved to the hotbar ui
 			if(HotbarInterface.PassTurnMessageChannel.MessagePending)
 			{
 				// the user clikced the pass turn button, so declare that the chose to pass the turn

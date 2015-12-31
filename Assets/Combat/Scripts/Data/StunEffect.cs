@@ -10,18 +10,21 @@ class StunEffect : AbilityEffect
 
 	IEnumerator WaitStunEffect(Unit attacker, Unit defender, int abilityPower, bool isCritical)
 	{
-		yield return new Routine(defender.WaitSetStatus(UnitStatus.Stunned, true));
+		//TODO impliment stun
+		throw new NotImplementedException("Implement stun stupid!");
 
-		float Potency = GetPotency(attacker, defender, isCritical);
-		int duration = 1 + (int)Math.Floor((Potency - 1) * 1.5);
+		//yield return new Routine(defender.WaitSetStatus(UnitStatus.Stunned, true));
 
-		while(duration > 0)
-		{
-			yield return new WaitForNextTurn();
-			duration--;
-		}
+		//float Potency = GetPotency(attacker, defender, isCritical);
+		//int duration = 1 + (int)Math.Floor((Potency - 1) * 1.5);
 
-		yield return new Routine(defender.WaitSetStatus(UnitStatus.Stunned, false));
+		//while(duration > 0)
+		//{
+		//yield return new WaitForNextTurn();
+		//duration--;
+		//}
+
+		//yield return new Routine(defender.WaitSetStatus(UnitStatus.Stunned, false));
 	}
 }
 

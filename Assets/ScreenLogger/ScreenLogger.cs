@@ -88,6 +88,7 @@ public class ScreenLogger : MonoBehaviour
 #else
 		Application.logMessageReceived += HandleLog;
 #endif
+		//TODO HACK fix this hack. meh, it works for now
 		LogManager.CombatLog.AddHandler(WaitHandleLog);
 	}
 

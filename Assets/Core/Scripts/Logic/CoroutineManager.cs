@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
+//TODO hmm....should the corutine manager be moved into view code
+//TODO UGGGGHHHHHHH .... i really need to wrap everything in namespaces
 public class CoroutineManager
 {
 	//globaly accsesable corutine manager ... TODO move this
@@ -17,7 +19,7 @@ public class CoroutineManager
 
 	public Coroutine StartCoroutine(IEnumerator routine)
 	{
-		Coroutine c = new Coroutine(routine, StackHelper.Caller__METHOD__, StackHelper.Caller__FILE__, StackHelper.Caller__LINE__);
+		Coroutine c = new Coroutine(routine, CallerInformation.MethodName, CallerInformation.FilePath, CallerInformation.LineNumber);
 		m_routines.Add(c);
 		
 		return c;

@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
+//TODO do we really need "actors"? or can each unit be an "actor"
 public class Actor
 {
 	public readonly Message<IActorAction> ActionDecidedMessage = new Message<IActorAction>();

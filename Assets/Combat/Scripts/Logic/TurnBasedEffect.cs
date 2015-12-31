@@ -6,13 +6,14 @@ using System.Collections.Generic;
 using System;
 
 
-public class TurnBassedEffect
+//TODO make turn bassed effect less general. so it exposes needed information (turns left, severity, ability to cancel...)
+public class TurnBasedEffect
 {
-	public TurnBassedEffect(IEnumerator routine, string meth = "", string file = "", int line = 0)
+	public TurnBasedEffect(IEnumerator routine, string meth = "", string file = "", int line = 0)
 	{
-		meth = file == "" ? StackHelper.Caller__METHOD__ : meth;
-		file = file == "" ? StackHelper.Caller__FILE__ : file;
-		line = line == 0 ? StackHelper.Caller__LINE__ : line;
+		meth = file == "" ? CallerInformation.MethodName : meth;
+		file = file == "" ? CallerInformation.FilePath : file;
+		line = line == 0 ? CallerInformation.LineNumber : line;
 		m_callStack.Push(new Routine(routine, meth, file, line));
 	}
 
@@ -69,9 +70,9 @@ public class TurnBassedEffect
 				//if it is, keep going
 				else
 				{
-					if(blockingRoutine.error != null)
+					if(blockingRoutine.Error != null)
 					{
-						throw new CoroutineException(blockingRoutine.error, m_callStack);
+						throw new CoroutineException(blockingRoutine.Error, m_callStack);
 					}
 
 					continue;

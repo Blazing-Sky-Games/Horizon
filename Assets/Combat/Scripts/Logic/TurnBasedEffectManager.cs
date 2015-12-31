@@ -6,14 +6,14 @@ public class TurnBasedEffectManager
 {
 	public static IEnumerator WaitStartTurnBasedEffect(IEnumerator effectRoutine)
 	{
-		TurnBassedEffect effect = new TurnBassedEffect(effectRoutine, StackHelper.Caller__METHOD__, StackHelper.Caller__FILE__, StackHelper.Caller__LINE__);
+		TurnBasedEffect effect = new TurnBasedEffect(effectRoutine, CallerInformation.MethodName, CallerInformation.FilePath, CallerInformation.LineNumber);
 		m_effects.Add(effect);
 		yield return new Routine(effect.WaitUpdate());
 	}
 
 	public static IEnumerator WaitUpdateTurnBasedEffects()
 	{
-		foreach(TurnBassedEffect effect in m_effects)
+		foreach(TurnBasedEffect effect in m_effects)
 		{
 			yield return new Routine(effect.WaitUpdate());
 		}
@@ -21,5 +21,5 @@ public class TurnBasedEffectManager
 		m_effects = m_effects.Where(x => !x.Done).ToList();
 	}
 
-	private static List<TurnBassedEffect> m_effects = new List<TurnBassedEffect>();
+	private static List<TurnBasedEffect> m_effects = new List<TurnBasedEffect>();
 }

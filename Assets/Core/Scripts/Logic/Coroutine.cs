@@ -1,82 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
-
-// a currently running "async"(sorta) process
-//TODO add debug info for stack traces that make sence
 using System;
 
-public class CoroutineException : Exception
-{
-	public override string Message
-	{
-		get
-		{
-			return m_message;
-		}
-	}
-
-	private string m_message;
-
-	public CoroutineException(Exception e, Stack<Routine> callStack) : base("",e)
-	{
-		string message = "\nRoutine Call Stack (up to call to StartCorutine)\n";
-		while(callStack.Count > 0)
-		{
-			Routine r = callStack.Pop();
-			message += ":    " + r.callerMethod + " (at " + r.callerFilePath + ":" + r.callerLineNumber + ")\n";
-		}
-		m_message = message;
-	} 
-}
-
-public class Routine
-{
-	public readonly string callerMethod;
-	public readonly string callerFilePath;
-	public readonly int callerLineNumber;
-
-	public Routine(IEnumerator routine)
-	{
-		m_routine = routine;
-		callerMethod = StackHelper.Caller__METHOD__;
-		callerFilePath = StackHelper.Caller__FILE__;
-		callerLineNumber = StackHelper.Caller__LINE__;
-	}
-
-	public Routine(IEnumerator routine, string method, string FilePath, int lineNumber)
-	{
-		m_routine = routine;
-		callerMethod = method;
-		callerFilePath = FilePath;
-		callerLineNumber = lineNumber;
-	}
-
-	public bool MoveNext()
-	{
-		return m_routine.MoveNext();
-	}
-
-	public object Current
-	{
-		get
-		{
-			return m_routine.Current;
-		}
-	}
-
-
-	IEnumerator m_routine;
-}
-
+// a currently running "async"(sorta) process, which represents another routine distinct from the starter of this Coroutine
+// TODO need a way to handle exceptions at the call site of StartCoroutine
 public class Coroutine
 {
-	public CoroutineException error = null;
+	public CoroutineException Error
+	{
+		get
+		{
+			return m_error;
+		}
+	}
 
 	public Coroutine(IEnumerator routine, string meth = "", string file = "", int line = 0)
 	{
-		meth = meth == "" ? StackHelper.Caller__METHOD__ : meth;
-		file = file == "" ? StackHelper.Caller__FILE__ : file;
-		line = line == 0 ? StackHelper.Caller__LINE__ : line;
+		meth = meth == "" ? CallerInformation.MethodName : meth;
+		file = file == "" ? CallerInformation.FilePath : file;
+		line = line == 0 ? CallerInformation.LineNumber : line;
 		m_callStack.Push(new Routine(routine, meth, file, line));
 		Update();
 	}
@@ -89,6 +31,7 @@ public class Coroutine
 		}
 	}
 	
+	//propogate exceptions up the call stack
 	public void Update()
 	{
 		while(!Done)
@@ -102,7 +45,8 @@ public class Coroutine
 			}
 			catch(Exception e)
 			{
-				throw new CoroutineException(e, m_callStack);
+				m_error = new CoroutineException(e, m_callStack);
+				throw m_error;
 			}
 			
 			// this routine is finished running, return to caller
@@ -134,9 +78,10 @@ public class Coroutine
 				//if it is, keep going
 				else
 				{
-					if(blockingRoutine.error != null)
+					if(blockingRoutine.Error != null)
 					{
-						throw new CoroutineException(blockingRoutine.error, m_callStack);
+						m_error = new CoroutineException(blockingRoutine.Error, m_callStack);
+						throw m_error;
 					}
 
 					continue;
@@ -156,10 +101,12 @@ public class Coroutine
 			}
 			else
 			{
-				throw new CoroutineException(new InvalidOperationException("yeilded object of invalid type. type was " + yielded.GetType().ToString()), m_callStack);
+				m_error = new CoroutineException(new InvalidOperationException("yeilded object of invalid type. type was " + yielded.GetType().ToString()), m_callStack);
+				throw m_error;
 			}
 		}
 	}
-	
+
+	private CoroutineException m_error;
 	private readonly Stack<Routine> m_callStack = new Stack<Routine>();
 }

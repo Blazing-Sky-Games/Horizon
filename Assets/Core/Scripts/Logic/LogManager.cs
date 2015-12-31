@@ -4,6 +4,7 @@ using System.Collections;
 using System.IO;
 
 [Flags]
+//TODO HACK i wish the log manager (a core class) didnt have to know about somthing combat related
 public enum LogDestination
 {
 	Console = 1,
@@ -12,10 +13,13 @@ public enum LogDestination
 
 public class LogManager
 {
+	//TODO HACK i wish the log manager (a core class) didnt have to know about somthing combat related
+	//TODO hmm....should this even be a message
 	public static readonly Message<string, string, LogType> CombatLog = new Message<string, string, LogType>();
 
 	private static string combatLogFilePath;
 
+	//TODO hmm...should this be syncronous?
 	public static Coroutine Log(string message, LogDestination destination = (LogDestination.Console | LogDestination.Console))
 	{
 		return CoroutineManager.Main.StartCoroutine(LogRoutine(message, destination));
@@ -23,6 +27,7 @@ public class LogManager
 
 	public static void NewCombatLog()
 	{
+		//TODO helper function for dealing with non-existant directories
 		string combatLogDirectoryPath = Path.Combine(Application.dataPath, "Combat/Logs");
 		combatLogFilePath = Path.Combine(combatLogDirectoryPath, "CombatLog.txt");
 		if(!Directory.Exists(combatLogDirectoryPath))
