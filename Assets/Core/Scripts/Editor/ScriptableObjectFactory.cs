@@ -13,9 +13,7 @@ public class ScriptableObjectFactory
 		var assembly = GetAssembly();
 		
 		// Get all classes derived from ScriptableObject
-		var allScriptableObjects = (from t in assembly.GetTypes()
-		                            where t.IsSubclassOf(typeof(ScriptableObject))
-		                            select t).ToArray();
+		var allScriptableObjects = assembly.GetTypes().Where(t => t.IsSubclassOf(typeof(ScriptableObject)) && t.GetCustomAttributes(typeof(Inline),true).Count() == 0).ToArray();
 		
 		// Show the selection window.
 		ScriptableObjectWindow.Init(allScriptableObjects);

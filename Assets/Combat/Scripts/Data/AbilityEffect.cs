@@ -1,5 +1,13 @@
 using System.Collections;
+using System;
 
+[AttributeUsage(AttributeTargets.All,Inherited=true)]
+public class Inline : Attribute
+{
+
+}
+
+[Inline]
 public abstract class AbilityEffect : UnityEngine.ScriptableObject
 {
 	public EffectType EffectType;
