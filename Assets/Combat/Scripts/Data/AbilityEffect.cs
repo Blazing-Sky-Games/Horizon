@@ -10,14 +10,14 @@ public class Inline : Attribute
 [Inline]
 public abstract class AbilityEffect : UnityEngine.ScriptableObject
 {
-	public EffectType EffectType;
+	public EffectType effectType;
 
-	public abstract IEnumerator WaitTrigger(Unit attacker, Unit defender, int abilityPower, bool isCritical);
+	public abstract IEnumerator WaitTrigger(Unit attacker, Unit defender, bool isCritical);
 
 	// skill based multiplyer
 	protected float GetCriticalPotency(Unit attacker, Unit defender)
 	{
-		float def = EffectType == EffectType.Physical ? defender.Stability : defender.Insight;
+		float def = effectType == EffectType.Physical ? defender.Stability : defender.Insight;
 
 		return 1 + ((float)attacker.Skill / (def * 2));
 	}
@@ -25,8 +25,8 @@ public abstract class AbilityEffect : UnityEngine.ScriptableObject
 	// combat strength based multiuplyer
 	protected float GetCombatPotency(Unit attacker, Unit defender)
 	{
-		float atk = EffectType == EffectType.Physical ? attacker.Strength : attacker.Intelligence;
-		float def = EffectType == EffectType.Physical ? defender.Stability : defender.Insight;
+		float atk = effectType == EffectType.Physical ? attacker.Strength : attacker.Intelligence;
+		float def = effectType == EffectType.Physical ? defender.Stability : defender.Insight;
 
 		return atk / def;
 	}

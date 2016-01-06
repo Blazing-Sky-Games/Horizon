@@ -21,9 +21,7 @@ public class CustomInspector : Editor {
 		bool enterChildren = true;
 		while (iterator.NextVisible(enterChildren))
 		{
-			if(iterator.name == "m_Script"){
-				continue;
-			} else if (ShouldInlineProp(iterator)) {
+			if (ShouldInlineProp(iterator)) {
 				drawInline (iterator);
 			} else {
 				EditorGUILayout.PropertyField (iterator, true, new UnityEngine.GUILayoutOption[0]);

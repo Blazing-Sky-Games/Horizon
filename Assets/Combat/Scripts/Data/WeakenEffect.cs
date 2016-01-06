@@ -2,21 +2,29 @@ using System.Collections;
 
 public class WeakenEffect : AbilityEffect
 {
+	[UnityEngine.Tooltip("which stat will be changed")]
 	public UnitStatatistic StatToWeaken = UnitStatatistic.Strength;
 
-	public override IEnumerator WaitTrigger(Unit Attacker, Unit Defender, int abilityPower, bool IsCritical)
+	[UnityEngine.Tooltip("Drop = M*potency")]
+	public int DropM = 20;
+	[UnityEngine.Tooltip("Duration = M*potency + B")]
+	public int DurationB = 2;
+	[UnityEngine.Tooltip("Duration = M*potency + B")]
+	public int DurationM = 2;
+
+	public override IEnumerator WaitTrigger(Unit Attacker, Unit Defender, bool IsCritical)
 	{
-		yield return new Routine(TurnBasedEffectManager.WaitStartTurnBasedEffect(WaitWeakenEffect(Attacker, Defender, abilityPower, IsCritical)));
+		yield return new Routine(TurnBasedEffectManager.WaitStartTurnBasedEffect(WaitWeakenEffect(Attacker, Defender, IsCritical)));
 	}
 
-	IEnumerator WaitWeakenEffect(Unit attacker, Unit defender, int abilityPower, bool isCritical)
+	IEnumerator WaitWeakenEffect(Unit attacker, Unit defender, bool isCritical)
 	{
 		yield return new Routine(defender.WaitSetStatus(UnitStatus.Weakened, true));
 
 		float Potency = GetPotency(attacker, defender, isCritical);
 
-		int drop = 20 * (int)Potency;
-		int duration = 2 + (int)Potency * 2;
+		int drop = DropM * (int)Potency;
+		int duration = DurationB + (int)Potency * DurationM;
 
 		int oldval = defender.GetStatistic(StatToWeaken);
 		defender.SetStatistic(StatToWeaken, oldval - drop);
