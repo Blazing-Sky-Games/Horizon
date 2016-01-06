@@ -51,13 +51,17 @@ public class CombatLogic : MonoBehaviour
 
 			while(FactionLeader.CanTakeAction)
 			{
-				//tell the actor to decide what to do
-				CoroutineManager.Main.StartCoroutine(FactionLeader.WaitDecideAction());
+				if (!TurnOrder.ActiveUnit.CanTakeAction)
+					//decide for the actor, they cant do anything this turn
+					yield return new Routine (FactionLeader.WaitPassTurn ());
+				else {
+					//tell the actor to decide what to do
+					CoroutineManager.Main.StartCoroutine (FactionLeader.WaitDecideAction ());
 
-				//wait for the current actor to decide an action
-				while(FactionLeader.ActionDecidedMessage.Idle)
-				{
-					yield return 0;
+					//wait for the current actor to decide an action
+					while (FactionLeader.ActionDecidedMessage.Idle) {
+						yield return 0;
+					}
 				}
 				//perform that action and wait for it to finish
 				yield return new Routine(FactionLeader.ActionDecidedMessage.WaitHandleMessage(WaitHandleActionDecided));

@@ -69,6 +69,15 @@ public class Unit : UnityEngine.ScriptableObject
 		}
 	}
 
+	public bool CanTakeAction
+	{
+		get
+		{
+			//hack to get stun to work
+			return GetStatus (UnitStatus.Stunned) == false;
+		}
+	}
+
 	public bool Dead
 	{
 		get

@@ -5,6 +5,7 @@ using System.Linq;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using System.IO;
 
 [CustomEditor(typeof(UnityEngine.Object), true)]
 public class CustomInspector : Editor {
@@ -63,7 +64,9 @@ public class CustomInspector : Editor {
 					DestroyImmediate (prop.objectReferenceValue, true);
 				
 				UnityEngine.Object newAsset = ScriptableObject.CreateInstance (SelectedType);
-				AssetDatabase.AddObjectToAsset (newAsset, target);
+				string aPath = AssetDatabase.GetAssetPath (target);
+				aPath = AssetDatabase.GenerateUniqueAssetPath (aPath);
+				AssetDatabase.AddObjectToAsset (newAsset, aPath);
 
 				prop.objectReferenceValue = newAsset;
 			}
@@ -96,8 +99,11 @@ public class CustomInspector : Editor {
 		if(listSize != listProp.arraySize){
 			while(listSize > listProp.arraySize){
 				listProp.InsertArrayElementAtIndex(listProp.arraySize);
+				var sp  = listProp.GetArrayElementAtIndex (listProp.arraySize - 1);
+				sp.objectReferenceValue = null;
 			}
 			while(listSize < listProp.arraySize){
+				DestroyImmediate (listProp.GetArrayElementAtIndex (listProp.arraySize - 1).objectReferenceValue, true);
 				listProp.DeleteArrayElementAtIndex(listProp.arraySize - 1);
 			}
 		}
