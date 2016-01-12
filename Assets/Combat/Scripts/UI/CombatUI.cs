@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 public class CombatUI : MonoBehaviour
 {
 	//supply in editor
+	public CombatLogicData logicData;
 	public CombatLogic Logic;
 
 	// *UI objects must be set up with Init
@@ -18,6 +19,7 @@ public class CombatUI : MonoBehaviour
 
 	private void Start()
 	{
+		Logic = new CombatLogic(logicData);
 		CoroutineManager.Main.StartCoroutine(WaitUiMain());
 	}
 

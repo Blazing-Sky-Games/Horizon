@@ -1,11 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine; // TODO fix this. just instatuite it in a view
 
-public class CombatLogic : MonoBehaviour
+public class CombatLogic
 {
 	//supplyed in Editor
 	public CombatLogicData Scenario;
+
+	public CombatLogic(CombatLogicData data)
+	{
+		Scenario = data;
+	}
 
 	public TurnOrder TurnOrder
 	{
