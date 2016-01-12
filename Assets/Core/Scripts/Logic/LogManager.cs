@@ -14,15 +14,13 @@ public enum LogDestination
 public class LogManager
 {
 	//TODO HACK i wish the log manager (a core class) didnt have to know about somthing combat related
-	//TODO hmm....should this even be a message
-	public static readonly Message<string, string, LogType> CombatLog = new Message<string, string, LogType>();
+	public static Action<string, string, LogType> CombatLog;
 
 	private static string combatLogFilePath;
 
-	//TODO hmm...should this be syncronous?
-	public static Coroutine Log(string message, LogDestination destination = (LogDestination.Console | LogDestination.Console))
+	public static void Log(string message, LogDestination destination = (LogDestination.Console | LogDestination.Console))
 	{
-		return CoroutineManager.Main.StartCoroutine(LogRoutine(message, destination));
+		LogRoutine(message, destination);
 	}
 
 	public static void NewCombatLog()
@@ -52,7 +50,7 @@ public class LogManager
 		}
 	}
 
-	private static IEnumerator LogRoutine(string message, LogDestination destination)
+	private static void LogRoutine(string message, LogDestination destination)
 	{
 		if((destination & LogDestination.Console) == LogDestination.Console)
 		{
@@ -63,10 +61,9 @@ public class LogManager
 		{
 			WriteToCombatLog(message);
 
-			yield return new Routine(CombatLog.WaitSend(message, new System.Diagnostics.StackTrace().ToString(), LogType.Log));
+			if(CombatLog != null)
+				CombatLog(message, new System.Diagnostics.StackTrace().ToString(), LogType.Log);
 		}
-
-		yield break;
 	}
 }
 

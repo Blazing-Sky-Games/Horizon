@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using Random = UnityEngine.Random;
 
-public class Unit : UnityEngine.ScriptableObject
+[DataCatagory("Combat/Logic")]
+public class Unit : Data
 {
 	//supplyed in editor
 	public Faction Faction;
@@ -19,7 +20,7 @@ public class Unit : UnityEngine.ScriptableObject
 
 	//this unit has been hurt
 	public readonly Message<int> HurtMessage = new Message<int>();
-	public readonly Message<AbilityUsedMessageContent> AbilityUsedMessage = new Message<AbilityUsedMessageContent>();
+	public readonly Message<Unit, UnitAbility, Unit> AbilityUsedMessage = new Message<Unit, UnitAbility, Unit>();
 	public readonly Message<UnitStatus> StatusChangedMessage = new Message<UnitStatus>();
 
 	public int GetStatistic(UnitStatatistic stat)
@@ -101,21 +102,6 @@ public class Unit : UnityEngine.ScriptableObject
 	public bool GetStatus(UnitStatus status)
 	{
 		return m_status.ContainsKey(status) && m_status[status];
-	}
-
-	public Unit DeepCopy()
-	{
-		Unit newUnit = UnityEngine.Object.Instantiate<Unit>(this);
-
-		List<UnitAbility> newAbilities = new List<UnitAbility>();
-		foreach(UnitAbility ability in Abilities)
-		{
-			newAbilities.Add(ability.DeepCopy());
-		}
-
-		newUnit.Abilities = newAbilities;
-
-		return newUnit;
 	}
 
 	//TODO deal with this being called when the unit is dead

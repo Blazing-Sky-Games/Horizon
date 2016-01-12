@@ -24,7 +24,7 @@ public class CombatLogic : MonoBehaviour
 	public void Init()
 	{
 		// deep copy so we are not editing the original version
-		Scenario = Scenario.DeepCopy();
+		Scenario = Scenario.DeepCopy() as CombatScenario;
 
 		m_turnOrder = new TurnOrder(Scenario);
 
@@ -41,7 +41,7 @@ public class CombatLogic : MonoBehaviour
 	private IEnumerator WaitCombatMain()
 	{
 		LogManager.NewCombatLog();
-		yield return LogManager.Log("begin combat", LogDestination.Combat);
+		LogManager.Log("begin combat", LogDestination.Combat);
 
 		while(true)
 		{

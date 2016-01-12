@@ -1,14 +1,8 @@
 using System.Collections;
 using System;
 
-[AttributeUsage(AttributeTargets.All,Inherited=true)]
-public class Inline : Attribute
-{
-
-}
-
-[Inline]
-public abstract class AbilityEffect : UnityEngine.ScriptableObject
+[InlineData]
+public abstract class AbilityEffect : Data
 {
 	public EffectType effectType;
 

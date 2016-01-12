@@ -89,7 +89,7 @@ public class ScreenLogger : MonoBehaviour
 		Application.logMessageReceived += HandleLog;
 #endif
 		//TODO HACK fix this hack. meh, it works for now
-		LogManager.CombatLog.AddHandler(WaitHandleLog);
+		LogManager.CombatLog += WaitHandleLog;
 	}
 
 	void OnDisable()
@@ -104,7 +104,7 @@ public class ScreenLogger : MonoBehaviour
 #else
 		Application.logMessageReceived -= HandleLog;
 #endif
-		LogManager.CombatLog.RemoveHandler(WaitHandleLog);
+		LogManager.CombatLog -= WaitHandleLog;
 	}
 
 	void Update()
@@ -240,13 +240,12 @@ public class ScreenLogger : MonoBehaviour
 			}
 	}
 
-	private IEnumerator WaitHandleLog(string arg1, string arg2, LogType arg3)
+	private void WaitHandleLog(string arg1, string arg2, LogType arg3)
 	{
 		bool old = LogMessages;
 		LogMessages = true;
 		HandleLog(arg1, arg2, arg3);
 		LogMessages = old;
-		yield break;
 	}
 }
 

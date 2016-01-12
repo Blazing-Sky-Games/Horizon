@@ -1,7 +1,7 @@
 using UnityEditor;
 using UnityEditor.ProjectWindowCallback;
 
-public class ScriptableObjectWindowEndNameEditAction : EndNameEditAction
+public class DataWindowEndNameEditAction : EndNameEditAction
 {
 	public override void Action(int instanceId, string pathName, string resourceFile)
 	{

@@ -33,7 +33,7 @@ public class HotbarUI : MonoBehaviour
 	IEnumerator WaitHandleTurnOrderAdvance()
 	{
 		//write to combat log
-		yield return LogManager.Log("advance turn order", LogDestination.Combat);
+		LogManager.Log("advance turn order", LogDestination.Combat);
 		SelectedUnit = m_turnOrder.ActiveUnit;
 		yield break;
 	}

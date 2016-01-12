@@ -7,8 +7,11 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.IO;
 
+// replace the default implimentation of the unity inspector
+// this version handels inlining data, and anything else we need it to do later
+// TODO make inline data less ugly
 [CustomEditor(typeof(UnityEngine.Object), true)]
-public class CustomInspector : Editor {
+public class CustomDefaultInspector : Editor {
 	public override void OnInspectorGUI ()
 	{
 		DoDrawDefaultInspector (serializedObject);
@@ -140,7 +143,7 @@ public class CustomInspector : Editor {
 
 	bool shouldInlinetype(Type t)
 	{
-		return typeof(ScriptableObject).IsAssignableFrom (t) && (t.GetCustomAttributes (typeof(Inline),true).Count () > 0 || t.GetCustomAttributes (typeof(Inline),true).Count () > 0);
+		return typeof(ScriptableObject).IsAssignableFrom (t) && (t.GetCustomAttributes (typeof(InlineData),true).Count () > 0 || t.GetCustomAttributes (typeof(InlineData),true).Count () > 0);
 	}
 
 	Type TypeSelectPopup(Type baseType, Type selected)
