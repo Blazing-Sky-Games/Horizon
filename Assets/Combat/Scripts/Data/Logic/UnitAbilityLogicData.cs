@@ -4,15 +4,15 @@ using System.Collections.Generic;
 using Random = UnityEngine.Random;
 
 [DataCatagory("Combat/Logic")]
-public class UnitAbility : Data
+public class UnitAbilityLogicData : Data
 {
 	//suppled in editor
 	public string AbilityName;
 	public float CritChanceMultiplyer = 1;
-	public List<AbilityEffect> CombatEffects;
-	public List<AbilityEffect> CriticalEffects;
+	public List<AbilityEffectLogicData> CombatEffects;
+	public List<AbilityEffectLogicData> CriticalEffects;
 
-	public IEnumerator WaitUse(Unit caster, Unit target)
+	public IEnumerator WaitUse(UnitLogicData caster, UnitLogicData target)
 	{
 		yield return new Routine(caster.AbilityUsedMessage.WaitSend(caster, this, target));
 
@@ -21,7 +21,7 @@ public class UnitAbility : Data
 		// wait for abilityconnectedMessage or somthing like that,
 		// then...
 
-		foreach(AbilityEffect effect in CombatEffects)
+		foreach(AbilityEffectLogicData effect in CombatEffects)
 		{
 			yield return new Routine(effect.WaitTrigger(caster, target, false));
 		}
@@ -36,7 +36,7 @@ public class UnitAbility : Data
 		if(Random.value < criticalSuccessThreshold * CritChanceMultiplyer)
 		{
 			//TODO send out critical hit message
-			foreach(AbilityEffect effect in CriticalEffects)
+			foreach(AbilityEffectLogicData effect in CriticalEffects)
 			{
 				yield return new Routine(effect.WaitTrigger(caster, target, true));
 			}

@@ -12,7 +12,7 @@ public class UnitView : MonoBehaviour
 	public Button UnitSelectButton;
 	
 	// By convention, Init must be called on UI elements to supply them with dependacies
-	public void Init(Unit unit, Message<Unit> unitSelectedMessageChannel, TurnOrder turnOrder)
+	public void Init(UnitLogicData unit, Message<UnitLogicData> unitSelectedMessageChannel, TurnOrder turnOrder)
 	{
 		//set backing fields
 		m_unit = unit;
@@ -42,7 +42,7 @@ public class UnitView : MonoBehaviour
 		yield break;
 	}
 
-	IEnumerator WaitHandleUnitKilled(Unit unitKilled)
+	IEnumerator WaitHandleUnitKilled(UnitLogicData unitKilled)
 	{
 		if(unitKilled == m_unit)
 		{
@@ -56,7 +56,7 @@ public class UnitView : MonoBehaviour
 		yield break;
 	}
 
-	IEnumerator WaitHandleAbilityUsed(Unit Caster, UnitAbility Ability, Unit Target)
+	IEnumerator WaitHandleAbilityUsed(UnitLogicData Caster, UnitAbilityLogicData Ability, UnitLogicData Target)
 	{
 		LogManager.Log(Caster.UnitName + " used " + Ability.AbilityName + " on " + Target.UnitName, LogDestination.Combat);
 		yield break;
@@ -113,9 +113,9 @@ public class UnitView : MonoBehaviour
 	}
 
 	// the unit this view is displaying
-	private Unit m_unit;
+	private UnitLogicData m_unit;
 	// send a message to this channel when this unit is selected
-	private Message<Unit> m_unitSelectedMessageChannel;
+	private Message<UnitLogicData> m_unitSelectedMessageChannel;
 	// use the turn order to check if a unit dies
 	// TODO fix it so we dont need this here
 	private TurnOrder m_turnOrder;

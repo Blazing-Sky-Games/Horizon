@@ -5,7 +5,7 @@ using UnityEngine; // TODO fix this. just instatuite it in a view
 public class CombatLogic : MonoBehaviour
 {
 	//supplyed in Editor
-	public CombatScenario Scenario;
+	public CombatLogicData Scenario;
 
 	public TurnOrder TurnOrder
 	{
@@ -24,7 +24,7 @@ public class CombatLogic : MonoBehaviour
 	public void Init()
 	{
 		// deep copy so we are not editing the original version
-		Scenario = Scenario.DeepCopy() as CombatScenario;
+		Scenario = Scenario.DeepCopy() as CombatLogicData;
 
 		m_turnOrder = new TurnOrder(Scenario);
 

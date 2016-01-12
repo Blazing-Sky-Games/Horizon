@@ -5,23 +5,23 @@ using System;
 
 // list of units. the order in which unts take their turn
 // also keeps track of units in general (death, etc)
-public class TurnOrder : IEnumerable<Unit>
+public class TurnOrder : IEnumerable<UnitLogicData>
 {
 	public readonly Message AdvanceTurnOrderMessage = new Message();
 	public readonly Message<bool> CombatEncounterOverMessage = new Message<bool>();
-	public readonly Message<Unit> UnitKilledMessage = new Message<Unit>();
+	public readonly Message<UnitLogicData> UnitKilledMessage = new Message<UnitLogicData>();
 
-	public TurnOrder(CombatScenario scenario)
+	public TurnOrder(CombatLogicData scenario)
 	{
 		m_units = scenario.Units;
 
-		foreach(Unit unit in m_units)
+		foreach(UnitLogicData unit in m_units)
 		{
 			unit.SetTurnOrder(this);
 		}
 	}
 
-	public Unit ActiveUnit
+	public UnitLogicData ActiveUnit
 	{
 		get
 		{
@@ -38,7 +38,7 @@ public class TurnOrder : IEnumerable<Unit>
 	}
 
 	// remove a unit from the turn order
-	public IEnumerator WaitKillUnit(Unit killedUnit)
+	public IEnumerator WaitKillUnit(UnitLogicData killedUnit)
 	{
 		int killedIndex = m_units.IndexOf(killedUnit);
 
@@ -67,7 +67,7 @@ public class TurnOrder : IEnumerable<Unit>
 		int numAI = 0;
 		int numPlayer = 0;
 		
-		foreach(Unit unit in m_units)
+		foreach(UnitLogicData unit in m_units)
 		{
 			if(unit.Faction == Faction.AI)
 			{
@@ -93,7 +93,7 @@ public class TurnOrder : IEnumerable<Unit>
 	}
 
 	//for IEnumerable<Unit>
-	public IEnumerator<Unit> GetEnumerator()
+	public IEnumerator<UnitLogicData> GetEnumerator()
 	{
 		return m_units.GetEnumerator();
 	}
@@ -113,6 +113,6 @@ public class TurnOrder : IEnumerable<Unit>
 		yield return new Routine(AdvanceTurnOrderMessage.WaitSend());
 	}
 
-	private List<Unit> m_units;
+	private List<UnitLogicData> m_units;
 	private int m_activeUnitIndex = 0;
 }

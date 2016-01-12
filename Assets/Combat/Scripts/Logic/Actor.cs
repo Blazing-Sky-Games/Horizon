@@ -44,7 +44,7 @@ public class Actor
 		yield return new Routine(ActionDecidedMessage.WaitSend(new PassTurnAction()));
 	}
 	
-	public IEnumerator WaitUseUnitAbility(Unit caster, UnitAbility ability, Unit target)
+	public IEnumerator WaitUseUnitAbility(UnitLogicData caster, UnitAbilityLogicData ability, UnitLogicData target)
 	{
 		m_usedAction = true;
 		yield return new Routine(ActionDecidedMessage.WaitSend(new UnitAbilityUsageAction(caster, ability, target)));

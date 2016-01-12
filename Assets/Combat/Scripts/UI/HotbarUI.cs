@@ -14,7 +14,7 @@ public class HotbarUI : MonoBehaviour
 	// the pass turn button was clicked
 	public readonly Message PassTurnMessageChannel = new Message();
 	// an ability was selected
-	public readonly Message<UnitAbility> UnitAbilitySelectedMessage = new Message<UnitAbility>();
+	public readonly Message<UnitAbilityLogicData> UnitAbilitySelectedMessage = new Message<UnitAbilityLogicData>();
 
 	// by convention init is called on ui elements to provide dependaceis
 	public void Init(TurnOrder turnOrder)
@@ -54,7 +54,7 @@ public class HotbarUI : MonoBehaviour
 	}
 
 	// the unit displayed in the hot bar
-	public Unit SelectedUnit
+	public UnitLogicData SelectedUnit
 	{ 
 		get
 		{
@@ -76,7 +76,7 @@ public class HotbarUI : MonoBehaviour
 		CoroutineManager.Main.StartCoroutine(PassTurnMessageChannel.WaitSend());
 	}
 
-	private void SetSelectedUnit(Unit newUnit)
+	private void SetSelectedUnit(UnitLogicData newUnit)
 	{
 		//update stat display
 		string newStatDisplayString = "";
@@ -116,7 +116,7 @@ public class HotbarUI : MonoBehaviour
 	}
 
 	// creat a new ability button based on prefab
-	private UnitAbilityButton instatiateAbilityButton(UnitAbility ability)
+	private UnitAbilityButton instatiateAbilityButton(UnitAbilityLogicData ability)
 	{
 		//instantiate the prefab
 		UnitAbilityButton newbutton = Instantiate(UnitAbilityButtonPrefab);
@@ -130,7 +130,7 @@ public class HotbarUI : MonoBehaviour
 	}
 
 	// the unit this view is displaying
-	private Unit m_showUnit;
+	private UnitLogicData m_showUnit;
 	// use this to update the selected unit when the turn order advances
 	private TurnOrder m_turnOrder;
 	// where we store the ability buttons

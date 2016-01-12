@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using Random = UnityEngine.Random;
 
 [DataCatagory("Combat/Logic")]
-public class Unit : Data
+public class UnitLogicData : Data
 {
 	//supplyed in editor
 	public Faction Faction;
 	public int MaxHealth;
 	public int Health;
 	public string UnitName;
-	public List<UnitAbility> Abilities;
+	public List<UnitAbilityLogicData> Abilities;
 	public int Strength; // phys dmg /crit
 	public int Intelligence; // tech dmg /crit
 	public int Stability; // phys def/crit res
@@ -20,7 +20,7 @@ public class Unit : Data
 
 	//this unit has been hurt
 	public readonly Message<int> HurtMessage = new Message<int>();
-	public readonly Message<Unit, UnitAbility, Unit> AbilityUsedMessage = new Message<Unit, UnitAbility, Unit>();
+	public readonly Message<UnitLogicData, UnitAbilityLogicData, UnitLogicData> AbilityUsedMessage = new Message<UnitLogicData, UnitAbilityLogicData, UnitLogicData>();
 	public readonly Message<UnitStatus> StatusChangedMessage = new Message<UnitStatus>();
 
 	public int GetStatistic(UnitStatatistic stat)

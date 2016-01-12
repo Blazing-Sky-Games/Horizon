@@ -2,14 +2,14 @@ using System.Collections;
 using System;
 
 [InlineData]
-public abstract class AbilityEffect : Data
+public abstract class AbilityEffectLogicData : Data
 {
 	public EffectType effectType;
 
-	public abstract IEnumerator WaitTrigger(Unit attacker, Unit defender, bool isCritical);
+	public abstract IEnumerator WaitTrigger(UnitLogicData attacker, UnitLogicData defender, bool isCritical);
 
 	// skill based multiplyer
-	protected float GetCriticalPotency(Unit attacker, Unit defender)
+	protected float GetCriticalPotency(UnitLogicData attacker, UnitLogicData defender)
 	{
 		float def = effectType == EffectType.Physical ? defender.Stability : defender.Insight;
 
@@ -17,7 +17,7 @@ public abstract class AbilityEffect : Data
 	}
 
 	// combat strength based multiuplyer
-	protected float GetCombatPotency(Unit attacker, Unit defender)
+	protected float GetCombatPotency(UnitLogicData attacker, UnitLogicData defender)
 	{
 		float atk = effectType == EffectType.Physical ? attacker.Strength : attacker.Intelligence;
 		float def = effectType == EffectType.Physical ? defender.Stability : defender.Insight;
@@ -26,7 +26,7 @@ public abstract class AbilityEffect : Data
 	}
 
 	//TODO include ability power in this
-	protected float GetPotency(Unit attacker, Unit defender, bool isCritical)
+	protected float GetPotency(UnitLogicData attacker, UnitLogicData defender, bool isCritical)
 	{
 		return isCritical ? GetCriticalPotency(attacker, defender) : GetCombatPotency(attacker, defender);
 	}

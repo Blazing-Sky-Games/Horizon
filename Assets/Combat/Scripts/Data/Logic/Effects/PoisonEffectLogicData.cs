@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 
 //TODO and this goes for other turn based effects. nead an elegant way to handle a unit dieing
-class PoisonEffect : AbilityEffect
+class PoisonEffectLogicData : AbilityEffectLogicData
 {
 	[UnityEngine.Tooltip("dmg = M*Potency")]
 	public int DamageM = 10;
@@ -12,12 +12,12 @@ class PoisonEffect : AbilityEffect
 	[UnityEngine.Tooltip("Duration = M*Potency + B")]
 	public int DurationM = 3;
 
-	public override IEnumerator WaitTrigger(Unit attacker, Unit defender, bool isCritical)
+	public override IEnumerator WaitTrigger(UnitLogicData attacker, UnitLogicData defender, bool isCritical)
 	{
 		yield return new Routine(TurnBasedEffectManager.WaitStartTurnBasedEffect(WaitPoisonEffect(attacker, defender, isCritical)));
 	}
 
-	private IEnumerator WaitPoisonEffect(Unit attacker, Unit defender, bool isCritical)
+	private IEnumerator WaitPoisonEffect(UnitLogicData attacker, UnitLogicData defender, bool isCritical)
 	{
 		yield return new Routine(defender.WaitSetStatus(UnitStatus.Poisoned, true));
 

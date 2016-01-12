@@ -1,7 +1,7 @@
 using System.Collections;
 using Random = UnityEngine.Random;
 
-public class DamageEffect : AbilityEffect
+public class DamageEffectLogicData : AbilityEffectLogicData
 {
 	[UnityEngine.Tooltip("dmg = M*Potency*Rand(LR,1)+B")]
 	public int DamageM = 10;
@@ -10,7 +10,7 @@ public class DamageEffect : AbilityEffect
 	[UnityEngine.Tooltip("dmg = M*Potency*Rand(LR,1)+B")]
 	public float DamageLR = 0.8f;
 
-	public override IEnumerator WaitTrigger(Unit Attacker, Unit Defender, bool IsCritical)
+	public override IEnumerator WaitTrigger(UnitLogicData Attacker, UnitLogicData Defender, bool IsCritical)
 	{
 		// roll a die to see how strong the attack is
 		float attackRoll = Random.Range(DamageLR, 1f);

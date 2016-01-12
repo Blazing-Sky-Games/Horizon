@@ -1,6 +1,6 @@
 using System.Collections;
 
-public class WeakenEffect : AbilityEffect
+public class WeakenEffectLogicData : AbilityEffectLogicData
 {
 	[UnityEngine.Tooltip("which stat will be changed")]
 	public UnitStatatistic StatToWeaken = UnitStatatistic.Strength;
@@ -12,12 +12,12 @@ public class WeakenEffect : AbilityEffect
 	[UnityEngine.Tooltip("Duration = M*potency + B")]
 	public int DurationM = 2;
 
-	public override IEnumerator WaitTrigger(Unit Attacker, Unit Defender, bool IsCritical)
+	public override IEnumerator WaitTrigger(UnitLogicData Attacker, UnitLogicData Defender, bool IsCritical)
 	{
 		yield return new Routine(TurnBasedEffectManager.WaitStartTurnBasedEffect(WaitWeakenEffect(Attacker, Defender, IsCritical)));
 	}
 
-	IEnumerator WaitWeakenEffect(Unit attacker, Unit defender, bool isCritical)
+	IEnumerator WaitWeakenEffect(UnitLogicData attacker, UnitLogicData defender, bool isCritical)
 	{
 		yield return new Routine(defender.WaitSetStatus(UnitStatus.Weakened, true));
 

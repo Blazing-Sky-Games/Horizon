@@ -14,7 +14,7 @@ public class AIActor : Actor
 	//pick a random ability and a random target and use that ability
 	public override IEnumerator WaitDecideAction()
 	{
-		Unit activeUnit = m_logic.TurnOrder.ActiveUnit;
+		UnitLogicData activeUnit = m_logic.TurnOrder.ActiveUnit;
 
 		if(m_logic.GetFactionLeader(activeUnit.Faction) != this)
 		{
@@ -22,8 +22,8 @@ public class AIActor : Actor
 		}
 
 		System.Random r = new System.Random();
-		Unit targetUnit = m_logic.TurnOrder.Where(x => x.Faction != m_faction).OrderBy(x => r.NextDouble()).First();
-		UnitAbility SelectedAbility = activeUnit.Abilities.OrderBy(x => r.NextDouble()).First();
+		UnitLogicData targetUnit = m_logic.TurnOrder.Where(x => x.Faction != m_faction).OrderBy(x => r.NextDouble()).First();
+		UnitAbilityLogicData SelectedAbility = activeUnit.Abilities.OrderBy(x => r.NextDouble()).First();
 
 		yield return new Routine(WaitUseUnitAbility(activeUnit, SelectedAbility, targetUnit));
 	}

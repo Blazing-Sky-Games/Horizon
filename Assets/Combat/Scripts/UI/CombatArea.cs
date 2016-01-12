@@ -12,7 +12,7 @@ public class CombatArea : MonoBehaviour
 	public Vector2 PlayerUnitOffset;
 
 	// call to supply dependancies
-	public void Init(TurnOrder turnOrder, Message<Unit> selectUnitMessage)
+	public void Init(TurnOrder turnOrder, Message<UnitLogicData> selectUnitMessage)
 	{
 		//set backing fields
 		m_turnOrder = turnOrder;
@@ -34,7 +34,7 @@ public class CombatArea : MonoBehaviour
 		m_aIUnits.Clear();
 
 		// add units from turn order to lists
-		foreach(Unit unit in m_turnOrder)
+		foreach(UnitLogicData unit in m_turnOrder)
 		{
 			if(unit.Faction == Faction.Player)
 			{
@@ -61,12 +61,12 @@ public class CombatArea : MonoBehaviour
 		m_aIUnitViews.Clear();
 
 		//create new unit views
-		foreach(Unit unit in m_playerUnits)
+		foreach(UnitLogicData unit in m_playerUnits)
 		{
 			m_playerUnitViews.Add(InstantiateUnitView(unit));
 		}
 		
-		foreach(Unit unit in m_aIUnits)
+		foreach(UnitLogicData unit in m_aIUnits)
 		{
 			m_aIUnitViews.Add(InstantiateUnitView(unit));
 		}
@@ -95,7 +95,7 @@ public class CombatArea : MonoBehaviour
 	}
 
 	//creat a new unit view
-	private UnitView InstantiateUnitView(Unit unit)
+	private UnitView InstantiateUnitView(UnitLogicData unit)
 	{
 		UnitView newView = Instantiate<UnitView>(UnitViewPrefab);
 		newView.Init(unit, m_selectUnitMessage, m_turnOrder);
@@ -105,10 +105,10 @@ public class CombatArea : MonoBehaviour
 		return newView;
 	}
 
-	private readonly  List<Unit> m_playerUnits = new List<Unit>();
+	private readonly  List<UnitLogicData> m_playerUnits = new List<UnitLogicData>();
 	private readonly List<UnitView> m_playerUnitViews = new List<UnitView>();
-	private readonly List<Unit> m_aIUnits = new List<Unit>();
+	private readonly List<UnitLogicData> m_aIUnits = new List<UnitLogicData>();
 	private readonly List<UnitView> m_aIUnitViews = new List<UnitView>();
-	private Message<Unit> m_selectUnitMessage;
+	private Message<UnitLogicData> m_selectUnitMessage;
 	private TurnOrder m_turnOrder;
 }

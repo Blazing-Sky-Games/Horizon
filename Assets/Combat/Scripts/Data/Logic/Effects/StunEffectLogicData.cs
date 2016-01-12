@@ -1,19 +1,19 @@
 using System;
 using System.Collections;
 
-class StunEffect : AbilityEffect
+class StunEffectLogicData : AbilityEffectLogicData
 {
 	[UnityEngine.Tooltip("Duration = M*(Potency-1)+B")]
 	public float DurationM = 1.5f;
 	[UnityEngine.Tooltip("Duration = M*(Potency-1)+B")]
 	public int DurationB = 1 ;
 
-	public override IEnumerator WaitTrigger(Unit Attacker, Unit Defender, bool IsCritical)
+	public override IEnumerator WaitTrigger(UnitLogicData Attacker, UnitLogicData Defender, bool IsCritical)
 	{
 		yield return new Routine(TurnBasedEffectManager.WaitStartTurnBasedEffect(WaitStunEffect(Attacker, Defender, IsCritical)));
 	}
 
-	IEnumerator WaitStunEffect(Unit attacker, Unit defender, bool isCritical)
+	IEnumerator WaitStunEffect(UnitLogicData attacker, UnitLogicData defender, bool isCritical)
 	{
 		yield return new Routine(defender.WaitSetStatus(UnitStatus.Stunned, true));
 

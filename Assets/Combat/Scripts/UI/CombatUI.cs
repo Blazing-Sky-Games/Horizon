@@ -14,7 +14,7 @@ public class CombatUI : MonoBehaviour
 	
 	// notify that a unit has been selected
 	// pass this to ui elements that need it
-	public readonly Message<Unit> UnitSelectedMessage = new Message<Unit>();
+	public readonly Message<UnitLogicData> UnitSelectedMessage = new Message<UnitLogicData>();
 
 	private void Start()
 	{
@@ -50,13 +50,13 @@ public class CombatUI : MonoBehaviour
 		yield break;
 	}
 
-	IEnumerator WaitHandleUnitSelected(Unit arg)
+	IEnumerator WaitHandleUnitSelected(UnitLogicData arg)
 	{
 		HotbarInterface.SelectedUnit = arg;
 		yield break;
 	}
 
-	IEnumerator WaitHandleAbilitySelected(UnitAbility arg)
+	IEnumerator WaitHandleAbilitySelected(UnitAbilityLogicData arg)
 	{
 		//yuk TODO clean up this logic
 		if(HotbarInterface.SelectedUnit == Logic.TurnOrder.ActiveUnit && Logic.TurnOrder.ActiveUnit.Faction == Faction.Player)

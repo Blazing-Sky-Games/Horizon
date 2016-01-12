@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Collections;
 
 [DataCatagory("Combat/Logic")]
-public class CombatScenario : Data
+public class CombatLogicData : Data
 {
 	// the units, and the turn order
-	public List<Unit> Units;
+	public List<UnitLogicData> Units;
 }
 
