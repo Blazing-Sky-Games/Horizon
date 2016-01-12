@@ -45,7 +45,7 @@ public class CombatLogic : MonoBehaviour
 
 		while(true)
 		{
-			Actor FactionLeader = GetFactionLeader(m_turnOrder.ActiveUnit.Faction);
+			Actor FactionLeader = GetFactionLeader(m_turnOrder.ActiveUnit.data.Faction);
 
 			FactionLeader.ResetCanTakeAction();
 

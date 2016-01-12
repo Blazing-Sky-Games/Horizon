@@ -12,7 +12,7 @@ public class UnitView : MonoBehaviour
 	public Button UnitSelectButton;
 	
 	// By convention, Init must be called on UI elements to supply them with dependacies
-	public void Init(UnitLogicData unit, Message<UnitLogicData> unitSelectedMessageChannel, TurnOrder turnOrder)
+	public void Init(UnitLogic unit, Message<UnitLogic> unitSelectedMessageChannel, TurnOrder turnOrder)
 	{
 		//set backing fields
 		m_unit = unit;
@@ -20,7 +20,7 @@ public class UnitView : MonoBehaviour
 		m_turnOrder = turnOrder;
 
 		// initilization
-		DisplayText.text = m_unit.UnitName + " HP : " + m_unit.Health + " / " + m_unit.MaxHealth;
+		DisplayText.text = m_unit.data.UnitName + " HP : " + m_unit.data.Health + " / " + m_unit.data.MaxHealth;
 		UnitSelectButton.onClick.AddListener(OnClickUnitSelect);
 
 		// start main
@@ -36,13 +36,13 @@ public class UnitView : MonoBehaviour
 	IEnumerator WaitHandleHurt(int arg)
 	{
 		//write to combat log
-		LogManager.Log(m_unit.UnitName + " took " + arg + " points of damage", LogDestination.Combat);
+		LogManager.Log(m_unit.data.UnitName + " took " + arg + " points of damage", LogDestination.Combat);
 		// update the health display
-		DisplayText.text = m_unit.UnitName + " HP : " + m_unit.Health + " / " + m_unit.MaxHealth;
+		DisplayText.text = m_unit.data.UnitName + " HP : " + m_unit.data.Health + " / " + m_unit.data.MaxHealth;
 		yield break;
 	}
 
-	IEnumerator WaitHandleUnitKilled(UnitLogicData unitKilled)
+	IEnumerator WaitHandleUnitKilled(UnitLogic unitKilled)
 	{
 		if(unitKilled == m_unit)
 		{
@@ -50,15 +50,15 @@ public class UnitView : MonoBehaviour
 			//TODO fix bug related to this
 			UnitSelectButton.gameObject.SetActive(false);
 			//write to combat log
-			LogManager.Log(m_unit.UnitName + " died", LogDestination.Combat);
+			LogManager.Log(m_unit.data.UnitName + " died", LogDestination.Combat);
 		}
 
 		yield break;
 	}
 
-	IEnumerator WaitHandleAbilityUsed(UnitLogicData Caster, UnitAbilityLogicData Ability, UnitLogicData Target)
+	IEnumerator WaitHandleAbilityUsed(UnitLogic Caster, UnitAbilityLogic Ability, UnitLogic Target)
 	{
-		LogManager.Log(Caster.UnitName + " used " + Ability.AbilityName + " on " + Target.UnitName, LogDestination.Combat);
+		LogManager.Log(Caster.data.UnitName + " used " + Ability.data.AbilityName + " on " + Target.data.UnitName, LogDestination.Combat);
 		yield break;
 	}
 
@@ -66,11 +66,11 @@ public class UnitView : MonoBehaviour
 	{
 		if(m_unit.GetStatus(arg))
 		{
-			LogManager.Log(m_unit.UnitName + " was " + arg.ToString(), LogDestination.Combat);
+			LogManager.Log(m_unit.data.UnitName + " was " + arg.ToString(), LogDestination.Combat);
 		}
 		else
 		{
-			LogManager.Log("status \"" + arg.ToString() + "\" ended for " + m_unit.UnitName, LogDestination.Combat);
+			LogManager.Log("status \"" + arg.ToString() + "\" ended for " + m_unit.data.UnitName, LogDestination.Combat);
 		}
 
 		yield break;
@@ -113,9 +113,9 @@ public class UnitView : MonoBehaviour
 	}
 
 	// the unit this view is displaying
-	private UnitLogicData m_unit;
+	private UnitLogic m_unit;
 	// send a message to this channel when this unit is selected
-	private Message<UnitLogicData> m_unitSelectedMessageChannel;
+	private Message<UnitLogic> m_unitSelectedMessageChannel;
 	// use the turn order to check if a unit dies
 	// TODO fix it so we dont need this here
 	private TurnOrder m_turnOrder;

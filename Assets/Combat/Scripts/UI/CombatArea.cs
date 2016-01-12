@@ -12,7 +12,7 @@ public class CombatArea : MonoBehaviour
 	public Vector2 PlayerUnitOffset;
 
 	// call to supply dependancies
-	public void Init(TurnOrder turnOrder, Message<UnitLogicData> selectUnitMessage)
+	public void Init(TurnOrder turnOrder, Message<UnitLogic> selectUnitMessage)
 	{
 		//set backing fields
 		m_turnOrder = turnOrder;
@@ -34,13 +34,13 @@ public class CombatArea : MonoBehaviour
 		m_aIUnits.Clear();
 
 		// add units from turn order to lists
-		foreach(UnitLogicData unit in m_turnOrder)
+		foreach(UnitLogic unit in m_turnOrder)
 		{
-			if(unit.Faction == Faction.Player)
+			if(unit.data.Faction == Faction.Player)
 			{
 				m_playerUnits.Add(unit);
 			}
-			else if(unit.Faction == Faction.AI)
+			else if(unit.data.Faction == Faction.AI)
 			{
 				m_aIUnits.Add(unit);
 			}
@@ -61,12 +61,12 @@ public class CombatArea : MonoBehaviour
 		m_aIUnitViews.Clear();
 
 		//create new unit views
-		foreach(UnitLogicData unit in m_playerUnits)
+		foreach(UnitLogic unit in m_playerUnits)
 		{
 			m_playerUnitViews.Add(InstantiateUnitView(unit));
 		}
 		
-		foreach(UnitLogicData unit in m_aIUnits)
+		foreach(UnitLogic unit in m_aIUnits)
 		{
 			m_aIUnitViews.Add(InstantiateUnitView(unit));
 		}
@@ -95,7 +95,7 @@ public class CombatArea : MonoBehaviour
 	}
 
 	//creat a new unit view
-	private UnitView InstantiateUnitView(UnitLogicData unit)
+	private UnitView InstantiateUnitView(UnitLogic unit)
 	{
 		UnitView newView = Instantiate<UnitView>(UnitViewPrefab);
 		newView.Init(unit, m_selectUnitMessage, m_turnOrder);
@@ -105,10 +105,10 @@ public class CombatArea : MonoBehaviour
 		return newView;
 	}
 
-	private readonly  List<UnitLogicData> m_playerUnits = new List<UnitLogicData>();
+	private readonly  List<UnitLogic> m_playerUnits = new List<UnitLogic>();
 	private readonly List<UnitView> m_playerUnitViews = new List<UnitView>();
-	private readonly List<UnitLogicData> m_aIUnits = new List<UnitLogicData>();
+	private readonly List<UnitLogic> m_aIUnits = new List<UnitLogic>();
 	private readonly List<UnitView> m_aIUnitViews = new List<UnitView>();
-	private Message<UnitLogicData> m_selectUnitMessage;
+	private Message<UnitLogic> m_selectUnitMessage;
 	private TurnOrder m_turnOrder;
 }

@@ -10,7 +10,7 @@ public class DamageEffectLogicData : AbilityEffectLogicData
 	[UnityEngine.Tooltip("dmg = M*Potency*Rand(LR,1)+B")]
 	public float DamageLR = 0.8f;
 
-	public override IEnumerator WaitTrigger(UnitLogicData Attacker, UnitLogicData Defender, bool IsCritical)
+	public override IEnumerator WaitTrigger(UnitLogic Attacker, UnitLogic Defender, bool IsCritical)
 	{
 		// roll a die to see how strong the attack is
 		float attackRoll = Random.Range(DamageLR, 1f);

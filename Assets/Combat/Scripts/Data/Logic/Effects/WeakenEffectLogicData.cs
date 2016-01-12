@@ -12,12 +12,12 @@ public class WeakenEffectLogicData : AbilityEffectLogicData
 	[UnityEngine.Tooltip("Duration = M*potency + B")]
 	public int DurationM = 2;
 
-	public override IEnumerator WaitTrigger(UnitLogicData Attacker, UnitLogicData Defender, bool IsCritical)
+	public override IEnumerator WaitTrigger(UnitLogic Attacker, UnitLogic Defender, bool IsCritical)
 	{
 		yield return new Routine(TurnBasedEffectManager.WaitStartTurnBasedEffect(WaitWeakenEffect(Attacker, Defender, IsCritical)));
 	}
 
-	IEnumerator WaitWeakenEffect(UnitLogicData attacker, UnitLogicData defender, bool isCritical)
+	IEnumerator WaitWeakenEffect(UnitLogic attacker, UnitLogic defender, bool isCritical)
 	{
 		yield return new Routine(defender.WaitSetStatus(UnitStatus.Weakened, true));
 

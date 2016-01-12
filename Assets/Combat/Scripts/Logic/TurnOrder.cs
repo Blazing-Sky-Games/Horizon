@@ -2,26 +2,28 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System;
+using System.Linq;
+
 
 // list of units. the order in which unts take their turn
 // also keeps track of units in general (death, etc)
-public class TurnOrder : IEnumerable<UnitLogicData>
+public class TurnOrder : IEnumerable<UnitLogic>
 {
 	public readonly Message AdvanceTurnOrderMessage = new Message();
 	public readonly Message<bool> CombatEncounterOverMessage = new Message<bool>();
-	public readonly Message<UnitLogicData> UnitKilledMessage = new Message<UnitLogicData>();
+	public readonly Message<UnitLogic> UnitKilledMessage = new Message<UnitLogic>();
 
 	public TurnOrder(CombatLogicData scenario)
 	{
-		m_units = scenario.Units;
+		m_units = scenario.Units.Select(data => new UnitLogic(data)).ToList();
 
-		foreach(UnitLogicData unit in m_units)
+		foreach(UnitLogic unit in m_units)
 		{
 			unit.SetTurnOrder(this);
 		}
 	}
 
-	public UnitLogicData ActiveUnit
+	public UnitLogic ActiveUnit
 	{
 		get
 		{
@@ -38,7 +40,7 @@ public class TurnOrder : IEnumerable<UnitLogicData>
 	}
 
 	// remove a unit from the turn order
-	public IEnumerator WaitKillUnit(UnitLogicData killedUnit)
+	public IEnumerator WaitKillUnit(UnitLogic killedUnit)
 	{
 		int killedIndex = m_units.IndexOf(killedUnit);
 
@@ -66,10 +68,10 @@ public class TurnOrder : IEnumerable<UnitLogicData>
 		// check if someone has won
 		int numAI = 0;
 		int numPlayer = 0;
-		
-		foreach(UnitLogicData unit in m_units)
+
+		foreach(UnitLogic unit in m_units)
 		{
-			if(unit.Faction == Faction.AI)
+			if(unit.data.Faction == Faction.AI)
 			{
 				numAI++;
 			}
@@ -93,7 +95,7 @@ public class TurnOrder : IEnumerable<UnitLogicData>
 	}
 
 	//for IEnumerable<Unit>
-	public IEnumerator<UnitLogicData> GetEnumerator()
+	public IEnumerator<UnitLogic> GetEnumerator()
 	{
 		return m_units.GetEnumerator();
 	}
@@ -113,6 +115,6 @@ public class TurnOrder : IEnumerable<UnitLogicData>
 		yield return new Routine(AdvanceTurnOrderMessage.WaitSend());
 	}
 
-	private List<UnitLogicData> m_units;
+	private List<UnitLogic> m_units;
 	private int m_activeUnitIndex = 0;
 }

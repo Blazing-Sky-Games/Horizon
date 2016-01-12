@@ -13,7 +13,7 @@ public class TargetingUI : MonoBehaviour
 	public IActorAction Result;
 
 	// By convention, Init must be called on UI elements to supply them with dependacies
-	public void Init(Message<UnitLogicData> selectUnitMessage, CombatLogic logic)
+	public void Init(Message<UnitLogic> selectUnitMessage, CombatLogic logic)
 	{
 		m_selectUnitMessage = selectUnitMessage;
 		m_logic = logic;
@@ -27,14 +27,14 @@ public class TargetingUI : MonoBehaviour
 		m_canceled = true;
 	}
 	
-	IEnumerator WaitHandleUnitSelected(UnitLogicData arg)
+	IEnumerator WaitHandleUnitSelected(UnitLogic arg)
 	{
 		// the user has selected a target, so declare that they have used an ability
-		yield return new Routine(m_logic.GetFactionLeader(m_caster.Faction).WaitUseUnitAbility(m_caster, m_ability, arg));
+		yield return new Routine(m_logic.GetFactionLeader(m_caster.data.Faction).WaitUseUnitAbility(m_caster, m_ability, arg));
 	}
 
 	// call this to bring up the ui and select a target for an ability
-	public IEnumerator WaitSelectTarget(UnitLogicData caster, UnitAbilityLogicData ability)
+	public IEnumerator WaitSelectTarget(UnitLogic caster, UnitAbilityLogic ability)
 	{
 		m_caster = caster;
 		m_ability = ability;
@@ -60,10 +60,10 @@ public class TargetingUI : MonoBehaviour
 	}
 
 	private bool m_canceled = false;
-	private UnitLogicData m_caster;
-	private UnitAbilityLogicData m_ability;
+	private UnitLogic m_caster;
+	private UnitAbilityLogic m_ability;
 	//supplyed in Init
-	private Message<UnitLogicData> m_selectUnitMessage;
+	private Message<UnitLogic> m_selectUnitMessage;
 	private CombatLogic m_logic;
 
 }

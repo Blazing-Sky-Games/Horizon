@@ -6,7 +6,7 @@ public abstract class AbilityEffectLogicData : Data
 {
 	public EffectType effectType;
 
-	public abstract IEnumerator WaitTrigger(UnitLogicData attacker, UnitLogicData defender, bool isCritical);
+	public abstract IEnumerator WaitTrigger(UnitLogic attacker, UnitLogic defender, bool isCritical);
 
 	// skill based multiplyer
 	protected float GetCriticalPotency(UnitLogicData attacker, UnitLogicData defender)
@@ -26,8 +26,8 @@ public abstract class AbilityEffectLogicData : Data
 	}
 
 	//TODO include ability power in this
-	protected float GetPotency(UnitLogicData attacker, UnitLogicData defender, bool isCritical)
+	protected float GetPotency(UnitLogic attacker, UnitLogic defender, bool isCritical)
 	{
-		return isCritical ? GetCriticalPotency(attacker, defender) : GetCombatPotency(attacker, defender);
+		return isCritical ? GetCriticalPotency(attacker.data, defender.data) : GetCombatPotency(attacker.data, defender.data);
 	}
 }

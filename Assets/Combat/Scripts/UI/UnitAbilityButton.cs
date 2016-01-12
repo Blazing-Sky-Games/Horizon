@@ -19,14 +19,14 @@ public class UnitAbilityButton : MonoBehaviour
 	}
 
 	// By convention, Init must be called on UI elements to supply them with dependacies
-	public void Init(UnitAbilityLogicData ability, Message<UnitAbilityLogicData> unitAbilitySelectedMessageChannel)
+	public void Init(UnitAbilityLogic ability, Message<UnitAbilityLogic> unitAbilitySelectedMessageChannel)
 	{
 		//set backing fields
 		m_unitAbilitySelectedMessageChannel = unitAbilitySelectedMessageChannel;
 		m_ability = ability;
 
 		//init
-		AbilityName.text = m_ability.AbilityName;
+		AbilityName.text = m_ability.data.AbilityName;
 		AbilityButton.onClick.AddListener(OnClick);
 	}
 
@@ -46,8 +46,8 @@ public class UnitAbilityButton : MonoBehaviour
 	}
 
 	// the ability this view is displaying
-	private UnitAbilityLogicData m_ability;
+	private UnitAbilityLogic m_ability;
 	// send a message down this to select an ability
-	private Message<UnitAbilityLogicData> m_unitAbilitySelectedMessageChannel;
+	private Message<UnitAbilityLogic> m_unitAbilitySelectedMessageChannel;
 }
 

@@ -8,12 +8,12 @@ class StunEffectLogicData : AbilityEffectLogicData
 	[UnityEngine.Tooltip("Duration = M*(Potency-1)+B")]
 	public int DurationB = 1 ;
 
-	public override IEnumerator WaitTrigger(UnitLogicData Attacker, UnitLogicData Defender, bool IsCritical)
+	public override IEnumerator WaitTrigger(UnitLogic Attacker, UnitLogic Defender, bool IsCritical)
 	{
 		yield return new Routine(TurnBasedEffectManager.WaitStartTurnBasedEffect(WaitStunEffect(Attacker, Defender, IsCritical)));
 	}
 
-	IEnumerator WaitStunEffect(UnitLogicData attacker, UnitLogicData defender, bool isCritical)
+	IEnumerator WaitStunEffect(UnitLogic attacker, UnitLogic defender, bool isCritical)
 	{
 		yield return new Routine(defender.WaitSetStatus(UnitStatus.Stunned, true));
 

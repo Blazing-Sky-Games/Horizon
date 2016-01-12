@@ -14,7 +14,7 @@ public class CombatUI : MonoBehaviour
 	
 	// notify that a unit has been selected
 	// pass this to ui elements that need it
-	public readonly Message<UnitLogicData> UnitSelectedMessage = new Message<UnitLogicData>();
+	public readonly Message<UnitLogic> UnitSelectedMessage = new Message<UnitLogic>();
 
 	private void Start()
 	{
@@ -50,16 +50,16 @@ public class CombatUI : MonoBehaviour
 		yield break;
 	}
 
-	IEnumerator WaitHandleUnitSelected(UnitLogicData arg)
+	IEnumerator WaitHandleUnitSelected(UnitLogic arg)
 	{
 		HotbarInterface.SelectedUnit = arg;
 		yield break;
 	}
 
-	IEnumerator WaitHandleAbilitySelected(UnitAbilityLogicData arg)
+	IEnumerator WaitHandleAbilitySelected(UnitAbilityLogic arg)
 	{
 		//yuk TODO clean up this logic
-		if(HotbarInterface.SelectedUnit == Logic.TurnOrder.ActiveUnit && Logic.TurnOrder.ActiveUnit.Faction == Faction.Player)
+		if(HotbarInterface.SelectedUnit == Logic.TurnOrder.ActiveUnit && Logic.TurnOrder.ActiveUnit.data.Faction == Faction.Player)
 		{
 			//bring up unit targeting diolouge and wait for it to close
 			yield return new Routine(TargetingInterface.WaitSelectTarget(Logic.TurnOrder.ActiveUnit, arg));
@@ -76,7 +76,7 @@ public class CombatUI : MonoBehaviour
 			while((UnitSelectedMessage.Idle && 
 			      HotbarInterface.UnitAbilitySelectedMessage.Idle && 
 			      HotbarInterface.PassTurnMessageChannel.Idle) ||
-			      Logic.TurnOrder.ActiveUnit.Faction != Faction.Player)
+				  Logic.TurnOrder.ActiveUnit.data.Faction != Faction.Player)
 			{
 				yield return 0;
 			}
@@ -86,7 +86,7 @@ public class CombatUI : MonoBehaviour
 			if(HotbarInterface.PassTurnMessageChannel.MessagePending)
 			{
 				// the user clikced the pass turn button, so declare that the chose to pass the turn
-				yield return new Routine(HotbarInterface.PassTurnMessageChannel.WaitHandleMessage(Logic.GetFactionLeader(Logic.TurnOrder.ActiveUnit.Faction).WaitPassTurn));
+				yield return new Routine(HotbarInterface.PassTurnMessageChannel.WaitHandleMessage(Logic.GetFactionLeader(Logic.TurnOrder.ActiveUnit.data.Faction).WaitPassTurn));
 			}
 			//a unit was selected hmm TODO should this be moved to hotbar ui
 			else if(UnitSelectedMessage.MessagePending)

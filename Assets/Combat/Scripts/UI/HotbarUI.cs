@@ -14,7 +14,7 @@ public class HotbarUI : MonoBehaviour
 	// the pass turn button was clicked
 	public readonly Message PassTurnMessageChannel = new Message();
 	// an ability was selected
-	public readonly Message<UnitAbilityLogicData> UnitAbilitySelectedMessage = new Message<UnitAbilityLogicData>();
+	public readonly Message<UnitAbilityLogic> UnitAbilitySelectedMessage = new Message<UnitAbilityLogic>();
 
 	// by convention init is called on ui elements to provide dependaceis
 	public void Init(TurnOrder turnOrder)
@@ -54,7 +54,7 @@ public class HotbarUI : MonoBehaviour
 	}
 
 	// the unit displayed in the hot bar
-	public UnitLogicData SelectedUnit
+	public UnitLogic SelectedUnit
 	{ 
 		get
 		{
@@ -76,20 +76,20 @@ public class HotbarUI : MonoBehaviour
 		CoroutineManager.Main.StartCoroutine(PassTurnMessageChannel.WaitSend());
 	}
 
-	private void SetSelectedUnit(UnitLogicData newUnit)
+	private void SetSelectedUnit(UnitLogic newUnit)
 	{
 		//update stat display
 		string newStatDisplayString = "";
-		newStatDisplayString += newUnit.UnitName + "\n";
+		newStatDisplayString += newUnit.data.UnitName + "\n";
 		newStatDisplayString += "Stats \n";
-		newStatDisplayString += "Owner : " + newUnit.Faction + "\n";
-		newStatDisplayString += "HP : " + newUnit.Health + " / " + newUnit.MaxHealth + "\n";
-		newStatDisplayString += "Strength : " + newUnit.Strength + "\n";
-		newStatDisplayString += "Intelligence : " + newUnit.Intelligence + "\n";
-		newStatDisplayString += "Stability : " + newUnit.Stability + "\n";
-		newStatDisplayString += "Insight : " + newUnit.Insight + "\n";
-		newStatDisplayString += "Skill : " + newUnit.Skill + "\n";
-		newStatDisplayString += "Vitality : " + newUnit.Vitality + "\n";
+		newStatDisplayString += "Owner : " + newUnit.data.Faction + "\n";
+		newStatDisplayString += "HP : " + newUnit.data.Health + " / " + newUnit.data.MaxHealth + "\n";
+		newStatDisplayString += "Strength : " + newUnit.data.Strength + "\n";
+		newStatDisplayString += "Intelligence : " + newUnit.data.Intelligence + "\n";
+		newStatDisplayString += "Stability : " + newUnit.data.Stability + "\n";
+		newStatDisplayString += "Insight : " + newUnit.data.Insight + "\n";
+		newStatDisplayString += "Skill : " + newUnit.data.Skill + "\n";
+		newStatDisplayString += "Vitality : " + newUnit.data.Vitality + "\n";
 		StatsDisplay.text = newStatDisplayString;
 
 
@@ -102,9 +102,9 @@ public class HotbarUI : MonoBehaviour
 		m_abilityButtons.Clear();
 
 		// re create the ability Buttons
-		for(int i = 0; i < newUnit.Abilities.Count; i++)
+		for(int i = 0; i < newUnit.abilities.Count; i++)
 		{
-			m_abilityButtons.Add(instatiateAbilityButton(newUnit.Abilities[i]));
+			m_abilityButtons.Add(instatiateAbilityButton(newUnit.abilities[i]));
 		}
 
 		// set the abilities on the ability buttons
@@ -116,7 +116,7 @@ public class HotbarUI : MonoBehaviour
 	}
 
 	// creat a new ability button based on prefab
-	private UnitAbilityButton instatiateAbilityButton(UnitAbilityLogicData ability)
+	private UnitAbilityButton instatiateAbilityButton(UnitAbilityLogic ability)
 	{
 		//instantiate the prefab
 		UnitAbilityButton newbutton = Instantiate(UnitAbilityButtonPrefab);
@@ -130,7 +130,7 @@ public class HotbarUI : MonoBehaviour
 	}
 
 	// the unit this view is displaying
-	private UnitLogicData m_showUnit;
+	private UnitLogic m_showUnit;
 	// use this to update the selected unit when the turn order advances
 	private TurnOrder m_turnOrder;
 	// where we store the ability buttons
