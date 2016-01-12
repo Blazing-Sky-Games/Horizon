@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class CombatUI : MonoBehaviour
 {
@@ -45,7 +46,7 @@ public class CombatUI : MonoBehaviour
 	IEnumerator WaitHandleCombatOver(bool win)
 	{
 		LogManager.Log(win ? "win" : "loss", LogDestination.Combat);
-		Application.LoadLevel(win ? 1 : 2);
+		SceneManager.LoadScene(win ? 1 : 2);
 		yield break;
 	}
 
