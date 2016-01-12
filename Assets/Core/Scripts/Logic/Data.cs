@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
-
-//tag data type with this to have it display inline in inspector
-//TODO make it so individual feilds can be inline
 using System.Collections;
 
-
+//tag data type with this to have it display inline in inspector
+//used to select an implimentation of an abstract data type
+//this data type will not show up in the creat data window
+//TODO make it so individual feilds can be inline
 [AttributeUsage(AttributeTargets.Class, Inherited = true)]
 public class InlineData : Attribute
 {
