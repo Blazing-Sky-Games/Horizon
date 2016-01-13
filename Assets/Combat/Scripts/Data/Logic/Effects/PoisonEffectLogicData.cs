@@ -21,7 +21,7 @@ class PoisonEffectLogicData : AbilityEffectLogicData
 	{
 		yield return new Routine(defender.WaitSetStatus(UnitStatus.Poisoned, true));
 
-		float potency = GetPotency(attacker, defender, isCritical);
+		float potency = GetMatchUp(attacker, defender, isCritical);
 
 		//how much damage does the posion do
 		int dmg = (int)(DamageM * potency);
@@ -37,7 +37,7 @@ class PoisonEffectLogicData : AbilityEffectLogicData
 			//TODO handle this better
 			if(!defender.Dead)
 			{
-				yield return new Routine(defender.WaitTakeDamage((int)dmg, false));
+				yield return new Routine(defender.Health.WaitHurt((int)dmg));
 			}
 		}
 

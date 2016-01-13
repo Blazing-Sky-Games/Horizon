@@ -36,11 +36,11 @@ public class CombatArea : MonoBehaviour
 		// add units from turn order to lists
 		foreach(UnitLogic unit in m_turnOrder)
 		{
-			if(unit.data.Faction == Faction.Player)
+			if(unit.Faction == Faction.Player)
 			{
 				m_playerUnits.Add(unit);
 			}
-			else if(unit.data.Faction == Faction.AI)
+			else if(unit.Faction == Faction.AI)
 			{
 				m_aIUnits.Add(unit);
 			}

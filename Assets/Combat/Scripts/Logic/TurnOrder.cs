@@ -19,8 +19,14 @@ public class TurnOrder : IEnumerable<UnitLogic>
 
 		foreach(UnitLogic unit in m_units)
 		{
-			unit.SetTurnOrder(this);
+			//TODO hmm....fix it so we can remove this handler
+			unit.Health.Zero.AddHandler(GetKillUnitHandler(unit));
 		}
+	}
+
+	private Func<IEnumerator> GetKillUnitHandler(UnitLogic unit)
+	{
+		return () => WaitKillUnit(unit);
 	}
 
 	public UnitLogic ActiveUnit
@@ -71,7 +77,7 @@ public class TurnOrder : IEnumerable<UnitLogic>
 
 		foreach(UnitLogic unit in m_units)
 		{
-			if(unit.data.Faction == Faction.AI)
+			if(unit.Faction == Faction.AI)
 			{
 				numAI++;
 			}

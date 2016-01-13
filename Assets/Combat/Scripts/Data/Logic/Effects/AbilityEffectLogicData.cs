@@ -8,26 +8,21 @@ public abstract class AbilityEffectLogicData : Data
 
 	public abstract IEnumerator WaitTrigger(UnitLogic attacker, UnitLogic defender, bool isCritical);
 
-	// skill based multiplyer
-	protected float GetCriticalPotency(UnitLogicData attacker, UnitLogicData defender)
+	// relative comparason between units for a critical effect
+	private float GetCriticalMatchUp(UnitLogic attacker, UnitLogic defender)
 	{
-		float def = effectType == EffectType.Physical ? defender.Stability : defender.Insight;
-
-		return 1 + ((float)attacker.Skill / (def * 2));
+		return 1 + ((float)attacker.GetCriticalPotency(effectType) / (defender.GetCriticalResistance(effectType) * 2));
 	}
 
-	// combat strength based multiuplyer
-	protected float GetCombatPotency(UnitLogicData attacker, UnitLogicData defender)
+	// relative comparason between units for a combat effect
+	private float GetCombatMatchUp(UnitLogic attacker, UnitLogic defender)
 	{
-		float atk = effectType == EffectType.Physical ? attacker.Strength : attacker.Intelligence;
-		float def = effectType == EffectType.Physical ? defender.Stability : defender.Insight;
-
-		return atk / def;
+		return attacker.GetCombatPotency(effectType) / defender.GetCombatResistance(effectType);
 	}
 
-	//TODO include ability power in this
-	protected float GetPotency(UnitLogic attacker, UnitLogic defender, bool isCritical)
+	// relative comparason between units for an combat
+	protected float GetMatchUp(UnitLogic attacker, UnitLogic defender, bool isCritical)
 	{
-		return isCritical ? GetCriticalPotency(attacker.data, defender.data) : GetCombatPotency(attacker.data, defender.data);
+		return isCritical ? GetCriticalMatchUp(attacker, defender) : GetCombatMatchUp(attacker, defender);
 	}
 }

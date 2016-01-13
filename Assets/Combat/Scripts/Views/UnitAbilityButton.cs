@@ -26,7 +26,7 @@ public class UnitAbilityButton : MonoBehaviour
 		m_ability = ability;
 
 		//init
-		AbilityName.text = m_ability.data.AbilityName;
+		//AbilityName.text = m_ability.AbilityName; TODO get this from view data
 		AbilityButton.onClick.AddListener(OnClick);
 	}
 

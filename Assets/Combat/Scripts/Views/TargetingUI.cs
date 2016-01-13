@@ -30,7 +30,7 @@ public class TargetingUI : MonoBehaviour
 	IEnumerator WaitHandleUnitSelected(UnitLogic arg)
 	{
 		// the user has selected a target, so declare that they have used an ability
-		yield return new Routine(m_logic.GetFactionLeader(m_caster.data.Faction).WaitUseUnitAbility(m_caster, m_ability, arg));
+		yield return new Routine(m_logic.GetFactionLeader(m_caster.Faction).WaitUseUnitAbility(m_caster, m_ability, arg));
 	}
 
 	// call this to bring up the ui and select a target for an ability

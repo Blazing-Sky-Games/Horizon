@@ -1,14 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class CombatLogic
+public class CombatLogic : DataDrivenLogic<CombatLogicData>
 {
 	//supplyed in Editor
-	public CombatLogicData Scenario;
-
-	public CombatLogic(CombatLogicData data)
+	public CombatLogic(CombatLogicData data) : base(data)
 	{
-		Scenario = data;
+		m_turnOrder = new TurnOrder(Data);
+
+		//creat the actors that will be playing
+		//TODO better way to get actors
+		//TODO actually, get rid of the whole actor thing, and just ask units what they want to do, not "actors"
+		//m_factionLeaders[Faction.Player] = new Actor("player");
+		m_factionLeaders[Faction.Player] = new AIActor("AI", this, Faction.Player); // use ai for player for testing
+		m_factionLeaders[Faction.AI] = new AIActor("AI", this, Faction.AI);
+
+		CoroutineManager.Main.StartCoroutine(WaitCombatMain());
 	}
 
 	public TurnOrder TurnOrder
@@ -25,31 +32,14 @@ public class CombatLogic
 		return m_factionLeaders[faction];
 	}
 
-	public void Init()
-	{
-		// deep copy so we are not editing the original version
-		Scenario = Scenario.DeepCopy() as CombatLogicData;
-
-		m_turnOrder = new TurnOrder(Scenario);
-
-		//creat the actors that will be playing
-		//TODO better way to get actors
-		//TODO actually, get rid of the whole actor thing, and just ask units what they want to do, not "actors"
-		//m_factionLeaders[Faction.Player] = new Actor("player");
-		m_factionLeaders[Faction.Player] = new AIActor("AI", this, Faction.Player); // use ai for player for testing
-		m_factionLeaders[Faction.AI] = new AIActor("AI", this, Faction.AI);
-
-		CoroutineManager.Main.StartCoroutine(WaitCombatMain());
-	}
-
 	private IEnumerator WaitCombatMain()
 	{
-		LogManager.NewCombatLog();
-		LogManager.Log("begin combat", LogDestination.Combat);
+		//LogManager.NewCombatLog();
+		//LogManager.Log("begin combat", LogDestination.Screen);
 
 		while(true)
 		{
-			Actor FactionLeader = GetFactionLeader(m_turnOrder.ActiveUnit.data.Faction);
+			Actor FactionLeader = GetFactionLeader(m_turnOrder.ActiveUnit.Faction);
 
 			FactionLeader.ResetCanTakeAction();
 

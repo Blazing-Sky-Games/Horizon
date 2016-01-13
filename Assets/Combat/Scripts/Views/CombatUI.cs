@@ -17,7 +17,7 @@ public class CombatUI : MonoBehaviour
 	// pass this to ui elements that need it
 	public readonly Message<UnitLogic> UnitSelectedMessage = new Message<UnitLogic>();
 
-	private void Start()
+	private void Awake()
 	{
 		Logic = new CombatLogic(logicData);
 		CoroutineManager.Main.StartCoroutine(WaitUiMain());
@@ -33,8 +33,6 @@ public class CombatUI : MonoBehaviour
 	// that should be the only class with static members in the project, and it needs to be set up here
 	private void Init()
 	{
-		//logic first
-		Logic.Init();
 		// the hotbar needs the turn order
 		HotbarInterface.Init(Logic.TurnOrder);
 		//the targeting infterface needs the selection channel and logic
@@ -47,7 +45,7 @@ public class CombatUI : MonoBehaviour
 
 	IEnumerator WaitHandleCombatOver(bool win)
 	{
-		LogManager.Log(win ? "win" : "loss", LogDestination.Combat);
+		//LogManager.Log(win ? "win" : "loss", LogDestination.Screen);
 		SceneManager.LoadScene(win ? 1 : 2);
 		yield break;
 	}
@@ -61,7 +59,7 @@ public class CombatUI : MonoBehaviour
 	IEnumerator WaitHandleAbilitySelected(UnitAbilityLogic arg)
 	{
 		//yuk TODO clean up this logic
-		if(HotbarInterface.SelectedUnit == Logic.TurnOrder.ActiveUnit && Logic.TurnOrder.ActiveUnit.data.Faction == Faction.Player)
+		if(HotbarInterface.SelectedUnit == Logic.TurnOrder.ActiveUnit && Logic.TurnOrder.ActiveUnit.Faction == Faction.Player)
 		{
 			//bring up unit targeting diolouge and wait for it to close
 			yield return new Routine(TargetingInterface.WaitSelectTarget(Logic.TurnOrder.ActiveUnit, arg));
@@ -78,7 +76,7 @@ public class CombatUI : MonoBehaviour
 			while((UnitSelectedMessage.Idle && 
 			      HotbarInterface.UnitAbilitySelectedMessage.Idle && 
 			      HotbarInterface.PassTurnMessageChannel.Idle) ||
-				  Logic.TurnOrder.ActiveUnit.data.Faction != Faction.Player)
+				  Logic.TurnOrder.ActiveUnit.Faction != Faction.Player)
 			{
 				yield return 0;
 			}
@@ -88,7 +86,7 @@ public class CombatUI : MonoBehaviour
 			if(HotbarInterface.PassTurnMessageChannel.MessagePending)
 			{
 				// the user clikced the pass turn button, so declare that the chose to pass the turn
-				yield return new Routine(HotbarInterface.PassTurnMessageChannel.WaitHandleMessage(Logic.GetFactionLeader(Logic.TurnOrder.ActiveUnit.data.Faction).WaitPassTurn));
+				yield return new Routine(HotbarInterface.PassTurnMessageChannel.WaitHandleMessage(Logic.GetFactionLeader(Logic.TurnOrder.ActiveUnit.Faction).WaitPassTurn));
 			}
 			//a unit was selected hmm TODO should this be moved to hotbar ui
 			else if(UnitSelectedMessage.MessagePending)

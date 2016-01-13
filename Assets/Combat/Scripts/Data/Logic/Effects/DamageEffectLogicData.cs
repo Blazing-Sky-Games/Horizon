@@ -16,12 +16,12 @@ public class DamageEffectLogicData : AbilityEffectLogicData
 		float attackRoll = Random.Range(DamageLR, 1f);
 
 		int dmg = 
-			(int)(GetPotency(Attacker, Defender, IsCritical) 
+			(int)(GetMatchUp(Attacker, Defender, IsCritical) 
 			* DamageM 
 			* attackRoll  
 			+ DamageB);
 
-		yield return new Routine(Defender.WaitTakeDamage(dmg, IsCritical));
+		yield return new Routine(Defender.Health.WaitHurt(dmg));
 	}
 
 }

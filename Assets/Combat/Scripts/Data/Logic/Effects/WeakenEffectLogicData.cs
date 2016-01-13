@@ -21,7 +21,7 @@ public class WeakenEffectLogicData : AbilityEffectLogicData
 	{
 		yield return new Routine(defender.WaitSetStatus(UnitStatus.Weakened, true));
 
-		float Potency = GetPotency(attacker, defender, isCritical);
+		float Potency = GetMatchUp(attacker, defender, isCritical);
 
 		int drop = DropM * (int)Potency;
 		int duration = DurationB + (int)Potency * DurationM;

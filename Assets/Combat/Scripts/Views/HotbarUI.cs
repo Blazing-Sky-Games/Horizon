@@ -33,7 +33,7 @@ public class HotbarUI : MonoBehaviour
 	IEnumerator WaitHandleTurnOrderAdvance()
 	{
 		//write to combat log
-		LogManager.Log("advance turn order", LogDestination.Combat);
+		//LogManager.Log("advance turn order", LogDestination.Screen); TODO
 		SelectedUnit = m_turnOrder.ActiveUnit;
 		yield break;
 	}
@@ -80,16 +80,16 @@ public class HotbarUI : MonoBehaviour
 	{
 		//update stat display
 		string newStatDisplayString = "";
-		newStatDisplayString += newUnit.data.UnitName + "\n";
+		//newStatDisplayString += newUnit.data.UnitName + "\n"; TODO get this from view information
 		newStatDisplayString += "Stats \n";
-		newStatDisplayString += "Owner : " + newUnit.data.Faction + "\n";
-		newStatDisplayString += "HP : " + newUnit.data.Health + " / " + newUnit.data.MaxHealth + "\n";
-		newStatDisplayString += "Strength : " + newUnit.data.Strength + "\n";
-		newStatDisplayString += "Intelligence : " + newUnit.data.Intelligence + "\n";
-		newStatDisplayString += "Stability : " + newUnit.data.Stability + "\n";
-		newStatDisplayString += "Insight : " + newUnit.data.Insight + "\n";
-		newStatDisplayString += "Skill : " + newUnit.data.Skill + "\n";
-		newStatDisplayString += "Vitality : " + newUnit.data.Vitality + "\n";
+		newStatDisplayString += "Owner : " + newUnit.Faction + "\n";
+		newStatDisplayString += "HP : " + newUnit.Health.Current + " / " + newUnit.Health.Max + "\n";
+		newStatDisplayString += "Strength : " + newUnit.Strength.Get() + "\n";
+		newStatDisplayString += "Intelligence : " + newUnit.Intelligence.Get() + "\n";
+		newStatDisplayString += "Stability : " + newUnit.Stability.Get() + "\n";
+		newStatDisplayString += "Insight : " + newUnit.Insight.Get() + "\n";
+		newStatDisplayString += "Skill : " + newUnit.Skill.Get() + "\n";
+		newStatDisplayString += "Vitality : " + newUnit.Vitality.Get() + "\n";
 		StatsDisplay.text = newStatDisplayString;
 
 
@@ -102,9 +102,9 @@ public class HotbarUI : MonoBehaviour
 		m_abilityButtons.Clear();
 
 		// re create the ability Buttons
-		for(int i = 0; i < newUnit.abilities.Count; i++)
+		for(int i = 0; i < newUnit.Abilities.Count; i++)
 		{
-			m_abilityButtons.Add(instatiateAbilityButton(newUnit.abilities[i]));
+			m_abilityButtons.Add(instatiateAbilityButton(newUnit.Abilities[i]));
 		}
 
 		// set the abilities on the ability buttons

@@ -3,18 +3,6 @@ using System.Diagnostics;
 
 public static class CallerInformation
 {
-	public static String ReportError(string message)
-	{
-		// Get the frame one step up the call tree
-		StackFrame CallStack = new StackFrame(1, true);
-		
-		// These will now show the file and line number of the ReportError
-		string SourceFile = CallStack.GetFileName();
-		int SourceLine = CallStack.GetFileLineNumber();
-		
-		return "Error: " + message + "\nFile: " + SourceFile + "\nLine: " + SourceLine.ToString();
-	}
-	
 	public static int LineNumber
 	{
 		get

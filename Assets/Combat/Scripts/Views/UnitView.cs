@@ -20,7 +20,8 @@ public class UnitView : MonoBehaviour
 		m_turnOrder = turnOrder;
 
 		// initilization
-		DisplayText.text = m_unit.data.UnitName + " HP : " + m_unit.data.Health + " / " + m_unit.data.MaxHealth;
+		//DisplayText.text = m_unit.data.UnitName + " HP : " + m_unit.Health + " / " + m_unit.data.MaxHealth;
+		DisplayText.text = " HP : " + m_unit.Health.Current + " / " + m_unit.Health.Max;
 		UnitSelectButton.onClick.AddListener(OnClickUnitSelect);
 
 		// start main
@@ -33,12 +34,13 @@ public class UnitView : MonoBehaviour
 		CoroutineManager.Main.StartCoroutine(m_unitSelectedMessageChannel.WaitSend(m_unit));
 	}
 
-	IEnumerator WaitHandleHurt(int arg)
+	IEnumerator WaitHandleHurt()
 	{
 		//write to combat log
-		LogManager.Log(m_unit.data.UnitName + " took " + arg + " points of damage", LogDestination.Combat);
+		//LogManager.Log(m_unit.data.UnitName + " took " + arg + " points of damage", LogDestination.Screen); TODO
 		// update the health display
-		DisplayText.text = m_unit.data.UnitName + " HP : " + m_unit.data.Health + " / " + m_unit.data.MaxHealth;
+		//DisplayText.text = m_unit.data.UnitName + " HP : " + m_unit.data.Health + " / " + m_unit.data.MaxHealth;
+		DisplayText.text = " HP : " + m_unit.Health.Current + " / " + m_unit.Health.Max;
 		yield break;
 	}
 
@@ -50,7 +52,7 @@ public class UnitView : MonoBehaviour
 			//TODO fix bug related to this
 			UnitSelectButton.gameObject.SetActive(false);
 			//write to combat log
-			LogManager.Log(m_unit.data.UnitName + " died", LogDestination.Combat);
+			//LogManager.Log(m_unit.data.UnitName + " died", LogDestination.Screen); TODO
 		}
 
 		yield break;
@@ -58,7 +60,8 @@ public class UnitView : MonoBehaviour
 
 	IEnumerator WaitHandleAbilityUsed(UnitLogic Caster, UnitAbilityLogic Ability, UnitLogic Target)
 	{
-		LogManager.Log(Caster.data.UnitName + " used " + Ability.data.AbilityName + " on " + Target.data.UnitName, LogDestination.Combat);
+		//TODO
+		//LogManager.Log(Caster.data.UnitName + " used " + Ability.data.AbilityName + " on " + Target.data.UnitName, LogDestination.Screen);
 		yield break;
 	}
 
@@ -66,11 +69,13 @@ public class UnitView : MonoBehaviour
 	{
 		if(m_unit.GetStatus(arg))
 		{
-			LogManager.Log(m_unit.data.UnitName + " was " + arg.ToString(), LogDestination.Combat);
+			//TODO
+			//LogManager.Log(m_unit.data.UnitName + " was " + arg.ToString(), LogDestination.Screen);
 		}
 		else
 		{
-			LogManager.Log("status \"" + arg.ToString() + "\" ended for " + m_unit.data.UnitName, LogDestination.Combat);
+			//TODO
+			//LogManager.Log("status \"" + arg.ToString() + "\" ended for " + m_unit.data.UnitName, LogDestination.Screen);
 		}
 
 		yield break;
@@ -82,7 +87,7 @@ public class UnitView : MonoBehaviour
 		while(true)
 		{
 			//wait for a message we care about
-			while(m_unit.HurtMessage.Idle &&
+			while(m_unit.Health.Hurt.Idle &&
 			      m_unit.AbilityUsedMessage.Idle &&
 			      m_turnOrder.UnitKilledMessage.Idle &&
 			      m_unit.StatusChangedMessage.Idle)
@@ -91,9 +96,9 @@ public class UnitView : MonoBehaviour
 			}
 
 			//the unit was hurt
-			if(m_unit.HurtMessage.MessagePending)
+			if(m_unit.Health.Hurt.MessagePending)
 			{
-				yield return new Routine(m_unit.HurtMessage.WaitHandleMessage(WaitHandleHurt));
+				yield return new Routine(m_unit.Health.Hurt.WaitHandleMessage(WaitHandleHurt));
 			}
 			else if(m_unit.StatusChangedMessage.MessagePending)
 			{

@@ -8,7 +8,7 @@ using System.IO;
 public enum LogDestination
 {
 	Console = 1,
-	Combat = 2
+	Screen = 2
 }
 
 public class LogManager
@@ -57,7 +57,7 @@ public class LogManager
 			Debug.Log(message);
 		}
 
-		if((destination & LogDestination.Combat) == LogDestination.Combat)
+		if((destination & LogDestination.Screen) == LogDestination.Screen)
 		{
 			WriteToCombatLog(message);
 

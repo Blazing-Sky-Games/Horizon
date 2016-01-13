@@ -17,7 +17,7 @@ class StunEffectLogicData : AbilityEffectLogicData
 	{
 		yield return new Routine(defender.WaitSetStatus(UnitStatus.Stunned, true));
 
-		float Potency = GetPotency(attacker, defender, isCritical);
+		float Potency = GetMatchUp(attacker, defender, isCritical);
 		int duration = DurationB + (int)((Potency - 1) * DurationM);
 
 		while(duration > 0)

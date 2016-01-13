@@ -9,7 +9,7 @@ public class UnitLogicData : Data
 	public Faction Faction;
 	public int MaxHealth;
 	public int Health;
-	public string UnitName;
+	//public string UnitName; TODO
 	public List<UnitAbilityLogicData> Abilities;
 	public int Strength; // phys dmg /crit
 	public int Intelligence; // tech dmg /crit
