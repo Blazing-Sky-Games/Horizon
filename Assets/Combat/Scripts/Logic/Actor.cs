@@ -22,7 +22,13 @@ public class Actor
 
 	public virtual IEnumerator WaitDecideAction()
 	{
-		yield break;
+		bool oldPassedTurn = m_passedTurn;
+		bool oldUsedAction = m_usedAction;
+
+		while(oldPassedTurn == m_passedTurn && oldUsedAction == m_usedAction)
+		{
+			yield return 0;
+		}
 	}
 
 	public IEnumerator WaitPassTurn()

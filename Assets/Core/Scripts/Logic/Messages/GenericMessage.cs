@@ -38,27 +38,6 @@ public class Message<TArg0>
 		convertedHandlers.Remove(handler);
 	}
 	
-	public IEnumerator WaitHandleMessage(Handler handler)
-	{
-		yield return new Routine(m_innerMessage.WaitHandleMessage(ConvertHandler(handler)));
-	}
-	
-	public bool Idle
-	{
-		get
-		{
-			return m_innerMessage.Idle;
-		}
-	}
-	
-	public bool MessagePending
-	{
-		get
-		{
-			return m_innerMessage.MessagePending;
-		}
-	}
-	
 	private Func<IEnumerator> ConvertHandler(Handler handler)
 	{
 		return () => handler(m_arg0);
@@ -98,27 +77,6 @@ public class Message<TArg0, TArg1>
 
 		m_innerMessage.AddHandler(convertedHandlers[handler]);
 		convertedHandlers.Remove(handler);
-	}
-	
-	public IEnumerator WaitHandleMessage(Handler handler)
-	{
-		yield return new Routine(m_innerMessage.WaitHandleMessage(ConvertHandler(handler)));
-	}
-	
-	public bool Idle
-	{
-		get
-		{
-			return m_innerMessage.Idle;
-		}
-	}
-	
-	public bool MessagePending
-	{
-		get
-		{
-			return m_innerMessage.MessagePending;
-		}
 	}
 	
 	private Func<IEnumerator> ConvertHandler(Handler handler)
@@ -162,27 +120,6 @@ public class Message<TArg0, TArg1, TArg2>
 
 		m_innerMessage.AddHandler(convertedHandlers[handler]);
 		convertedHandlers.Remove(handler);
-	}
-	
-	public IEnumerator WaitHandleMessage(Handler handler)
-	{
-		yield return new Routine(m_innerMessage.WaitHandleMessage(ConvertHandler(handler)));
-	}
-	
-	public bool Idle
-	{
-		get
-		{
-			return m_innerMessage.Idle;
-		}
-	}
-	
-	public bool MessagePending
-	{
-		get
-		{
-			return m_innerMessage.MessagePending;
-		}
 	}
 	
 	private Func<IEnumerator> ConvertHandler(Handler handler)
@@ -229,28 +166,7 @@ public class Message<TArg0, TArg1, TArg2, TArg3>
 		m_innerMessage.AddHandler(convertedHandlers[handler]);
 		convertedHandlers.Remove(handler);
 	}
-	
-	public IEnumerator WaitHandleMessage(Handler handler)
-	{
-		yield return new Routine(m_innerMessage.WaitHandleMessage(ConvertHandler(handler)));
-	}
-	
-	public bool Idle
-	{
-		get
-		{
-			return m_innerMessage.Idle;
-		}
-	}
-	
-	public bool MessagePending
-	{
-		get
-		{
-			return m_innerMessage.MessagePending;
-		}
-	}
-	
+
 	private Func<IEnumerator> ConvertHandler(Handler handler)
 	{
 		return () => handler(m_arg0, m_arg1, m_arg2, m_arg3);
@@ -297,28 +213,7 @@ public class Message<TArg0, TArg1, TArg2, TArg3, TArg4>
 		m_innerMessage.AddHandler(convertedHandlers[handler]);
 		convertedHandlers.Remove(handler);
 	}
-	
-	public IEnumerator WaitHandleMessage(Handler handler)
-	{
-		yield return new Routine(m_innerMessage.WaitHandleMessage(ConvertHandler(handler)));
-	}
-	
-	public bool Idle
-	{
-		get
-		{
-			return m_innerMessage.Idle;
-		}
-	}
-	
-	public bool MessagePending
-	{
-		get
-		{
-			return m_innerMessage.MessagePending;
-		}
-	}
-	
+
 	private Func<IEnumerator> ConvertHandler(Handler handler)
 	{
 		return () => handler(m_arg0, m_arg1, m_arg2, m_arg3, m_arg4);

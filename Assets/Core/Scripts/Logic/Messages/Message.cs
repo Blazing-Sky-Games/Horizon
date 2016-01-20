@@ -16,12 +16,14 @@ public class Message
 	//TODO return a coroutine and call it Send
 	public IEnumerator WaitSend()
 	{
-		if(!Idle)
+		if(!m_idle)
 		{
 			throw new InvalidOperationException("send can only be called when a previose call to send has finised");
 			//TODO should this be replaced with a qeue based system
 			//what about recursive message calls (where fireing a message caused that message to fire again, like a recursive function call...would that ever happen)...hmmm
 		}
+
+		m_idle = false;
 		
 		List<Coroutine> runningHandlers = new List<Coroutine>();
 		
@@ -29,22 +31,12 @@ public class Message
 		{
 			runningHandlers.Add(Horizon.Core.Logic.Globals.Coroutines.StartCoroutine(handler()));
 		}
-		
-		m_idle = false;
+
 		foreach(Coroutine runningHandler in runningHandlers)
 		{
 			yield return runningHandler;
 		}
-		
-		// give a frame for late handlers to show up
-		// TODO hmm... should we even alow late handlers
-		yield return 0;
 
-		while(m_lateHandlers > 0)
-		{
-			yield return 0;
-		}
-		
 		m_idle = true;
 	}
 	
@@ -58,42 +50,6 @@ public class Message
 		m_handlers.Remove(handler);
 	}
 
-	public IEnumerator WaitHandleMessage(Func<IEnumerator> handler)
-	{
-		if(Idle)
-		{
-			throw new InvalidOperationException("Can not handle an idle message");
-		}
-
-		IEnumerator WaitHandler = handler();
-
-		m_lateHandlers++;
-		yield return new Routine(WaitHandler);
-		m_lateHandlers--;
-		
-		while(MessagePending)
-		{
-			yield return 0;
-		}
-	}
-	
-	public bool Idle
-	{
-		get
-		{
-			return m_idle;
-		}
-	}
-	
-	public bool MessagePending
-	{
-		get
-		{
-			return !Idle;
-		}
-	}
-	
 	private bool m_idle = true;
-	private int m_lateHandlers = 0;
 	private readonly List<Func<IEnumerator>> m_handlers = new List<Func<IEnumerator>>();
 }
