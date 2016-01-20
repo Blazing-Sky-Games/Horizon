@@ -1,30 +1,41 @@
 ﻿using System;
 using System.Collections;
 
-public class Statistic<DataType>
+public class Statistic
 {
 	public readonly Message Changed = new Message();
 
-	public DataType Get()
+	public int Value
 	{
-		return m_value;
+		get{ return m_value + m_modifications; }
 	}
 
-	public IEnumerator WaitSet(DataType value)
+	//TODO creat a "modification" class, to keep better track of the idividual effects changing a stat?
+	public IEnumerator WaitModify(int value)
 	{
-		DataType old = m_value;
+		int old = m_modifications;
+		m_modifications = value;
+
+		if(!old.Equals(value))
+			yield return new Routine(Changed.WaitSend());
+	}
+
+	public IEnumerator WaitSet(int value)
+	{
+		int old = m_value;
 		m_value = value;
 
 		if(!old.Equals(value))
 			yield return new Routine(Changed.WaitSend());
 	}
 
-	public Statistic(DataType value)
+	public Statistic(int value)
 	{
 		m_value = value;
 	}
 
-	private DataType m_value;
+	private int m_value;
+	private int m_modifications;
 }
 
 

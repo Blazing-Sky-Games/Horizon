@@ -27,7 +27,7 @@ public class Message
 		
 		foreach(Func<IEnumerator> handler in m_handlers)
 		{
-			runningHandlers.Add(CoroutineManager.Main.StartCoroutine(handler()));
+			runningHandlers.Add(Horizon.Core.Logic.Globals.Coroutines.StartCoroutine(handler()));
 		}
 		
 		m_idle = false;
@@ -57,8 +57,7 @@ public class Message
 	{
 		m_handlers.Remove(handler);
 	}
-	
-	//TODO return a coroutine and call it Handle
+
 	public IEnumerator WaitHandleMessage(Func<IEnumerator> handler)
 	{
 		if(Idle)

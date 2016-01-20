@@ -29,17 +29,17 @@ class PoisonEffectLogicData : AbilityEffectLogicData
 		//how many turns does the poison last
 		int duration = (int)(DurationB + DurationM * potency);
 
-		while(duration > 0 && !defender.Dead)
-		{
+		//while(duration > 0 && !defender.Dead)
+		//{
 			yield return new WaitForNextTurn();
 			duration--;
 
 			//TODO handle this better
-			if(!defender.Dead)
-			{
+			//if(!defender.Dead)
+			//{
 				yield return new Routine(defender.Health.WaitHurt((int)dmg));
-			}
-		}
+			//}
+		//}
 
 		yield return new Routine(defender.WaitSetStatus(UnitStatus.Poisoned, false));
 	}

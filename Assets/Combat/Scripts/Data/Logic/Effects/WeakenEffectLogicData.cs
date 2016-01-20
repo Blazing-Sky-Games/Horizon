@@ -26,8 +26,8 @@ public class WeakenEffectLogicData : AbilityEffectLogicData
 		int drop = DropM * (int)Potency;
 		int duration = DurationB + (int)Potency * DurationM;
 
-		int oldval = defender.GetStatistic(StatToWeaken);
-		defender.SetStatistic(StatToWeaken, oldval - drop);
+		Statistic stat = defender.GetStatistic(StatToWeaken);
+		yield return new Routine(stat.WaitModify(-drop));
 
 		while(duration > 0)
 		{
@@ -35,8 +35,11 @@ public class WeakenEffectLogicData : AbilityEffectLogicData
 			duration--;
 		}
 
-		defender.SetStatistic(StatToWeaken, oldval);
-		yield return new Routine(defender.WaitSetStatus(UnitStatus.Weakened, false));
+		Coroutine removeModifyerRoutine = Horizon.Core.Logic.Globals.Coroutines.StartCoroutine(stat.WaitModify(drop));
+		Coroutine removeStatusRoutine = Horizon.Core.Logic.Globals.Coroutines.StartCoroutine(defender.WaitSetStatus(UnitStatus.Weakened, false));
+
+		yield return removeModifyerRoutine;
+		yield return removeStatusRoutine;
 	}
 }
 

@@ -6,10 +6,11 @@ using Random = UnityEngine.Random;
 [DataCatagory("Combat/Logic")]
 public class UnitAbilityLogicData : Data
 {
-	//suppled in editor
-	//public string AbilityName; TODO
-	public float CritChanceBonus = 1;
+	[UnityEngine.Tooltip("value from 0 to 1 that adds to crit liclyhood")]
+	public float CritChanceBonus = 0;
+	[UnityEngine.Tooltip("these effects always happen")]
 	public List<AbilityEffectLogicData> CombatEffects;
+	[UnityEngine.Tooltip("these effects only happen on a succsesfull crit")]
 	public List<AbilityEffectLogicData> CriticalEffects;
 }
 

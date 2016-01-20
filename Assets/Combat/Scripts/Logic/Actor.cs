@@ -25,19 +25,6 @@ public class Actor
 		yield break;
 	}
 
-	public string ActorName
-	{
-		get
-		{
-			return m_actorName;
-		}
-	}
-
-	public Actor(string name)
-	{
-		m_actorName = name;
-	}
-
 	public IEnumerator WaitPassTurn()
 	{
 		m_passedTurn = true;
@@ -50,7 +37,6 @@ public class Actor
 		yield return new Routine(ActionDecidedMessage.WaitSend(new UnitAbilityUsageAction(caster, ability, target)));
 	}
 
-	private readonly string m_actorName;
 	private bool m_passedTurn = false;
 	private bool m_usedAction = false;
 }

@@ -29,6 +29,13 @@ public class DataCatagory : Attribute
 
 public class Data : ScriptableObject
 {
+	public static EmptyData Empty;
+
+	static Data()
+	{
+		Empty = ScriptableObject.CreateInstance<EmptyData>();
+	}
+
 	public ScriptableObject DeepCopy ()
 	{
 		Type dataType = GetType();

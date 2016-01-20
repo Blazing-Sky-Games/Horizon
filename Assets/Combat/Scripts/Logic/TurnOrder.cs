@@ -24,6 +24,7 @@ public class TurnOrder : IEnumerable<UnitLogic>
 		}
 	}
 
+	//TODO store lambdas in a dictionary so they can be removed
 	private Func<IEnumerator> GetKillUnitHandler(UnitLogic unit)
 	{
 		return () => WaitKillUnit(unit);

@@ -33,13 +33,12 @@ public class UnitAbilityButton : MonoBehaviour
 	// when the button is clicked, send a Ability selected message
 	void OnClick()
 	{
-		CoroutineManager.Main.StartCoroutine(WaitHandleOnClick());
+		Horizon.Core.Logic.Globals.Coroutines.StartCoroutine(WaitHandleOnClick());
 	}
 
 	IEnumerator WaitHandleOnClick()
 	{
-		// TODO fix this weird thing. should you always have to wait for a message to be processed?
-		// TODO lol i dont understand that old todo above this one
+		// TODO disable all ability buttons
 		AbilityButton.enabled = false;
 		yield return new Routine(m_unitAbilitySelectedMessageChannel.WaitSend(m_ability));
 		AbilityButton.enabled = true;

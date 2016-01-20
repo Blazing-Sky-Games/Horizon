@@ -3,54 +3,54 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-public class UnitLogic : DataDrivenLogic<UnitLogicData>
+public class UnitLogic : ViewLogic<UnitLogicData>
 {
 	//this unit has been hurt
 	public readonly Message<UnitLogic, UnitAbilityLogic, UnitLogic> AbilityUsedMessage = new Message<UnitLogic, UnitAbilityLogic, UnitLogic>();
 	public readonly Message<UnitStatus> StatusChangedMessage = new Message<UnitStatus>();
 	public List<UnitAbilityLogic> Abilities = new List<UnitAbilityLogic>();
 
-	public readonly Statistic<int> Strength;
-	public readonly Statistic<int> Intelligence;
-	public readonly Statistic<int> Stability;
-	public readonly Statistic<int> Insight;
-	public readonly Statistic<int> Skill;
-	public readonly Statistic<int> Vitality;
+	public readonly Statistic Strength;
+	public readonly Statistic Intelligence;
+	public readonly Statistic Stability;
+	public readonly Statistic Insight;
+	public readonly Statistic Skill;
+	public readonly Statistic Vitality;
 
 	public readonly HitPoints Health;
+
+	public readonly Faction Faction;
 
 	public UnitLogic(UnitLogicData Data) 
 		: base(Data)
 	{
 		Abilities = Data.Abilities.Select(abilityData => new UnitAbilityLogic(abilityData)).ToList();
-		Strength = new Statistic<int>(Data.Strength);
-		Intelligence = new Statistic<int>(Data.Intelligence);
-		Stability = new Statistic<int>(Data.Stability);
-		Insight = new Statistic<int>(Data.Insight);
-		Skill = new Statistic<int>(Data.Skill);
-		Vitality = new Statistic<int>(Data.Vitality);
+
+		Strength = new Statistic(Data.Strength);
+		Intelligence = new Statistic(Data.Intelligence);
+		Stability = new Statistic(Data.Stability);
+		Insight = new Statistic(Data.Insight);
+		Skill = new Statistic(Data.Skill);
+		Vitality = new Statistic(Data.Vitality);
+
+		Faction = Data.Faction;
 
 		Health = new HitPoints(Data.Health, Data.MaxHealth);
 	}
 
-	public Faction Faction
-	{
-		get{ return Data.Faction; }
-	}
-
 	public int GetCombatPotency (EffectType effectType)
 	{
-		return effectType == EffectType.Physical ? Data.Strength : Data.Intelligence;
+		return effectType == EffectType.Physical ? Strength.Value : Intelligence.Value;
 	}
 
 	public int GetCombatResistance(EffectType effectType)
 	{
-		return effectType == EffectType.Physical ? Data.Stability : Data.Insight;
+		return effectType == EffectType.Physical ? Stability.Value : Insight.Value;
 	}
 
 	public int GetCriticalPotency (EffectType effectType)
 	{
-		return Data.Skill;
+		return Skill.Value;
 	}
 
 	public int GetCriticalResistance (EffectType effectType)
@@ -58,64 +58,37 @@ public class UnitLogic : DataDrivenLogic<UnitLogicData>
 		return GetCombatResistance(effectType);
 	}
 
-	public float GetCriticalChance()
+	//based on skill, int, str, 
+	public float GetCriticalAccuracy()
 	{
-		//TODO impliment this
-		return 0;
+		return Skill.Value + Intelligence.Value / 2 + Strength.Value / 4;
 	}
 
-	public float GetCriticalAvoidanceChance()
+	// vitality, stability, insight
+	public float GetCriticalAvoidance()
 	{
-		//TODO impliment this
-		return 0;
+		return Vitality.Value + Stability.Value / 2 + Insight.Value / 4;
 	}
 
-	//TODO get rid of this
-	public int GetStatistic(UnitStatatistic stat)
+	//TODO CHANGE this to return a statistic instead of just an int
+	public Statistic GetStatistic(UnitStatatistic stat)
 	{
 		switch(stat)
 		{
 			case(UnitStatatistic.Insight):
-				return Data.Insight;
+				return Insight;
 			case(UnitStatatistic.Intelligence):
-				return Data.Intelligence;
+				return Intelligence;
 			case(UnitStatatistic.Skill):
-				return Data.Skill;
+				return Skill;
 			case(UnitStatatistic.Stability):
-				return Data.Stability;
+				return Stability;
 			case(UnitStatatistic.Strength):
-				return Data.Strength;
+				return Strength;
 			case(UnitStatatistic.Vitality):
-				return Data.Vitality;
+				return Vitality;
 			default:
-				return 0;
-		}
-	}
-
-	//TODO hmm...should this be WaitSetStatistic and send a message
-	//TODO get rid of this
-	public void SetStatistic(UnitStatatistic stat, int value)
-	{
-		switch(stat)
-		{
-			case(UnitStatatistic.Insight):
-				Data.Insight = value;
-				break;
-			case(UnitStatatistic.Intelligence):
-				Data.Intelligence = value;
-				break;
-			case(UnitStatatistic.Skill):
-				Data.Skill = value;
-				break;
-			case(UnitStatatistic.Stability):
-				Data.Stability = value;
-				break;
-			case(UnitStatatistic.Strength):
-				Data.Strength = value;
-				break;
-			case(UnitStatatistic.Vitality):
-				Data.Vitality = value;
-				break;
+				return null;
 		}
 	}
 
@@ -128,14 +101,6 @@ public class UnitLogic : DataDrivenLogic<UnitLogicData>
 		}
 	}
 
-	public bool Dead
-	{
-		get
-		{
-			return Health.Current == 0;
-		}
-	}
-
 	public IEnumerator WaitSetStatus(UnitStatus status, bool active)
 	{
 		m_status[status] = active;
@@ -145,6 +110,11 @@ public class UnitLogic : DataDrivenLogic<UnitLogicData>
 	public bool GetStatus(UnitStatus status)
 	{
 		return m_status.ContainsKey(status) && m_status[status];
+	}
+
+	public override void Destroy ()
+	{
+		//nothing
 	}
 
 	private Dictionary<UnitStatus,bool> m_status = new Dictionary<UnitStatus, bool>();

@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 // displayes a unit in combat
-public class UnitView : MonoBehaviour
+public class UnitView : View<UnitLogic,UnitLogicData,EmptyData>
 {
 	// where the name and health are displayed
 	// must be a child of the button
@@ -11,42 +11,42 @@ public class UnitView : MonoBehaviour
 	//click on it to select the unit
 	public Button UnitSelectButton;
 	
-	// By convention, Init must be called on UI elements to supply them with dependacies
-	public void Init(UnitLogic unit, Message<UnitLogic> unitSelectedMessageChannel, TurnOrder turnOrder)
+	protected override IEnumerator MainRoutine ()
 	{
-		//set backing fields
-		m_unit = unit;
-		m_unitSelectedMessageChannel = unitSelectedMessageChannel;
-		m_turnOrder = turnOrder;
+		throw new System.NotImplementedException();
+	}
 
+	// By convention, Init must be called on UI elements to supply them with dependacies
+	public void Init()
+	{
 		// initilization
 		//DisplayText.text = m_unit.data.UnitName + " HP : " + m_unit.Health + " / " + m_unit.data.MaxHealth;
-		DisplayText.text = " HP : " + m_unit.Health.Current + " / " + m_unit.Health.Max;
+		DisplayText.text = " HP : " + Logic.Health.Current + " / " + Logic.Health.Max;
 		UnitSelectButton.onClick.AddListener(OnClickUnitSelect);
 
 		// start main
-		CoroutineManager.Main.StartCoroutine(WaitUnitViewMain());
+		Horizon.Core.Logic.Globals.Coroutines.StartCoroutine(WaitUnitViewMain());
 	}
 
 	// when the user clicks on the unit, send a unit selected message
 	private void OnClickUnitSelect()
 	{
-		CoroutineManager.Main.StartCoroutine(m_unitSelectedMessageChannel.WaitSend(m_unit));
+		Horizon.Core.Logic.Globals.Coroutines.StartCoroutine(Horizon.Combat.Views.Globals.UnitSelected.WaitSend(Logic));
 	}
 
 	IEnumerator WaitHandleHurt()
 	{
 		//write to combat log
-		//LogManager.Log(m_unit.data.UnitName + " took " + arg + " points of damage", LogDestination.Screen); TODO
+		//LogManager.Log(m_unit.data.UnitName + " took " + arg + " points of damage", LogDestination.Screen); todo name from viuew data
 		// update the health display
 		//DisplayText.text = m_unit.data.UnitName + " HP : " + m_unit.data.Health + " / " + m_unit.data.MaxHealth;
-		DisplayText.text = " HP : " + m_unit.Health.Current + " / " + m_unit.Health.Max;
+		DisplayText.text = " HP : " + Logic.Health.Current + " / " + Logic.Health.Max;
 		yield break;
 	}
 
 	IEnumerator WaitHandleUnitKilled(UnitLogic unitKilled)
 	{
-		if(unitKilled == m_unit)
+		if(unitKilled == Logic)
 		{
 			//dont show the unit
 			//TODO fix bug related to this
@@ -67,7 +67,7 @@ public class UnitView : MonoBehaviour
 
 	IEnumerator WaitHandleStatusChange(UnitStatus arg)
 	{
-		if(m_unit.GetStatus(arg))
+		if(Logic.GetStatus(arg))
 		{
 			//TODO
 			//LogManager.Log(m_unit.data.UnitName + " was " + arg.ToString(), LogDestination.Screen);
@@ -87,41 +87,33 @@ public class UnitView : MonoBehaviour
 		while(true)
 		{
 			//wait for a message we care about
-			while(m_unit.Health.Hurt.Idle &&
-			      m_unit.AbilityUsedMessage.Idle &&
-			      m_turnOrder.UnitKilledMessage.Idle &&
-			      m_unit.StatusChangedMessage.Idle)
+			while(Logic.Health.Hurt.Idle &&
+			      Logic.AbilityUsedMessage.Idle &&
+			      Horizon.Combat.Logic.Globals.UnitKilled.Idle &&
+			      Logic.StatusChangedMessage.Idle)
 			{
 				yield return 0;
 			}
 
 			//the unit was hurt
-			if(m_unit.Health.Hurt.MessagePending)
+			if(Logic.Health.Hurt.MessagePending)
 			{
-				yield return new Routine(m_unit.Health.Hurt.WaitHandleMessage(WaitHandleHurt));
+				yield return new Routine(Logic.Health.Hurt.WaitHandleMessage(WaitHandleHurt));
 			}
-			else if(m_unit.StatusChangedMessage.MessagePending)
+			else if(Logic.StatusChangedMessage.MessagePending)
 			{
-				yield return new Routine(m_unit.StatusChangedMessage.WaitHandleMessage(WaitHandleStatusChange));
+				yield return new Routine(Logic.StatusChangedMessage.WaitHandleMessage(WaitHandleStatusChange));
 			}
 			// the unit used an ability
-			else if(m_unit.AbilityUsedMessage.MessagePending)
+			else if(Logic.AbilityUsedMessage.MessagePending)
 			{
-				yield return new Routine(m_unit.AbilityUsedMessage.WaitHandleMessage(WaitHandleAbilityUsed));
+				yield return new Routine(Logic.AbilityUsedMessage.WaitHandleMessage(WaitHandleAbilityUsed));
 			}
 			// the unit was killed
-			else if(m_turnOrder.UnitKilledMessage.MessagePending)
+			else if(Horizon.Combat.Logic.Globals.UnitKilled.MessagePending)
 			{
-				yield return new Routine(m_turnOrder.UnitKilledMessage.WaitHandleMessage(WaitHandleUnitKilled));
+				yield return new Routine(Horizon.Combat.Logic.Globals.UnitKilled.WaitHandleMessage(WaitHandleUnitKilled));
 			}
 		}
 	}
-
-	// the unit this view is displaying
-	private UnitLogic m_unit;
-	// send a message to this channel when this unit is selected
-	private Message<UnitLogic> m_unitSelectedMessageChannel;
-	// use the turn order to check if a unit dies
-	// TODO fix it so we dont need this here
-	private TurnOrder m_turnOrder;
 }

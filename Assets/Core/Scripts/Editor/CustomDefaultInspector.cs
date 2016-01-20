@@ -46,7 +46,7 @@ public class CustomDefaultInspector : Editor {
 
 			FieldInfo field = targetType.GetField (prop.name);
 
-			Type baseType = baset ?? field.GetType ();
+			Type baseType = baset ?? field.FieldType;
 
 			Type currentType;
 			if (prop.objectReferenceValue == null) {
