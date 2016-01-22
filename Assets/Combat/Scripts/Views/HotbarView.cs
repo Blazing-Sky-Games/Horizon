@@ -19,35 +19,22 @@ public class HotbarView : View<UnitLogic,UnitLogicData,EmptyData>
 	protected override void Awake ()
 	{
 		base.Awake();
-		InjectLogic(Horizon.Combat.Logic.Globals.turnOrder.ActiveUnit, false);
+		InjectLogic(turnOrder.Dereference().ActiveUnit, false);
+		turnOrder = ServiceUtility.GetServiceReference<TurnOrder>();
 	}
 
 	protected override void AttachInstanceHandlers ()
 	{
 		base.AttachInstanceHandlers();
 		PassTurnBtn.onClick.AddListener(OnClickPassTurn);
+		turnOrder.Dereference().AdvanceTurnOrderMessage.AddHandler(OnTurnOrderAdvance);
 	}
 
-	protected override IEnumerator MainRoutine ()
-	{
-		while(true)
-		{
-			//wait for a message we care about
-			while(Horizon.Combat.Logic.Globals.turnOrder.AdvanceTurnOrderMessage.Idle)
-			{
-				yield return 0;
-			}
-
-			//turn order advanced
-			yield return new Routine(Horizon.Combat.Logic.Globals.turnOrder.AdvanceTurnOrderMessage.WaitHandleMessage(WaitHandleTurnOrderAdvance));
-		}
-	}
-
-	IEnumerator WaitHandleTurnOrderAdvance()
+	IEnumerator OnTurnOrderAdvance()
 	{
 		//write to combat log
 		//LogManager.Log("advance turn order", LogDestination.Screen); TODO
-		SelectedUnit = Horizon.Combat.Logic.Globals.turnOrder.ActiveUnit;
+		SelectedUnit = turnOrder.Dereference().ActiveUnit;
 		yield break;
 	}
 
@@ -67,7 +54,7 @@ public class HotbarView : View<UnitLogic,UnitLogicData,EmptyData>
 	// send pass turn message when pass turn button clicked
 	private void OnClickPassTurn()
 	{
-		Horizon.Core.Logic.Globals.Coroutines.StartCoroutine(PassTurnMessageChannel.WaitSend());
+		CoroutineUtility.StartCoroutine(PassTurnMessageChannel.WaitSend());
 	}
 
 	//TODO bind to messages on stats
@@ -114,8 +101,9 @@ public class HotbarView : View<UnitLogic,UnitLogicData,EmptyData>
 	private UnitAbilityButton instatiateAbilityButton(UnitAbilityLogic ability)
 	{
 		//instantiate the prefab
+		//TODO hmm....
 		UnitAbilityButton newbutton = Instantiate(UnitAbilityButtonPrefab);
-		newbutton.Init(ability, UnitAbilitySelectedMessage);
+		newbutton.Init(ability);
 
 		//make sure the button is scalled correctly
 		newbutton.transform.SetParent(transform, false);
@@ -126,4 +114,5 @@ public class HotbarView : View<UnitLogic,UnitLogicData,EmptyData>
 		
 	// where we store the ability buttons
 	private List<UnitAbilityButton> m_abilityButtons = new List<UnitAbilityButton>();
+	WeakReference<TurnOrder> turnOrder;
 }

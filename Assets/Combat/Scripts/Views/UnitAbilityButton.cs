@@ -19,11 +19,12 @@ public class UnitAbilityButton : MonoBehaviour
 	}
 
 	// By convention, Init must be called on UI elements to supply them with dependacies
-	public void Init(UnitAbilityLogic ability, Message<UnitAbilityLogic> unitAbilitySelectedMessageChannel)
+	public void Init(UnitAbilityLogic ability)
 	{
 		//set backing fields
-		m_unitAbilitySelectedMessageChannel = unitAbilitySelectedMessageChannel;
 		m_ability = ability;
+
+		combatViewMessages = ServiceUtility.GetServiceReference<CombatViewMessages>();
 
 		//init
 		//AbilityName.text = m_ability.AbilityName; TODO get this from view data
@@ -33,20 +34,19 @@ public class UnitAbilityButton : MonoBehaviour
 	// when the button is clicked, send a Ability selected message
 	void OnClick()
 	{
-		Horizon.Core.Logic.Globals.Coroutines.StartCoroutine(WaitHandleOnClick());
+		CoroutineUtility.StartCoroutine(WaitHandleOnClick());
 	}
 
 	IEnumerator WaitHandleOnClick()
 	{
 		// TODO disable all ability buttons
 		AbilityButton.enabled = false;
-		yield return new Routine(m_unitAbilitySelectedMessageChannel.WaitSend(m_ability));
+		yield return new Routine(combatViewMessages.Dereference().AbilitySelected.WaitSend(m_ability));
 		AbilityButton.enabled = true;
 	}
 
 	// the ability this view is displaying
 	private UnitAbilityLogic m_ability;
-	// send a message down this to select an ability
-	private Message<UnitAbilityLogic> m_unitAbilitySelectedMessageChannel;
+	WeakReference<CombatViewMessages> combatViewMessages;
 }
 

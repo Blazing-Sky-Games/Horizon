@@ -35,8 +35,8 @@ public class WeakenEffectLogicData : AbilityEffectLogicData
 			duration--;
 		}
 
-		Coroutine removeModifyerRoutine = Horizon.Core.Logic.Globals.Coroutines.StartCoroutine(stat.WaitModify(drop));
-		Coroutine removeStatusRoutine = Horizon.Core.Logic.Globals.Coroutines.StartCoroutine(defender.WaitSetStatus(UnitStatus.Weakened, false));
+		Coroutine removeModifyerRoutine = CoroutineUtility.StartCoroutine(stat.WaitModify(drop));
+		Coroutine removeStatusRoutine = CoroutineUtility.StartCoroutine(defender.WaitSetStatus(UnitStatus.Weakened, false));
 
 		yield return removeModifyerRoutine;
 		yield return removeStatusRoutine;

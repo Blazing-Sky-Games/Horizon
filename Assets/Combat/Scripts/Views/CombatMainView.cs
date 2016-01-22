@@ -7,62 +7,68 @@ public class CombatMainView : DataFromEditorView<CombatMainLogic,CombatLogicData
 	// *UI objects must be set up with Init
 	public HotbarView HotbarInterface;
 	public CombatAreaView CombatDisplay;
+	public TargetingView TargetingPopup;
+
+	protected override void SetUp ()
+	{
+		base.SetUp();
+		turnOrder = ServiceUtility.GetServiceReference<TurnOrder>();
+		factionService = ServiceUtility.GetServiceReference<FactionService>();
+		combatLogicMessages = ServiceUtility.GetServiceReference<CombatLogicMessages>();
+		combatViewMessages = ServiceUtility.GetServiceReference<CombatViewMessages>();
+	}
 
 	protected override void AttachInstanceHandlers ()
 	{
-		Horizon.Combat.Logic.Globals.CombatEncounterOver.AddHandler(HandleCombatOver);
-		Horizon.Combat.Views.Globals.UnitSelected.AddHandler(HandleUnitSelected);
-		HotbarInterface.UnitAbilitySelectedMessage.AddHandler(HandleAbilitySelected);
-		HotbarInterface.PassTurnMessageChannel.AddHandler(HandelPassTurn);
+		combatLogicMessages.Dereference().CombatEncounterOver.AddHandler(OnCombatOver);
+		combatViewMessages.Dereference().UnitSelected.AddHandler(OnUnitSelected);
+		HotbarInterface.UnitAbilitySelectedMessage.AddHandler(OnAbilitySelected);
+		HotbarInterface.PassTurnMessageChannel.AddHandler(OnPassTurn);
 	}
 
 	protected override void DetachInstanceHandlers ()
 	{
-		Horizon.Combat.Logic.Globals.CombatEncounterOver.RemoveHandler(HandleCombatOver);
-		Horizon.Combat.Views.Globals.UnitSelected.RemoveHandler(HandleUnitSelected);
-		HotbarInterface.UnitAbilitySelectedMessage.RemoveHandler(HandleAbilitySelected);
-		HotbarInterface.PassTurnMessageChannel.RemoveHandler(HandelPassTurn);
+		combatLogicMessages.Dereference().CombatEncounterOver.RemoveHandler(OnCombatOver);
+		combatViewMessages.Dereference().UnitSelected.RemoveHandler(OnUnitSelected);
+		HotbarInterface.UnitAbilitySelectedMessage.RemoveHandler(OnAbilitySelected);
+		HotbarInterface.PassTurnMessageChannel.RemoveHandler(OnPassTurn);
 	}
 
-	IEnumerator HandleCombatOver(bool win)
+	IEnumerator OnCombatOver(bool win)
 	{
 		//LogManager.Log(win ? "win" : "loss", LogDestination.Screen);
 		yield break;
 	}
 
-	IEnumerator HandleUnitSelected(UnitLogic arg)
+	IEnumerator OnUnitSelected(UnitLogic arg)
 	{
 		HotbarInterface.SelectedUnit = arg;
 		yield break;
 	}
 
-	IEnumerator HandleAbilitySelected(UnitAbilityLogic arg)
+	IEnumerator OnAbilitySelected(UnitAbilityLogic arg)
 	{
 		//yuk TODO clean up this logic
-		if(HotbarInterface.SelectedUnit == Horizon.Combat.Logic.Globals.turnOrder.ActiveUnit && Horizon.Combat.Logic.Globals.turnOrder.ActiveUnit.Faction == Faction.Player)
+		if(HotbarInterface.SelectedUnit == turnOrder.Dereference().ActiveUnit && turnOrder.Dereference().ActiveUnit.Faction == Faction.Player)
 		{
-			var TargetingInterface = gameObject.AddView<TargetingView,EmptyLogic,EmptyData,EmptyData>(EmptyLogic.Empty,Data.Empty);
+			Routine<UnitLogic> TargetUnitRoutine = TargetingPopup.TargetUnitAsync();
+			yield return TargetUnitRoutine;
 
-			while(TargetingInterface.targ.Idle &&
-				  TargetingInterface.CancelSelectTarget.Idle)
-			{
-				yield return 0;
-			}
+			var faction = turnOrder.Dereference().ActiveUnit.Faction;
+			var factionLeader = factionService.Dereference().GetFactionLeader(faction);
 
-			if(TargetingInterface.TargetSelected.MessagePending)
-			{
-				UnitLogic activeunit = Horizon.Combat.Logic.Globals.turnOrder.ActiveUnit;
-				Actor leader = Horizon.Combat.Logic.Globals.GetFactionLeader(activeunit.Faction);
-
-				//yield return new Routine(leader.WaitUseUnitAbility(activeunit,arg,))
-			}
+			if(TargetUnitRoutine.Result != null)
+				yield return new Routine(factionLeader.WaitUseUnitAbility(HotbarInterface.SelectedUnit,arg,TargetUnitRoutine.Result));
 		}
-
-		yield break;
 	}
 
-	private IEnumerator HandelPassTurn()
+	private IEnumerator OnPassTurn()
 	{
-		yield return new Routine(Horizon.Combat.Logic.Globals.GetFactionLeader(Horizon.Combat.Logic.Globals.turnOrder.ActiveUnit.Faction).WaitPassTurn());
+		yield return new Routine(factionService.Dereference().GetFactionLeader(turnOrder.Dereference().ActiveUnit.Faction).WaitPassTurn());
 	}
+
+	WeakReference<TurnOrder> turnOrder;
+	WeakReference<FactionService> factionService;
+	WeakReference<CombatLogicMessages> combatLogicMessages;
+	WeakReference<CombatViewMessages> combatViewMessages;
 }

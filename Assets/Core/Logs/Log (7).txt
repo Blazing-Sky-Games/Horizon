@@ -1,0 +1,1201 @@
+log file created on 1/21/2016 3:49:32 PM by Matthew on Machine DESKTOP-011B83U
+MainRoutine
+Load scene LoadingScreen
+Load scene Combat
+UnLoad scene LoadingScreen
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 
+UnityEngine.MissingReferenceException: The object of type 'Image' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+  at (wrapper managed-to-native) UnityEngine.Component:get_transform ()
+  at LoadingScreenMainView+<MainRoutine>c__Iterator39.MoveNext () [0x00026] in C:\Users\Matthew\Desktop\Horizon\Assets\LoadingScreen\Scripts\LoadingScreenMainView.cs:17 

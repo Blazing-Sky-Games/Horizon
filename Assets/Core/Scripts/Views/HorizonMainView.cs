@@ -6,51 +6,39 @@ using System.Collections.Generic;
 
 public class HorizonMainView : DataFromEditorView<EmptyLogic,EmptyData,EmptyData>
 {
+	protected override void Awake ()
+	{
+		ServiceUtility.Init();
+		base.Awake();
+	}
+
+	protected override void SetUp ()
+	{
+		base.SetUp();
+		logManager = ServiceUtility.GetServiceReference<LogManager>();
+	}
+
 	private void Update()
 	{
-		Horizon.Core.Logic.Globals.Coroutines.UpdateCoroutines();
+		CoroutineUtility.UpdateCoroutines();
 	}
 
 	protected override IEnumerator MainRoutine ()
 	{
-		yield return new Routine(LoadScene(SceneType.LoadingScreen));
-		yield return new Routine(LoadScene(SceneType.Combat));
-		yield return new Routine(UnloadScene(SceneType.LoadingScreen));
-	}
+		logManager.Dereference().CoreLogFileAndScreen.Log("MainRoutine");
 
-	public IEnumerator GoToSceneThroughLoadingScreen(SceneType scene)
-	{
-		yield return new Routine(UnloadScene(currentScene));
-		yield return new Routine(LoadScene(SceneType.LoadingScreen));
-		yield return new Routine(LoadScene(scene));
-		yield return new Routine(UnloadScene(SceneType.LoadingScreen));
-	}
+		yield return new Routine(SceneUtility.LoadScene(SceneType.LoadingScreen));
 
-	public IEnumerator LoadScene(SceneType scene)
-	{
-		Horizon.Core.Views.Globals.LoadingScene = true;
-		var asop = SceneManager.LoadSceneAsync(scene.ToString(), LoadSceneMode.Additive);
-
-		while(!asop.isDone)
+		float dt = 0;
+		while(dt < 4)
 		{
+			dt += Time.deltaTime;
 			yield return 0;
 		}
 
-		SceneManager.SetActiveScene(SceneManager.GetSceneByName(scene.ToString()));
-
-		currentScene = scene;
-		Horizon.Core.Views.Globals.LoadingScene = false;
+		yield return new Routine(SceneUtility.LoadScene(SceneType.Combat));
+		yield return new Routine(SceneUtility.UnloadScene(SceneType.LoadingScreen));
 	}
 
-	public IEnumerator UnloadScene(SceneType scene)
-	{
-		SceneManager.UnloadScene(scene.ToString());
-		var asop = Resources.UnloadUnusedAssets();
-		while(!asop.isDone)
-		{
-			yield return 0;
-		}
-	}
-
-	private SceneType currentScene;
+	WeakReference<LogManager> logManager;
 }

@@ -34,7 +34,7 @@ public class TurnBasedEffect
 			//update the routine
 			try
 			{   
-				stackFrameRunning = m_callStack.Peek().MoveNext();
+				stackFrameRunning = m_callStack.Peek().Step();
 			}
 			catch(Exception e)
 			{
@@ -51,7 +51,7 @@ public class TurnBasedEffect
 			//the current routine is still running
 			
 			//what has the routine yielded
-			object current = m_callStack.Peek().Current;
+			object current = m_callStack.Peek().Yielded;
 			
 			// if it is null, move along....
 			if(current == null)

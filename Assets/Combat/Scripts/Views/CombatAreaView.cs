@@ -11,6 +11,12 @@ public class CombatAreaView : View<CombatMainLogic,CombatLogicData,EmptyData>
 	public Vector2 AIUnitOffset;
 	public Vector2 PlayerUnitOffset;
 
+	protected override void SetUp ()
+	{
+		base.SetUp();
+		turnOrder = ServiceUtility.GetServiceReference<TurnOrder>();
+	}
+
 	protected override IEnumerator MainRoutine ()
 	{
 		//init
@@ -35,7 +41,7 @@ public class CombatAreaView : View<CombatMainLogic,CombatLogicData,EmptyData>
 		m_aIUnits.Clear();
 
 		// add units from turn order to lists
-		foreach(UnitLogic unit in Horizon.Combat.Logic.Globals.turnOrder)
+		foreach(UnitLogic unit in turnOrder.Dereference())
 		{
 			if(unit.Faction == Faction.Player)
 			{
@@ -97,4 +103,6 @@ public class CombatAreaView : View<CombatMainLogic,CombatLogicData,EmptyData>
 	private readonly List<UnitView> m_playerUnitViews = new List<UnitView>();
 	private readonly List<UnitLogic> m_aIUnits = new List<UnitLogic>();
 	private readonly List<UnitView> m_aIUnitViews = new List<UnitView>();
+
+	WeakReference<TurnOrder> turnOrder;
 }

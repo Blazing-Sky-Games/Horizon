@@ -10,12 +10,15 @@ public class CombatMainLogic : ViewLogic<CombatLogicData>
 		//TODO creat turn order
 		//m_turnOrder = new TurnOrder(Data);
 
+		turnOrder = ServiceUtility.GetServiceReference<TurnOrder>();
+		factionService = ServiceUtility.GetServiceReference<FactionService>();
+
 		//creat the actors that will be playing
 		//Horizon.Combat.Logic.Globals.SetFactionLeader(Faction.Player, new Actor());
-		Horizon.Combat.Logic.Globals.SetFactionLeader(Faction.Player, new AIActor(Faction.Player));
-		Horizon.Combat.Logic.Globals.SetFactionLeader(Faction.AI, new AIActor(Faction.AI));
+		factionService.Dereference().SetFactionLeader(Faction.Player, new AIActor(Faction.Player));
+		factionService.Dereference().SetFactionLeader(Faction.AI, new AIActor(Faction.AI));
 
-		Horizon.Core.Logic.Globals.Coroutines.StartCoroutine(WaitCombatMain());
+		CoroutineUtility.StartCoroutine(WaitCombatMain());
 	}
 
 	private IEnumerator WaitCombatMain ()
@@ -25,13 +28,13 @@ public class CombatMainLogic : ViewLogic<CombatLogicData>
 
 		while(true)
 		{
-			Actor FactionLeader = Horizon.Combat.Logic.Globals.GetFactionLeader(Horizon.Combat.Logic.Globals.turnOrder.ActiveUnit.Faction);
+			Actor FactionLeader = factionService.Dereference().GetFactionLeader(turnOrder.Dereference().ActiveUnit.Faction);
 
 			FactionLeader.ResetCanTakeAction();
 
 			while(FactionLeader.CanTakeAction)
 			{
-				if(!Horizon.Combat.Logic.Globals.turnOrder.ActiveUnit.CanTakeAction)
+				if(!turnOrder.Dereference().ActiveUnit.CanTakeAction)
 				{
 					//decide for the actor, they cant do anything this turn
 					yield return new Routine(FactionLeader.WaitPassTurn());
@@ -40,13 +43,13 @@ public class CombatMainLogic : ViewLogic<CombatLogicData>
 				{
 					//tell the actor to decide what to do
 					FactionLeader.ActionDecidedMessage.AddHandler(HandleActionDecided);
-					Horizon.Core.Logic.Globals.Coroutines.StartCoroutine(FactionLeader.WaitDecideAction());
+					CoroutineUtility.StartCoroutine(FactionLeader.WaitDecideAction());
 					FactionLeader.ActionDecidedMessage.RemoveHandler(HandleActionDecided);
 				}
 			}
 
 			//advance the turn order
-			yield return new Routine(Horizon.Combat.Logic.Globals.turnOrder.WaitAdvance());
+			yield return new Routine(turnOrder.Dereference().WaitAdvance());
 			yield return new Routine(TurnBasedEffectManager.WaitUpdateTurnBasedEffects());
 		}
 	}
@@ -56,8 +59,6 @@ public class CombatMainLogic : ViewLogic<CombatLogicData>
 		yield return new Routine(action.WaitPerform());
 	}
 
-	public override void Destroy ()
-	{
-		//nothing
-	}
+	private WeakReference<FactionService> factionService;
+	private WeakReference<TurnOrder> turnOrder;
 }

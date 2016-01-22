@@ -7,7 +7,7 @@ using System.Linq;
 
 // list of units. the order in which unts take their turn
 // also keeps track of units in general (death, etc)
-public class TurnOrder : IEnumerable<UnitLogic>
+public class TurnOrder : Service, IEnumerable<UnitLogic>
 {
 	public readonly Message AdvanceTurnOrderMessage = new Message();
 	public readonly Message<bool> CombatEncounterOverMessage = new Message<bool>();

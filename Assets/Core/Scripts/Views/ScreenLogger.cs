@@ -12,18 +12,13 @@ public class ScreenLogger : MonoBehaviour
 		BottomRight
 	}
 
-	public bool IsPersistent = true;
-	public bool ShowInEditor = true;
-
 	[Tooltip("Height of the log area as a percentage of the screen height")]
 	[Range(0.3f, 1.0f)]
-	public float
-		Height = 0.5f;
+	public float Height = 0.5f;
 
 	[Tooltip("Width of the log area as a percentage of the screen width")]
 	[Range(0.3f, 1.0f)]
-	public float
-		Width = 0.5f;
+	public float Width = 0.5f;
 
 	public int Margin = 20;
 
@@ -32,21 +27,10 @@ public class ScreenLogger : MonoBehaviour
 	public int FontSize = 14;
 
 	[Range(0f, 01f)]
-	public float
-		BackgroundOpacity = 0.5f;
+	public float BackgroundOpacity = 0.5f;
 	public Color BackgroundColor = Color.black;
 
-	public bool LogMessages = true;
-	public bool LogWarnings = true;
-	public bool LogErrors = true;
-
 	public Color MessageColor = Color.white;
-	public Color WarningColor = Color.yellow;
-	public Color ErrorColor = new Color(1, 0.5f, 0.5f);
-
-	public bool StackTraceMessages = false;
-	public bool StackTraceWarnings = false;
-	public bool StackTraceErrors = true;
 
 	static Queue<LogMessage> queue = new Queue<LogMessage>();
 
@@ -68,52 +52,23 @@ public class ScreenLogger : MonoBehaviour
 		styleText = new GUIStyle();
 		styleText.fontSize = FontSize;
 
-		if(IsPersistent)
-		{
-			DontDestroyOnLoad(this);
-		}
+		logManager = ServiceUtility.GetServiceReference<LogManager>();
 	}
 
 	void OnEnable()
 	{
-		if(!ShowInEditor && Application.isEditor)
-		{
-			return;
-		}
-
 		queue = new Queue<LogMessage>();
-
-#if UNITY_4_5 || UNITY_4_6
-        Application.RegisterLogCallback(HandleLog);
-#else
-		Application.logMessageReceived += HandleLog;
-#endif
 		//TODO HACK fix this hack. meh, it works for now
-		LogManager.CombatLog += WaitHandleLog;
+		logManager.Dereference().OnLogToScreen += HandleLog;
 	}
 
 	void OnDisable()
 	{
-		if(!ShowInEditor && Application.isEditor)
-		{
-			return;
-		}
-
-#if UNITY_4_5 || UNITY_4_6
-        Application.RegisterLogCallback(null);
-#else
-		Application.logMessageReceived -= HandleLog;
-#endif
-		LogManager.CombatLog -= WaitHandleLog;
+		logManager.Dereference().OnLogToScreen -= HandleLog;
 	}
 
 	void Update()
 	{
-		if(!ShowInEditor && Application.isEditor)
-		{
-			return;
-		}
-
 		while(queue.Count > ((Screen.height - 2 * Margin) * Height - 2 * padding) / styleText.lineHeight)
 		{
 			queue.Dequeue();
@@ -122,11 +77,6 @@ public class ScreenLogger : MonoBehaviour
 
 	void OnGUI()
 	{
-		if(!ShowInEditor && Application.isEditor)
-		{
-			return;
-		}
-
 		float w = (Screen.width - 2 * Margin) * Width;
 		float h = (Screen.height - 2 * Margin) * Height;
 		float x = 1, y = 1;
@@ -158,26 +108,7 @@ public class ScreenLogger : MonoBehaviour
 
 		foreach(LogMessage m in queue)
 		{
-			switch(m.Type)
-			{
-				case LogType.Warning:
-					styleText.normal.textColor = WarningColor;
-					break;
-
-				case LogType.Log:
-					styleText.normal.textColor = MessageColor;
-					break;
-
-				case LogType.Assert:
-				case LogType.Exception:
-				case LogType.Error:
-					styleText.normal.textColor = ErrorColor;
-					break;
-
-				default:
-					styleText.normal.textColor = MessageColor;
-					break;
-			}
+			styleText.normal.textColor = MessageColor;
 
 			GUILayout.Label(m.Message, styleText);
 		}
@@ -185,78 +116,20 @@ public class ScreenLogger : MonoBehaviour
 		GUILayout.EndArea();
 	}
 
-	void HandleLog(string message, string stackTrace, LogType type)
+	void HandleLog(string message)
 	{
-		if(type == LogType.Assert && !LogErrors)
-		{
-			return;
-		}
-		if(type == LogType.Error && !LogErrors)
-		{
-			return;
-		}
-		if(type == LogType.Exception && !LogErrors)
-		{
-			return;
-		}
-		if(type == LogType.Log && !LogMessages)
-		{
-			return;
-		}
-		if(type == LogType.Warning && !LogWarnings)
-		{
-			return;
-		}
-
-		queue.Enqueue(new LogMessage(message, type));
-
-		if(type == LogType.Assert && !StackTraceErrors)
-		{
-			return;
-		}
-		if(type == LogType.Error && !StackTraceErrors)
-		{
-			return;
-		}
-		if(type == LogType.Exception && !StackTraceErrors)
-		{
-			return;
-		}
-		if(type == LogType.Log && !StackTraceMessages)
-		{
-			return;
-		}
-		if(type == LogType.Warning && !StackTraceWarnings)
-		{
-			return;
-		}
-
-		string[] trace = stackTrace.Split(new char[] { '\n' });
-
-		foreach(string t in trace)
-			if(t.Length != 0)
-			{
-				queue.Enqueue(new LogMessage("  " + t, type));
-			}
+		queue.Enqueue(new LogMessage(message));
 	}
 
-	private void WaitHandleLog(string arg1, string arg2, LogType arg3)
-	{
-		bool old = LogMessages;
-		LogMessages = true;
-		HandleLog(arg1, arg2, arg3);
-		LogMessages = old;
-	}
+	WeakReference<LogManager> logManager;
 }
 
 class LogMessage
 {
 	public string Message;
-	public LogType Type;
 
-	public LogMessage(string msg, LogType type)
+	public LogMessage(string msg)
 	{
 		Message = msg;
-		Type = type;
 	}
 }
