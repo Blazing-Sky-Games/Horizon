@@ -11,8 +11,41 @@ using System.Collections.Generic;
 // there is also a mechanism for seeing if a given message is "idle" or not (if send was just called)
 // so code can handle a message being sent, without explicetly attaching a handler
 
-public class Message
+public interface IGenericMessage
 {
+	IEnumerator WaitSendGeneric (object[] args);
+	void AddHandlerGeneric(Func<object[],IEnumerator> handler);
+	void RemoveHandlerGeneric(Func<object[],IEnumerator> handler);
+}
+
+public class Message : IGenericMessage
+{
+	#region IGenericMessage implementation
+
+	public IEnumerator WaitSendGeneric (object[] args)
+	{
+		return WaitSend();
+	}
+
+	public void AddHandlerGeneric (Func<object[], IEnumerator> handler)
+	{
+		if(!convertedGenericHandlers.ContainsKey(handler))
+			convertedGenericHandlers[handler] = convertGenericHandler(handler);
+
+		AddHandler(convertedGenericHandlers[handler]);
+	}
+
+	public void RemoveHandlerGeneric (Func<object[], IEnumerator> handler)
+	{
+		if(!convertedGenericHandlers.ContainsKey(handler))
+			return;
+
+		RemoveHandler(convertedGenericHandlers[handler]);
+		convertedGenericHandlers.Remove(handler);
+	}
+
+	#endregion
+
 	//TODO return a coroutine and call it Send
 	public IEnumerator WaitSend()
 	{
@@ -61,6 +94,16 @@ public class Message
 		convertedActions.Remove(handler);
 	}
 
+	Func<IEnumerator> convertGenericHandler(Func<object[], IEnumerator> handler)
+	{
+		return () => wrapGenericHandler(handler);
+	}
+
+	IEnumerator wrapGenericHandler(Func<object[], IEnumerator> handler)
+	{
+		return handler(new Object[]{ });
+	}
+
 	Func<IEnumerator> convertAction(Action handler)
 	{
 		return () => wrapAction(handler);
@@ -85,4 +128,5 @@ public class Message
 	private bool m_idle = true;
 	private readonly List<Func<IEnumerator>> m_handlers = new List<Func<IEnumerator>>();
 	private Dictionary<Action, Func<IEnumerator>> convertedActions = new Dictionary<Action, Func<IEnumerator>>();
+	private Dictionary<Func<object[], IEnumerator>, Func<IEnumerator>> convertedGenericHandlers = new Dictionary<Func<object[], IEnumerator>, Func<IEnumerator>>();
 }

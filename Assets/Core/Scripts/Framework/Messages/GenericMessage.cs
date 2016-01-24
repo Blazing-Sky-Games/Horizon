@@ -8,8 +8,34 @@ using System.Collections.Generic;
 // add the tt file back to the project (unit removes it automatically)
 //set custom tool to TextTemplatingFileGenerator see https://forums.xamarin.com/discussion/7573/run-t4-template-in-xamarin-studio
 
-public class Message<TArg0>
+public class Message<TArg0> : IGenericMessage
 {
+	#region IGenericMessage implementation
+
+	public IEnumerator WaitSendGeneric (object[] args)
+	{
+		return WaitSend((TArg0)args[0]);
+	}
+
+	public void AddHandlerGeneric (Func<object[], IEnumerator> handler)
+	{
+		if(!convertedGenericHandlers.ContainsKey(handler))
+			convertedGenericHandlers[handler] = convertGenericHandler(handler);
+
+		m_innerMessage.AddHandler(convertedGenericHandlers[handler]);
+	}
+
+	public void RemoveHandlerGeneric (Func<object[], IEnumerator> handler)
+	{
+		if(!convertedGenericHandlers.ContainsKey(handler))
+			return;
+
+		m_innerMessage.RemoveHandler(convertedGenericHandlers[handler]);
+		convertedGenericHandlers.Remove(handler);
+	}
+
+	#endregion
+
 	public delegate IEnumerator Handler(TArg0 arg0);
 	public delegate void HandlerAction(TArg0 arg0);
 	
@@ -61,6 +87,16 @@ public class Message<TArg0>
 		convertedHandlers.Remove(handler);
 	}
 	
+	Func<IEnumerator> convertGenericHandler(Func<object[], IEnumerator> handler)
+	{
+		return () => wrapGenericHandler(handler);
+	}
+
+	IEnumerator wrapGenericHandler(Func<object[], IEnumerator> handler)
+	{
+		return handler(new Object[]{m_arg0 });
+	}
+
 	private Func<IEnumerator> ConvertHandler(Handler handler)
 	{
 		return () => handler(m_arg0);
@@ -81,9 +117,36 @@ public class Message<TArg0>
 	private readonly Message m_innerMessage = new Message();
 	private static readonly Dictionary<Handler,Func<IEnumerator>> convertedHandlers = new Dictionary<Handler, Func<IEnumerator>>();
 	private static readonly Dictionary<HandlerAction,Func<IEnumerator>> convertedHandlerActions = new Dictionary<HandlerAction, Func<IEnumerator>>();
+	private Dictionary<Func<object[], IEnumerator>, Func<IEnumerator>> convertedGenericHandlers = new Dictionary<Func<object[], IEnumerator>, Func<IEnumerator>>();
 }
-public class Message<TArg0, TArg1>
+public class Message<TArg0, TArg1> : IGenericMessage
 {
+	#region IGenericMessage implementation
+
+	public IEnumerator WaitSendGeneric (object[] args)
+	{
+		return WaitSend((TArg0)args[0], (TArg1)args[1]);
+	}
+
+	public void AddHandlerGeneric (Func<object[], IEnumerator> handler)
+	{
+		if(!convertedGenericHandlers.ContainsKey(handler))
+			convertedGenericHandlers[handler] = convertGenericHandler(handler);
+
+		m_innerMessage.AddHandler(convertedGenericHandlers[handler]);
+	}
+
+	public void RemoveHandlerGeneric (Func<object[], IEnumerator> handler)
+	{
+		if(!convertedGenericHandlers.ContainsKey(handler))
+			return;
+
+		m_innerMessage.RemoveHandler(convertedGenericHandlers[handler]);
+		convertedGenericHandlers.Remove(handler);
+	}
+
+	#endregion
+
 	public delegate IEnumerator Handler(TArg0 arg0, TArg1 arg1);
 	public delegate void HandlerAction(TArg0 arg0, TArg1 arg1);
 	
@@ -136,6 +199,16 @@ public class Message<TArg0, TArg1>
 		convertedHandlers.Remove(handler);
 	}
 	
+	Func<IEnumerator> convertGenericHandler(Func<object[], IEnumerator> handler)
+	{
+		return () => wrapGenericHandler(handler);
+	}
+
+	IEnumerator wrapGenericHandler(Func<object[], IEnumerator> handler)
+	{
+		return handler(new Object[]{m_arg0, m_arg1 });
+	}
+
 	private Func<IEnumerator> ConvertHandler(Handler handler)
 	{
 		return () => handler(m_arg0, m_arg1);
@@ -157,9 +230,36 @@ public class Message<TArg0, TArg1>
 	private readonly Message m_innerMessage = new Message();
 	private static readonly Dictionary<Handler,Func<IEnumerator>> convertedHandlers = new Dictionary<Handler, Func<IEnumerator>>();
 	private static readonly Dictionary<HandlerAction,Func<IEnumerator>> convertedHandlerActions = new Dictionary<HandlerAction, Func<IEnumerator>>();
+	private Dictionary<Func<object[], IEnumerator>, Func<IEnumerator>> convertedGenericHandlers = new Dictionary<Func<object[], IEnumerator>, Func<IEnumerator>>();
 }
-public class Message<TArg0, TArg1, TArg2>
+public class Message<TArg0, TArg1, TArg2> : IGenericMessage
 {
+	#region IGenericMessage implementation
+
+	public IEnumerator WaitSendGeneric (object[] args)
+	{
+		return WaitSend((TArg0)args[0], (TArg1)args[1], (TArg2)args[2]);
+	}
+
+	public void AddHandlerGeneric (Func<object[], IEnumerator> handler)
+	{
+		if(!convertedGenericHandlers.ContainsKey(handler))
+			convertedGenericHandlers[handler] = convertGenericHandler(handler);
+
+		m_innerMessage.AddHandler(convertedGenericHandlers[handler]);
+	}
+
+	public void RemoveHandlerGeneric (Func<object[], IEnumerator> handler)
+	{
+		if(!convertedGenericHandlers.ContainsKey(handler))
+			return;
+
+		m_innerMessage.RemoveHandler(convertedGenericHandlers[handler]);
+		convertedGenericHandlers.Remove(handler);
+	}
+
+	#endregion
+
 	public delegate IEnumerator Handler(TArg0 arg0, TArg1 arg1, TArg2 arg2);
 	public delegate void HandlerAction(TArg0 arg0, TArg1 arg1, TArg2 arg2);
 	
@@ -213,6 +313,16 @@ public class Message<TArg0, TArg1, TArg2>
 		convertedHandlers.Remove(handler);
 	}
 	
+	Func<IEnumerator> convertGenericHandler(Func<object[], IEnumerator> handler)
+	{
+		return () => wrapGenericHandler(handler);
+	}
+
+	IEnumerator wrapGenericHandler(Func<object[], IEnumerator> handler)
+	{
+		return handler(new Object[]{m_arg0, m_arg1, m_arg2 });
+	}
+
 	private Func<IEnumerator> ConvertHandler(Handler handler)
 	{
 		return () => handler(m_arg0, m_arg1, m_arg2);
@@ -235,9 +345,36 @@ public class Message<TArg0, TArg1, TArg2>
 	private readonly Message m_innerMessage = new Message();
 	private static readonly Dictionary<Handler,Func<IEnumerator>> convertedHandlers = new Dictionary<Handler, Func<IEnumerator>>();
 	private static readonly Dictionary<HandlerAction,Func<IEnumerator>> convertedHandlerActions = new Dictionary<HandlerAction, Func<IEnumerator>>();
+	private Dictionary<Func<object[], IEnumerator>, Func<IEnumerator>> convertedGenericHandlers = new Dictionary<Func<object[], IEnumerator>, Func<IEnumerator>>();
 }
-public class Message<TArg0, TArg1, TArg2, TArg3>
+public class Message<TArg0, TArg1, TArg2, TArg3> : IGenericMessage
 {
+	#region IGenericMessage implementation
+
+	public IEnumerator WaitSendGeneric (object[] args)
+	{
+		return WaitSend((TArg0)args[0], (TArg1)args[1], (TArg2)args[2], (TArg3)args[3]);
+	}
+
+	public void AddHandlerGeneric (Func<object[], IEnumerator> handler)
+	{
+		if(!convertedGenericHandlers.ContainsKey(handler))
+			convertedGenericHandlers[handler] = convertGenericHandler(handler);
+
+		m_innerMessage.AddHandler(convertedGenericHandlers[handler]);
+	}
+
+	public void RemoveHandlerGeneric (Func<object[], IEnumerator> handler)
+	{
+		if(!convertedGenericHandlers.ContainsKey(handler))
+			return;
+
+		m_innerMessage.RemoveHandler(convertedGenericHandlers[handler]);
+		convertedGenericHandlers.Remove(handler);
+	}
+
+	#endregion
+
 	public delegate IEnumerator Handler(TArg0 arg0, TArg1 arg1, TArg2 arg2, TArg3 arg3);
 	public delegate void HandlerAction(TArg0 arg0, TArg1 arg1, TArg2 arg2, TArg3 arg3);
 	
@@ -292,6 +429,16 @@ public class Message<TArg0, TArg1, TArg2, TArg3>
 		convertedHandlers.Remove(handler);
 	}
 	
+	Func<IEnumerator> convertGenericHandler(Func<object[], IEnumerator> handler)
+	{
+		return () => wrapGenericHandler(handler);
+	}
+
+	IEnumerator wrapGenericHandler(Func<object[], IEnumerator> handler)
+	{
+		return handler(new Object[]{m_arg0, m_arg1, m_arg2, m_arg3 });
+	}
+
 	private Func<IEnumerator> ConvertHandler(Handler handler)
 	{
 		return () => handler(m_arg0, m_arg1, m_arg2, m_arg3);
@@ -315,9 +462,36 @@ public class Message<TArg0, TArg1, TArg2, TArg3>
 	private readonly Message m_innerMessage = new Message();
 	private static readonly Dictionary<Handler,Func<IEnumerator>> convertedHandlers = new Dictionary<Handler, Func<IEnumerator>>();
 	private static readonly Dictionary<HandlerAction,Func<IEnumerator>> convertedHandlerActions = new Dictionary<HandlerAction, Func<IEnumerator>>();
+	private Dictionary<Func<object[], IEnumerator>, Func<IEnumerator>> convertedGenericHandlers = new Dictionary<Func<object[], IEnumerator>, Func<IEnumerator>>();
 }
-public class Message<TArg0, TArg1, TArg2, TArg3, TArg4>
+public class Message<TArg0, TArg1, TArg2, TArg3, TArg4> : IGenericMessage
 {
+	#region IGenericMessage implementation
+
+	public IEnumerator WaitSendGeneric (object[] args)
+	{
+		return WaitSend((TArg0)args[0], (TArg1)args[1], (TArg2)args[2], (TArg3)args[3], (TArg4)args[4]);
+	}
+
+	public void AddHandlerGeneric (Func<object[], IEnumerator> handler)
+	{
+		if(!convertedGenericHandlers.ContainsKey(handler))
+			convertedGenericHandlers[handler] = convertGenericHandler(handler);
+
+		m_innerMessage.AddHandler(convertedGenericHandlers[handler]);
+	}
+
+	public void RemoveHandlerGeneric (Func<object[], IEnumerator> handler)
+	{
+		if(!convertedGenericHandlers.ContainsKey(handler))
+			return;
+
+		m_innerMessage.RemoveHandler(convertedGenericHandlers[handler]);
+		convertedGenericHandlers.Remove(handler);
+	}
+
+	#endregion
+
 	public delegate IEnumerator Handler(TArg0 arg0, TArg1 arg1, TArg2 arg2, TArg3 arg3, TArg4 arg4);
 	public delegate void HandlerAction(TArg0 arg0, TArg1 arg1, TArg2 arg2, TArg3 arg3, TArg4 arg4);
 	
@@ -373,6 +547,16 @@ public class Message<TArg0, TArg1, TArg2, TArg3, TArg4>
 		convertedHandlers.Remove(handler);
 	}
 	
+	Func<IEnumerator> convertGenericHandler(Func<object[], IEnumerator> handler)
+	{
+		return () => wrapGenericHandler(handler);
+	}
+
+	IEnumerator wrapGenericHandler(Func<object[], IEnumerator> handler)
+	{
+		return handler(new Object[]{m_arg0, m_arg1, m_arg2, m_arg3, m_arg4 });
+	}
+
 	private Func<IEnumerator> ConvertHandler(Handler handler)
 	{
 		return () => handler(m_arg0, m_arg1, m_arg2, m_arg3, m_arg4);
@@ -397,4 +581,5 @@ public class Message<TArg0, TArg1, TArg2, TArg3, TArg4>
 	private readonly Message m_innerMessage = new Message();
 	private static readonly Dictionary<Handler,Func<IEnumerator>> convertedHandlers = new Dictionary<Handler, Func<IEnumerator>>();
 	private static readonly Dictionary<HandlerAction,Func<IEnumerator>> convertedHandlerActions = new Dictionary<HandlerAction, Func<IEnumerator>>();
+	private Dictionary<Func<object[], IEnumerator>, Func<IEnumerator>> convertedGenericHandlers = new Dictionary<Func<object[], IEnumerator>, Func<IEnumerator>>();
 }
