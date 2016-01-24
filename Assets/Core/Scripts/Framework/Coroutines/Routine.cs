@@ -7,7 +7,22 @@ using System.Collections.Generic;
 
 public class RoutineException : Exception
 {
-	public RoutineException(Exception e):base("routine had an eception",e){
+	public override string Message
+	{
+		get
+		{
+			string msg = "Exception in routine\n";
+
+			foreach(var rot in CallStack)
+			{
+				msg += rot.CallerMethod + " (at " + rot.CallerFile + ":" + rot.CallerLine + ")\n";
+			}
+
+			return msg;
+		}
+	}
+
+	public RoutineException(Exception e):base("",e){
 	}
 
 	public readonly List<Routine> CallStack = new List<Routine>();
@@ -63,6 +78,7 @@ public class Routine : RoutineControlSignal
 		{
 			m_error = new RoutineException(e);
 			m_done = true;
+			return;
 		}
 
 		if(Yielded != null && !typeof(RoutineControlSignal).IsAssignableFrom(Yielded.GetType()))

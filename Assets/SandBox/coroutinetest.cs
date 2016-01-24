@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class coroutinetest : MonoBehaviour
 {
@@ -24,8 +25,13 @@ public class coroutinetest : MonoBehaviour
 		Coroutine c1 = CoroutineUtility.StartCoroutine(subrot(2));
 		Coroutine c2 = CoroutineUtility.StartCoroutine(subrot(3));
 
+		c2.CatchExceptions = true;
+
 		yield return c1;
 		yield return c2;
+
+		if(c2.HasError)
+			UnityEngine.Debug.LogException(c2.Error);
 
 		yield return CoroutineUtility.StartCoroutine(subrot(4));
 		yield return CoroutineUtility.StartCoroutine(subrot(4));
@@ -41,6 +47,11 @@ public class coroutinetest : MonoBehaviour
 		{
 			elapsed += Time.deltaTime;
 			yield return new WaitForNextFrame();
+		}
+
+		if(x == 3)
+		{
+			throw new InvalidOperationException("X cant equal 3!");
 		}
 
 		Debug.Log("End" + x.ToString());

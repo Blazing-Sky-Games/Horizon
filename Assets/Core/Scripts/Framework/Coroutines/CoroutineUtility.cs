@@ -29,7 +29,7 @@ public static class CoroutineUtility
 			{
 				//log somewhere
 			#if DEBUG
-				System.Diagnostics.Debugger.Break();
+				UnityEngine.Debug.LogException(m_routines[i].Error);
 			#endif
 			}
 		}
