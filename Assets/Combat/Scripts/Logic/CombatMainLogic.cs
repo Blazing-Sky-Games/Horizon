@@ -50,7 +50,7 @@ public class CombatMainLogic : ViewLogic<CombatLogicData>
 
 			//advance the turn order
 			yield return new Routine(turnOrder.Dereference().WaitAdvance());
-			yield return new Routine(TurnBasedEffectManager.WaitUpdateTurnBasedEffects());
+			//yield return new Routine(TurnBasedEffectManager.WaitUpdateTurnBasedEffects()); TODO
 		}
 	}
 

@@ -34,7 +34,7 @@ public abstract class View<LogicType, LogicDataType, ViewDataType> : MonoBehavio
 	{
 		while(!destroyed)
 		{
-			yield return 0;
+			yield return new WaitForNextFrame();
 		}
 	}
 
@@ -115,7 +115,7 @@ public abstract class View<LogicType, LogicDataType, ViewDataType> : MonoBehavio
 	{
 		while(true)
 		{
-			yield return 0;
+			yield return new WaitForNextFrame();
 		}
 	}
 
@@ -173,7 +173,7 @@ public abstract class View<LogicType, LogicDataType, ViewDataType> : MonoBehavio
 	private IEnumerator LaunchWhenSceneInLoaded()
 	{
 		while(SceneUtility.LoadingScene)
-			yield return 0;
+			yield return new WaitForNextFrame();
 
 		SetUp();
 		InitFromData(m_data);

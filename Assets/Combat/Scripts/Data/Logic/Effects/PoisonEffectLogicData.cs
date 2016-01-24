@@ -14,7 +14,8 @@ class PoisonEffectLogicData : AbilityEffectLogicData
 
 	public override IEnumerator WaitTrigger(UnitLogic attacker, UnitLogic defender, bool isCritical)
 	{
-		yield return new Routine(TurnBasedEffectManager.WaitStartTurnBasedEffect(WaitPoisonEffect(attacker, defender, isCritical)));
+		//yield return new Routine(TurnBasedEffectManager.WaitStartTurnBasedEffect(WaitPoisonEffect(attacker, defender, isCritical))); TODO
+		yield break;
 	}
 
 	private IEnumerator WaitPoisonEffect(UnitLogic attacker, UnitLogic defender, bool isCritical)

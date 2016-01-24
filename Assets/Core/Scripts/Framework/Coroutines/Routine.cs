@@ -2,20 +2,47 @@ using System.Collections;
 
 //a syncronous process (which may take multiple frames)
 using System;
+using System.Collections.Generic;
 
 
-public class Routine
+public class RoutineException : Exception
+{
+	public RoutineException(Exception e):base("routine had an eception",e){
+	}
+
+	public readonly List<Routine> CallStack = new List<Routine>();
+}
+
+public class Routine : RoutineControlSignal
 {
 	public readonly string CallerMethod;
 	public readonly string CallerFile;
 	public readonly int CallerLine;
 
-	public Routine(IEnumerator routine)
+	public bool CatchExceptions;
+
+	public RoutineException Error
 	{
-		m_routine = routine;
-		CallerMethod = CallerInformation.MethodName;
-		CallerFile = CallerInformation.FilePath;
-		CallerLine = CallerInformation.LineNumber;
+		get
+		{
+			return m_error;
+		}
+		set
+		{
+			m_error = value;
+			if(HasError)
+				m_done = true;
+		}
+	}
+
+	public bool HasError
+	{
+		get{ return m_error != null; }
+	}
+
+	public Routine(IEnumerator routine) 
+		: this(routine, CallerInformation.MethodName, CallerInformation.FilePath, CallerInformation.LineNumber)
+	{
 	}
 
 	public Routine(IEnumerator routine, string method, string filePath, int lineNumber)
@@ -26,15 +53,32 @@ public class Routine
 		CallerLine = lineNumber;
 	}
 
-	//TODO add error handling here
-	//TODO add way to catach expetions from a yeild location (propogate exceptions up)
-	//TODO better naming conventions
-	public virtual bool Step()
+	public virtual void Step ()
 	{
-		return m_routine.MoveNext();
+		try
+		{
+			m_done = !m_routine.MoveNext();
+		}
+		catch(Exception e)
+		{
+			m_error = new RoutineException(e);
+			m_done = true;
+		}
+
+		if(Yielded != null && !typeof(RoutineControlSignal).IsAssignableFrom(Yielded.GetType()))
+		{
+			Error = new RoutineException(new InvalidOperationException("you can only yield a RoutineControlSignal from a routine"));
+		}
 	}
 
-	//TODO better naming conventions
+	public bool Done
+	{
+		get
+		{
+			return m_done;
+		}
+	}
+
 	public virtual object Yielded
 	{
 		get
@@ -44,6 +88,8 @@ public class Routine
 	}
 
 	protected readonly IEnumerator m_routine;
+	protected bool m_done;
+	private RoutineException m_error;
 }
 
 //a syncronous process (which may take multiple frames) and returns a value
@@ -68,22 +114,37 @@ public class Routine<T> : Routine
 		}
 	}
 
-	public Routine(IEnumerator routine) : base(routine){}
-
-	public Routine(IEnumerator routine, string method, string filePath, int lineNumber) : base(routine, method, filePath, lineNumber) {}
-
-	public override bool Step ()
+	public Routine(IEnumerator routine)
+		: base(routine)
 	{
-		bool done = base.Step();
+	}
+
+	public Routine(IEnumerator routine, string method, string filePath, int lineNumber)
+		: base(routine, method, filePath, lineNumber)
+	{
+	}
+
+	public override void Step ()
+	{
+		try
+		{
+			m_done = !m_routine.MoveNext();
+		}
+		catch(Exception e)
+		{
+			Error = new RoutineException(e);
+		}
 
 		if(typeof(T).IsAssignableFrom(Yielded.GetType()))
 		{
 			m_result = (T)Yielded;
 			m_hasResult = true;
-			return false;
+			m_done = true;
 		}
-
-		return done;
+		else if(Yielded != null && !typeof(RoutineControlSignal).IsAssignableFrom(Yielded.GetType()))
+		{
+			Error = new RoutineException(new InvalidOperationException("you can only yield a RoutineControlSignal from a routine"));
+		}
 	}
 
 	private T m_result;

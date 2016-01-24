@@ -48,7 +48,7 @@ public class TargetingView : View<EmptyLogic,EmptyData,EmptyData>
 		target = null;
 
 		while(!canceled && target == null)
-			yield return 0;
+			yield return new WaitForNextFrame();
 
 		yield return target;
 	}

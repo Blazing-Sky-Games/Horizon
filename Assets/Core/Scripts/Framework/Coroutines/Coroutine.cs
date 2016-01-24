@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using System;
+using System.Linq;
 
 // a currently running "async"(sorta) process, which represents another routine distinct from the starter of this Coroutine
 // TODO need a way to handle exceptions at the call site of StartCoroutine
-public class Coroutine
+public class Coroutine : RoutineControlSignal
 {
 	public CoroutineException Error
 	{
@@ -14,15 +15,32 @@ public class Coroutine
 		}
 	}
 
+	public bool HasError
+	{
+		get
+		{
+			return m_error != null;
+		}
+	}
+
+	public bool CatchExceptions;
+
+	public object Yielded
+	{
+		get
+		{
+			return m_callStack.Peek() != null ? m_callStack.Peek().Yielded : null;
+		}
+	}
+
 	public Coroutine(IEnumerator routine, string meth = "", string file = "", int line = 0)
 	{
 		meth = meth == "" ? CallerInformation.MethodName : meth;
 		file = file == "" ? CallerInformation.FilePath : file;
 		line = line == 0 ? CallerInformation.LineNumber : line;
 		m_callStack.Push(new Routine(routine, meth, file, line));
-		Update();
 	}
-	
+
 	public bool Done
 	{
 		get
@@ -32,81 +50,105 @@ public class Coroutine
 	}
 	
 	//propogate exceptions up the call stack
-	public void Update()
+	public void Step (RoutineYieldInstruction instruction)
 	{
 		while(!Done)
 		{
-			bool stackFrameRunning = false;
-
-			//update the routine
-			try
-			{   
-				stackFrameRunning = m_callStack.Peek().Step();
-			}
-			catch(Exception e)
-			{
-				m_error = new CoroutineException(e, m_callStack);
-				throw m_error;
-			}
+			// the routine at the top of the call stack
+			Routine topRoutine = m_callStack.Peek();
 			
-			// this routine is finished running, return to caller
-			if(!stackFrameRunning)
+			//the routine is done
+			if(topRoutine.Done)
 			{
-				m_callStack.Pop();
-				continue;
-			}
-			
-			//the current routine is still running
-			
-			//what has the routine yielded
-			object yielded = m_callStack.Peek().Yielded;
-			
-			// if it is null, move along....
-			if(yielded == null)
-			{
-				continue;
-			}
-			// if its a corutine, wait for it to finish (wait for frames)
-			else if(yielded as Coroutine != null)
-			{
-				Coroutine blockingRoutine = yielded as Coroutine;
-				//if it isnt done
-				if(!blockingRoutine.Done)
+				Routine oldTop = m_callStack.Pop();
+				if(oldTop.HasError)
 				{
+					oldTop.Error.CallStack.Add(oldTop);
+					m_unwindQ.Enqueue(oldTop);
+
+					if(m_callStack.Count > 0)
+					{
+						if(!oldTop.CatchExceptions)
+						{
+							//pass the error down the call stack
+							m_callStack.Peek().Error = oldTop.Error;
+						}
+						else
+						{
+							//control passes down the stack, where the exception will be handled/ignored
+							m_callStack.Peek().Step();
+						}
+					}
+					else
+					{
+						// the corutine will exit with an error
+						//TODO make sure the call stack comes out in the right order
+						m_error = new CoroutineException(m_unwindQ.Peek().Error, new Stack<Routine>(m_unwindQ.ToArray().Reverse()));
+					}
+				}
+				else if(m_callStack.Count > 0)
+				{
+					//control passes back down the ecall stack
+					m_callStack.Peek().Step();
+				}
+				//control passes back down the call stack
+				continue;
+			}
+			// the routine is not done and it yielded null
+			// this means it either just started, or there was a yield return null (a no-op)
+			// in either case, continue the current routine
+			else if(topRoutine.Yielded == null)
+			{
+				//continue the current routine
+				topRoutine.Step();
+				continue;
+			}
+			else if(topRoutine.Yielded is Coroutine)
+			{
+				var co = topRoutine.Yielded as Coroutine;
+				if(!co.Done)
+				{
+					//this routine is blocked on a coroutine
 					break;
 				}
-				//if it is, keep going
+				else if(co.HasError && !co.CatchExceptions)
+				{
+					// the corutine threw an exception
+					topRoutine.Error = new RoutineException(co.Error);
+					continue;
+				}
 				else
 				{
-					if(blockingRoutine.Error != null)
-					{
-						m_error = new CoroutineException(blockingRoutine.Error, m_callStack);
-						throw m_error;
-					}
-
+					//the corutine finished. continue the current routine
+					// if the corutine threw an exception, it will be in Error, and the current rotutine can do somthing with it
+					topRoutine.Step();
 					continue;
 				}
 			}
-			// if its a ienumerator, step into it
-			else if(yielded as Routine != null)
+			// if its a routine, step into it
+			else if(topRoutine.Yielded is Routine)
 			{
-				Routine cr = yielded as Routine;
-				m_callStack.Push(cr);
+				//push it on the stack and transfer control to it
+				m_callStack.Push(topRoutine.Yielded as Routine);
+				continue;
+			} 
+			//a yield instruction was yeilded. this means this coroutine is waiting for a relevent call to UpDateCoroutines
+			//if we are updating this yeild instruction...
+			else if(instruction != null && instruction.GetType() == topRoutine.Yielded.GetType())
+			{
+				topRoutine.Step();
+				instruction = null;
 				continue;
 			}
-			// int was yielded. wait a frame
-			else if(yielded.GetType().IsAssignableFrom(typeof(int)))
-			{
-				break;
-			}
+			// we are stuck on a yield instruction that is not being updated right now
 			else
 			{
-				m_error = new CoroutineException(new InvalidOperationException("yeilded object of invalid type. type was " + yielded.GetType().ToString()), m_callStack);
-				throw m_error;
+				break;
 			}
 		}
 	}
 
 	private CoroutineException m_error;
 	private readonly Stack<Routine> m_callStack = new Stack<Routine>();
+	private readonly Queue<Routine> m_unwindQ = new Queue<Routine>();
 }

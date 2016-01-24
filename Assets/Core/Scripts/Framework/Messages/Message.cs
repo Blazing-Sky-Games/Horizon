@@ -47,6 +47,8 @@ public class Message : IGenericMessage
 	#endregion
 
 	//TODO return a coroutine and call it Send
+	//TODO recursive messages, send message while it is being processed
+	//TODO Message Cancelation
 	public IEnumerator WaitSend()
 	{
 		if(!m_idle)

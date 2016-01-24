@@ -26,7 +26,7 @@ public class LoadingScreenMainView : DataFromEditorView<EmptyLogic,EmptyData,Emp
 			{
 				logManager.Dereference().CoreLogFile.Log(e.ToString());
 			}
-			yield return 0;
+			yield return new WaitForNextFrame();
 		}
 	}
 

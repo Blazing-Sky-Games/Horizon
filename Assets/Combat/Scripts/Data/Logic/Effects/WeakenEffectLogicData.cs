@@ -14,7 +14,8 @@ public class WeakenEffectLogicData : AbilityEffectLogicData
 
 	public override IEnumerator WaitTrigger(UnitLogic Attacker, UnitLogic Defender, bool IsCritical)
 	{
-		yield return new Routine(TurnBasedEffectManager.WaitStartTurnBasedEffect(WaitWeakenEffect(Attacker, Defender, IsCritical)));
+		//yield return new Routine(TurnBasedEffectManager.WaitStartTurnBasedEffect(WaitWeakenEffect(Attacker, Defender, IsCritical)));
+		yield break;
 	}
 
 	IEnumerator WaitWeakenEffect(UnitLogic attacker, UnitLogic defender, bool isCritical)

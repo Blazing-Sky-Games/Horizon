@@ -10,7 +10,8 @@ class StunEffectLogicData : AbilityEffectLogicData
 
 	public override IEnumerator WaitTrigger(UnitLogic Attacker, UnitLogic Defender, bool IsCritical)
 	{
-		yield return new Routine(TurnBasedEffectManager.WaitStartTurnBasedEffect(WaitStunEffect(Attacker, Defender, IsCritical)));
+		//yield return new Routine(TurnBasedEffectManager.WaitStartTurnBasedEffect(WaitStunEffect(Attacker, Defender, IsCritical))); TODO
+		yield break;
 	}
 
 	IEnumerator WaitStunEffect(UnitLogic attacker, UnitLogic defender, bool isCritical)

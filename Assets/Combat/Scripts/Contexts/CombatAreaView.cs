@@ -28,7 +28,7 @@ public class CombatAreaView : View<CombatMainLogic,CombatLogicData,EmptyData>
 			//yield return m_turnOrder.UnitKilledMessage.WaitForMessage();
 			//yield return m_turnOrder.UnitKilledMessage.WaitTillMessageProcessed();
 			//UpdateCombatArea(); TODO MEGA BUG
-			yield return 0;
+			yield return new WaitForNextFrame();
 		}
 	}
 

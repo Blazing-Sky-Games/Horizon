@@ -23,7 +23,7 @@ public static class SceneUtility
 
 		while(!asop.isDone)
 		{
-			yield return 0;
+			yield return new WaitForNextFrame();
 		}
 
 		SceneManager.SetActiveScene(SceneManager.GetSceneByName(scene.ToString()));
@@ -40,7 +40,7 @@ public static class SceneUtility
 		var asop = Resources.UnloadUnusedAssets();
 		while(!asop.isDone)
 		{
-			yield return 0;
+			yield return new WaitForNextFrame();
 		}
 	}
 	public static bool LoadingScene;

@@ -12,7 +12,7 @@ public class CompContext : Context
 		while(frames < 100)
 		{
 			frames++;
-			yield return 0;
+			yield return new WaitForNextFrame();
 		}
 	}
 

@@ -33,7 +33,7 @@ public class HorizonMainView : DataFromEditorView<EmptyLogic,EmptyData,EmptyData
 		while(dt < 4)
 		{
 			dt += Time.deltaTime;
-			yield return 0;
+			yield return new WaitForNextFrame();
 		}
 
 		yield return new Routine(SceneUtility.LoadScene(SceneType.Combat));
