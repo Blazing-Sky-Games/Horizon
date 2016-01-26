@@ -8,8 +8,8 @@ public class AIActor : Actor
 	public AIActor(Faction faction)
 	{
 		m_faction = faction;
-		turnOrder = ServiceUtility.GetServiceReference<TurnOrder>();
-		factionService = ServiceUtility.GetServiceReference<FactionService>();
+		turnOrder = ServiceLocator.GetService<TurnOrder>();
+		factionService = ServiceLocator.GetService<FactionService>();
 	}
 
 	//pick a random ability and a random target and use that ability

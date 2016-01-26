@@ -4,7 +4,7 @@ using System.Linq;
 
 //TODO UGGGGHHHHHHH .... i really need to wrap everything in namespaces
 //TODO synchronozation between coroutines. i can think of some times it might be needed
-public static class CoroutineUtility
+public static class CoroutineService
 {
 	public static Coroutine StartCoroutine (IEnumerator routine)
 	{

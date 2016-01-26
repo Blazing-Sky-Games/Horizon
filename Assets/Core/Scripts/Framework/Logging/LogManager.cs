@@ -9,7 +9,7 @@ public interface ILog
 }
 
 [Service(typeof(LogManager))]
-public class LogManager : Service
+public class LoggingService : Service
 {
 	public LogManager()
 	{

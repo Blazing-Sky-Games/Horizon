@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-public static class ReflectionUtility
+public static class ReflectionService
 {
 	public static IEnumerable<Type> AllTypes
 	{
@@ -40,7 +40,7 @@ public static class ReflectionUtility
 	{
 		public DerivedTypeRecord(Type BaseType)
 		{
-			List<Type> derivedTypesList = ReflectionUtility.AllTypes.Where(t => BaseType.IsAssignableFrom(t) && t.IsAbstract == false).ToList();
+			List<Type> derivedTypesList = ReflectionService.AllTypes.Where(t => BaseType.IsAssignableFrom(t) && t.IsAbstract == false).ToList();
 
 			foreach(Type type in derivedTypesList)
 			{

@@ -27,7 +27,7 @@ public class Actor
 
 		while(oldPassedTurn == m_passedTurn && oldUsedAction == m_usedAction)
 		{
-			yield return new WaitForNextFrame();
+			yield return new WaitForNextUpdate();
 		}
 	}
 

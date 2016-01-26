@@ -12,7 +12,7 @@ public class LoadingScreenMainView : DataFromEditorView<EmptyLogic,EmptyData,Emp
 	protected override void SetUp ()
 	{
 		base.SetUp();
-		logManager = ServiceUtility.GetServiceReference<LogManager>();
+		logManager = ServiceLocator.GetService<LogManager>();
 	}
 
 	protected override IEnumerator MainRoutine ()
@@ -26,7 +26,7 @@ public class LoadingScreenMainView : DataFromEditorView<EmptyLogic,EmptyData,Emp
 			{
 				logManager.Dereference().CoreLogFile.Log(e.ToString());
 			}
-			yield return new WaitForNextFrame();
+			yield return new WaitForNextUpdate();
 		}
 	}
 

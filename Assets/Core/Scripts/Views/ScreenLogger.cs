@@ -52,7 +52,7 @@ public class ScreenLogger : MonoBehaviour
 		styleText = new GUIStyle();
 		styleText.fontSize = FontSize;
 
-		logManager = ServiceUtility.GetServiceReference<LogManager>();
+		logManager = ServiceLocator.GetService<LogManager>();
 	}
 
 	void OnEnable()

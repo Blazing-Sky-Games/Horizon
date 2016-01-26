@@ -50,7 +50,7 @@ public class CustomDefaultInspector : Editor {
 
 			Type currentType;
 			if (prop.objectReferenceValue == null) {
-				currentType = ReflectionUtility.GetDerivedTypes(baseType).derivedTypes [0].Value;
+				currentType = ReflectionService.GetDerivedTypes(baseType).derivedTypes [0].Value;
 			} else {
 				currentType = prop.objectReferenceValue.GetType ();
 			}
@@ -148,7 +148,7 @@ public class CustomDefaultInspector : Editor {
 		if (!baseType.IsAssignableFrom (selected) || selected.IsAbstract)
 			throw new Exception ();
 
-		var derivedTypes = ReflectionUtility.GetDerivedTypes(baseType);
+		var derivedTypes = ReflectionService.GetDerivedTypes(baseType);
 
 		int selectedIndex = derivedTypes.typeIndexLookup[selected];
 

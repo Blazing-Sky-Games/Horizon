@@ -36,8 +36,8 @@ public class WeakenEffectLogicData : AbilityEffectLogicData
 			duration--;
 		}
 
-		Coroutine removeModifyerRoutine = CoroutineUtility.StartCoroutine(stat.WaitModify(drop));
-		Coroutine removeStatusRoutine = CoroutineUtility.StartCoroutine(defender.WaitSetStatus(UnitStatus.Weakened, false));
+		Coroutine removeModifyerRoutine = CoroutineService.StartCoroutine(stat.WaitModify(drop));
+		Coroutine removeStatusRoutine = CoroutineService.StartCoroutine(defender.WaitSetStatus(UnitStatus.Weakened, false));
 
 		yield return removeModifyerRoutine;
 		yield return removeStatusRoutine;

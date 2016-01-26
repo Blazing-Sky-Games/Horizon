@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine;
 
 
-public static class SceneUtility
+public static class ContextService
 {
 	public static readonly Message<SceneType> SceneLoaded = new Message<SceneType>();
 	public static readonly Message<SceneType> SceneUnloaded = new Message<SceneType>();

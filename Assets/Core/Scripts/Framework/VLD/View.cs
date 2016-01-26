@@ -34,7 +34,7 @@ public abstract class View<LogicType, LogicDataType, ViewDataType> : MonoBehavio
 	{
 		while(!destroyed)
 		{
-			yield return new WaitForNextFrame();
+			yield return new WaitForNextUpdate();
 		}
 	}
 
@@ -115,7 +115,7 @@ public abstract class View<LogicType, LogicDataType, ViewDataType> : MonoBehavio
 	{
 		while(true)
 		{
-			yield return new WaitForNextFrame();
+			yield return new WaitForNextUpdate();
 		}
 	}
 
@@ -167,20 +167,20 @@ public abstract class View<LogicType, LogicDataType, ViewDataType> : MonoBehavio
 		if(Logic == null || m_data == null)
 			throw new InvalidOperationException("a view must have its logic and data set when it 'starts up', by calling injectlogic and injectdata in awake, passing non-null logic and data");
 
-		CoroutineUtility.StartCoroutine(LaunchWhenSceneInLoaded());
+		CoroutineService.StartCoroutine(LaunchWhenSceneInLoaded());
 	}
 
 	private IEnumerator LaunchWhenSceneInLoaded()
 	{
-		while(SceneUtility.LoadingScene)
-			yield return new WaitForNextFrame();
+		while(ContextLoadingService.LoadingScene)
+			yield return new WaitForNextUpdate();
 
 		SetUp();
 		InitFromData(m_data);
 		AttachInstanceHandlers();
 		AttachLogic();
 
-		CoroutineUtility.StartCoroutine(MainRoutine());
+		CoroutineService.StartCoroutine(MainRoutine());
 		yield break;
 	}
 		
@@ -202,7 +202,7 @@ public abstract class View<LogicType, LogicDataType, ViewDataType> : MonoBehavio
 
 		TearDown();
 		destroyed = true;
-		CoroutineUtility.StartCoroutine(Destroyed.WaitSend());
+		CoroutineService.StartCoroutine(Destroyed.WaitSend());
 	}
 
 	private bool destroyed;

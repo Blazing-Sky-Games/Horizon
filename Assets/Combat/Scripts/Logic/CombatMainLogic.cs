@@ -10,15 +10,15 @@ public class CombatMainLogic : ViewLogic<CombatLogicData>
 		//TODO creat turn order
 		//m_turnOrder = new TurnOrder(Data);
 
-		turnOrder = ServiceUtility.GetServiceReference<TurnOrder>();
-		factionService = ServiceUtility.GetServiceReference<FactionService>();
+		turnOrder = ServiceLocator.GetService<TurnOrder>();
+		factionService = ServiceLocator.GetService<FactionService>();
 
 		//creat the actors that will be playing
 		//Horizon.Combat.Logic.Globals.SetFactionLeader(Faction.Player, new Actor());
 		factionService.Dereference().SetFactionLeader(Faction.Player, new AIActor(Faction.Player));
 		factionService.Dereference().SetFactionLeader(Faction.AI, new AIActor(Faction.AI));
 
-		CoroutineUtility.StartCoroutine(WaitCombatMain());
+		CoroutineService.StartCoroutine(WaitCombatMain());
 	}
 
 	private IEnumerator WaitCombatMain ()
@@ -43,7 +43,7 @@ public class CombatMainLogic : ViewLogic<CombatLogicData>
 				{
 					//tell the actor to decide what to do
 					FactionLeader.ActionDecidedMessage.AddHandler(HandleActionDecided);
-					CoroutineUtility.StartCoroutine(FactionLeader.WaitDecideAction());
+					CoroutineService.StartCoroutine(FactionLeader.WaitDecideAction());
 					FactionLeader.ActionDecidedMessage.RemoveHandler(HandleActionDecided);
 				}
 			}

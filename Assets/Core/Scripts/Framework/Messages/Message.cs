@@ -64,7 +64,7 @@ public class Message : IGenericMessage
 		
 		foreach(Func<IEnumerator> handler in m_handlers)
 		{
-			runningHandlers.Add(CoroutineUtility.StartCoroutine(handler()));
+			runningHandlers.Add(CoroutineService.StartCoroutine(handler()));
 		}
 
 		foreach(Coroutine runningHandler in runningHandlers)
