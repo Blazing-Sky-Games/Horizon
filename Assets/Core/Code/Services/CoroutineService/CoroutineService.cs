@@ -1,22 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-
-//TODO UGGGGHHHHHHH .... i really need to wrap everything in namespaces
-//TODO synchronozation between coroutines. i can think of some times it might be needed
 using Core.Scripts.Contexts;
+using Core.Code.Services.LoggingService;
 
 
 public class CoroutineService : ICoroutineService
 {
 	public void LoadService ()
 	{
-		throw new System.NotImplementedException();
+		loggingService = ServiceLocator.GetService<ILoggingService>();
 	}
 
 	public void UnloadService ()
 	{
-		throw new System.NotImplementedException();
+		loggingService = null;
 	}
 
 	public Coroutine StartCoroutine (IEnumerator routine)
@@ -40,10 +38,7 @@ public class CoroutineService : ICoroutineService
 			m_routines[i].Step(new YeildInstructionType());
 			if(m_routines[i].HasError)
 			{
-				//log somewhere
-			#if DEBUG
-				UnityEngine.Debug.LogException(m_routines[i].Error);
-			#endif
+				loggingService.ErrorLog.Log(m_routines[i].Error.ToString());
 			}
 		}
 		
@@ -51,4 +46,6 @@ public class CoroutineService : ICoroutineService
 	}
 
 	private List<Coroutine> m_routines = new List<Coroutine>();
+
+	private ILoggingService loggingService;
 }

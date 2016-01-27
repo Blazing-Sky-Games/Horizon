@@ -1,10 +1,8 @@
 using System.Collections;
-
-//a syncronous process (which may take multiple frames)
 using System;
 using System.Collections.Generic;
 
-
+//a syncronous process (which may take multiple frames)
 public class RoutineException : Exception
 {
 	public override string Message

@@ -5,7 +5,6 @@ using System.Linq;
 
 public class Unit
 {
-	//this unit has been hurt
 	public readonly Message<Unit, UnitAbility, Unit> AbilityUsedMessage = new Message<Unit, UnitAbility, Unit>();
 	public readonly Message<UnitStatus> StatusChangedMessage = new Message<UnitStatus>();
 	public List<UnitAbility> Abilities = new List<UnitAbility>();
@@ -21,7 +20,7 @@ public class Unit
 
 	public readonly Faction Faction;
 
-	public Unit(UnitLogicData Data) 
+	public Unit(UnitData Data)
 	{
 		Abilities = Data.Abilities.Select(abilityData => new UnitAbility(abilityData)).ToList();
 
@@ -42,7 +41,7 @@ public class Unit
 		return effectType == EffectType.Physical ? Strength.Value : Intelligence.Value;
 	}
 
-	public int GetCombatResistance(EffectType effectType)
+	public int GetCombatResistance (EffectType effectType)
 	{
 		return effectType == EffectType.Physical ? Stability.Value : Insight.Value;
 	}
@@ -57,20 +56,19 @@ public class Unit
 		return GetCombatResistance(effectType);
 	}
 
-	//based on skill, int, str, 
-	public float GetCriticalAccuracy()
+	//based on skill, int, str,
+	public float GetCriticalAccuracy ()
 	{
 		return Skill.Value + Intelligence.Value / 2 + Strength.Value / 4;
 	}
 
-	// vitality, stability, insight
-	public float GetCriticalAvoidance()
+	//based on vitality, stability, insight
+	public float GetCriticalAvoidance ()
 	{
 		return Vitality.Value + Stability.Value / 2 + Insight.Value / 4;
 	}
 
-	//TODO CHANGE this to return a statistic instead of just an int
-	public Statistic GetStatistic(UnitStatatistic stat)
+	public Statistic GetStatistic (UnitStatatistic stat)
 	{
 		switch(stat)
 		{
@@ -95,18 +93,19 @@ public class Unit
 	{
 		get
 		{
-			//hack to get stun to work
-			return GetStatus (UnitStatus.Stunned) == false;
+			return !CanTakeActionPoll.AnyFalse;
 		}
 	}
 
-	public IEnumerator WaitSetStatus(UnitStatus status, bool active)
+	public readonly Poll CanTakeActionPoll;
+
+	public IEnumerator WaitSetStatus (UnitStatus status, bool active)
 	{
 		m_status[status] = active;
 		yield return new Routine(StatusChangedMessage.WaitSend(status));
 	}
 
-	public bool GetStatus(UnitStatus status)
+	public bool GetStatus (UnitStatus status)
 	{
 		return m_status.ContainsKey(status) && m_status[status];
 	}

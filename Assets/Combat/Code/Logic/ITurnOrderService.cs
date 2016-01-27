@@ -9,8 +9,10 @@ namespace Combat.Code.Services.TurnOrderService
 {
 	public interface ITurnOrderService : IService
 	{
-		Unit ActiveUnit { get; }
+		UnitId ActiveUnitId { get; }
 		IEnumerator WaitAdvance();
+
+		void SetOrder (IEnumerable<UnitId> ids);
 	}
 }
 

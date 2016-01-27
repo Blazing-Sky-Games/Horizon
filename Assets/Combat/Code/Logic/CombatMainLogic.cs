@@ -3,21 +3,28 @@ using System.Collections.Generic;
 using Combat.Code.Services.FactionService;
 using Combat.Code.Services.TurnOrderService;
 using Core.Scripts.Contexts;
+using Combat.Code.Data.Logic.Effects;
+using System.Linq;
+using Core.Code.Services.LoggingService;
+using Combat.Code.Extensions;
 
 public class CombatMainLogic
 {
-	//supplyed in Editor
-	public CombatMainLogic(CombatLogicData Data)
+	public CombatMainLogic(CombatScenario Data)
 	{
-		//TODO creat turn order
-		//m_turnOrder = new TurnOrder(Data);
-
 		turnOrderService = ServiceLocator.GetService<ITurnOrderService>();
 		factionService = ServiceLocator.GetService<IFactionService>();
 		coroutineService = ServiceLocator.GetService<ICoroutineService>();
+		enduringEffectService = ServiceLocator.GetService<IEnduringEffectService>();
+		unitService = ServiceLocator.GetService<IUnitService>();
+		loggingService = ServiceLocator.GetService<ILoggingService>();
 
-		//creat the actors that will be playing
-		//Horizon.Combat.Logic.Globals.SetFactionLeader(Faction.Player, new Actor());
+		//create the units in the combat scenrios
+		var createdUnitsIds = unitService.CreateUnits(Data.Units);
+		turnOrderService.SetOrder(createdUnitsIds);
+
+		//create the actors that will be playing
+		//factionService.SetFactionLeader(Faction.Player, new Actor(Faction.Player));
 		factionService.SetFactionLeader(Faction.Player, new AIActor(Faction.Player));
 		factionService.SetFactionLeader(Faction.AI, new AIActor(Faction.AI));
 
@@ -26,18 +33,32 @@ public class CombatMainLogic
 
 	private IEnumerator WaitCombatMain ()
 	{
-		//LogManager.NewCombatLog();
-		//LogManager.Log("begin combat", LogDestination.Screen);
+		combatLog = loggingService.NewMultiLog(loggingService.NewLogFile("CombatLog"),loggingService.ScreenLog);
+		combatLog.Log("begin combat");
 
 		while(true)
 		{
-			Actor FactionLeader = factionService.GetFactionLeader(turnOrderService.ActiveUnit.Faction);
+			Actor FactionLeader = unitService.GetUnit(turnOrderService.ActiveUnitId).Faction.GetLeader();
 
 			FactionLeader.ResetCanTakeAction();
 
+			//update turn based effects targeting the active unit
+			IEnumerable<TurnBasedEffect> turnBasedEffectsOnActiveUnit = enduringEffectService.ActiveEffectsOfType<TurnBasedEffect>().Where(effect => effect.Target == turnOrderService.ActiveUnitId);
+			foreach(TurnBasedEffect effect in turnBasedEffectsOnActiveUnit)
+			{
+				effect.OnNewTurn();
+			}
+
+			//update passive effects on the active unit
+			IEnumerable<PassiveEffect> passiveEffectsOnActiveUnit = enduringEffectService.ActiveEffectsOfType<PassiveEffect>().Where(effect => effect.Target == turnOrderService.ActiveUnitId);
+			foreach(PassiveEffect effect in passiveEffectsOnActiveUnit)
+			{
+				effect.OnNewTurn();
+			}
+
 			while(FactionLeader.CanTakeAction)
 			{
-				if(!turnOrderService.ActiveUnit.CanTakeAction)
+				if(!unitService.GetUnit(turnOrderService.ActiveUnitId).CanTakeAction)
 				{
 					//decide for the actor, they cant do anything this turn
 					yield return new Routine(FactionLeader.WaitPassTurn());
@@ -53,7 +74,6 @@ public class CombatMainLogic
 
 			//advance the turn order
 			yield return new Routine(turnOrderService.WaitAdvance());
-			//yield return new Routine(TurnBasedEffectManager.WaitUpdateTurnBasedEffects()); TODO
 		}
 	}
 
@@ -64,5 +84,10 @@ public class CombatMainLogic
 
 	private IFactionService factionService;
 	private ITurnOrderService turnOrderService;
+	private IUnitService unitService;
 	private ICoroutineService coroutineService;
+	private IEnduringEffectService enduringEffectService;
+	private ILoggingService loggingService;
+
+	private ILog combatLog;
 }

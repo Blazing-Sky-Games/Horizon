@@ -52,20 +52,11 @@ public class ScreenLogger : MonoBehaviour
 
 		styleText = new GUIStyle();
 		styleText.fontSize = FontSize;
-
-		loggingService = ServiceLocator.GetService<ILoggingService>();
 	}
 
 	void OnEnable()
 	{
 		queue = new Queue<LogMessage>();
-		//TODO HACK fix this hack. meh, it works for now
-		loggingService.ScreenLog.OnLog += HandleLog;
-	}
-
-	void OnDisable()
-	{
-		loggingService.ScreenLog.OnLog -= HandleLog;
 	}
 
 	void Update()
@@ -121,8 +112,6 @@ public class ScreenLogger : MonoBehaviour
 	{
 		queue.Enqueue(new LogMessage(message));
 	}
-
-	ILoggingService loggingService;
 }
 
 class LogMessage

@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
+using Combat.Code.Services.TurnOrderService;
 
-//TODO do we really need "actors"? or can each unit be an "actor"
 public class Actor
 {
 	public readonly Message<IActorAction> ActionDecidedMessage = new Message<IActorAction>();
@@ -37,7 +37,7 @@ public class Actor
 		yield return new Routine(ActionDecidedMessage.WaitSend(new PassTurnAction()));
 	}
 	
-	public IEnumerator WaitUseUnitAbility(Unit caster, UnitAbility ability, Unit target)
+	public IEnumerator WaitUseUnitAbility(UnitId caster, UnitAbility ability, UnitId target)
 	{
 		m_usedAction = true;
 		yield return new Routine(ActionDecidedMessage.WaitSend(new UnitAbilityUsageAction(caster, ability, target)));

@@ -1,21 +1,22 @@
 ﻿using System;
 using System.Collections;
+using Combat.Code.Services.TurnOrderService;
 
 namespace Combat.Code.Data.Logic.Effects
 {
 	public abstract class EnduringEffect : CombatEffect
 	{
-		private Unit m_attacker;
-		private Unit m_defender;
+		private UnitId m_attacker;
+		private UnitId m_defender;
 		private bool m_isCritical;
 
 		private IEnduringEffectService enduringEffectService;
 
-		public Unit Attacker{get{ return m_attacker;}}
-		public Unit Defender{get{ return m_defender;}}
+		public UnitId Caster{get{ return m_attacker;}}
+		public UnitId Target{get{ return m_defender;}}
 		public bool IsCritical{get{ return m_isCritical;}}
 
-		public override IEnumerator WaitTrigger (Unit attacker, Unit defender, bool isCritical)
+		public override IEnumerator WaitTrigger (UnitId attacker, UnitId defender, bool isCritical)
 		{
 			enduringEffectService = enduringEffectService == null ? ServiceLocator.GetService<IEnduringEffectService>() : enduringEffectService;
 

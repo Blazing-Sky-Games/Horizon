@@ -11,22 +11,23 @@ public class AIActor : Actor
 	public AIActor(Faction faction)
 	{
 		m_faction = faction;
-		turnOrderService = ServiceLocator.GetService<TurnOrder>();
+		turnOrderService = ServiceLocator.GetService<TurnOrderService>();
 		factionService = ServiceLocator.GetService<FactionService>();
+		unitService = ServiceLocator.GetService<IUnitService>();
 	}
 
 	//pick a random ability and a random target and use that ability
 	public override IEnumerator WaitDecideAction()
 	{
-		Unit activeUnit = turnOrderService.ActiveUnit;
+		Unit activeUnit = unitService.GetUnit(turnOrderService.ActiveUnitId);
 
-		if(factionService.GetFactionLeader(activeUnit.Faction) != this)
+		if(activeUnit.Faction.GetLeader() != this)
 		{
 			throw new InvalidOperationException("AI can only decide action when it is its turn");
 		}
 			
-		Unit targetUnit = factionService.GetOpposingFaction(m_faction).GetUnits().RandomOrder().FirstOrDefault();
-		if(targetUnit == null)
+		UnitId targetUnitId = factionService.GetOpposingFaction(m_faction).GetUnits().RandomOrder().FirstOrDefault();
+		if(targetUnitId == null)
 		{
 			yield return new Routine(WaitPassTurn());
 			yield break;
@@ -39,7 +40,7 @@ public class AIActor : Actor
 			yield break;
 		}
 
-		yield return new Routine(WaitUseUnitAbility(activeUnit, SelectedAbility, targetUnit));
+		yield return new Routine(WaitUseUnitAbility(turnOrderService.ActiveUnitId, SelectedAbility, targetUnitId));
 	}
 
 	private ITurnOrderService turnOrderService;

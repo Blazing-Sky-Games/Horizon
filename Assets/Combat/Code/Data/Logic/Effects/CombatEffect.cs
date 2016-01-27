@@ -1,12 +1,13 @@
 using System.Collections;
 using System;
+using Combat.Code.Services.TurnOrderService;
 
 [InlineData]
 public abstract class CombatEffect : Data
 {
 	public EffectType effectType;
 
-	public abstract IEnumerator WaitTrigger(Unit attacker, Unit defender, bool isCritical);
+	public abstract IEnumerator WaitTrigger(UnitId attacker, UnitId defender, bool isCritical);
 
 	// relative comparason between units for a critical effect
 	private float GetCriticalMatchUp(Unit attacker, Unit defender)

@@ -5,8 +5,22 @@ using System.IO;
 
 namespace Core.Code.Services.LoggingService
 {
+	public enum LogFileCreateMode
+	{
+		Overwrite,
+		CreateNew
+	}
+
 	public class LoggingService : ILoggingService
 	{
+		public ILog ErrorLog
+		{
+			get
+			{
+				throw new NotImplementedException();
+			}
+		}
+
 		#region IService implementation
 
 		public void LoadService ()
@@ -74,11 +88,7 @@ namespace Core.Code.Services.LoggingService
 			return new MultiLog(logs);
 		}
 
-		public enum LogFileCreateMode
-		{
-			Overwrite,
-			CreateNew
-		}
+
 
 		private class LogFile : ILog
 		{

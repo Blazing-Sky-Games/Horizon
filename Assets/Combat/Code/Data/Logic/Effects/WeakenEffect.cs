@@ -18,9 +18,11 @@ public class WeakenEffect : TurnBasedEffect
 
 	public override IEnumerator StartEffect ()
 	{
+		IUnitService unitService = ServiceLocator.GetService<IUnitService>();
+
 		yield return new Routine(base.StartEffect());
 
-		Potency = (int)GetMatchUp(Attacker, Defender, IsCritical);
+		Potency = (int)GetMatchUp(unitService.GetUnit(Caster), unitService.GetUnit(Target), IsCritical);
 
 		yield return new Routine(TurnsRemainingSetter.WaitSet(DurationM * Potency + DurationB));
 

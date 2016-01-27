@@ -7,7 +7,6 @@ using System.Collections;
 //tag data type with this to have it display inline in inspector
 //used to select an implimentation of an abstract data type
 //this data type will not show up in the creat data window
-//TODO make it so individual feilds can be inline
 [AttributeUsage(AttributeTargets.Class, Inherited = true)]
 public class InlineData : Attribute
 {
@@ -29,13 +28,6 @@ public class DataCatagory : Attribute
 
 public class Data : ScriptableObject
 {
-	public static EmptyData Empty;
-
-	static Data()
-	{
-		Empty = ScriptableObject.CreateInstance<EmptyData>();
-	}
-
 	public ScriptableObject DeepCopy ()
 	{
 		Type dataType = GetType();

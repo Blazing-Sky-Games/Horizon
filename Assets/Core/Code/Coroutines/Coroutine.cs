@@ -4,7 +4,6 @@ using System;
 using System.Linq;
 
 // a currently running "async"(sorta) process, which represents another routine distinct from the starter of this Coroutine
-// TODO need a way to handle exceptions at the call site of StartCoroutine
 public class Coroutine : RoutineControlSignal
 {
 	public CoroutineException Error
@@ -82,7 +81,6 @@ public class Coroutine : RoutineControlSignal
 					else
 					{
 						// the corutine will exit with an error
-						//TODO make sure the call stack comes out in the right order
 						m_error = new CoroutineException(m_unwindQ.Peek().Error, new Stack<Routine>(m_unwindQ.ToArray().Reverse()));
 					}
 				}

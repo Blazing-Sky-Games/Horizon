@@ -1,17 +1,9 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-
-// A coroutine bassed event
-// like a regular event, handlers can be added and removed, and the event can be "fired"
-// but unlike an event, the handlers can be coroutines (take multiple frames) which run in parralel
-// and "fireing" (sending) the message will not return untill all handlers have finished
-
-// TODO do we need this next bit (late handlers)
-// there is also a mechanism for seeing if a given message is "idle" or not (if send was just called)
-// so code can handle a message being sent, without explicetly attaching a handler
 using Core.Scripts.Contexts;
 
+//generic interface to all types of messages
 public interface IGenericMessage
 {
 	IEnumerator WaitSendGeneric (object[] args);
@@ -19,6 +11,10 @@ public interface IGenericMessage
 	void RemoveHandlerGeneric(Func<object[],IEnumerator> handler);
 }
 
+// A coroutine based event
+// like a regular event, handlers can be added and removed, and the event can be "fired"
+// but unlike an event, the handlers can be coroutines (take multiple frames) which run in parralel
+// and "fireing" (sending) the message will not return untill all handlers have finished
 public class Message : IGenericMessage
 {
 	private ICoroutineService coroutineService;
@@ -54,16 +50,11 @@ public class Message : IGenericMessage
 
 	#endregion
 
-	//TODO return a coroutine and call it Send
-	//TODO recursive messages, send message while it is being processed
-	//TODO Message Cancelation
 	public IEnumerator WaitSend()
 	{
 		if(!m_idle)
 		{
 			throw new InvalidOperationException("send can only be called when a previose call to send has finised");
-			//TODO should this be replaced with a qeue based system
-			//what about recursive message calls (where fireing a message caused that message to fire again, like a recursive function call...would that ever happen)...hmmm
 		}
 
 		m_idle = false;

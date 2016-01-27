@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 
-//TODO and this goes for other turn based effects. nead an elegant way to handle a unit dieing
 using Combat.Code.Data.Logic.Effects;
 
 

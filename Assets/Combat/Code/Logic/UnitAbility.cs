@@ -6,35 +6,41 @@ using System.Collections.Generic;
 
 public class UnitAbility
 {
+	public readonly Message CriticalHit = new Message();
+
 	private readonly List<CombatEffect> combatEffects;
 	private readonly List<CombatEffect> criticalEffects;
 	private readonly float critChanceBonus;
 
-	public UnitAbility(UnitAbilityLogicData Data)
+	public UnitAbility(UnitAbilityData Data)
 	{
 		combatEffects = Data.CombatEffects;
 		criticalEffects = Data.CriticalEffects;
 		critChanceBonus = Data.CritChanceBonus;
 	}
 
-	public IEnumerator WaitUse(Unit caster, Unit target)
+	public IEnumerator WaitUse(UnitId casterId, UnitId targetId)
 	{
+		IUnitService unitService = ServiceLocator.GetService<IUnitService>();
+		Unit caster = unitService.GetUnit(casterId);
+		Unit target = unitService.GetUnit(targetId);
+
 		yield return new Routine(caster.AbilityUsedMessage.WaitSend(caster, this, target));
 
 		foreach(CombatEffect effect in combatEffects)
 		{
-			yield return new Routine(effect.WaitTrigger(caster, target, false));
+			yield return new Routine(effect.WaitTrigger(casterId, targetId, false));
 		}
 
-		//this equation will probably change
 		float criticalSuccessThreshold = (caster.GetCriticalAccuracy() / target.GetCriticalAvoidance()) * 0.2f; 
 
 		if(Random.value <= criticalSuccessThreshold + critChanceBonus)
 		{
-			//TODO send out critical hit message
+			yield return new Routine(CriticalHit.WaitSend());
+
 			foreach(CombatEffect effect in criticalEffects)
 			{
-				yield return new Routine(effect.WaitTrigger(caster, target, true));
+				yield return new Routine(effect.WaitTrigger(casterId, targetId, true));
 			}
 		}
 	}

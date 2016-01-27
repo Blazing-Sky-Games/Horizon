@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Random = UnityEngine.Random;
 
 [DataCatagory("Combat/Logic")]
-public class UnitAbilityLogicData : Data
+public class UnitAbilityData : Data
 {
 	[UnityEngine.Tooltip("value from 0 to 1 that adds to crit liclyhood")]
 	public float CritChanceBonus = 0;

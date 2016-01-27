@@ -1,17 +1,20 @@
 using UnityEngine;
 using System.Collections;
 
-// represents and actors choice to use a unit ability
+// represents an actors choice to use a unit ability
+using Combat.Code.Services.TurnOrderService;
+
+
 public class UnitAbilityUsageAction : IActorAction
 {
 	// the unit using the ability
-	public Unit Caster;
+	public UnitId Caster;
 	// the unit targeted by the ability
-	public Unit Target;
+	public UnitId Target;
 	// the ability being used
 	public UnitAbility Ability;
 
-	public UnitAbilityUsageAction(Unit caster, UnitAbility ability, Unit target)
+	public UnitAbilityUsageAction(UnitId caster, UnitAbility ability, UnitId target)
 	{
 		Caster = caster;
 		Ability = ability;

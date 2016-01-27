@@ -1,5 +1,6 @@
 using System.Collections;
-using Random = UnityEngine.Random;
+using System;
+using Combat.Code.Services.TurnOrderService;
 
 public class DamageEffectLogicData : CombatEffect
 {
@@ -10,18 +11,22 @@ public class DamageEffectLogicData : CombatEffect
 	[UnityEngine.Tooltip("dmg = M*Potency*Rand(LR,1)+B")]
 	public float DamageLR = 0.8f;
 
-	public override IEnumerator WaitTrigger(Unit Attacker, Unit Defender, bool IsCritical)
+	public override IEnumerator WaitTrigger(UnitId Attacker, UnitId Defender, bool IsCritical)
 	{
+		IUnitService unitService = ServiceLocator.GetService<IUnitService>();
+
+		Random rand = new Random();
+
 		// roll a die to see how strong the attack is
-		float attackRoll = Random.Range(DamageLR, 1f);
+		float attackRoll = (float)rand.NextDouble() * (1f - DamageLR) + DamageLR;
 
 		int dmg = 
-			(int)(GetMatchUp(Attacker, Defender, IsCritical) 
+			(int)(GetMatchUp(unitService.GetUnit(Attacker), unitService.GetUnit(Defender), IsCritical) 
 			* DamageM 
 			* attackRoll  
 			+ DamageB);
 
-		yield return new Routine(Defender.Health.WaitHurt(dmg));
+		yield return new Routine(unitService.GetUnit(Defender).Health.WaitHurt(dmg));
 	}
 
 }

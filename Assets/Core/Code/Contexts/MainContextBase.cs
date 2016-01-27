@@ -17,6 +17,7 @@ namespace Core.Scripts.Contexts
 
 		public void UnLoad()
 		{
+			RemoveServiceReferences();
 			RemoveCoreServices();
 		}
 
