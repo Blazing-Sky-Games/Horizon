@@ -5,13 +5,13 @@ using System.Collections;
 public class UnitAbilityUsageAction : IActorAction
 {
 	// the unit using the ability
-	public UnitId Caster;
+	public Unit Caster;
 	// the unit targeted by the ability
-	public UnitId Target;
+	public Unit Target;
 	// the ability being used
 	public UnitAbility Ability;
 
-	public UnitAbilityUsageAction(UnitId caster, UnitAbility ability, UnitId target)
+	public UnitAbilityUsageAction(Unit caster, UnitAbility ability, Unit target)
 	{
 		Caster = caster;
 		Ability = ability;

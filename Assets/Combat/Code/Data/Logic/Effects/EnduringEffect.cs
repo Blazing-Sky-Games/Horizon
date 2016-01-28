@@ -2,19 +2,19 @@
 
 public abstract class EnduringEffect : CombatEffect
 {
-	private UnitId m_attacker;
-	private UnitId m_defender;
+	private Unit m_attacker;
+	private Unit m_defender;
 	private bool m_isCritical;
 
 	private IEnduringEffectService enduringEffectService;
 
-	public UnitId Caster{ get { return m_attacker; } }
+	public Unit Caster{ get { return m_attacker; } }
 
-	public UnitId Target{ get { return m_defender; } }
+	public Unit Target{ get { return m_defender; } }
 
 	public bool IsCritical{ get { return m_isCritical; } }
 
-	public override IEnumerator WaitTrigger (UnitId attacker, UnitId defender, bool isCritical)
+	public override IEnumerator WaitTrigger (Unit attacker, Unit defender, bool isCritical)
 	{
 		enduringEffectService = enduringEffectService == null ? ServiceLocator.GetService<IEnduringEffectService>() : enduringEffectService;
 
@@ -32,5 +32,5 @@ public abstract class EnduringEffect : CombatEffect
 
 	public abstract bool EndingCondition ();
 
-	public abstract IEnumerator EndEffect ();
+	public virtual IEnumerator EndEffect (){yield break;}
 }

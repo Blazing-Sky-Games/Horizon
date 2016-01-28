@@ -32,27 +32,20 @@ public class CombatMainLogic
 
 		while(true)
 		{
-			Actor FactionLeader = unitService.GetUnit(turnOrderService.ActiveUnitId).Faction.GetLeader();
+			Actor FactionLeader = turnOrderService.ActiveUnit.Faction.GetLeader();
 
 			FactionLeader.ResetCanTakeAction();
 
 			//update turn based effects targeting the active unit
-			IEnumerable<TurnBasedEffect> turnBasedEffectsOnActiveUnit = enduringEffectService.ActiveEffectsOfType<TurnBasedEffect>().Where(effect => effect.Target == turnOrderService.ActiveUnitId);
+			IEnumerable<TurnBasedEffect> turnBasedEffectsOnActiveUnit = enduringEffectService.ActiveEffectsOfType<TurnBasedEffect>().Where(effect => effect.Target == turnOrderService.ActiveUnit);
 			foreach(TurnBasedEffect effect in turnBasedEffectsOnActiveUnit)
-			{
-				effect.OnNewTurn();
-			}
-
-			//update passive effects on the active unit
-			IEnumerable<PassiveEffect> passiveEffectsOnActiveUnit = enduringEffectService.ActiveEffectsOfType<PassiveEffect>().Where(effect => effect.Target == turnOrderService.ActiveUnitId);
-			foreach(PassiveEffect effect in passiveEffectsOnActiveUnit)
 			{
 				effect.OnNewTurn();
 			}
 
 			while(FactionLeader.CanTakeAction)
 			{
-				if(!unitService.GetUnit(turnOrderService.ActiveUnitId).CanTakeAction)
+				if(!turnOrderService.ActiveUnit.CanTakeAction)
 				{
 					//decide for the actor, they cant do anything this turn
 					yield return new Routine(FactionLeader.WaitPassTurn());

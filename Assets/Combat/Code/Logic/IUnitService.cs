@@ -2,11 +2,9 @@ using System.Collections.Generic;
 
 interface IUnitService : IService
 {
-	IEnumerable<UnitId> UnitsOfFaction (Faction faction);
+	IEnumerable<Unit> UnitsOfFaction (Faction faction);
 
-	Unit GetUnit(UnitId id);
-
-	IEnumerable<UnitId> CreateUnits (IEnumerable<UnitData> units);
-	UnitId CreateUnit (UnitData unit);
+	IEnumerable<Unit> CreateUnits (IEnumerable<UnitData> units);
+	Unit CreateUnit (UnitData unit);
 }
 

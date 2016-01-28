@@ -3,14 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-public class TurnOrderService : ITurnOrderService, IEnumerable<UnitId>
+public class TurnOrderService : ITurnOrderService, IEnumerable<Unit>
 {
-	public void SetOrder (IEnumerable<UnitId> ids)
+	public void SetOrder (IEnumerable<Unit> units)
 	{
-		m_units = ids.ToList();
+		m_units = units.ToList();
 	}
 
-	public UnitId ActiveUnitId
+	public Unit ActiveUnit
 	{
 		get
 		{
@@ -40,8 +40,8 @@ public class TurnOrderService : ITurnOrderService, IEnumerable<UnitId>
 		}
 	}
 
-	//for IEnumerable<UnitId>
-	public IEnumerator<UnitId> GetEnumerator ()
+	//for IEnumerable<Unit>
+	public IEnumerator<Unit> GetEnumerator ()
 	{
 		return m_units.GetEnumerator();
 	}
@@ -60,6 +60,6 @@ public class TurnOrderService : ITurnOrderService, IEnumerable<UnitId>
 		yield return new Routine(AdvanceTurnOrderMessage.WaitSend());
 	}
 
-	private List<UnitId> m_units;
+	private List<Unit> m_units;
 	private int m_activeUnitIndex = 0;
 }

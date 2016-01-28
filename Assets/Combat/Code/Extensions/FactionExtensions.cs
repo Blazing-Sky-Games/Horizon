@@ -11,7 +11,7 @@ public static class FactionExtensions
 		factionService = ServiceLocator.GetService<IFactionService>();
 	}
 
-	public static IEnumerable<UnitId> GetUnits (this Faction faction)
+	public static IEnumerable<Unit> GetUnits (this Faction faction)
 	{
 		return unitService.UnitsOfFaction(faction);
 	}

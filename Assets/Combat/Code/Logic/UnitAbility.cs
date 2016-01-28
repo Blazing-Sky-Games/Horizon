@@ -17,17 +17,13 @@ public class UnitAbility
 		critChanceBonus = Data.CritChanceBonus;
 	}
 
-	public IEnumerator WaitUse(UnitId casterId, UnitId targetId)
+	public IEnumerator WaitUse(Unit caster, Unit target)
 	{
-		IUnitService unitService = ServiceLocator.GetService<IUnitService>();
-		Unit caster = unitService.GetUnit(casterId);
-		Unit target = unitService.GetUnit(targetId);
-
 		yield return new Routine(caster.AbilityUsedMessage.WaitSend(caster, this, target));
 
 		foreach(CombatEffect effect in combatEffects)
 		{
-			yield return new Routine(effect.WaitTrigger(casterId, targetId, false));
+			yield return new Routine(effect.WaitTrigger(caster, target, false));
 		}
 
 		float criticalSuccessThreshold = (caster.GetCriticalAccuracy() / target.GetCriticalAvoidance()) * 0.2f; 
@@ -40,7 +36,7 @@ public class UnitAbility
 
 			foreach(CombatEffect effect in criticalEffects)
 			{
-				yield return new Routine(effect.WaitTrigger(casterId, targetId, true));
+				yield return new Routine(effect.WaitTrigger(caster, target, true));
 			}
 		}
 	}

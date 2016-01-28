@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 public interface ITurnOrderService : IService
 {
-	UnitId ActiveUnitId { get; }
+	Unit ActiveUnit { get; }
 
 	IEnumerator WaitAdvance ();
 
-	void SetOrder (IEnumerable<UnitId> ids);
+	void SetOrder (IEnumerable<Unit> ids);
 }
