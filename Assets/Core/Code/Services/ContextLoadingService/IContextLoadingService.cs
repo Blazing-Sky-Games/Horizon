@@ -5,18 +5,27 @@ public interface IContextLoadingService : IService
 {
 	Type LoadingContextType{ get; set; }
 
+	Message<MainContextBase> ContextLoading{ get; }
+
 	Message<MainContextBase> ContextLoaded{ get; }
+
+	Message<MainContextBase> ContextUnloading{ get; }
 
 	Message<MainContextBase> ContextUnloaded{ get; }
 
-	IEnumerator LoadContext<ContextType> ()
+	IEnumerator WaitLoadContext<ContextType> ()
 			where ContextType : MainContextBase;
 
-	IEnumerator LoadContext (Type contextType);
+	IEnumerator WaitLoadContext (Type contextType);
 
-	IEnumerator UnloadContext<ContextType> ()
+	IEnumerator WaitUnloadContext<ContextType> ()
 			where ContextType : MainContextBase;
 
-	IEnumerator UnloadContext (Type contextType);
+	IEnumerator WaitUnloadContext (Type contextType);
+
+	bool IsLoaded<ContextType> ()
+		where ContextType : MainContextBase;
+
+	bool IsLoaded(Type contextType);
 }
 

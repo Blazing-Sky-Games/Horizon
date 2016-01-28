@@ -17,6 +17,9 @@ public class CombatMainLogic
 		var createdUnitsIds = unitService.CreateUnits(Data.Units);
 		turnOrderService.SetOrder(createdUnitsIds);
 
+		factionService.SetOpposingFaction(Faction.Player, Faction.AI);
+		factionService.SetOpposingFaction(Faction.AI, Faction.Player);
+
 		//create the actors that will be playing
 		//factionService.SetFactionLeader(Faction.Player, new Actor(Faction.Player));
 		factionService.SetFactionLeader(Faction.Player, new AIActor(Faction.Player));
@@ -38,14 +41,11 @@ public class CombatMainLogic
 
 			//update turn based effects targeting the active unit
 			IEnumerable<TurnBasedEffect> turnBasedEffectsOnActiveUnit = enduringEffectService.ActiveEffectsOfType<TurnBasedEffect>().Where(effect => effect.Target == turnOrderService.ActiveUnit);
-			foreach(TurnBasedEffect effect in turnBasedEffectsOnActiveUnit)
-			{
-				effect.OnNewTurn();
-			}
+			enduringEffectService.UpdateEffects(turnBasedEffectsOnActiveUnit.Select(x => (EnduringEffect)x));
 
 			while(FactionLeader.CanTakeAction)
 			{
-				if(!turnOrderService.ActiveUnit.CanTakeAction)
+				if(!turnOrderService.ActiveUnit.ActionPrevented)
 				{
 					//decide for the actor, they cant do anything this turn
 					yield return new Routine(FactionLeader.WaitPassTurn());
@@ -53,9 +53,9 @@ public class CombatMainLogic
 				else
 				{
 					//tell the actor to decide what to do
-					FactionLeader.ActionDecidedMessage.AddHandler(HandleActionDecided);
+					FactionLeader.ActionDecidedMessage.AddHandler(WaitOnActionDecided);
 					coroutineService.StartCoroutine(FactionLeader.WaitDecideAction());
-					FactionLeader.ActionDecidedMessage.RemoveHandler(HandleActionDecided);
+					FactionLeader.ActionDecidedMessage.RemoveHandler(WaitOnActionDecided);
 				}
 			}
 
@@ -64,7 +64,7 @@ public class CombatMainLogic
 		}
 	}
 
-	private IEnumerator HandleActionDecided (IActorAction action)
+	private IEnumerator WaitOnActionDecided (IActorAction action)
 	{
 		yield return new Routine(action.WaitPerform());
 	}

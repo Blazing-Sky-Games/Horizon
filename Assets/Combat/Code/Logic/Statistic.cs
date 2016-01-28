@@ -4,16 +4,36 @@ public class Statistic
 {
 	public Statistic(int value)
 	{
-		throw new NotImplementedException();
+		m_value = value;;
 	}
 
 	public int Value
 	{
 		get
 		{
-			throw new NotImplementedException();
+			return m_value + m_modification;
 		}
 	}
+
+	public void ApplyDrop(int modification)
+	{
+		m_modification -= modification;
+	}
+	public void RemoveDrop(int modification)
+	{
+		m_modification += modification;
+	}
+	public void ApplyBonus(int modification)
+	{
+		m_modification += modification;
+	}
+	public void RemoveBonus(int modification)
+	{
+		m_modification -= modification;
+	}
+
+	private int m_modification = 0;
+	private int m_value;
 }
 
 

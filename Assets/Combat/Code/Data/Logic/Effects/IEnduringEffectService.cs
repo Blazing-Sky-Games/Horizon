@@ -9,4 +9,8 @@ interface IEnduringEffectService : IService
 
 	IEnumerable<EffectType> ActiveEffectsOfType<EffectType> ()
 			where EffectType : EnduringEffect;
+
+	IEnumerator UpdateEffects (IEnumerable<EnduringEffect> effects);
+
+	IEnumerator UpdateEffect (EnduringEffect effect);
 }

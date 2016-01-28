@@ -46,7 +46,7 @@ public class HitPoints
 		}
 	}
 
-	public IEnumerator SetMax(int max)
+	public IEnumerator WaitSetMax(int max)
 	{
 		m_max = max;
 

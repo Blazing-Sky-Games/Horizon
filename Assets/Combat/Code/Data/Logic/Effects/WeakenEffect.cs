@@ -13,23 +13,26 @@ public class WeakenEffect : TurnBasedEffect
 	[UnityEngine.Tooltip("Duration = M*potency + B")]
 	public int DurationM = 2;
 
-	private int Potency;
+ 	int Potency;
+	private int Drop;
 
-	public override IEnumerator StartEffect ()
+	public override IEnumerator WaitStart ()
 	{
-		yield return new Routine(base.StartEffect());
+		yield return new Routine(base.WaitStart());
 
-		Potency = (int)GetMatchUp(Caster, Target, IsCritical);
+		float Potency = GetMatchUp(Caster, Target, IsCritical);
 
-		yield return new Routine(TurnsRemainingSetter.WaitSet(DurationM * Potency + DurationB));
+		int duration = (int)(DurationM * Potency + DurationB);
 
-		//drop
-		throw new NotImplementedException();
+		yield return new Routine(DurationSetter.WaitSet(duration));
+
+		Drop = (int)(DropM * Potency);
+		Target.GetStatistic(StatToWeaken).ApplyDrop(Drop);
 	}
 
-	public override IEnumerator EndEffect ()
+	public override IEnumerator WaitEnd ()
 	{
-		//undo drop
-		throw new NotImplementedException();
+		yield return new Routine(base.WaitEnd());
+		Target.GetStatistic(StatToWeaken).RemoveDrop(Drop);
 	}
 }

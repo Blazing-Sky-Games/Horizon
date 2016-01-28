@@ -26,11 +26,11 @@ public abstract class EnduringEffect : CombatEffect
 		yield return new Routine(enduringEffectService.RecordEffect(copy));
 	}
 
-	public abstract IEnumerator StartEffect ();
+	public abstract IEnumerator WaitStart ();
 
-	public abstract IEnumerator OnNewTurn ();
+	public abstract IEnumerator WaitNewTurn ();
 
 	public abstract bool EndingCondition ();
 
-	public virtual IEnumerator EndEffect (){yield break;}
+	public virtual IEnumerator WaitEnd (){yield break;}
 }

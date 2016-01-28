@@ -2,33 +2,33 @@
 
 public abstract class TurnBasedEffect : EnduringEffect
 {
-	public ReadonlyObservable<int> TurnsRemaining
+	public ReadonlyObservable<int> Duration
 	{
 		get
 		{
-			return m_turnsRemaining;
+			return m_duration;
 		}
 	}
 
-	private ReadonlyObservable<int> m_turnsRemaining;
-	protected ObservableSetter<int> TurnsRemainingSetter;
+	private ReadonlyObservable<int> m_duration;
+	protected ObservableSetter<int> DurationSetter;
 
-	public override IEnumerator StartEffect ()
+	public override IEnumerator WaitStart ()
 	{
-		m_turnsRemaining = new ReadonlyObservable<int>(out TurnsRemainingSetter);
+		m_duration = new ReadonlyObservable<int>(out DurationSetter);
 		yield break;
 	}
 
-	public override IEnumerator OnNewTurn ()
+	public override IEnumerator WaitNewTurn ()
 	{
-		int turnsRemainingMinusOne = TurnsRemaining.Value - 1;
+		int turnsRemainingMinusOne = Duration.Value - 1;
 		turnsRemainingMinusOne = turnsRemainingMinusOne < 0 ? 0 : turnsRemainingMinusOne;
 
-		yield return new Routine(TurnsRemainingSetter.WaitSet(turnsRemainingMinusOne));
+		yield return new Routine(DurationSetter.WaitSet(turnsRemainingMinusOne));
 	}
 
 	public override bool EndingCondition ()
 	{
-		return TurnsRemaining.Value == 0;
+		return Duration.Value == 0;
 	}
 }

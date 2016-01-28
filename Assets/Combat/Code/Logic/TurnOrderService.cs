@@ -20,12 +20,12 @@ public class TurnOrderService : ITurnOrderService, IEnumerable<Unit>
 
 	public void LoadService ()
 	{
-		throw new NotImplementedException();
+		//nothing
 	}
 
 	public void UnloadService ()
 	{
-		throw new NotImplementedException();
+		//nothing
 	}
 
 	public readonly Message AdvanceTurnOrderMessage = new Message();

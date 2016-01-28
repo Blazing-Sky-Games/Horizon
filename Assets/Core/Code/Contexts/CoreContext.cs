@@ -26,16 +26,13 @@ public class CoreContext : MainContextBase
 		m_coroutineService.UpdateCoroutines();
 	}
 
-	protected override void RegisterCoreServices ()
+	public override IEnumerator WaitLoad ()
 	{
 		ServiceLocator.RegisterService<IContextLoadingService, ContextLoadingService>();
 		ServiceLocator.RegisterService<IReflectionService, ReflectionService>();
 		ServiceLocator.RegisterService<ICoroutineService, CoroutineService>();
 		ServiceLocator.RegisterService<ILoggingService, LoggingService>();
-	}
 
-	protected override void InstatiateCoreServices ()
-	{
 		m_contextLoadingService = ServiceLocator.GetService<IContextLoadingService>();
 		m_coroutineService = ServiceLocator.GetService<ICoroutineService>();
 		m_loggingService = ServiceLocator.GetService<ILoggingService>();
@@ -43,25 +40,23 @@ public class CoreContext : MainContextBase
 		m_contextLoadingService.LoadService();
 		m_coroutineService.LoadService();
 		m_loggingService.LoadService();
-	}
 
-	protected override IEnumerator Launch ()
-	{
 		// load the loading screen
 		m_contextLoadingService.LoadingContextType = LoadingContextType;
-		m_contextLoadingService.LoadContext(FirstContextType);
+		m_contextLoadingService.WaitLoadContext(FirstContextType);
 		yield break;
 	}
 
-	protected override void RemoveServiceReferences ()
+	public override void Unload ()
 	{
+		m_contextLoadingService.UnloadService();
+		m_coroutineService.UnloadService();
+		m_loggingService.UnloadService();
+
 		m_contextLoadingService = null;
 		m_coroutineService = null;
 		m_loggingService = null;
-	}
 
-	protected override void RemoveCoreServices ()
-	{
 		ServiceLocator.RemoveService<IContextLoadingService>();
 		ServiceLocator.RemoveService<IReflectionService>();
 		ServiceLocator.RemoveService<ICoroutineService>();

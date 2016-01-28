@@ -1,29 +1,38 @@
 using System;
+using System.Collections.Generic;
 
 public class FactionService : IFactionService
 {
 	public void LoadService ()
 	{
-		throw new NotImplementedException();
+		//nothing
 	}
 
 	public void UnloadService ()
 	{
-		throw new NotImplementedException();
+		//nothing
 	}
 
 	public Actor GetFactionLeader (Faction faction)
 	{
-		throw new NotImplementedException();
+		return factionLeaders[faction];
 	}
 
 	public void SetFactionLeader (Faction faction, Actor leader)
 	{
-		throw new NotImplementedException();
+		factionLeaders[faction] = leader;
 	}
 
 	public Faction GetOpposingFaction (Faction faction)
 	{
-		throw new NotImplementedException();
+		return OpposingFactions[faction];
 	}
+
+	public void SetOpposingFaction(Faction faction, Faction opposing)
+	{
+		OpposingFactions[faction] = opposing;
+	}
+
+	private readonly Dictionary<Faction,Faction> OpposingFactions = new Dictionary<Faction, Faction>();
+	private readonly Dictionary<Faction,Actor> factionLeaders = new Dictionary<Faction, Actor>();
 }

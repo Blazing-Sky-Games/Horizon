@@ -2,36 +2,27 @@ using System;
 using System.IO;
 using UnityEngine;
 
-public class LoggingService : ILoggingService
+public class LoggingService : Service,  ILoggingService
 {
 	public ILog ErrorLog
 	{
 		get
 		{
-			throw new NotImplementedException();
+			return m_ErrorLog;
 		}
 	}
 
 	#region IService implementation
 
-	public void LoadService ()
-	{
-		throw new NotImplementedException();
-	}
-
-	public void UnloadService ()
-	{
-		throw new NotImplementedException();
-	}
-
-	#endregion
-
-	public LoggingService()
+	public override void LoadService ()
 	{
 		m_screenLog = new LambdaLogger((msg) => LogToScreen(msg));
 		m_coreLogFile = NewLogFile();
 		m_coreLogFileAndScreen = new MultiLog(CoreLogFile, ScreenLog);
+		m_ErrorLog = new LambdaLogger((msg) => UnityEngine.Debug.LogError(msg));
 	}
+
+	#endregion
 
 	public ILog CoreLogFile
 	{
@@ -221,6 +212,7 @@ public class LoggingService : ILoggingService
 
 	private LambdaLogger m_screenLog;
 
+	ILog m_ErrorLog;
 	ILog m_coreLogFile;
 	ILog m_coreLogFileAndScreen;
 }

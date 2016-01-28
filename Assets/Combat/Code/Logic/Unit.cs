@@ -86,13 +86,13 @@ public class Unit
 		}
 	}
 
-	public bool CanTakeAction
+	public bool ActionPrevented
 	{
 		get
 		{
-			return !CanTakeActionPoll.AnyFalse;
+			return !ActionPreventedPoll.AnyVotes;
 		}
 	}
 
-	public readonly Poll CanTakeActionPoll;
+	public readonly Poll ActionPreventedPoll;
 }

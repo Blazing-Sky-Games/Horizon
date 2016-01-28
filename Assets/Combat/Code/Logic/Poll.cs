@@ -1,53 +1,22 @@
 public class Poll
 {
-	private int numFalse = 0;
-	private int numTrue = 0;
+	private int numVotes = 0;
 
-	public void AddVote (bool vote)
+	public void AddVote ()
 	{
-		if(vote)
-			numTrue++;
-		else
-			numFalse++;
+		numVotes++;
 	}
 
-	public void RemoveVote (bool vote)
+	public void RemoveVote ()
 	{
-		if(vote)
-			numTrue--;
-		else
-			numFalse--;
+		numVotes--;
 	}
 
-	public bool AnyFalse
+	public bool AnyVotes
 	{
 		get
 		{
-			return numFalse > 0;
-		}
-	}
-
-	public bool AnyTrue
-	{
-		get
-		{
-			return numTrue > 0;
-		}
-	}
-
-	public bool MajorityVote
-	{
-		get
-		{
-			return numTrue > numFalse;
-		}
-	}
-
-	public bool MinorityVote
-	{
-		get
-		{
-			return !MajorityVote;
+			return numVotes > 0;
 		}
 	}
 
@@ -55,23 +24,7 @@ public class Poll
 	{
 		get
 		{
-			return numTrue + numFalse;
-		}
-	}
-
-	public int TrueCount
-	{
-		get
-		{
-			return numTrue;
-		}
-	}
-
-	public int FalseCount
-	{
-		get
-		{
-			return numFalse;
+			return numVotes;
 		}
 	}
 }

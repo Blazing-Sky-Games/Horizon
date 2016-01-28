@@ -1,35 +1,25 @@
 ﻿using System;
+using System.Collections;
 
 public class CombatContext : MainContextBase
 {
-	public override void Update ()
-	{
-		throw new NotImplementedException();
-	}
-
-	protected override void RegisterCoreServices ()
+	public override IEnumerator WaitLoad ()
 	{
 		ServiceLocator.RegisterService<ITurnOrderService,TurnOrderService>();
 		ServiceLocator.RegisterService<IFactionService, FactionService>();
+
+		ServiceLocator.GetService<ITurnOrderService>().LoadService();
+		ServiceLocator.GetService<IFactionService>().LoadService();
+
+		yield break;
 	}
 
-	protected override void InstatiateCoreServices ()
+	public override void Unload ()
 	{
-		throw new NotImplementedException();
-	}
+		ServiceLocator.GetService<ITurnOrderService>().UnloadService();
+		ServiceLocator.GetService<IFactionService>().UnloadService();
 
-	protected override System.Collections.IEnumerator Launch ()
-	{
-		throw new NotImplementedException();
-	}
-
-	protected override void RemoveServiceReferences ()
-	{
-		throw new NotImplementedException();
-	}
-
-	protected override void RemoveCoreServices ()
-	{
-		throw new NotImplementedException();
+		ServiceLocator.RemoveService<ITurnOrderService>();
+		ServiceLocator.RemoveService<IFactionService>();
 	}
 }

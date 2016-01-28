@@ -2,22 +2,8 @@
 using System;
 using System.Linq;
 
-public class ReflectionService : IReflectionService
+public class ReflectionService : Service, IReflectionService
 {
-	#region IService implementation
-
-	public void LoadService ()
-	{
-		throw new NotImplementedException();
-	}
-
-	public void UnloadService ()
-	{
-		throw new NotImplementedException();
-	}
-
-	#endregion
-
 	public IEnumerable<Type> AllTypes
 	{
 		get
