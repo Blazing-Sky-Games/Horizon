@@ -3,15 +3,20 @@ using System.Collections;
 
 public class CombatContext : MainContextBase
 {
-	public override IEnumerator WaitLoad ()
+	private CombatLogic combatLogic;
+
+	protected override Coroutine Load ()
 	{
+		base.Load();
 		ServiceLocator.RegisterService<ITurnOrderService,TurnOrderService>();
 		ServiceLocator.RegisterService<IFactionService, FactionService>();
 
 		ServiceLocator.GetService<ITurnOrderService>().LoadService();
 		ServiceLocator.GetService<IFactionService>().LoadService();
 
-		yield break;
+		combatLogic = new CombatLogic(ServiceLocator.GetService<ICombatScenarioService>().CurrentScenario);
+
+		return null;
 	}
 
 	public override void Unload ()

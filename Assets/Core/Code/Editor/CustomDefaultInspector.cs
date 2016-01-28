@@ -10,6 +10,8 @@ public class CustomDefaultInspector : Editor
 {
 	public void OnEnable ()
 	{
+		//TODO fix this
+		ServiceLocator.RegisterService<IReflectionService,ReflectionService>();
 		reflectionService = ServiceLocator.GetService<IReflectionService>();
 	}
 

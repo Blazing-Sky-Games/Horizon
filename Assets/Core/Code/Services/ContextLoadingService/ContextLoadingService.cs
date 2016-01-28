@@ -12,14 +12,19 @@ public class ContextLoadingService : Service, IContextLoadingService
 
 	public IEnumerator WaitLoadContext (Type contextType)
 	{
+		ServiceLocator.GetService<ILoggingService>().Log("loading context type " + contextType.ToString());
+
 		if(IsLoaded(contextType))
 			yield break;
 
 		MainContextBase context = (MainContextBase)Activator.CreateInstance(contextType);
+
+		yield return new Routine(isLoading.WaitSet(true));
 		yield return new Routine(contextLoading.WaitSend(context));
-		yield return new Routine(context.WaitLoad());
+		yield return context.LoadIfNotLoaded();
 		yield return new Routine(ContextLoaded.WaitSend(context));
 		loadedContexts.Add(context);
+		yield return new Routine(isLoading.WaitSet(false));
 	}
 
 	public IEnumerator WaitUnloadContext<ContextType> () where ContextType : MainContextBase
@@ -50,10 +55,9 @@ public class ContextLoadingService : Service, IContextLoadingService
 		return loadedContexts.Any(x => x.GetType() == contextType);
 	}
 
-	public Type LoadingContextType
+	public Observable<bool> IsLoading
 	{
-		get{ return loadingContextType; }
-		set{ loadingContextType = value; }
+		get{ return isLoading; }
 	}
 
 	public Message<MainContextBase> ContextLoading
@@ -76,7 +80,7 @@ public class ContextLoadingService : Service, IContextLoadingService
 		get{ return contextUnloaded; }
 	}
 
-	private Type loadingContextType;
+	private Observable<bool> isLoading = new Observable<bool>();
 
 	private readonly Message<MainContextBase> contextLoading = new Message<MainContextBase>();
 	private readonly Message<MainContextBase> contextLoaded = new Message<MainContextBase>();

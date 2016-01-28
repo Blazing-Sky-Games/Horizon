@@ -3,9 +3,32 @@ using Slash.Unity.DataBind.Core.Data;
 
 public abstract class MainContextBase : Context
 {
-	public virtual IEnumerator WaitLoad (){ yield break;}
+	private bool isLoaded;
 
-	public virtual void Update (){}
+	public Coroutine LoadIfNotLoaded()
+	{
+		if(!isLoaded)
+		{
+			return Load();
+		}
+		else
+		{
+			return null;
+		}
+	}
+		
+	protected virtual Coroutine Load ()
+	{ 
+		isLoaded = true;
+		return null;
+	}
 
-	public virtual void Unload (){}
+	public virtual void Update ()
+	{
+	}
+
+	public virtual void Unload ()
+	{
+		isLoaded = false;
+	}
 }

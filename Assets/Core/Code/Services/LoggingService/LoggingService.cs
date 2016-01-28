@@ -4,6 +4,15 @@ using UnityEngine;
 
 public class LoggingService : Service,  ILoggingService
 {
+	public event Action<string> OnLog;
+
+	public void Log(string message)
+	{
+		UnityEngine.Debug.Log(message);
+		if(OnLog != null)
+			OnLog(message);
+	}
+
 	public ILog ErrorLog
 	{
 		get
@@ -41,6 +50,16 @@ public class LoggingService : Service,  ILoggingService
 	}
 
 	public event Action<string> OnLogToScreen;
+
+	public Observable<bool> ShowScreenLog
+	{
+		get
+		{
+			return showScreenLog;
+		}
+	}
+
+	private readonly Observable<bool> showScreenLog = new Observable<bool>();
 
 	public ILog ScreenLog
 	{

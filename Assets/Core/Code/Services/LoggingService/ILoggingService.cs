@@ -1,5 +1,7 @@
-public interface ILoggingService : IService
+public interface ILoggingService : IService, ILog
 {
+	Observable<bool> ShowScreenLog{ get; }
+
 	ILog ScreenLog{ get; }
 
 	ILog ErrorLog { get; }

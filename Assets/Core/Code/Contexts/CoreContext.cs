@@ -1,17 +1,29 @@
 ﻿using System;
 using System.Collections;
+using Slash.Unity.DataBind.Core.Data;
 
 public class CoreContext : MainContextBase
-{
-	//TODO make this bindable
-	public Type LoadingContextType
+{		
+	private Property<bool> IsLoadingProperty = new Property<bool>(); 
+
+	public bool IsLoading
 	{
 		get
 		{
-			return typeof(LoadingContext);
+			return IsLoadingProperty.Value;
 		}
 	}
-			
+
+	private Property<bool> ShowScreenLogProperty = new Property<bool>(); 
+
+	public bool ShowScreenLog
+	{
+		get
+		{
+			return ShowScreenLogProperty.Value;
+		}
+	}
+
 	//TODO make this bindable
 	public Type FirstContextType
 	{
@@ -26,12 +38,14 @@ public class CoreContext : MainContextBase
 		m_coroutineService.UpdateCoroutines();
 	}
 
-	public override IEnumerator WaitLoad ()
+	protected override Coroutine Load ()
 	{
+		base.Load();
 		ServiceLocator.RegisterService<IContextLoadingService, ContextLoadingService>();
 		ServiceLocator.RegisterService<IReflectionService, ReflectionService>();
 		ServiceLocator.RegisterService<ICoroutineService, CoroutineService>();
 		ServiceLocator.RegisterService<ILoggingService, LoggingService>();
+		ServiceLocator.RegisterService<ICombatScenarioService, CombatScenarioService>();
 
 		m_contextLoadingService = ServiceLocator.GetService<IContextLoadingService>();
 		m_coroutineService = ServiceLocator.GetService<ICoroutineService>();
@@ -41,10 +55,26 @@ public class CoreContext : MainContextBase
 		m_coroutineService.LoadService();
 		m_loggingService.LoadService();
 
+		m_loggingService.Log("core services instatiated and loaded");
+
+		m_contextLoadingService.IsLoading.Changed.AddAction(IsLoadingChanged);
+		IsLoadingChanged();
+
+		m_loggingService.ShowScreenLog.Changed.AddAction(ShowScreenLogChanged);
+		ShowScreenLogChanged();
+
 		// load the loading screen
-		m_contextLoadingService.LoadingContextType = LoadingContextType;
-		m_contextLoadingService.WaitLoadContext(FirstContextType);
-		yield break;
+		return m_coroutineService.StartCoroutine(m_contextLoadingService.WaitLoadContext(FirstContextType));
+	}
+
+	void IsLoadingChanged()
+	{
+		IsLoadingProperty.Value = m_contextLoadingService.IsLoading.Value;
+	}
+
+	void ShowScreenLogChanged()
+	{
+		ShowScreenLogProperty.Value = m_loggingService.ShowScreenLog.Value;
 	}
 
 	public override void Unload ()

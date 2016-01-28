@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-public class CombatMainLogic
+public class CombatLogic
 {
-	public CombatMainLogic(CombatScenario Data)
+	public CombatLogic(CombatScenario Data)
 	{
 		turnOrderService = ServiceLocator.GetService<ITurnOrderService>();
 		factionService = ServiceLocator.GetService<IFactionService>();
