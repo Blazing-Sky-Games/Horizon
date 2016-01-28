@@ -1,10 +1,7 @@
-﻿using System;
-using System.Linq;
-using System.Reflection;
+﻿using System.Reflection;
 using UnityEditor;
-using UnityEngine;
+using System.Linq;
 
-//A helper class for instantiating Data in the editor.
 public class DataFactory
 {
 	[MenuItem("Assets/Create/Data")]

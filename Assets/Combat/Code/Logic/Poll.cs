@@ -1,9 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-
-//a class 
 public class Poll
 {
 	private int numFalse = 0;

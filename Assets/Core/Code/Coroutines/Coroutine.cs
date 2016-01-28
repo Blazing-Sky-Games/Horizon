@@ -1,9 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
-using System;
 using System.Linq;
 
-// a currently running "async"(sorta) process, which represents another routine distinct from the starter of this Coroutine
 public class Coroutine : RoutineControlSignal
 {
 	public CoroutineException Error

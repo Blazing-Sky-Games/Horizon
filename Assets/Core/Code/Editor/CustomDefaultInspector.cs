@@ -1,15 +1,10 @@
-﻿using UnityEngine;
-using UnityEditor;
-using System.Collections;
-using System.Linq;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
-using System.IO;
-using Core.Scripts.Contexts;
+using UnityEditor;
+using UnityEngine;
+using System.Linq;
 
-// replace the default implimentation of the unity inspector
-// this version handels inlining data, and anything else we need it to do later
 [CustomEditor(typeof(UnityEngine.Object), true)]
 public class CustomDefaultInspector : Editor
 {

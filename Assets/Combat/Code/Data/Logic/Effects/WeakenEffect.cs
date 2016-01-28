@@ -1,6 +1,5 @@
-using System.Collections;
-using Combat.Code.Data.Logic.Effects;
 using System;
+using System.Collections;
 
 public class WeakenEffect : TurnBasedEffect
 {
@@ -29,12 +28,10 @@ public class WeakenEffect : TurnBasedEffect
 		//drop
 		throw new NotImplementedException();
 	}
+
 	public override IEnumerator EndEffect ()
 	{
 		//undo drop
 		throw new NotImplementedException();
 	}
 }
-
-
-

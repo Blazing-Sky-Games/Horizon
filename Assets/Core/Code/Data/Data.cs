@@ -1,30 +1,8 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
-using System.Collections;
-
-//tag data type with this to have it display inline in inspector
-//used to select an implimentation of an abstract data type
-//this data type will not show up in the creat data window
-[AttributeUsage(AttributeTargets.Class, Inherited = true)]
-public class InlineData : Attribute
-{
-}
-
-//tag data type with this to control how it displays in create data menu
-// for example "combat" will appear in a combat drop down
-// "combat/logic" will appear in a drop down inside the dropdown combat
-[AttributeUsage(AttributeTargets.Class, Inherited = false)]
-public class DataCatagory : Attribute
-{
-	public readonly string Catagory;
-
-	public DataCatagory(string catagory)
-	{
-		Catagory = catagory;
-	}
-}
 
 public class Data : ScriptableObject
 {
@@ -71,5 +49,3 @@ public class Data : ScriptableObject
 		return Copy;
 	}
 }
-
-

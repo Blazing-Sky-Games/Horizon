@@ -1,7 +1,4 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 
 public class HitPoints
 {
@@ -64,6 +61,3 @@ public class HitPoints
 	private int m_current;
 	private int m_max;
 }
-
-
-

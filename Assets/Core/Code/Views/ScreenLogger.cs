@@ -1,7 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
-using System.Collections;
-using Core.Code.Services.LoggingService;
 
 public class ScreenLogger : MonoBehaviour
 {
@@ -33,7 +31,7 @@ public class ScreenLogger : MonoBehaviour
 
 	public Color MessageColor = Color.white;
 
-	static Queue<LogMessage> queue = new Queue<LogMessage>();
+	static Queue<string> queue = new Queue<string>();
 
 	GUIStyle styleContainer, styleText;
 	int padding = 5;
@@ -56,7 +54,7 @@ public class ScreenLogger : MonoBehaviour
 
 	void OnEnable()
 	{
-		queue = new Queue<LogMessage>();
+		queue = new Queue<string>();
 	}
 
 	void Update()
@@ -98,11 +96,11 @@ public class ScreenLogger : MonoBehaviour
 
 		GUILayout.BeginArea(new Rect(x, y, w, h), styleContainer);
 
-		foreach(LogMessage m in queue)
+		foreach(string m in queue)
 		{
 			styleText.normal.textColor = MessageColor;
 
-			GUILayout.Label(m.Message, styleText);
+			GUILayout.Label(m, styleText);
 		}
 
 		GUILayout.EndArea();
@@ -110,16 +108,6 @@ public class ScreenLogger : MonoBehaviour
 
 	void HandleLog(string message)
 	{
-		queue.Enqueue(new LogMessage(message));
-	}
-}
-
-class LogMessage
-{
-	public string Message;
-
-	public LogMessage(string msg)
-	{
-		Message = msg;
+		queue.Enqueue(message);
 	}
 }

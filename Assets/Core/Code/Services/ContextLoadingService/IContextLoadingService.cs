@@ -1,26 +1,22 @@
 using System;
-using Slash.Unity.DataBind.Core.Data;
 using System.Collections;
 
-namespace Core.Scripts.Contexts
+public interface IContextLoadingService : IService
 {
-	public interface IContextLoadingService : IService
-	{
-		Type LoadingContextType{ get; set; }
+	Type LoadingContextType{ get; set; }
 
-		Message<MainContextBase> ContextLoaded{ get; }
+	Message<MainContextBase> ContextLoaded{ get; }
 
-		Message<MainContextBase> ContextUnloaded{ get; }
+	Message<MainContextBase> ContextUnloaded{ get; }
 
-		IEnumerator LoadContext<ContextType> ()
+	IEnumerator LoadContext<ContextType> ()
 			where ContextType : MainContextBase;
 
-		IEnumerator LoadContext (Type contextType);
+	IEnumerator LoadContext (Type contextType);
 
-		IEnumerator UnloadContext<ContextType> ()
+	IEnumerator UnloadContext<ContextType> ()
 			where ContextType : MainContextBase;
 
-		IEnumerator UnloadContext(Type contextType);
-	}
+	IEnumerator UnloadContext (Type contextType);
 }
 

@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using Combat.Code.Data.Logic.Effects;
 
 class StunEffect : TurnBasedEffect
 {
@@ -19,5 +18,3 @@ class StunEffect : TurnBasedEffect
 		throw new NotImplementedException();
 	}
 }
-
-

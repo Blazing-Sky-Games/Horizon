@@ -1,30 +1,7 @@
+//a syncronous process (which may take multiple frames)
 using System.Collections;
 using System;
-using System.Collections.Generic;
 
-//a syncronous process (which may take multiple frames)
-public class RoutineException : Exception
-{
-	public override string Message
-	{
-		get
-		{
-			string msg = "Exception in routine\n";
-
-			foreach(var rot in CallStack)
-			{
-				msg += rot.CallerMethod + " (at " + rot.CallerFile + ":" + rot.CallerLine + ")\n";
-			}
-
-			return msg;
-		}
-	}
-
-	public RoutineException(Exception e):base("",e){
-	}
-
-	public readonly List<Routine> CallStack = new List<Routine>();
-}
 
 public class Routine : RoutineControlSignal
 {

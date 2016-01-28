@@ -1,8 +1,5 @@
-using UnityEngine;
-using System.Collections;
-
 // represents an actors choice to use a unit ability
-using Combat.Code.Services.TurnOrderService;
+using System.Collections;
 
 
 public class UnitAbilityUsageAction : IActorAction

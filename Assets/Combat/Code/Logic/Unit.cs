@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 public class Unit
 {
 	public readonly Message<Unit, UnitAbility, Unit> AbilityUsedMessage = new Message<Unit, UnitAbility, Unit>();
-	public readonly Message<UnitStatus> StatusChangedMessage = new Message<UnitStatus>();
 	public List<UnitAbility> Abilities = new List<UnitAbility>();
 
 	public readonly Statistic Strength;
@@ -98,19 +95,4 @@ public class Unit
 	}
 
 	public readonly Poll CanTakeActionPoll;
-
-	public IEnumerator WaitSetStatus (UnitStatus status, bool active)
-	{
-		m_status[status] = active;
-		yield return new Routine(StatusChangedMessage.WaitSend(status));
-	}
-
-	public bool GetStatus (UnitStatus status)
-	{
-		return m_status.ContainsKey(status) && m_status[status];
-	}
-
-	private Dictionary<UnitStatus,bool> m_status = new Dictionary<UnitStatus, bool>();
 }
-
-

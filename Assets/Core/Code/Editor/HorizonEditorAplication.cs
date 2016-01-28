@@ -1,16 +1,12 @@
-﻿using System;
-using UnityEditor;
-using Core.Scripts.Contexts;
+﻿using UnityEditor;
 
-namespace Core.Code.Editor
+[InitializeOnLoad]
+public class HorizonEditorAplication
 {
-	[InitializeOnLoad]
-	public class HorizonEditorAplication
+	static HorizonEditorAplication()
 	{
-		static HorizonEditorAplication()
-		{
-			ServiceLocator.RegisterService<IReflectionService, ReflectionService>();
-		}
+		ServiceLocator.RegisterService<IReflectionService, ReflectionService>();
 	}
 }
+
 

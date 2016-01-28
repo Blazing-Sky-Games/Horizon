@@ -1,5 +1,3 @@
-using System.Collections;
-
 public enum UnitStatatistic
 {
 	Strength, // phys dmg /crit

@@ -1,6 +1,4 @@
-using System.Collections;
 using System.Collections.Generic;
-using Random = UnityEngine.Random;
 
 [DataCatagory("Combat/Logic")]
 public class UnitData : Data

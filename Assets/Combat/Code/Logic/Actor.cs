@@ -1,6 +1,4 @@
-using UnityEngine;
 using System.Collections;
-using Combat.Code.Services.TurnOrderService;
 
 public class Actor
 {

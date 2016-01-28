@@ -1,10 +1,6 @@
-using UnityEngine;
 using System;
-using System.Linq;
 using System.Collections;
-using Combat.Code.Services.TurnOrderService;
-using Combat.Code.Services.FactionService;
-using Combat.Code.Extensions;
+using System.Linq;
 
 public class AIActor : Actor
 {

@@ -1,8 +1,6 @@
-﻿using System;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Collections;
-using Random = UnityEngine.Random;
-using System.Collections.Generic;
+using System;
 
 public class UnitAbility
 {
@@ -34,7 +32,9 @@ public class UnitAbility
 
 		float criticalSuccessThreshold = (caster.GetCriticalAccuracy() / target.GetCriticalAvoidance()) * 0.2f; 
 
-		if(Random.value <= criticalSuccessThreshold + critChanceBonus)
+		Random rand = new Random();
+
+		if(rand.NextDouble() <= criticalSuccessThreshold + critChanceBonus)
 		{
 			yield return new Routine(CriticalHit.WaitSend());
 
@@ -45,5 +45,3 @@ public class UnitAbility
 		}
 	}
 }
-
-

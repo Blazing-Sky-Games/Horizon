@@ -1,30 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using Combat.Code.Services.TurnOrderService;
-using Combat.Code.Services.FactionService;
+﻿using System.Collections.Generic;
 
-namespace Combat.Code.Extensions
+public static class FactionExtensions
 {
-	public static class FactionExtensions
+	private static IUnitService unitService;
+	private static IFactionService factionService;
+
+	static FactionExtensions()
 	{
-		private static IUnitService unitService;
-		private static IFactionService factionService;
+		unitService = ServiceLocator.GetService<IUnitService>();
+		factionService = ServiceLocator.GetService<IFactionService>();
+	}
 
-		static FactionExtensions()
-		{
-			unitService = ServiceLocator.GetService<IUnitService>();
-			factionService = ServiceLocator.GetService<IFactionService>();
-		}
+	public static IEnumerable<UnitId> GetUnits (this Faction faction)
+	{
+		return unitService.UnitsOfFaction(faction);
+	}
 
-		public static IEnumerable<UnitId> GetUnits(this Faction faction)
-		{
-			return unitService.UnitsOfFaction(faction);
-		}
-
-		public static Actor GetLeader(this Faction faction)
-		{
-			return factionService.GetFactionLeader(faction);
-		}
+	public static Actor GetLeader (this Faction faction)
+	{
+		return factionService.GetFactionLeader(faction);
 	}
 }
-

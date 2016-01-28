@@ -1,9 +1,5 @@
 ﻿using System;
-using Slash.Unity.DataBind.Core.Data;
 using System.Collections;
-using Core.Code.Services.LoggingService;
-using Combat.Code.Data.Context;
-
 
 public class CoreContext : MainContextBase
 {
@@ -76,5 +72,3 @@ public class CoreContext : MainContextBase
 	private ICoroutineService m_coroutineService;
 	private ILoggingService m_loggingService;
 }
-
-

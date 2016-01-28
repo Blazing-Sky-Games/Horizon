@@ -1,6 +1,5 @@
 using System.Collections;
 using System;
-using Combat.Code.Services.TurnOrderService;
 
 public class DamageEffectLogicData : CombatEffect
 {
@@ -30,4 +29,3 @@ public class DamageEffectLogicData : CombatEffect
 	}
 
 }
-

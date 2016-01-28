@@ -1,7 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections;
 using UnityEngine.UI;
-using UnityEngine.EventSystems;
 
 [AddComponentMenu("Layout/Relative Layout Element", 140)]
 [RequireComponent(typeof(RectTransform))]

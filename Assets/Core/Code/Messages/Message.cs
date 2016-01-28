@@ -1,20 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using Core.Scripts.Contexts;
 
-//generic interface to all types of messages
-public interface IGenericMessage
-{
-	IEnumerator WaitSendGeneric (object[] args);
-	void AddHandlerGeneric(Func<object[],IEnumerator> handler);
-	void RemoveHandlerGeneric(Func<object[],IEnumerator> handler);
-}
-
-// A coroutine based event
-// like a regular event, handlers can be added and removed, and the event can be "fired"
-// but unlike an event, the handlers can be coroutines (take multiple frames) which run in parralel
-// and "fireing" (sending) the message will not return untill all handlers have finished
 public class Message : IGenericMessage
 {
 	private ICoroutineService coroutineService;
