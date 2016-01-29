@@ -1,17 +1,8 @@
 using System;
 using System.Collections.Generic;
 
-public class FactionService : IFactionService
+public class FactionService :Service,  IFactionService
 {
-	public void LoadService ()
-	{
-		//nothing
-	}
-
-	public void UnloadService ()
-	{
-		//nothing
-	}
 
 	public Actor GetFactionLeader (Faction faction)
 	{

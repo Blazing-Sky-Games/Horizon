@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-public class TurnOrderService : ITurnOrderService, IEnumerable<Unit>
+public class TurnOrderService : Service, ITurnOrderService, IEnumerable<Unit>
 {
 	public void SetOrder (IEnumerable<Unit> units)
 	{
@@ -16,16 +16,6 @@ public class TurnOrderService : ITurnOrderService, IEnumerable<Unit>
 		{
 			return m_units[ActiveUnitIndex];
 		}
-	}
-
-	public void LoadService ()
-	{
-		//nothing
-	}
-
-	public void UnloadService ()
-	{
-		//nothing
 	}
 
 	public readonly Message AdvanceTurnOrderMessage = new Message();

@@ -38,24 +38,29 @@ public class CoreContext : MainContextBase
 		m_coroutineService.UpdateCoroutines();
 	}
 
-	protected override Coroutine Load ()
+	protected override IEnumerator Load ()
 	{
-		base.Load();
+		yield return new Routine(base.Load());
 		ServiceLocator.RegisterService<IContextLoadingService, ContextLoadingService>();
 		ServiceLocator.RegisterService<IReflectionService, ReflectionService>();
 		ServiceLocator.RegisterService<ICoroutineService, CoroutineService>();
 		ServiceLocator.RegisterService<ILoggingService, LoggingService>();
 		ServiceLocator.RegisterService<ICombatScenarioService, CombatScenarioService>();
+		ServiceLocator.RegisterService<IResourceService, ResourceService>();
 
 		m_contextLoadingService = ServiceLocator.GetService<IContextLoadingService>();
+		m_reflectionService = ServiceLocator.GetService<IReflectionService>();
 		m_coroutineService = ServiceLocator.GetService<ICoroutineService>();
 		m_loggingService = ServiceLocator.GetService<ILoggingService>();
+		m_combatScenarioService = ServiceLocator.GetService<ICombatScenarioService>();
+		m_resourseService = ServiceLocator.GetService<IResourceService>();
 
-		m_contextLoadingService.LoadService();
-		m_coroutineService.LoadService();
-		m_loggingService.LoadService();
-
-		m_loggingService.Log("core services instatiated and loaded");
+		yield return new Routine(m_contextLoadingService.LoadService());
+		yield return new Routine(m_reflectionService.LoadService());
+		yield return new Routine(m_coroutineService.LoadService());
+		yield return new Routine(m_loggingService.LoadService());
+		yield return new Routine(m_combatScenarioService.LoadService());
+		yield return new Routine(m_resourseService.LoadService());
 
 		m_contextLoadingService.IsLoading.Changed.AddAction(IsLoadingChanged);
 		IsLoadingChanged();
@@ -63,8 +68,16 @@ public class CoreContext : MainContextBase
 		m_loggingService.ShowScreenLog.Changed.AddAction(ShowScreenLogChanged);
 		ShowScreenLogChanged();
 
+		if(shouldLaunchIfCore)
+			yield return new Routine(Launch());
+	}
+
+	protected override IEnumerator Launch ()
+	{
+		yield return new Routine(base.Launch());
+
 		// load the loading screen
-		return m_coroutineService.StartCoroutine(m_contextLoadingService.WaitLoadContext(FirstContextType));
+		yield return m_coroutineService.StartCoroutine(m_contextLoadingService.WaitLoadContext(FirstContextType));
 	}
 
 	void IsLoadingChanged()
@@ -80,20 +93,31 @@ public class CoreContext : MainContextBase
 	public override void Unload ()
 	{
 		m_contextLoadingService.UnloadService();
+		m_reflectionService.UnloadService();
 		m_coroutineService.UnloadService();
 		m_loggingService.UnloadService();
+		m_combatScenarioService.UnloadService();
+		m_resourseService.UnloadService();
 
 		m_contextLoadingService = null;
+		m_reflectionService = null;
 		m_coroutineService = null;
 		m_loggingService = null;
+		m_combatScenarioService = null;
+		m_resourseService = null;
 
 		ServiceLocator.RemoveService<IContextLoadingService>();
 		ServiceLocator.RemoveService<IReflectionService>();
 		ServiceLocator.RemoveService<ICoroutineService>();
 		ServiceLocator.RemoveService<ILoggingService>();
+		ServiceLocator.RemoveService<ICombatScenarioService>();
+		ServiceLocator.RemoveService<IResourceService>();
 	}
 
 	private IContextLoadingService m_contextLoadingService;
+	private IReflectionService m_reflectionService;
 	private ICoroutineService m_coroutineService;
 	private ILoggingService m_loggingService;
+	private ICombatScenarioService m_combatScenarioService;
+	private IResourceService m_resourseService;
 }

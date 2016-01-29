@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using UnityEngine;
+using System.Collections;
 
 public class LoggingService : Service,  ILoggingService
 {
@@ -23,12 +24,13 @@ public class LoggingService : Service,  ILoggingService
 
 	#region IService implementation
 
-	public override void LoadService ()
+	public override IEnumerator LoadService ()
 	{
 		m_screenLog = new LambdaLogger((msg) => LogToScreen(msg));
 		m_coreLogFile = NewLogFile();
 		m_coreLogFileAndScreen = new MultiLog(CoreLogFile, ScreenLog);
 		m_ErrorLog = new LambdaLogger((msg) => UnityEngine.Debug.LogError(msg));
+		yield break;
 	}
 
 	#endregion

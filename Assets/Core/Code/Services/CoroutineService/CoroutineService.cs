@@ -2,14 +2,15 @@ using System.Collections.Generic;
 using System.Collections;
 using System.Linq;
 
-public class CoroutineService : ICoroutineService
+public class CoroutineService : Service, ICoroutineService
 {
-	public void LoadService ()
+	public override IEnumerator LoadService ()
 	{
 		loggingService = ServiceLocator.GetService<ILoggingService>();
+		yield break;
 	}
 
-	public void UnloadService ()
+	public override void UnloadService ()
 	{
 		loggingService = null;
 	}
@@ -33,6 +34,7 @@ public class CoroutineService : ICoroutineService
 		for(int i = 0; i < m_routines.Count(); i++)
 		{
 			m_routines[i].Step(new YeildInstructionType());
+
 			if(m_routines[i].HasError)
 			{
 				loggingService.ErrorLog.Log(m_routines[i].Error.ToString());

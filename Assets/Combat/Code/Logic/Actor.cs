@@ -25,6 +25,7 @@ public class Actor
 
 		while(oldPassedTurn == m_passedTurn && oldUsedAction == m_usedAction)
 		{
+			//TODO fix this so it doesnt have to hang
 			yield return new WaitForNextUpdate();
 		}
 	}

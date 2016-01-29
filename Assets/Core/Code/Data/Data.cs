@@ -10,7 +10,7 @@ public class Data : ScriptableObject
 	{
 		Type dataType = GetType();
 
-		FieldInfo[] fields = dataType.GetFields();
+		FieldInfo[] fields = dataType.GetFields(BindingFlags.FlattenHierarchy | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance);
 
 		ScriptableObject Copy = ScriptableObject.CreateInstance(dataType);
 

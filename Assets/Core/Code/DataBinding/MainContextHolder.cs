@@ -3,21 +3,37 @@ using Slash.Unity.DataBind.Core.Presentation;
 
 public class MainContextHolder : ContextHolder
 {
+	private bool started;
+
 	protected override void OnContextChanged ()
 	{
 		base.OnContextChanged();
 
-		(Context as MainContextBase).LoadIfNotLoaded();
+		if(Context != null)
+			(Context as MainContextBase).LoadIfNotLoaded();
+
+		if(started && Context != null)
+			(Context as MainContextBase).LaunchIfNotLaunched();
 	}
 
-	void Update()
+	void Start()
 	{
-		(Context as MainContextBase).Update();
+		if(Context != null)
+			(Context as MainContextBase).LaunchIfNotLaunched();
+
+		started = true;
 	}
 
-	void OnDestroy()
+	void Update ()
 	{
-		(Context as MainContextBase).Unload();
+		if(Context != null)
+			(Context as MainContextBase).Update();
+	}
+
+	void OnDestroy ()
+	{
+		if(Context != null)
+			(Context as MainContextBase).Unload();
 	}
 }
 

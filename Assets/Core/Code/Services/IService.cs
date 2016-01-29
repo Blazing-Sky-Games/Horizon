@@ -1,6 +1,8 @@
+using System.Collections;
+
 public interface IService
 {
-	void LoadService();
+	IEnumerator LoadService();
 	void UnloadService();
 }
 

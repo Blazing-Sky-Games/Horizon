@@ -5,6 +5,12 @@ using System.Linq;
 
 public class ContextLoadingService : Service, IContextLoadingService
 {
+	public override IEnumerator LoadService ()
+	{
+		yield return new Routine(base.LoadService());
+		yield return new Routine(isLoading.WaitSet(true));
+	}
+
 	public IEnumerator WaitLoadContext<ContextType> () where ContextType : MainContextBase
 	{
 		yield return new Routine(WaitLoadContext(typeof(ContextType)));
@@ -12,12 +18,20 @@ public class ContextLoadingService : Service, IContextLoadingService
 
 	public IEnumerator WaitLoadContext (Type contextType)
 	{
-		ServiceLocator.GetService<ILoggingService>().Log("loading context type " + contextType.ToString());
-
 		if(IsLoaded(contextType))
 			yield break;
 
-		MainContextBase context = (MainContextBase)Activator.CreateInstance(contextType);
+		MainContextBase context = null;
+
+		try
+		{
+			context = (MainContextBase)Activator.CreateInstance(contextType);
+		}
+		catch(Exception e)
+		{
+			UnityEngine.Debug.Log(e.ToString());
+			yield break;
+		}
 
 		yield return new Routine(isLoading.WaitSet(true));
 		yield return new Routine(contextLoading.WaitSend(context));
@@ -25,6 +39,7 @@ public class ContextLoadingService : Service, IContextLoadingService
 		yield return new Routine(ContextLoaded.WaitSend(context));
 		loadedContexts.Add(context);
 		yield return new Routine(isLoading.WaitSet(false));
+		yield return context.LaunchIfNotLaunched();
 	}
 
 	public IEnumerator WaitUnloadContext<ContextType> () where ContextType : MainContextBase

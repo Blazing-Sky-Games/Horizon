@@ -91,7 +91,7 @@ public class Coroutine : RoutineControlSignal
 				continue;
 			}
 			// the routine is not done and it yielded null
-			// this means it either just started, or there was a yield return null (a no-op)
+			// this means it either just started, or there was a yield break (a no-op)
 			// in either case, continue the current routine
 			else if(topRoutine.Yielded == null)
 			{

@@ -6,7 +6,7 @@ public interface ICombatScenarioService : IService
 
 	Message ScenarioWillChange { get; }
 
-	Message ScenarioWillChanged { get; }
+	Message ScenarioChanged { get; }
 }
 
 
