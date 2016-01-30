@@ -1,7 +1,7 @@
 using System.Collections;
 using System;
 
-public class DamageEffectLogicData : CombatEffect
+public class DamageEffect : CombatEffect
 {
 	[UnityEngine.Tooltip("dmg = M*Potency*Rand(LR,1)+B")]
 	public int DamageM = 10;

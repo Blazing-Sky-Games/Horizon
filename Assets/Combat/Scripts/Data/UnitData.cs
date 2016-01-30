@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 
-[DataCatagory("Combat/Logic")]
 public class UnitData : Data
 {
 	public Faction Faction;

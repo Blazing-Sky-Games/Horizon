@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 
-[DataCatagory("Combat/Logic")]
 public class UnitAbilityData : Data
 {
 	[UnityEngine.Tooltip("value from 0 to 1 that adds to crit liclyhood")]

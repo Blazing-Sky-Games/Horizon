@@ -9,10 +9,11 @@ public class DataWindow : EditorWindow
 	{
 		string name = t.Name;
 
-		DataCatagory catagory = t.GetCustomAttributes (typeof(DataCatagory), false).FirstOrDefault () as DataCatagory;
+		//TODO catagorizing data for easyer creation
+		//DataCatagory catagory = t.GetCustomAttributes (typeof(DataCatagory), false).FirstOrDefault () as DataCatagory;
 
-		if(catagory != null)
-			name = catagory.Catagory + "/" + name;
+		//if(catagory != null)
+			//name = catagory.Catagory + "/" + name;
 
 		return name;
 	}
