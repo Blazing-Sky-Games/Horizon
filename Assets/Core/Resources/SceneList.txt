@@ -1,2 +1,2 @@
-CombatContext Combat/Combat CombatContext
 CoreContext Core/Core CoreContext
+CombatContext Combat/Combat CombatContext
