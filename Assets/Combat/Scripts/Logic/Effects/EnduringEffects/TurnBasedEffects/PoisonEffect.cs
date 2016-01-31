@@ -10,6 +10,14 @@ class PoisonEffect : TurnBasedEffect
 	[UnityEngine.Tooltip("Duration = M*Potency + B")]
 	public int DurationM = 3;
 
+	public override IEnumerator WaitStart ()
+	{
+		throw new NotImplementedException();
+	}
 
+	public override IEnumerator WaitUpdate ()
+	{
+		throw new NotImplementedException();
+	}
 }
 

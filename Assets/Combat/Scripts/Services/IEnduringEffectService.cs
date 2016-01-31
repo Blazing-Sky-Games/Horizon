@@ -3,14 +3,18 @@ using System.Collections.Generic;
 
 interface IEnduringEffectService : IService
 {
-	IEnumerator RecordEffect (EnduringEffect effect);
+	Message<EnduringEffect> EffectRecorded{ get; }
 
-	IEnumerator EraseEffect (EnduringEffect effect);
+	Message<EnduringEffect> EffectErased{ get; }
+
+	IEnumerator WaitRecordEffect (EnduringEffect effect);
+
+	IEnumerator WaitEraseEffect (EnduringEffect effect);
 
 	IEnumerable<EffectType> ActiveEffectsOfType<EffectType> ()
 			where EffectType : EnduringEffect;
 
-	IEnumerator UpdateEffects (IEnumerable<EnduringEffect> effects);
+	IEnumerator WaitUpdateEffects (IEnumerable<EnduringEffect> effects);
 
-	IEnumerator UpdateEffect (EnduringEffect effect);
+	IEnumerator WaitUpdateEffect (EnduringEffect effect);
 }

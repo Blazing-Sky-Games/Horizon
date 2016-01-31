@@ -23,12 +23,12 @@ public abstract class EnduringEffect : CombatEffect
 		m_isCritical = isCritical;
 
 		EnduringEffect copy = (EnduringEffect)this.DeepCopy();
-		yield return new Routine(enduringEffectService.RecordEffect(copy));
+		yield return new Routine(enduringEffectService.WaitRecordEffect(copy));
 	}
 
 	public abstract IEnumerator WaitStart ();
 
-	public abstract IEnumerator WaitNewTurn ();
+	public abstract IEnumerator WaitUpdate ();
 
 	public abstract bool EndingCondition ();
 

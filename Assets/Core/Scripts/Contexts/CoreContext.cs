@@ -55,12 +55,14 @@ public class CoreContext : MainContextBase
 		m_combatScenarioService = ServiceLocator.GetService<ICombatScenarioService>();
 		m_resourseService = ServiceLocator.GetService<IResourceService>();
 
+		//TODO find a way to handle dependecys between services
 		yield return new Routine(m_contextLoadingService.LoadService());
 		yield return new Routine(m_reflectionService.LoadService());
 		yield return new Routine(m_coroutineService.LoadService());
 		yield return new Routine(m_loggingService.LoadService());
-		yield return new Routine(m_combatScenarioService.LoadService());
 		yield return new Routine(m_resourseService.LoadService());
+		yield return new Routine(m_combatScenarioService.LoadService());
+
 
 		m_contextLoadingService.IsLoading.Changed.AddAction(IsLoadingChanged);
 		IsLoadingChanged();

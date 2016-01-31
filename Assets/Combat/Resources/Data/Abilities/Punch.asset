@@ -8,8 +8,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01c582905a60cd145bbccabe02dcc5f5, type: 3}
-  m_Name: CombatScenarioDirectory
+  m_Script: {fileID: 11500000, guid: faad2c7511ab6eb4ab380c30b1d2b17c, type: 3}
+  m_Name: Punch
   m_EditorClassIdentifier: 
-  FirstScenarioResource: {fileID: 11465680, guid: c6c8f580325be9e48ab3d9b7716a1a2d,
-    type: 2}
+  CritChanceBonus: 0
+  CombatEffects:
+  - {fileID: 11423116, guid: 397b9d8528d93524b828d295ff21bbdb, type: 2}
+  CriticalEffects: []

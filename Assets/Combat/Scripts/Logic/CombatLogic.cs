@@ -4,6 +4,9 @@ using System.Linq;
 
 public class CombatLogic
 {
+	public readonly Message CombatStarted = new Message();
+	public readonly Message<Faction> CombatOver = new Message<Faction>();
+
 	public CombatLogic(CombatScenario Data)
 	{
 		turnOrderService = ServiceLocator.GetService<ITurnOrderService>();
@@ -11,7 +14,6 @@ public class CombatLogic
 		coroutineService = ServiceLocator.GetService<ICoroutineService>();
 		enduringEffectService = ServiceLocator.GetService<IEnduringEffectService>();
 		unitService = ServiceLocator.GetService<IUnitService>();
-		loggingService = ServiceLocator.GetService<ILoggingService>();
 
 		//create the units in the combat scenrios
 		var createdUnitsIds = unitService.CreateUnits(Data.Units);
@@ -24,14 +26,16 @@ public class CombatLogic
 		//factionService.SetFactionLeader(Faction.Player, new Actor(Faction.Player));
 		factionService.SetFactionLeader(Faction.Player, new AIActor(Faction.Player));
 		factionService.SetFactionLeader(Faction.AI, new AIActor(Faction.AI));
+	}
 
+	public void Start()
+	{
 		coroutineService.StartCoroutine(WaitCombatMain());
 	}
 
 	private IEnumerator WaitCombatMain ()
 	{
-		combatLog = loggingService.NewMultiLog(loggingService.NewLogFile("CombatLog"),loggingService.ScreenLog);
-		combatLog.Log("begin combat");
+		yield return new Routine(CombatStarted.WaitSend());
 
 		while(true)
 		{
@@ -41,11 +45,11 @@ public class CombatLogic
 
 			//update turn based effects targeting the active unit
 			IEnumerable<TurnBasedEffect> turnBasedEffectsOnActiveUnit = enduringEffectService.ActiveEffectsOfType<TurnBasedEffect>().Where(effect => effect.Target == turnOrderService.ActiveUnit);
-			enduringEffectService.UpdateEffects(turnBasedEffectsOnActiveUnit.Cast<EnduringEffect>());
+			yield return new Routine(enduringEffectService.WaitUpdateEffects(turnBasedEffectsOnActiveUnit.Cast<EnduringEffect>()));
 
 			while(FactionLeader.CanTakeAction)
 			{
-				if(!turnOrderService.ActiveUnit.ActionPrevented)
+				if(turnOrderService.ActiveUnit.ActionPrevented)
 				{
 					//decide for the actor, they cant do anything this turn
 					yield return new Routine(FactionLeader.WaitPassTurn());
@@ -54,9 +58,13 @@ public class CombatLogic
 				{
 					//tell the actor to decide what to do
 					FactionLeader.ActionDecidedMessage.AddHandler(WaitOnActionDecided);
-					coroutineService.StartCoroutine(FactionLeader.WaitDecideAction());
+					yield return new Routine(FactionLeader.WaitDecideAction());
 					FactionLeader.ActionDecidedMessage.RemoveHandler(WaitOnActionDecided);
 				}
+
+				//check if the encounter is over
+				int aiUnits = unitService.UnitsOfFaction(Faction.AI).Count();
+				int playerUnits = unitService.UnitsOfFaction(Faction.Player).Count();
 			}
 
 			//advance the turn order
@@ -74,7 +82,6 @@ public class CombatLogic
 	private IUnitService unitService;
 	private ICoroutineService coroutineService;
 	private IEnduringEffectService enduringEffectService;
-	private ILoggingService loggingService;
 
 	private ILog combatLog;
 }

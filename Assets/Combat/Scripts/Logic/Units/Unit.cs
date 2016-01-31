@@ -90,9 +90,9 @@ public class Unit
 	{
 		get
 		{
-			return !ActionPreventedPoll.AnyVotes;
+			return ActionPreventedPoll.AnyVotes;
 		}
 	}
 
-	public readonly Poll ActionPreventedPoll;
+	public readonly Poll ActionPreventedPoll = new Poll();
 }

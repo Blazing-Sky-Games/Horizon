@@ -5,6 +5,44 @@ using System.Linq;
 
 public class TurnOrderService : Service, ITurnOrderService, IEnumerable<Unit>
 {
+	private readonly Message m_orderChanged = new Message();
+
+	public Message OrderChanged
+	{
+		get
+		{
+			return m_orderChanged;
+		}
+	}
+
+	public override IEnumerator LoadService ()
+	{
+		ServiceLocator.GetService<IUnitService>().UnitDied.AddHandler(WaitOnUnitDied);
+		yield break;
+	}
+
+	private IEnumerator WaitOnUnitDied (Unit unit)
+	{
+		int indexOf = m_units.IndexOf(unit);
+
+		if(indexOf == m_activeUnitIndex)
+		{
+			//umm ... what do we do in this case
+		}
+		else if(indexOf < m_activeUnitIndex)
+		{
+			// we dont have to do anything
+		}
+		else if(indexOf > m_activeUnitIndex)
+		{
+			//reduce the active unit index by one
+			m_activeUnitIndex--;
+		}
+
+		m_units.Remove(unit);
+		yield return new Routine(OrderChanged.WaitSend());
+	}
+
 	public void SetOrder (IEnumerable<Unit> units)
 	{
 		m_units = units.ToList();
@@ -18,9 +56,15 @@ public class TurnOrderService : Service, ITurnOrderService, IEnumerable<Unit>
 		}
 	}
 
-	public readonly Message AdvanceTurnOrderMessage = new Message();
-	public readonly Message<bool> CombatEncounterOverMessage = new Message<bool>();
-	public readonly Message<Unit> UnitKilledMessage = new Message<Unit>();
+	public Message TurnOrderAdvanced
+	{
+		get
+		{
+			return m_turnOrderAdvanced;
+		}
+	}
+
+	private readonly Message m_turnOrderAdvanced = new Message();
 
 	public int ActiveUnitIndex
 	{
@@ -47,7 +91,7 @@ public class TurnOrderService : Service, ITurnOrderService, IEnumerable<Unit>
 		m_activeUnitIndex++;
 		m_activeUnitIndex %= m_units.Count;
 
-		yield return new Routine(AdvanceTurnOrderMessage.WaitSend());
+		yield return new Routine(m_turnOrderAdvanced.WaitSend());
 	}
 
 	private List<Unit> m_units;

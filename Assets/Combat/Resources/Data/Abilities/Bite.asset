@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: faad2c7511ab6eb4ab380c30b1d2b17c, type: 3}
+  m_Name: Bite
+  m_EditorClassIdentifier: 
+  CritChanceBonus: 0
+  CombatEffects:
+  - {fileID: 11425260, guid: ea26b86355ccc5140a7734409def9e81, type: 2}
+  CriticalEffects:
+  - {fileID: 11409350, guid: 75898be0537ad5c449adb905cda94b09, type: 2}

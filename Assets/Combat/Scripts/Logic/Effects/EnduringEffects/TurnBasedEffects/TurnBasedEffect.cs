@@ -19,7 +19,7 @@ public abstract class TurnBasedEffect : EnduringEffect
 		yield break;
 	}
 
-	public override IEnumerator WaitNewTurn ()
+	public override IEnumerator WaitUpdate ()
 	{
 		int turnsRemainingMinusOne = Duration.Value - 1;
 		turnsRemainingMinusOne = turnsRemainingMinusOne < 0 ? 0 : turnsRemainingMinusOne;

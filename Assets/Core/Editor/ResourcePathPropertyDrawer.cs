@@ -12,7 +12,16 @@ public class ResourcePathPropertyDrawer : PropertyDrawer
 	public override void OnGUI (Rect position, SerializedProperty property, GUIContent label)
 	{
 		if(!resources.ContainsKey(property.serializedObject.targetObject))
-			resources[property.serializedObject.targetObject] = null;
+		{
+			if(property.stringValue != "MISSINGPATH" && property.stringValue != "")
+			{
+				resources[property.serializedObject.targetObject] = Resources.Load(property.stringValue);
+			}
+			else
+			{
+				resources[property.serializedObject.targetObject] = null;
+			}
+		}
 
 		UnityEngine.Object old = resources[property.serializedObject.targetObject];
 
@@ -30,9 +39,12 @@ public class ResourcePathPropertyDrawer : PropertyDrawer
 		{
 			string path = AssetDatabase.GetAssetPath(resources[property.serializedObject.targetObject]);
 			path = path.Substring(path.IndexOf("/Resources/")).Remove(0,"/Resources/".Count());
+			path = path.Remove(path.Count() - ".asset".Count());
 
 			property.stringValue = path;
 		}
+
+		property.serializedObject.ApplyModifiedProperties();
 	}
 }
 
