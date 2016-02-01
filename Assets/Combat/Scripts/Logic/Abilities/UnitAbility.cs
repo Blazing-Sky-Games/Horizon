@@ -10,15 +10,19 @@ public class UnitAbility
 	private readonly List<CombatEffect> criticalEffects;
 	private readonly float critChanceBonus;
 
+	public readonly string Name;
+
 	public UnitAbility(UnitAbilityData Data)
 	{
 		combatEffects = Data.CombatEffects;
 		criticalEffects = Data.CriticalEffects;
 		critChanceBonus = Data.CritChanceBonus;
+		Name = Data.DebugName;
 	}
 
 	public IEnumerator WaitUse(Unit caster, Unit target)
 	{
+		ServiceLocator.GetService<ILoggingService>().Log(caster.Name + " Used ability " + Name + " on " + target.Name );
 		yield return new Routine(caster.AbilityUsedMessage.WaitSend(caster, this, target));
 
 		foreach(CombatEffect effect in combatEffects)
@@ -32,6 +36,7 @@ public class UnitAbility
 
 		if(rand.NextDouble() <= criticalSuccessThreshold + critChanceBonus)
 		{
+			ServiceLocator.GetService<ILoggingService>().Log("critical hit!");
 			yield return new Routine(CriticalHit.WaitSend());
 
 			foreach(CombatEffect effect in criticalEffects)

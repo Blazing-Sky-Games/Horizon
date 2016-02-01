@@ -4,7 +4,7 @@ using System.Linq;
 
 public class AIActor : Actor
 {
-	public AIActor(Faction faction)
+	public AIActor(Faction faction, string Name) : base (Name)
 	{
 		m_faction = faction;
 		turnOrderService = ServiceLocator.GetService<ITurnOrderService>();

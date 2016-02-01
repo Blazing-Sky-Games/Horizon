@@ -4,7 +4,7 @@ using System.Linq;
 
 public class CoroutineService : Service, ICoroutineService
 {
-	public override IEnumerator LoadService ()
+	public override IEnumerator WaitLoadService ()
 	{
 		loggingService = ServiceLocator.GetService<ILoggingService>();
 		yield break;

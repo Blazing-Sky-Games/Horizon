@@ -2,6 +2,7 @@ using System.Collections.Generic;
 
 public class UnitData : Data
 {
+	public string DebugName;
 	public Faction Faction;
 	public int MaxHealth;
 	public int Health;

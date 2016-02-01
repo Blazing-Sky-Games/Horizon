@@ -11,6 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d6504c9f27fdc64aabd0f6a289e34e0, type: 3}
   m_Name: Hunter
   m_EditorClassIdentifier: 
+  DebugName: hunter
   Faction: 0
   MaxHealth: 100
   Health: 100

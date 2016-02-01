@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class ResourceService : Service, IResourceService
 {
-	public override IEnumerator LoadService ()
+	public override IEnumerator WaitLoadService ()
 	{
 		m_combatScenarioDirectoryResource = ScriptableObject.CreateInstance<CombatScenarioDirectoryResourceReference>();
 

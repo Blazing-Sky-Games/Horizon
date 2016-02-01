@@ -83,7 +83,7 @@ public class Message<TArg0> : IGenericMessage
 			return;
 		}
 
-		m_innerMessage.AddHandler(convertedHandlers[handler]);
+		m_innerMessage.RemoveHandler(convertedHandlers[handler]);
 		convertedHandlers.Remove(handler);
 	}
 	
@@ -195,7 +195,7 @@ public class Message<TArg0, TArg1> : IGenericMessage
 			return;
 		}
 
-		m_innerMessage.AddHandler(convertedHandlers[handler]);
+		m_innerMessage.RemoveHandler(convertedHandlers[handler]);
 		convertedHandlers.Remove(handler);
 	}
 	
@@ -309,7 +309,7 @@ public class Message<TArg0, TArg1, TArg2> : IGenericMessage
 			return;
 		}
 
-		m_innerMessage.AddHandler(convertedHandlers[handler]);
+		m_innerMessage.RemoveHandler(convertedHandlers[handler]);
 		convertedHandlers.Remove(handler);
 	}
 	
@@ -425,7 +425,7 @@ public class Message<TArg0, TArg1, TArg2, TArg3> : IGenericMessage
 			return;
 		}
 
-		m_innerMessage.AddHandler(convertedHandlers[handler]);
+		m_innerMessage.RemoveHandler(convertedHandlers[handler]);
 		convertedHandlers.Remove(handler);
 	}
 	
@@ -543,7 +543,7 @@ public class Message<TArg0, TArg1, TArg2, TArg3, TArg4> : IGenericMessage
 			return;
 		}
 
-		m_innerMessage.AddHandler(convertedHandlers[handler]);
+		m_innerMessage.RemoveHandler(convertedHandlers[handler]);
 		convertedHandlers.Remove(handler);
 	}
 	

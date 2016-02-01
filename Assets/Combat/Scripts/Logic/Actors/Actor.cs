@@ -2,6 +2,13 @@ using System.Collections;
 
 public class Actor
 {
+	public readonly string DebugName;
+
+	public Actor(string debugName)
+	{
+		DebugName = debugName;
+	}
+
 	public readonly Message<IActorAction> ActionDecidedMessage = new Message<IActorAction>();
 
 	public bool CanTakeAction
@@ -33,12 +40,14 @@ public class Actor
 	public IEnumerator WaitPassTurn()
 	{
 		m_passedTurn = true;
+		//ServiceLocator.GetService<ILoggingService>().Log("actor " + DebugName + " passes turn");
 		yield return new Routine(ActionDecidedMessage.WaitSend(new PassTurnAction()));
 	}
 	
 	public IEnumerator WaitUseUnitAbility(Unit caster, UnitAbility ability, Unit target)
 	{
 		m_usedAction = true;
+		//ServiceLocator.GetService<ILoggingService>().Log("actor " + DebugName + " used unit ability");
 		yield return new Routine(ActionDecidedMessage.WaitSend(new UnitAbilityUsageAction(caster, ability, target)));
 	}
 

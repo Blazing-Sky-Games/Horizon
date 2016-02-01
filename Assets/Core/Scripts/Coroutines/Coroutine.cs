@@ -105,6 +105,8 @@ public class Coroutine : RoutineControlSignal
 				if(!co.Done)
 				{
 					//this routine is blocked on a coroutine
+					//TODO fix it so routines will start as soon as a corotine is finished, not when update is called again
+					//If a program never yields a yield instruction, the coroutines should all run in a single frame
 					break;
 				}
 				else if(co.HasError && !co.CatchExceptions)

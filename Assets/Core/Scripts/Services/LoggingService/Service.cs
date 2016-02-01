@@ -5,7 +5,7 @@ using System.Collections;
 
 public class Service : IService
 {
-	public virtual IEnumerator LoadService ()
+	public virtual IEnumerator WaitLoadService ()
 	{
 		yield break;
 	}

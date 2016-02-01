@@ -19,6 +19,7 @@ public class EnduringEffectService : Service, IEnduringEffectService
 	{
 		activeEffects.Add(effect);
 		var startEffect = ServiceLocator.GetService<ICoroutineService>().StartCoroutine(effect.WaitStart());
+		ServiceLocator.GetService<ILoggingService>().Log("enduring effect of type " + effect.GetType().Name + " recorded");
 		var recordEffect = ServiceLocator.GetService<ICoroutineService>().StartCoroutine(m_effectRecorded.WaitSend(effect));
 
 		yield return startEffect;
@@ -29,6 +30,7 @@ public class EnduringEffectService : Service, IEnduringEffectService
 	{
 		activeEffects.Add(effect);
 		var endEffect = ServiceLocator.GetService<ICoroutineService>().StartCoroutine(effect.WaitEnd());
+		ServiceLocator.GetService<ILoggingService>().Log("enduring effect of type " + effect.GetType().Name + " erased");
 		var eraseEffect = ServiceLocator.GetService<ICoroutineService>().StartCoroutine(m_effectErased.WaitSend(effect));
 
 		yield return endEffect;
@@ -37,7 +39,7 @@ public class EnduringEffectService : Service, IEnduringEffectService
 
 	public IEnumerable<EffectType> ActiveEffectsOfType<EffectType> () where EffectType : EnduringEffect
 	{
-		return activeEffects.Where(effect => effect.GetType() == typeof(EffectType)).Cast<EffectType>();
+		return activeEffects.Where(effect => effect.GetType().IsSubclassOf(typeof(EffectType))).Cast<EffectType>();
 	}
 
 	public IEnumerator WaitUpdateEffects (IEnumerable<EnduringEffect> effects)
@@ -56,6 +58,7 @@ public class EnduringEffectService : Service, IEnduringEffectService
 		}
 		else
 		{
+			ServiceLocator.GetService<ILoggingService>().Log("updateing enduring effect of type " + effect.GetType().Name);
 			yield return new Routine(effect.WaitUpdate());
 		}
 	}

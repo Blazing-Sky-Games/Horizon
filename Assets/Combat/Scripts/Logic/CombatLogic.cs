@@ -24,17 +24,18 @@ public class CombatLogic
 
 		//create the actors that will be playing
 		//factionService.SetFactionLeader(Faction.Player, new Actor(Faction.Player));
-		factionService.SetFactionLeader(Faction.Player, new AIActor(Faction.Player));
-		factionService.SetFactionLeader(Faction.AI, new AIActor(Faction.AI));
+		factionService.SetFactionLeader(Faction.Player, new AIActor(Faction.Player, "player"));
+		factionService.SetFactionLeader(Faction.AI, new AIActor(Faction.AI, "ai"));
 	}
 
-	public void Start()
+	public void Launch()
 	{
 		coroutineService.StartCoroutine(WaitCombatMain());
 	}
 
 	private IEnumerator WaitCombatMain ()
 	{
+		ServiceLocator.GetService<ILoggingService>().Log("combat Started");
 		yield return new Routine(CombatStarted.WaitSend());
 
 		while(true)
@@ -44,7 +45,8 @@ public class CombatLogic
 			FactionLeader.ResetCanTakeAction();
 
 			//update turn based effects targeting the active unit
-			IEnumerable<TurnBasedEffect> turnBasedEffectsOnActiveUnit = enduringEffectService.ActiveEffectsOfType<TurnBasedEffect>().Where(effect => effect.Target == turnOrderService.ActiveUnit);
+			List<TurnBasedEffect> tb = enduringEffectService.ActiveEffectsOfType<TurnBasedEffect>().ToList();
+			List<TurnBasedEffect> turnBasedEffectsOnActiveUnit = tb.Where(effect => effect.Target.Equals(turnOrderService.ActiveUnit)).ToList();
 			yield return new Routine(enduringEffectService.WaitUpdateEffects(turnBasedEffectsOnActiveUnit.Cast<EnduringEffect>()));
 
 			while(FactionLeader.CanTakeAction)
@@ -63,8 +65,22 @@ public class CombatLogic
 				}
 
 				//check if the encounter is over
+				//TODO make this generic (for a given win condition), and do not only check for wins here
 				int aiUnits = unitService.UnitsOfFaction(Faction.AI).Count();
 				int playerUnits = unitService.UnitsOfFaction(Faction.Player).Count();
+
+				if(playerUnits == 0)
+				{
+					ServiceLocator.GetService<ILoggingService>().Log("lose");
+					yield return new Routine(CombatOver.WaitSend(Faction.Player));
+					yield break;
+				}
+				else if(aiUnits == 0)
+				{
+					ServiceLocator.GetService<ILoggingService>().Log("win");
+					yield return new Routine(CombatOver.WaitSend(Faction.AI));
+					yield break;
+				}
 			}
 
 			//advance the turn order
@@ -82,6 +98,4 @@ public class CombatLogic
 	private IUnitService unitService;
 	private ICoroutineService coroutineService;
 	private IEnduringEffectService enduringEffectService;
-
-	private ILog combatLog;
 }

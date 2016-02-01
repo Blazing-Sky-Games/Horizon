@@ -11,7 +11,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: faad2c7511ab6eb4ab380c30b1d2b17c, type: 3}
   m_Name: Punch
   m_EditorClassIdentifier: 
+  DebugName: punch
   CritChanceBonus: 0
   CombatEffects:
-  - {fileID: 11423116, guid: 397b9d8528d93524b828d295ff21bbdb, type: 2}
+  - {fileID: 11430826, guid: b7898eb0c4dd10c4eb31312ee52e51a7, type: 2}
   CriticalEffects: []

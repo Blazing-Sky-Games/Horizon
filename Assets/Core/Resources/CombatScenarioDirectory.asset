@@ -11,5 +11,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01c582905a60cd145bbccabe02dcc5f5, type: 3}
   m_Name: CombatScenarioDirectory
   m_EditorClassIdentifier: 
-  FirstScenarioResource: {fileID: 11465680, guid: c6c8f580325be9e48ab3d9b7716a1a2d,
+  FirstScenarioResource: {fileID: 11425314, guid: 377757428b105024d81320acf41a9ff8,
     type: 2}

@@ -24,7 +24,7 @@ public class LoggingService : Service,  ILoggingService
 
 	#region IService implementation
 
-	public override IEnumerator LoadService ()
+	public override IEnumerator WaitLoadService ()
 	{
 		m_screenLog = new LambdaLogger((msg) => LogToScreen(msg));
 		m_coreLogFile = NewLogFile();

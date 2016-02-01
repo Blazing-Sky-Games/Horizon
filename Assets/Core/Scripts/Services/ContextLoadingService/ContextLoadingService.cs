@@ -5,9 +5,9 @@ using System.Linq;
 
 public class ContextLoadingService : Service, IContextLoadingService
 {
-	public override IEnumerator LoadService ()
+	public override IEnumerator WaitLoadService ()
 	{
-		yield return new Routine(base.LoadService());
+		yield return new Routine(base.WaitLoadService());
 		yield return new Routine(isLoading.WaitSet(true));
 	}
 

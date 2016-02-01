@@ -42,16 +42,17 @@ public class UnitService : Service, IUnitService
 	{
 		if(!DiedHandlers.ContainsKey(unit))
 		{
-			DiedHandlers[unit] = () => KillUnit(unit);
+			DiedHandlers[unit] = () => WaitKillUnit(unit);
 		}
 
 		return DiedHandlers[unit];
 	}
 
-	private IEnumerator KillUnit(Unit unit)
+	private IEnumerator WaitKillUnit(Unit unit)
 	{
 		DiedHandlers.Remove(unit);
 		m_units.Remove(unit);
+		ServiceLocator.GetService<ILoggingService>().Log("unit " + unit.Name + " died");
 		yield return new Routine(UnitDied.WaitSend(unit));
 	}
 

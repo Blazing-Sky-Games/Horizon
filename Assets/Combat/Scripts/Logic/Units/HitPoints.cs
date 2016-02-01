@@ -38,10 +38,12 @@ public class HitPoints
 		m_current -= dmg;
 		m_current = m_current < 0 ? 0 : Current;
 
+		ServiceLocator.GetService<ILoggingService>().Log("unit hurt for  " + dmg);
 		yield return new Routine(Hurt.WaitSend());
 
 		if(m_current == 0)
 		{
+			//ServiceLocator.GetService<ILoggingService>().Log("unit health reached zero");
 			yield return new Routine(Zero.WaitSend());
 		}
 	}

@@ -13,6 +13,8 @@ public class Unit
 	public readonly Statistic Skill;
 	public readonly Statistic Vitality;
 
+	public readonly string Name;
+
 	public readonly HitPoints Health;
 
 	public readonly Faction Faction;
@@ -20,6 +22,8 @@ public class Unit
 	public Unit(UnitData Data)
 	{
 		Abilities = Data.Abilities.Select(abilityData => new UnitAbility(abilityData)).ToList();
+
+		Name = Data.DebugName;
 
 		Strength = new Statistic(Data.Strength);
 		Intelligence = new Statistic(Data.Intelligence);

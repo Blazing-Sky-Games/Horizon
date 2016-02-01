@@ -4,9 +4,9 @@ using System.Collections;
 
 public class CombatScenarioService : Service, ICombatScenarioService
 {
-	public override IEnumerator LoadService ()
+	public override IEnumerator WaitLoadService ()
 	{
-		yield return new Routine(base.LoadService());
+		yield return new Routine(base.WaitLoadService());
 		m_resourceService = ServiceLocator.GetService<IResourceService>();
 
 		yield return new Routine(m_resourceService.CombatScenarioDirectoryResource.WaitLoad());

@@ -3,14 +3,24 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
+using System.Linq;
 
 public class Data : ScriptableObject
 {
+	public static IEnumerable<FieldInfo> GetAllFields(Type t)
+	{
+		if (t == null)
+			return Enumerable.Empty<FieldInfo>();
+
+		BindingFlags flags = BindingFlags.Public | BindingFlags.NonPublic |  BindingFlags.Instance | BindingFlags.DeclaredOnly;
+		return t.GetFields(flags).Concat(GetAllFields(t.BaseType));
+	}
+
 	public ScriptableObject DeepCopy ()
 	{
 		Type dataType = GetType();
 
-		FieldInfo[] fields = dataType.GetFields(BindingFlags.FlattenHierarchy | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance);
+		FieldInfo[] fields = GetAllFields(dataType).ToArray();
 
 		ScriptableObject Copy = ScriptableObject.CreateInstance(dataType);
 

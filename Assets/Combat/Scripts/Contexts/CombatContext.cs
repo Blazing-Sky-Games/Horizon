@@ -6,25 +6,26 @@ public class CombatContext : MainContextBase
 	private CombatLogic combatLogic;
 	private CombatScenario scenario;
 
-	protected override IEnumerator Load ()
+	protected override IEnumerator WaitLoad ()
 	{
-		yield return new Routine(base.Load());
+		yield return new Routine(base.WaitLoad());
 		ServiceLocator.RegisterService<ITurnOrderService,TurnOrderService>();
 		ServiceLocator.RegisterService<IFactionService, FactionService>();
 		ServiceLocator.RegisterService<IEnduringEffectService, EnduringEffectService>();
 		ServiceLocator.RegisterService<IUnitService, UnitService>();
 
-		yield return new Routine(ServiceLocator.GetService<ITurnOrderService>().LoadService());
-		yield return new Routine(ServiceLocator.GetService<IFactionService>().LoadService());
+		yield return new Routine(ServiceLocator.GetService<ITurnOrderService>().WaitLoadService());
+		yield return new Routine(ServiceLocator.GetService<IFactionService>().WaitLoadService());
 
 		scenario = ServiceLocator.GetService<ICombatScenarioService>().CurrentScenario;
+		combatLogic = new CombatLogic(scenario);
 	}
 
-	protected override IEnumerator Launch ()
+	protected override IEnumerator WaitLaunch ()
 	{
-		yield return new Routine(base.Launch());
+		yield return new Routine(base.WaitLaunch());
 
-		combatLogic = new CombatLogic(scenario);
+		combatLogic.Launch();
 	}
 
 	public override void Unload ()

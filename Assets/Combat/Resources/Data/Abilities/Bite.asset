@@ -11,8 +11,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: faad2c7511ab6eb4ab380c30b1d2b17c, type: 3}
   m_Name: Bite
   m_EditorClassIdentifier: 
-  CritChanceBonus: 0
+  DebugName: bite
+  CritChanceBonus: 0.8
   CombatEffects:
-  - {fileID: 11425260, guid: ea26b86355ccc5140a7734409def9e81, type: 2}
+  - {fileID: 11417688, guid: 87ae0dc0f17c3ec40a0e993e0ce99301, type: 2}
   CriticalEffects:
-  - {fileID: 11409350, guid: 75898be0537ad5c449adb905cda94b09, type: 2}
+  - {fileID: 11430736, guid: 15f072ff847330146950cca56bea8a1d, type: 2}

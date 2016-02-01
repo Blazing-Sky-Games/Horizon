@@ -38,9 +38,9 @@ public class CoreContext : MainContextBase
 		m_coroutineService.UpdateCoroutines();
 	}
 
-	protected override IEnumerator Load ()
+	protected override IEnumerator WaitLoad ()
 	{
-		yield return new Routine(base.Load());
+		yield return new Routine(base.WaitLoad());
 		ServiceLocator.RegisterService<IContextLoadingService, ContextLoadingService>();
 		ServiceLocator.RegisterService<IReflectionService, ReflectionService>();
 		ServiceLocator.RegisterService<ICoroutineService, CoroutineService>();
@@ -56,12 +56,12 @@ public class CoreContext : MainContextBase
 		m_resourseService = ServiceLocator.GetService<IResourceService>();
 
 		//TODO find a way to handle dependecys between services
-		yield return new Routine(m_contextLoadingService.LoadService());
-		yield return new Routine(m_reflectionService.LoadService());
-		yield return new Routine(m_coroutineService.LoadService());
-		yield return new Routine(m_loggingService.LoadService());
-		yield return new Routine(m_resourseService.LoadService());
-		yield return new Routine(m_combatScenarioService.LoadService());
+		yield return new Routine(m_contextLoadingService.WaitLoadService());
+		yield return new Routine(m_reflectionService.WaitLoadService());
+		yield return new Routine(m_coroutineService.WaitLoadService());
+		yield return new Routine(m_loggingService.WaitLoadService());
+		yield return new Routine(m_resourseService.WaitLoadService());
+		yield return new Routine(m_combatScenarioService.WaitLoadService());
 
 
 		m_contextLoadingService.IsLoading.Changed.AddAction(IsLoadingChanged);
@@ -71,12 +71,12 @@ public class CoreContext : MainContextBase
 		ShowScreenLogChanged();
 
 		if(shouldLaunchIfCore)
-			yield return new Routine(Launch());
+			yield return new Routine(WaitLaunch());
 	}
 
-	protected override IEnumerator Launch ()
+	protected override IEnumerator WaitLaunch ()
 	{
-		yield return new Routine(base.Launch());
+		yield return new Routine(base.WaitLaunch());
 
 		// load the loading screen
 		yield return m_coroutineService.StartCoroutine(m_contextLoadingService.WaitLoadContext(FirstContextType));

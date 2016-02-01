@@ -14,7 +14,7 @@ public abstract class MainContextBase : Context
 		if(!isLoaded)
 		{
 			ServiceLocator.RegisterService<ICoroutineService,CoroutineService>();
-			loading = ServiceLocator.GetService<ICoroutineService>().StartCoroutine(Load());
+			loading = ServiceLocator.GetService<ICoroutineService>().StartCoroutine(WaitLoad());
 			loading.Step(null);
 		}
 		return loading;
@@ -28,7 +28,7 @@ public abstract class MainContextBase : Context
 		if(!launched && loading != null && loading.Done)
 		{
 			ServiceLocator.RegisterService<ICoroutineService,CoroutineService>();
-			launching = ServiceLocator.GetService<ICoroutineService>().StartCoroutine(Launch());
+			launching = ServiceLocator.GetService<ICoroutineService>().StartCoroutine(WaitLaunch());
 			launching.Step(null);
 		}
 		else
@@ -39,13 +39,13 @@ public abstract class MainContextBase : Context
 		return launching;
 	}
 
-	protected virtual IEnumerator Launch()
+	protected virtual IEnumerator WaitLaunch()
 	{
 		launched = true;
 		yield break;
 	}
 		
-	protected virtual IEnumerator Load ()
+	protected virtual IEnumerator WaitLoad ()
 	{ 
 		isLoaded = true;
 		yield break;

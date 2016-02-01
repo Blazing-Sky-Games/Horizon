@@ -2,7 +2,7 @@ using System.Collections;
 
 public interface IService
 {
-	IEnumerator LoadService();
+	IEnumerator WaitLoadService();
 	void UnloadService();
 }
 

@@ -15,7 +15,7 @@ public class TurnOrderService : Service, ITurnOrderService, IEnumerable<Unit>
 		}
 	}
 
-	public override IEnumerator LoadService ()
+	public override IEnumerator WaitLoadService ()
 	{
 		ServiceLocator.GetService<IUnitService>().UnitDied.AddHandler(WaitOnUnitDied);
 		yield break;
@@ -40,6 +40,7 @@ public class TurnOrderService : Service, ITurnOrderService, IEnumerable<Unit>
 		}
 
 		m_units.Remove(unit);
+		ServiceLocator.GetService<ILoggingService>().Log("turn order changed");
 		yield return new Routine(OrderChanged.WaitSend());
 	}
 
@@ -90,7 +91,7 @@ public class TurnOrderService : Service, ITurnOrderService, IEnumerable<Unit>
 	{
 		m_activeUnitIndex++;
 		m_activeUnitIndex %= m_units.Count;
-
+		ServiceLocator.GetService<ILoggingService>().Log("turn order advanced");
 		yield return new Routine(m_turnOrderAdvanced.WaitSend());
 	}
 
