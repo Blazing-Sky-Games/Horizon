@@ -4,14 +4,26 @@ using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
 
-[InlineData]
-public class ResourceReference<ResourceType> : Data
+public interface IResoureReference
+{
+	Type ResType
+	{
+		get;
+	}
+}
+
+[Serializable]
+public class ResourceReference<ResourceType> : IResoureReference
 	where ResourceType : UnityEngine.Object
 {
-	[ResourcePath]
 	public string ResourcePath;
 
-	public readonly Type ResType = typeof(ResourceType);
+	public Type ResType
+	{
+		get{ return m_resType; }
+	}
+
+	private readonly Type m_resType = typeof(ResourceType);
 
 	public ResourceType Asset
 	{

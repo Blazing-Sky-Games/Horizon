@@ -42,14 +42,12 @@ public class CoreContext : MainContextBase
 	{
 		yield return new Routine(base.WaitLoad());
 		ServiceLocator.RegisterService<IContextLoadingService, ContextLoadingService>();
-		ServiceLocator.RegisterService<IReflectionService, ReflectionService>();
 		ServiceLocator.RegisterService<ICoroutineService, CoroutineService>();
 		ServiceLocator.RegisterService<ILoggingService, LoggingService>();
 		ServiceLocator.RegisterService<ICombatScenarioService, CombatScenarioService>();
 		ServiceLocator.RegisterService<IResourceService, ResourceService>();
 
 		m_contextLoadingService = ServiceLocator.GetService<IContextLoadingService>();
-		m_reflectionService = ServiceLocator.GetService<IReflectionService>();
 		m_coroutineService = ServiceLocator.GetService<ICoroutineService>();
 		m_loggingService = ServiceLocator.GetService<ILoggingService>();
 		m_combatScenarioService = ServiceLocator.GetService<ICombatScenarioService>();
@@ -57,7 +55,6 @@ public class CoreContext : MainContextBase
 
 		//TODO find a way to handle dependecys between services
 		yield return new Routine(m_contextLoadingService.WaitLoadService());
-		yield return new Routine(m_reflectionService.WaitLoadService());
 		yield return new Routine(m_coroutineService.WaitLoadService());
 		yield return new Routine(m_loggingService.WaitLoadService());
 		yield return new Routine(m_resourseService.WaitLoadService());
@@ -95,21 +92,18 @@ public class CoreContext : MainContextBase
 	public override void Unload ()
 	{
 		m_contextLoadingService.UnloadService();
-		m_reflectionService.UnloadService();
 		m_coroutineService.UnloadService();
 		m_loggingService.UnloadService();
 		m_combatScenarioService.UnloadService();
 		m_resourseService.UnloadService();
 
 		m_contextLoadingService = null;
-		m_reflectionService = null;
 		m_coroutineService = null;
 		m_loggingService = null;
 		m_combatScenarioService = null;
 		m_resourseService = null;
 
 		ServiceLocator.RemoveService<IContextLoadingService>();
-		ServiceLocator.RemoveService<IReflectionService>();
 		ServiceLocator.RemoveService<ICoroutineService>();
 		ServiceLocator.RemoveService<ILoggingService>();
 		ServiceLocator.RemoveService<ICombatScenarioService>();
@@ -117,7 +111,6 @@ public class CoreContext : MainContextBase
 	}
 
 	private IContextLoadingService m_contextLoadingService;
-	private IReflectionService m_reflectionService;
 	private ICoroutineService m_coroutineService;
 	private ILoggingService m_loggingService;
 	private ICombatScenarioService m_combatScenarioService;

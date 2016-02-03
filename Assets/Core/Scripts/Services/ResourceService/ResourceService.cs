@@ -7,7 +7,7 @@ public class ResourceService : Service, IResourceService
 {
 	public override IEnumerator WaitLoadService ()
 	{
-		m_combatScenarioDirectoryResource = ScriptableObject.CreateInstance<CombatScenarioDirectoryResourceReference>();
+		m_combatScenarioDirectoryResource = new CombatScenarioDirectoryResourceReference();
 
 		m_combatScenarioDirectoryResource.ResourcePath = CombatScenarioPath;
 

@@ -12,8 +12,8 @@ public class CombatScenarioService : Service, ICombatScenarioService
 		yield return new Routine(m_resourceService.CombatScenarioDirectoryResource.WaitLoad());
 
 		combatScenarioDirectory = m_resourceService.CombatScenarioDirectoryResource.Asset;
-		yield return new Routine(combatScenarioDirectory.FirstScenarioResource.WaitLoad());
-		m_currentScenario = combatScenarioDirectory.FirstScenarioResource.Asset;
+		yield return new Routine(combatScenarioDirectory.FirstScenario.WaitLoad());
+		m_currentScenario = combatScenarioDirectory.FirstScenario.Asset;
 	}
 
 	public CombatScenario CurrentScenario

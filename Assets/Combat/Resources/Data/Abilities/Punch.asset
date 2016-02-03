@@ -14,5 +14,20 @@ MonoBehaviour:
   DebugName: punch
   CritChanceBonus: 0
   CombatEffects:
-  - {fileID: 11430826, guid: b7898eb0c4dd10c4eb31312ee52e51a7, type: 2}
+  - {fileID: 11479576}
   CriticalEffects: []
+--- !u!114 &11479576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42a9cdf485ba4a5439080e0b917bec1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effectType: 0
+  DamageM: 10
+  DamageB: 5
+  DamageLR: 0.8

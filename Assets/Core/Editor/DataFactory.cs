@@ -10,7 +10,7 @@ public class DataFactory
 		var assembly = GetAssembly();
 		
 		// Get all classes derived from Data
-		var allDataTypes = assembly.GetTypes().Where(t => t.IsSubclassOf(typeof(Data)) && t.GetCustomAttributes(typeof(InlineData),true).Count() == 0).ToArray();
+		var allDataTypes = assembly.GetTypes().Where(t => t.IsSubclassOf(typeof(Data)) && !t.IsSubclassOf(typeof(PolymorphicSerializable))).ToArray();
 		
 		// Show the selection window.
 		DataWindow.Init(allDataTypes);

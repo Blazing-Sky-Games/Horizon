@@ -1,7 +1,6 @@
 using System.Collections;
 
-[InlineData(true)]
-public abstract class CombatEffect : Data
+public abstract class CombatEffect : PolymorphicSerializable
 {
 	public EffectType effectType;
 

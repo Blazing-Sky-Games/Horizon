@@ -14,6 +14,36 @@ MonoBehaviour:
   DebugName: bite
   CritChanceBonus: 0.8
   CombatEffects:
-  - {fileID: 11417688, guid: 87ae0dc0f17c3ec40a0e993e0ce99301, type: 2}
+  - {fileID: 11474156}
   CriticalEffects:
-  - {fileID: 11430736, guid: 15f072ff847330146950cca56bea8a1d, type: 2}
+  - {fileID: 11445430}
+--- !u!114 &11445430
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88fa6a54e2652ed40b51bb10cfc1a835, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effectType: 0
+  DamageM: 10
+  DurationB: 1
+  DurationM: 3
+--- !u!114 &11474156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42a9cdf485ba4a5439080e0b917bec1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effectType: 0
+  DamageM: 10
+  DamageB: 5
+  DamageLR: 0.8
