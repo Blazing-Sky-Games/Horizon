@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 218a8c2b920d19f43abaa05b1ff5898c, type: 3}
+  m_Name: BasicCombat
+  m_EditorClassIdentifier: 
+  Units:
+  - {fileID: 11400000, guid: 6299ca19511f66f45870a5f6fe8de978, type: 2}
+  - {fileID: 11400000, guid: 8140e3e0608731a42b7d2ab9ae516361, type: 2}
+  - {fileID: 11400000, guid: af205a29d23aea8499c19f588a343661, type: 2}
+  - {fileID: 11400000, guid: 2bb986107dcd4e5439882817132a56ba, type: 2}

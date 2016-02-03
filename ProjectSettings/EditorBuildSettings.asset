@@ -5,9 +5,7 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Horizon/Scenes/Combat.unity
-  - enabled: 0
-    path: Assets/Horizon/Scenes/win.unity
-  - enabled: 0
-    path: Assets/Horizon/Scenes/loss.unity
+  - enabled: 1
+    path: Assets/Core/Core.unity
+  - enabled: 1
+    path: Assets/Combat/Combat.unity
