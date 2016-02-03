@@ -1,83 +1,101 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine; // TODO fix this. just instatuite it in a view
+using System.Linq;
 
-public class CombatLogic : MonoBehaviour
+public class CombatLogic
 {
-	//supplyed in Editor
-	public CombatScenario Scenario;
+	public readonly Message CombatStarted = new Message();
+	public readonly Message<Faction> CombatOver = new Message<Faction>();
 
-	public TurnOrder TurnOrder
+	public CombatLogic(CombatScenario Data)
 	{
-		get
-		{
-			return m_turnOrder;
-		}
+		turnOrderService = ServiceLocator.GetService<ITurnOrderService>();
+		factionService = ServiceLocator.GetService<IFactionService>();
+		coroutineService = ServiceLocator.GetService<ICoroutineService>();
+		enduringEffectService = ServiceLocator.GetService<IEnduringEffectService>();
+		unitService = ServiceLocator.GetService<IUnitService>();
+
+		//create the units in the combat scenrios
+		var createdUnitsIds = unitService.CreateUnits(Data.Units);
+		turnOrderService.SetOrder(createdUnitsIds);
+
+		factionService.SetOpposingFaction(Faction.Player, Faction.AI);
+		factionService.SetOpposingFaction(Faction.AI, Faction.Player);
+
+		//create the actors that will be playing
+		//factionService.SetFactionLeader(Faction.Player, new Actor(Faction.Player));
+		factionService.SetFactionLeader(Faction.Player, new AIActor(Faction.Player, "player"));
+		factionService.SetFactionLeader(Faction.AI, new AIActor(Faction.AI, "ai"));
 	}
 
-	//get the Actor Associated with a faction
-	public Actor GetFactionLeader(Faction faction)
+	public void Launch()
 	{
-		return m_factionLeaders[faction];
+		coroutineService.StartCoroutine(WaitCombatMain());
 	}
 
-	public void Init()
+	private IEnumerator WaitCombatMain ()
 	{
-		// deep copy so we are not editing the original version
-		Scenario = Scenario.DeepCopy();
-
-		m_turnOrder = new TurnOrder(Scenario);
-
-		//creat the actors that will be playing
-		//TODO better way to get actors
-		//TODO actually, get rid of the whole actor thing, and just ask units what they want to do, not "actors"
-		//m_factionLeaders[Faction.Player] = new Actor("player");
-		m_factionLeaders[Faction.Player] = new AIActor("AI", this, Faction.Player); // use ai for player for testing
-		m_factionLeaders[Faction.AI] = new AIActor("AI", this, Faction.AI);
-
-		CoroutineManager.Main.StartCoroutine(WaitCombatMain());
-	}
-
-	private IEnumerator WaitCombatMain()
-	{
-		LogManager.NewCombatLog();
-		yield return LogManager.Log("begin combat", LogDestination.Combat);
+		ServiceLocator.GetService<ILoggingService>().Log("combat Started");
+		yield return new Routine(CombatStarted.WaitSend());
 
 		while(true)
 		{
-			Actor FactionLeader = GetFactionLeader(m_turnOrder.ActiveUnit.Faction);
+			Actor FactionLeader = turnOrderService.ActiveUnit.Faction.GetLeader();
 
 			FactionLeader.ResetCanTakeAction();
 
+			//update turn based effects targeting the active unit
+			List<TurnBasedEffect> tb = enduringEffectService.ActiveEffectsOfType<TurnBasedEffect>().ToList();
+			List<TurnBasedEffect> turnBasedEffectsOnActiveUnit = tb.Where(effect => effect.Target.Equals(turnOrderService.ActiveUnit)).ToList();
+			yield return new Routine(enduringEffectService.WaitUpdateEffects(turnBasedEffectsOnActiveUnit.Cast<EnduringEffect>()));
+
 			while(FactionLeader.CanTakeAction)
 			{
-				if (!TurnOrder.ActiveUnit.CanTakeAction)
+				if(turnOrderService.ActiveUnit.ActionPrevented)
+				{
 					//decide for the actor, they cant do anything this turn
-					yield return new Routine (FactionLeader.WaitPassTurn ());
-				else {
-					//tell the actor to decide what to do
-					CoroutineManager.Main.StartCoroutine (FactionLeader.WaitDecideAction ());
-
-					//wait for the current actor to decide an action
-					while (FactionLeader.ActionDecidedMessage.Idle) {
-						yield return 0;
-					}
+					yield return new Routine(FactionLeader.WaitPassTurn());
 				}
-				//perform that action and wait for it to finish
-				yield return new Routine(FactionLeader.ActionDecidedMessage.WaitHandleMessage(WaitHandleActionDecided));
+				else
+				{
+					//tell the actor to decide what to do
+					FactionLeader.ActionDecidedMessage.AddHandler(WaitOnActionDecided);
+					yield return new Routine(FactionLeader.WaitDecideAction());
+					FactionLeader.ActionDecidedMessage.RemoveHandler(WaitOnActionDecided);
+				}
+
+				//check if the encounter is over
+				//TODO make this generic (for a given win condition), and do not only check for wins here
+				int aiUnits = unitService.UnitsOfFaction(Faction.AI).Count();
+				int playerUnits = unitService.UnitsOfFaction(Faction.Player).Count();
+
+				if(playerUnits == 0)
+				{
+					ServiceLocator.GetService<ILoggingService>().Log("lose");
+					yield return new Routine(CombatOver.WaitSend(Faction.Player));
+					yield break;
+				}
+				else if(aiUnits == 0)
+				{
+					ServiceLocator.GetService<ILoggingService>().Log("win");
+					yield return new Routine(CombatOver.WaitSend(Faction.AI));
+					yield break;
+				}
 			}
 
 			//advance the turn order
-			yield return new Routine(m_turnOrder.WaitAdvance());
-			yield return new Routine(TurnBasedEffectManager.WaitUpdateTurnBasedEffects());
+			yield return new Routine(turnOrderService.WaitAdvance());
 		}
 	}
 
-	private IEnumerator WaitHandleActionDecided(IActorAction action)
+	private IEnumerator WaitOnActionDecided (IActorAction action)
 	{
 		yield return new Routine(action.WaitPerform());
 	}
-	
-	private TurnOrder m_turnOrder;
-	private readonly Dictionary<Faction, Actor> m_factionLeaders = new Dictionary<Faction, Actor>();
+
+	private IFactionService factionService;
+	private ITurnOrderService turnOrderService;
+	private IUnitService unitService;
+	private ICoroutineService coroutineService;
+	private IEnduringEffectService enduringEffectService;
 }
