@@ -23,3 +23,7 @@ sysinfo.txt
 #log files
 /**/Logs/
 /**/Logs.meta
+
+#sand box
+/**/Sandbox/
+/**/Sandbox.meta
