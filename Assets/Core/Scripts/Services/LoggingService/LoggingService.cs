@@ -53,7 +53,7 @@ public class LoggingService : Service,  ILoggingService
 
 	public event Action<string> OnLogToScreen;
 
-	public Observable<bool> ShowScreenLog
+	public MessageProperty<bool> ShowScreenLog
 	{
 		get
 		{
@@ -61,7 +61,7 @@ public class LoggingService : Service,  ILoggingService
 		}
 	}
 
-	private readonly Observable<bool> showScreenLog = new Observable<bool>();
+	private readonly MessageProperty<bool> showScreenLog = new MessageProperty<bool>();
 
 	public ILog ScreenLog
 	{

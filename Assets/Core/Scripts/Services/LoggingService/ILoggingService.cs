@@ -1,6 +1,6 @@
 public interface ILoggingService : IService, ILog
 {
-	Observable<bool> ShowScreenLog{ get; }
+	MessageProperty<bool> ShowScreenLog{ get; }
 
 	ILog ScreenLog{ get; }
 

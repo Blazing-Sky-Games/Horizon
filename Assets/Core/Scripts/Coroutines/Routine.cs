@@ -2,7 +2,6 @@
 using System.Collections;
 using System;
 
-
 public class Routine : RoutineControlSignal
 {
 	public readonly string CallerMethod;
@@ -10,6 +9,11 @@ public class Routine : RoutineControlSignal
 	public readonly int CallerLine;
 
 	public bool CatchExceptions;
+
+	public virtual void Reset()
+	{
+		m_routine.Reset();
+	}
 
 	public RoutineException Error
 	{
@@ -86,6 +90,12 @@ public class Routine : RoutineControlSignal
 //a syncronous process (which may take multiple frames) and returns a value
 public class Routine<T> : Routine
 {
+	public override void Reset ()
+	{
+		base.Reset();
+		m_hasResult = false;
+	}
+
 	public T Result
 	{
 		get

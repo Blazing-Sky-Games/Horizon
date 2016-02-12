@@ -3,7 +3,7 @@ using System.Collections;
 
 public interface IContextLoadingService : IService
 {
-	Observable<bool> IsLoading{ get; }
+	MessageProperty<bool> IsLoading{ get; }
 
 	Message<MainContextBase> ContextLoading{ get; }
 

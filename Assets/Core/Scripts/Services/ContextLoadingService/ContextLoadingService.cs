@@ -70,7 +70,7 @@ public class ContextLoadingService : Service, IContextLoadingService
 		return loadedContexts.Any(x => x.GetType() == contextType);
 	}
 
-	public Observable<bool> IsLoading
+	public MessageProperty<bool> IsLoading
 	{
 		get{ return isLoading; }
 	}
@@ -95,7 +95,7 @@ public class ContextLoadingService : Service, IContextLoadingService
 		get{ return contextUnloaded; }
 	}
 
-	private Observable<bool> isLoading = new Observable<bool>();
+	private MessageProperty<bool> isLoading = new MessageProperty<bool>();
 
 	private readonly Message<MainContextBase> contextLoading = new Message<MainContextBase>();
 	private readonly Message<MainContextBase> contextLoaded = new Message<MainContextBase>();

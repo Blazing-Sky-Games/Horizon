@@ -62,10 +62,10 @@ public class CoreContext : MainContextBase
 
 
 		m_contextLoadingService.IsLoading.Changed.AddAction(IsLoadingChanged);
-		IsLoadingChanged();
+		IsLoadingChanged(null);
 
 		m_loggingService.ShowScreenLog.Changed.AddAction(ShowScreenLogChanged);
-		ShowScreenLogChanged();
+		ShowScreenLogChanged(null);
 
 		if(shouldLaunchIfCore)
 			yield return new Routine(WaitLaunch());
@@ -79,12 +79,12 @@ public class CoreContext : MainContextBase
 		yield return m_coroutineService.StartCoroutine(m_contextLoadingService.WaitLoadContext(FirstContextType));
 	}
 
-	void IsLoadingChanged()
+	void IsLoadingChanged(object value)
 	{
 		IsLoadingProperty.Value = m_contextLoadingService.IsLoading.Value;
 	}
 
-	void ShowScreenLogChanged()
+	void ShowScreenLogChanged(object value)
 	{
 		ShowScreenLogProperty.Value = m_loggingService.ShowScreenLog.Value;
 	}

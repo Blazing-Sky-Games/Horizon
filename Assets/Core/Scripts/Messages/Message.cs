@@ -37,7 +37,7 @@ public class Message : IGenericMessage
 
 	#endregion
 
-	public IEnumerator WaitSend()
+	public virtual IEnumerator WaitSend()
 	{
 		if(!m_idle)
 		{
