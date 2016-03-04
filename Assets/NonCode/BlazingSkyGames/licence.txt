@@ -1,4 +1,4 @@
-all assets in this folder and any subfolders, unless explicitly stated that there is another licence for that folder, assets
+all assets in this folder and any subfolders, unless explicitly stated that there is another licence for that folder or asset, assets
 are licenced under the Creative Commons Attribution-NonCommercial 4.0 International Public License
 
 http://creativecommons.org/licenses/by-nc/4.0/legalcode
