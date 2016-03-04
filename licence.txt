@@ -1,0 +1,14 @@
+relevent licences are located in the various asset folders
+
+overview
+
+unless otherwise noted, code which is mainted by blazing sky games (mattmanj17) is under the MIT licence
+
+unless otherwise noted, non code assets are licenced under the Creative Commons Attribution-NonCommercial 4.0 International
+
+assets in the 3rd party folder are subject to the licenses of those assets
+
+assets which do not have an open licence (payed unity asset store assets) are not included in this repo
+
+tldr: if its in this folder, and it is not an external project, use it and give credit. don't use the 3d models/whatever to go sell your own game.
+if it is an external project, followe whatever licen it uses

@@ -1,2 +1,0 @@
-CoreContext Core/Core CoreContext
-CombatContext Combat/Combat CombatContext

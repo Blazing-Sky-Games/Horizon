@@ -20,10 +20,6 @@
 # Unity3D Generated File On Crash Reports
 sysinfo.txt
 
-#log files
-/**/Logs/
-/**/Logs.meta
-
-#sand box
-/**/Sandbox/
-/**/Sandbox.meta
+#generic non commited files
+/**/Ignore/
+/**/Ignore.meta

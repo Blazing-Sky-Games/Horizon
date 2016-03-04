@@ -1,8 +1,22 @@
 # Horizon
 Turn Based Sci-Fi RPG made in Unity. Work in Progress.
+Will eventually be a freeware demo to showcase the team's work.
 
-[Game Design Document](https://docs.google.com/document/d/1Caw3FosVD5JMeRcuaQ9D5baiVCoA_uGdO00N-D_RSgo/edit?usp=sharing)
+See licence.txt for licence information
 
-Base Hyper Alpha screen shot WIP
+[dev blog](https://blazingskygamesdev.wordpress.com/)
 
-![ScreenShot](https://dl.dropboxusercontent.com/u/185070052/HorizonCurrentScreenShoot.png)
+this project depends on licenced assets from the unity asset store. 
+These assset are not included in this repo, and so it may not be possible to build the project without them
+(ie, without having accses to the teams private repos)
+
+Licenced Assets
+
+[Data Bind For Unity](https://www.assetstore.unity3d.com/en/#!/content/28301)
+
+this project also depends on other open source projects, from the asset store (or other places)
+when these projects are not maintained by blazing sky games (mattmanj17), they are located in the 3rd party folder
+
+open source assets
+
+[YamlDotNet](https://github.com/aaubry/YamlDotNet)
