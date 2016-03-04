@@ -4,6 +4,11 @@ Will eventually be a freeware demo to showcase the team's work.
 
 ### The Team
 Matthew Draper [(dev blog)](https://blazingskygamesdev.wordpress.com/)
+Benjamin Hughes [(Portfolio)](https://benjaminedhughes.wordpress.com/)
+Alan Ornelas [(Portfolio)](http://alanornelas.weebly.com/)
+Marco Rojas
+Micheal Neward
+Shayne Simpson
 
 ### licensing
 See licence.txt for licence information
