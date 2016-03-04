@@ -28,11 +28,19 @@ when these projects are not maintained by blazing sky games (mattmanj17), they a
 [YamlDotNet](https://github.com/aaubry/YamlDotNet)
 
 ### Directory Structure
-
-
-
-### ROADMAP
 todo
 
-### CONTRIBUTING
+### travis build status
+todo
+
+### Documentation/Wiki
+todo
+
+### RoadMap
+todo
+
+### Contributing
+todo
+
+### Working With Submodules
 todo
