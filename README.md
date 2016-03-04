@@ -31,7 +31,7 @@ These assset are not included in this repo, and so it may not be possible to bui
 ### Open Source Assets
 
 this project also depends on other open source projects, from the asset store (or other places)
-when these projects are not maintained by blazing sky games (mattmanj17), they are located in the 3rd party folder
+when these projects are not maintained by blazing sky games, they are located in the 3rd party folder
 
 #### List of Open Source Assets
 
