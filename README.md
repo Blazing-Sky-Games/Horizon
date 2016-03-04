@@ -11,7 +11,7 @@ Alan Ornelas [(Portfolio)](http://alanornelas.weebly.com/)
 
 Marco Rojas
 
-Micheal Neward
+Micheal Neward [(Portfolio)](http://michaelneward.site44.com/#/)
 
 Shayne Simpson
 
