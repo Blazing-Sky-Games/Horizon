@@ -9,7 +9,7 @@ Benjamin Hughes [(Portfolio)](https://benjaminedhughes.wordpress.com/)
 
 Alan Ornelas [(Portfolio)](http://alanornelas.weebly.com/)
 
-Marco Rojas
+Marco Rojas [(Portfolio)](http://marcojr.weebly.com/)
 
 Micheal Neward [(Portfolio)](http://michaelneward.site44.com/#/)
 
