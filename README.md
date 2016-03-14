@@ -2,6 +2,8 @@
 Turn Based Sci-Fi RPG made in Unity. Work in Progress.
 Will eventually be a freeware demo to showcase the team's work.
 
+*A young hunter, from a remote planet, travels the solar system with a strange old cyborg. This duo is on a mission to collect powerful artifacts of an ancient race, gather a party of extraordinary individuals, bring down a sinister plot that could be the end of all things, and all while a century-long war threatens to reignite between the People’s Republic and the Empire of Humanity. A light hearted Sci-fi fantasy, where a couple weirdos collect some other weirdos to prepare for the big weirdo wars.*
+
 ### The Team
 Matthew Draper [(dev blog)](https://blazingskygamesdev.wordpress.com/)
 
