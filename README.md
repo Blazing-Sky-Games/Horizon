@@ -1,4 +1,4 @@
-# Project Codename : Horizon
+# Project Horizon
 Turn Based Sci-Fi RPG made in Unity. Work in Progress.
 Will eventually be a freeware demo to showcase the team's work.
 
