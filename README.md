@@ -38,21 +38,3 @@ when these projects are not maintained by blazing sky games, they are located in
 #### List of Open Source Assets
 
 [YamlDotNet](https://github.com/aaubry/YamlDotNet)
-
-### Directory Structure
-todo
-
-### travis build status
-todo
-
-### Documentation/Wiki
-todo
-
-### RoadMap
-todo
-
-### Contributing
-todo
-
-### Working With Submodules
-todo
