@@ -51,20 +51,17 @@ public class CalcUnit : MonoBehaviour
 	//https://docs.google.com/spreadsheets/d/138VGZZzNuFbEXh27yZ0QuRD780J2cALNZ6BIrzTwxO4/edit?usp=sharing
 	public combatResult combatCalc (EffectType type, CalcUnit target, int abilityPower)
 	{
-		double B = type == EffectType.Physical ? Strength : Intelligence;
-		double C = type == EffectType.Physical ? target.Stability : target.Insight;
-		double D = Skill;
-		double E = target.Vitality;
-		double G = abilityPower;
+		double AttackStat = type == EffectType.Physical ? Strength : Intelligence;
+		double DefStat = type == EffectType.Physical ? target.Stability : target.Insight;
 
-		double MaxDMG = B / C * G * 0.91 + 1.0;
+		double MaxDMG = AttackStat / DefStat * abilityPower * 0.91 + 1.0;
 		double DMG = Random.Range (0.8f, 1.0f) * MaxDMG;
 
-		double CritChance = B / E * 0.2;
+		double CritChance = (Skill + Intelligence / 2.0 + Strength / 4.0) / (target.Vitality + target.Stability / 2.0 + target.Insight / 4) * 0.2;
 
 		bool didCrit = Random.value < CritChance;
 
-		double CritMult = 1 + (D / C / 2);
+		double CritMult = 1 + (Skill / DefStat / 2);
 
 		combatResult result = new combatResult ();
 		result.damage = (int)DMG;
